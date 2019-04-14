@@ -1,0 +1,22 @@
+div, button {
+  margin: 5px;
+}
+
+h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 4em
+}
+
+.home {
+  text-align: center;
+
+}
+
+button{
+  background-color: lightgray;
+  height: 40px;
+  width: 100px;
+  font-size: 20px;
+  border-radius: 4px;
+
+}
