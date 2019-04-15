@@ -4,27 +4,27 @@ import '../App.css'
 class App extends Component {
     constructor() {
         super()
-        const params = this.getHashParams()
+        const pms = this.getHashParams()
         this.state = {
             loggedIn: params.access_token ? true : false,
-            nowPlaying = {
+            nowPlaying: {
                 name: "Not Checked", 
-                image: ''
+                top: ''
             }
         }
     }
     
 
-    // getHashParams() {
-    //     console.log('something')
-    //       var hashParams = {};
-    //       var e, r = /([^&;=]+)=?([^&;]*)/g,
-    //           q = window.location.hash.substring(1);
-    //       while ( e = r.exec(q)) {
-    //          hashParams[e[1]] = decodeURIComponent(e[2]);
-    //       }
-    //       return hashParams;
-    // }
+    getHashParams() {
+        console.log('something')
+          var hashParams = {};
+          var e, r = /([^&;=]+)=?([^&;]*)/g,
+              q = window.location.hash.substring(1);
+          while ( e = r.exec(q)) {
+             hashParams[e[1]] = decodeURIComponent(e[2]);
+          }
+          return hashParams;
+    }
         
     render() {
         return (
