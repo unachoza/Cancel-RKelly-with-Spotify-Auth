@@ -14,7 +14,7 @@ var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
 var client_id = '7724c6815dc24749af9bfd50cc601061'; // Your client id
-var client_secret = '6596c8af66394cb98b75be66e74083b5'; // Your secret
+var client_secret = '4e43e094a73443a69c63d88d4324da70'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 /**
@@ -67,7 +67,7 @@ app.get('/callback', function(req, res) {
   var storedState = req.cookies ? req.cookies[stateKey] : null;
 
   if (state === null || state !== storedState) {
-    res.redirect('/#' +
+    res.redirect('http://localhost:3000/#' +
       querystring.stringify({
         error: 'state_mismatch'
       }));

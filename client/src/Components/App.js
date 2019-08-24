@@ -4,7 +4,7 @@ import '../App.css'
 class App extends Component {
     constructor() {
         super()
-        const pms = this.getHashParams()
+        const params = this.getHashParams()
         this.state = {
             loggedIn: params.access_token ? true : false,
             nowPlaying: {
