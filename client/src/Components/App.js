@@ -29,11 +29,10 @@ class App extends Component {
     render() {
         return (
             <div className="home">
-                <h1>Arianna's App</h1>
-            <h1>Log in to Spotify</h1>
-            <a href="http://localhost:8888">
-                <button>Login</button>
-            </a>
+                <h1>Your Spotify Needs Help</h1>
+                <a href="http://localhost:8888">
+                    <button>Login to Spotify</button>
+                </a>
             <div>Now Playing {this.state.nowPlaying.name}</div>
             <img src={this.state.nowPlaying.image} style={{ width: 100 }}/>
         </div>
