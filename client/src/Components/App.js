@@ -11,9 +11,7 @@ class App extends Component {
         const token = params.access_token
         this.state = {
             loggedIn: token ? true : false,
-            nowPlaying: {
-                name: "", 
-            }
+            playlistNames: ""
         }
         if (token) {
             console.log('got access token', token)
@@ -23,28 +21,31 @@ class App extends Component {
     }
     
 
-   getHashParams() {
-          let hashParams = {};
-          let e, r = /([^&;=]+)=?([^&;]*)/g,
-              q = window.location.hash.substring(1);
-          while ( e = r.exec(q)) {
-             hashParams[e[1]] = decodeURIComponent(e[2]);
-          }
-       console.log('got hash params', hashParams)
-          return hashParams;
-   }
+    getHashParams() {
+        let hashParams = {};
+        let e, r = /([^&;=]+)=?([^&;]*)/g,
+            q = window.location.hash.substring(1);
+        while (e = r.exec(q)) {
+            hashParams[e[1]] = decodeURIComponent(e[2]);
+        }
+        console.log('got hash params', hashParams)
+        return hashParams;
+    }
     
     getNowPlaying() {
         spotifyWebApi.getUserPlaylists("1224023576")
             .then((response) => {
-            console.log("playing", response.items)
-            this.setState({
-                nowPlaying: {
-                    name: response.items[0].name,
-                }
+                console.log("playing", response.items)
+                this.setState({ playlistNames: response.items })
             })
+    }
+    mapit() {
+        this.state.playlistNames.map((names, i) => {
+            // console.log(names[i].name)
+            return <div key={i}>{names}</div>
         })
     }
+
         
     render() {
         return (
@@ -57,8 +58,8 @@ class App extends Component {
                     {this.state.loggedIn &&
                         <button onClick={() => this.getNowPlaying()}>Check What's Playing</button>}
                 </div>  
-                {this.state.nowPlaying.name? <div>These are All Your Playlists: {this.state.nowPlaying.name} </div>  : ""}
-            {/* <div>Your Playlists : {this.state.nowPlaying.name}</div> */}
+                {this.state.playlistNames? <div>These are All Your Playlists: {this.state.playlistNames} </div>  : ""}
+            {/* <div>Your Playlists : {this.state.playlistNames}</div> */}
                  
         </div>
          )
