@@ -51,16 +51,17 @@ class App extends Component {
         return (
             <div className="home">
                 <h1>Your Spotify Needs Help</h1>
-                <a href="http://localhost:8888">
+                {!this.state.loggedIn ? <a href="http://localhost:8888">
                     <button>Login to Spotify</button>
-                </a>
+                </a> : ""}
+                
                 <div>
                     {this.state.loggedIn &&
-                        <button onClick={() => this.getNowPlaying()}>Check What's Playing</button>}
+                        <button onClick={() => this.getNowPlaying()}>Check Your Playlists</button>}
                 </div>  
                 {/* {this.state.playlistNames? <div>These are All Your Playlists: {this.state.playlistNames} </div>  : ""} */}
                 {/* <div>Your Playlists : {this.state.playlistNames}</div> */}
-            {this.state.playlistNames ? this.state.playlistNames.map(title => <div>{title.name}</div>) : ""}
+            {this.state.playlistNames ? this.state.playlistNames.map((title, i) => <div key={i}>{title.name}</div>) : ""}
                  
         </div>
          )
