@@ -39,12 +39,12 @@ class App extends Component {
                 this.setState({ playlistNames: response.items })
             })
     }
-    mapit() {
-        this.state.playlistNames.map((names, i) => {
-            // console.log(names[i].name)
-            return <div key={i}>{names}</div>
-        })
-    }
+    // mapit() {
+    //     this.state.playlistNames.map((names, i) => {
+    //         // console.log(names[i].name)
+    //         return <div key={i}>{names}</div>
+    //     })
+    // }
 
         
     render() {
@@ -58,8 +58,9 @@ class App extends Component {
                     {this.state.loggedIn &&
                         <button onClick={() => this.getNowPlaying()}>Check What's Playing</button>}
                 </div>  
-                {this.state.playlistNames? <div>These are All Your Playlists: {this.state.playlistNames} </div>  : ""}
-            {/* <div>Your Playlists : {this.state.playlistNames}</div> */}
+                {/* {this.state.playlistNames? <div>These are All Your Playlists: {this.state.playlistNames} </div>  : ""} */}
+                {/* <div>Your Playlists : {this.state.playlistNames}</div> */}
+            {this.state.playlistNames ? this.state.playlistNames.map(title => <div>{title.name}</div>) : ""}
                  
         </div>
          )
