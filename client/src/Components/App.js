@@ -33,7 +33,7 @@ class App extends Component {
     }
     
     getPlaylists() {
-        spotifyWebApi.getUserPlaylists("1224023576")
+        spotifyWebApi.getUserPlaylists("1224023576", {limit: 50})
             .then((response) => {
                 console.log("playing", response.items)
                 this.setState({ playlistNames: response.items })
@@ -63,11 +63,11 @@ class App extends Component {
                 
                 <div>
                     {this.state.loggedIn &&
-                        <button onClick={() => this.listTracksFromPlaylists()}>Check Your Playlists</button>}
+                        <button onClick={() => this.getPlaylists()}>Check Your Playlists</button>}
                 </div>  
                 {/* {this.state.playlistNames? <div>These are All Your Playlists: {this.state.playlistNames} </div>  : ""} */}
                 {/* <div>Your Playlists : {this.state.playlistNames}</div> */}
-            {this.state.playlistNames ? this.state.playlistNames.map((title, i) => <div key={i}>{title.name}</div>) : ""}
+            {this.state.playlistNames ? this.state.playlistNames.map((title, i) => <div key={i} style={{display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white"}}>{title.name}</div>) : ""}
                  
         </div>
          )
