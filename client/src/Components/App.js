@@ -32,19 +32,25 @@ class App extends Component {
         return hashParams;
     }
     
-    getNowPlaying() {
+    getPlaylists() {
         spotifyWebApi.getUserPlaylists("1224023576")
             .then((response) => {
                 console.log("playing", response.items)
                 this.setState({ playlistNames: response.items })
             })
     }
-    // mapit() {
-    //     this.state.playlistNames.map((names, i) => {
-    //         // console.log(names[i].name)
-    //         return <div key={i}>{names}</div>
-    //     })
-    // }
+    listTracksFromPlaylists() {
+        spotifyWebApi.getPlaylistTracks("5eQkKKafKAWZ02UEzOfcgo")
+        .then((response) => console.log(response) )
+    }
+   
+    findRKelly() {
+        spotifyWebApi.search("r kelly", ["artist"])
+            .then((response) => {
+            console.log("this is the response ", response)
+        })
+    }
+    // rkelly id : "2mxe0TnaNL039ysAj51xPQ"
 
         
     render() {
@@ -57,7 +63,7 @@ class App extends Component {
                 
                 <div>
                     {this.state.loggedIn &&
-                        <button onClick={() => this.getNowPlaying()}>Check Your Playlists</button>}
+                        <button onClick={() => this.listTracksFromPlaylists()}>Check Your Playlists</button>}
                 </div>  
                 {/* {this.state.playlistNames? <div>These are All Your Playlists: {this.state.playlistNames} </div>  : ""} */}
                 {/* <div>Your Playlists : {this.state.playlistNames}</div> */}
