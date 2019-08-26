@@ -33,14 +33,16 @@ class App extends Component {
     }
     
     getPlaylists() {
-        spotifyWebApi.getUserPlaylists("1224023576", {limit: 50})
+        spotifyWebApi.getUserPlaylists("1224023576", {limit: 50, offset: 40})
             .then((response) => {
                 console.log("playing", response.items)
                 this.setState({ playlistNames: response.items })
             })
+        this.listTracksFromPlaylists()
     }
     listTracksFromPlaylists() {
-        spotifyWebApi.getPlaylistTracks("5eQkKKafKAWZ02UEzOfcgo")
+        //like a g6 playlist 27 tracks, 5th from the bottom is ignition
+        spotifyWebApi.getPlaylistTracks("10ts9epZnIHySy31AGHfmP")
         .then((response) => console.log(response) )
     }
    
