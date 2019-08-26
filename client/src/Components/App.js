@@ -38,12 +38,20 @@ class App extends Component {
                 console.log("playing", response.items)
                 this.setState({ playlistNames: response.items })
             })
-        this.listTracksFromPlaylists()
     }
+
     listTracksFromPlaylists() {
         //like a g6 playlist 27 tracks, 5th from the bottom is ignition
         spotifyWebApi.getPlaylistTracks("10ts9epZnIHySy31AGHfmP")
+        spotifyWebApi.getPlaylistTracks(this.state.playlistNames.id)
         .then((response) => console.log(response) )
+    }
+
+    tracksList() {
+        for (let i = 0; i < 49; i++){
+            spotifyWebApi.getPlaylistTracks(this.state.playlistNames[i].id)
+            .then((response) => console.log(response))
+        }
     }
    
     findRKelly() {
@@ -67,6 +75,7 @@ class App extends Component {
                     {this.state.loggedIn &&
                         <button onClick={() => this.getPlaylists()}>Check Your Playlists</button>}
                 </div>  
+                {this.state.playlistNames? this.tracksList(): <div>not yet</div>}
                 {/* {this.state.playlistNames? <div>These are All Your Playlists: {this.state.playlistNames} </div>  : ""} */}
                 {/* <div>Your Playlists : {this.state.playlistNames}</div> */}
             {this.state.playlistNames ? this.state.playlistNames.map((title, i) => <div key={i} style={{display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white"}}>{title.name}</div>) : ""}
