@@ -12,11 +12,17 @@ class App extends Component {
         this.state = {
             loggedIn: token ? true : false,
             playlistNames: "",
-            trackNamesArr: ""
+            trackNamesArr: "",
+            user: {
+                name: "", 
+                imageUrl: ""
+            }
         }
         if (token) {
             console.log('got access token', token)
             spotifyWebApi.setAccessToken(token)
+            this.getUserInfo()
+
         }
         console.log(this.state)
     }
@@ -32,6 +38,16 @@ class App extends Component {
         console.log('got hash params', hashParams)
         return hashParams;
     }
+    getUserInfo() {
+        spotifyWebApi.getMe()
+            .then(response => {
+                this.setState({
+                    name: response.display_name,
+                    imageUrl: response.images.url
+                })
+                console.log("this response", response, "and state", this.state)
+            })
+    }
     
     getPlaylists() {
         spotifyWebApi.getUserPlaylists("1224023576", {limit: 50, offset: 40})
@@ -40,7 +56,6 @@ class App extends Component {
                 this.setState({ playlistNames: response.items })
             })
     }
-//this.state.playlistNames[2].id
     listTracksFromPlaylists(trackID) {
         //like a g6 playlist 27 tracks, 5th from the bottom is ignition
         // listTracksFromPlaylistsspotifyWebApi.getPlaylistTracks("10ts9epZnIHySy31AGHfmP")'
@@ -48,30 +63,14 @@ class App extends Component {
         spotifyWebApi.getPlaylistTracks(trackID)
         .then((response) => console.log(response) )
     }
-
-    // tracksList() {
-    //     for (let i = 0; i < 49; i++){
-    //         spotifyWebApi.getPlaylistTracks(this.state.playlistNames[i].id)
-    //             .then((response) => {
-    //                 this.setState({ trackNamesArr: response.item })
-    //                 console.log(this.state.trackNamesArr)
-    //             })
-    //     }
-        // if (this.state.trackNamesArr) {
-        //         this.state.trackNamesArr.map(list => console.log(list.tracks.name))
-        //     }  else {
-        //         console.log('not yet')
-        //     }
-
-    // }
    
-     findRKelly() {
+    findRKelly() {
+    // rkelly id : "2mxe0TnaNL039ysAj51xPQ"
         spotifyWebApi.search("r kelly", ["artist"])
             .then((response) => {
             console.log("this is the response ", response)
         })
     }
-    // rkelly id : "2mxe0TnaNL039ysAj51xPQ"
 
         
     render() {
