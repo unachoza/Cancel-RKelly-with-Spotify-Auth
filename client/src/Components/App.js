@@ -11,7 +11,8 @@ class App extends Component {
         const token = params.access_token
         this.state = {
             loggedIn: token ? true : false,
-            playlistNames: ""
+            playlistNames: "",
+            trackNamesArr: ""
         }
         if (token) {
             console.log('got access token', token)
@@ -39,22 +40,32 @@ class App extends Component {
                 this.setState({ playlistNames: response.items })
             })
     }
-
-    listTracksFromPlaylists() {
+//this.state.playlistNames[2].id
+    listTracksFromPlaylists(trackID) {
         //like a g6 playlist 27 tracks, 5th from the bottom is ignition
-        spotifyWebApi.getPlaylistTracks("10ts9epZnIHySy31AGHfmP")
-        spotifyWebApi.getPlaylistTracks(this.state.playlistNames.id)
+        // listTracksFromPlaylistsspotifyWebApi.getPlaylistTracks("10ts9epZnIHySy31AGHfmP")'
+        console.log(this.state.playlistNames)
+        spotifyWebApi.getPlaylistTracks(trackID)
         .then((response) => console.log(response) )
     }
 
-    tracksList() {
-        for (let i = 0; i < 49; i++){
-            spotifyWebApi.getPlaylistTracks(this.state.playlistNames[i].id)
-            .then((response) => console.log(response))
-        }
-    }
+    // tracksList() {
+    //     for (let i = 0; i < 49; i++){
+    //         spotifyWebApi.getPlaylistTracks(this.state.playlistNames[i].id)
+    //             .then((response) => {
+    //                 this.setState({ trackNamesArr: response.item })
+    //                 console.log(this.state.trackNamesArr)
+    //             })
+    //     }
+        // if (this.state.trackNamesArr) {
+        //         this.state.trackNamesArr.map(list => console.log(list.tracks.name))
+        //     }  else {
+        //         console.log('not yet')
+        //     }
+
+    // }
    
-    findRKelly() {
+     findRKelly() {
         spotifyWebApi.search("r kelly", ["artist"])
             .then((response) => {
             console.log("this is the response ", response)
@@ -66,23 +77,22 @@ class App extends Component {
     render() {
         return (
             <div className="home">
-                <h1>Your Spotify Needs Help</h1>
-                {!this.state.loggedIn ? <a href="http://localhost:8888">
-                    <button>Login to Spotify</button>
-                </a> : ""}
+                <h1>Your Spotify Music Needs Help</h1>
+                {!this.state.loggedIn ?
+                    <a href="http://localhost:8888">
+                        <button>Login to Spotify</button>
+                    </a>
+                    : <button onClick={() => this.getPlaylists()}>Check Your Playlists</button>}
                 
-                <div>
-                    {this.state.loggedIn &&
-                        <button onClick={() => this.getPlaylists()}>Check Your Playlists</button>}
-                </div>  
-                {this.state.playlistNames? this.tracksList(): <div>not yet</div>}
-                {/* {this.state.playlistNames? <div>These are All Your Playlists: {this.state.playlistNames} </div>  : ""} */}
-                {/* <div>Your Playlists : {this.state.playlistNames}</div> */}
-            {this.state.playlistNames ? this.state.playlistNames.map((title, i) => <div key={i} style={{display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white"}}>{title.name}</div>) : ""}
-                 
-        </div>
-         )
+                {this.state.playlistNames && this.state.playlistNames.map(playlist => (
+                    this.listTracksFromPlaylists(playlist.id)))}
+               
+                {this.state.playlistNames && this.state.playlistNames.map((title, i) => <div key={i} style={{ display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white" }}>{title.name}</div>)}
+            </div>
+        )
     }
+         
+    
     
 }
 
