@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import '../App.css'
 import Spotify from 'spotify-web-api-js'
+import PlaylistList from './PlaylistsList';
 
 const spotifyWebApi = new Spotify()
 
@@ -61,7 +62,10 @@ class App extends Component {
         // listTracksFromPlaylistsspotifyWebApi.getPlaylistTracks("10ts9epZnIHySy31AGHfmP")'
         console.log(this.state.playlistNames)
         spotifyWebApi.getPlaylistTracks(trackID)
-        .then((response) => console.log(response) )
+            .then((response) => console.log(response))
+            .then(response => {
+                this.setState({ trackNamesArr: response.items[0].track.name})
+        })
     }
    
     findRKelly() {
@@ -85,8 +89,8 @@ class App extends Component {
                 
                 {this.state.playlistNames && this.state.playlistNames.map(playlist => (
                     this.listTracksFromPlaylists(playlist.id)))}
-               
-                {this.state.playlistNames && this.state.playlistNames.map((title, i) => <div key={i} style={{ display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white" }}>{title.name}</div>)}
+                {this.state.playlistNames && <PlaylistList usersPlaylists={this.state.playlistNames} />}
+                {/* {this.state.playlistNames && this.state.playlistNames.map((title, i) => <div key={i} style={{ display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white" }}>{title.name}</div>)} */}
             </div>
         )
     }
