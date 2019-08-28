@@ -51,7 +51,7 @@ class App extends Component {
     }
     
     getPlaylists() {
-        spotifyWebApi.getUserPlaylists("1224023576", {limit: 50, offset: 40})
+        spotifyWebApi.getUserPlaylists("1224023576", {limit: 3, offset: 90})
             .then((response) => {
                 console.log("playing", response.items)
                 this.setState({ playlistNames: response.items })
@@ -60,11 +60,10 @@ class App extends Component {
     listTracksFromPlaylists(trackID) {
         //like a g6 playlist 27 tracks, 5th from the bottom is ignition
         // listTracksFromPlaylistsspotifyWebApi.getPlaylistTracks("10ts9epZnIHySy31AGHfmP")'
-        console.log(this.state.playlistNames)
         spotifyWebApi.getPlaylistTracks(trackID)
-            .then((response) => console.log(response))
             .then(response => {
-                this.setState({ trackNamesArr: response.items[0].track.name})
+                this.setState({ trackNamesArr: response.items})
+                
         })
     }
    
@@ -89,7 +88,11 @@ class App extends Component {
                 
                 {this.state.playlistNames && this.state.playlistNames.map(playlist => (
                     this.listTracksFromPlaylists(playlist.id)))}
-                {this.state.playlistNames && <PlaylistList usersPlaylists={this.state.playlistNames} />}
+                {this.state.playlistNames &&
+                    <PlaylistList
+                    usersPlaylists={this.state.playlistNames}
+                    tracksObject={this.state.trackNamesArr}
+                    />}
                 {/* {this.state.playlistNames && this.state.playlistNames.map((title, i) => <div key={i} style={{ display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white" }}>{title.name}</div>)} */}
             </div>
         )
