@@ -13,12 +13,13 @@ class App extends Component {
         this.state = {
             loggedIn: token ? true : false,
             playlistNames: "",
-            trackNamesArr: "",
+            trackNamesArr: [],
             user: {
                 name: "", 
                 imageUrl: ""
             }
         }
+        this.listTracksFromPlaylists = this.listTracksFromPlaylists.bind(this)
         if (token) {
             console.log('got access token', token)
             spotifyWebApi.setAccessToken(token)
@@ -51,20 +52,27 @@ class App extends Component {
     }
     
     getPlaylists() {
-        spotifyWebApi.getUserPlaylists("1224023576", {limit: 3, offset: 90})
+        spotifyWebApi.getUserPlaylists("1224023576", {limit: 2, offset: 70})
             .then((response) => {
                 console.log("playing", response.items)
                 this.setState({ playlistNames: response.items })
+                console.log(this.state.playlistNames)
             })
     }
     listTracksFromPlaylists(trackID) {
         //like a g6 playlist 27 tracks, 5th from the bottom is ignition
         // listTracksFromPlaylistsspotifyWebApi.getPlaylistTracks("10ts9epZnIHySy31AGHfmP")'
+        console.log(trackID)
         spotifyWebApi.getPlaylistTracks(trackID)
-            .then(response => {
-                this.setState({ trackNamesArr: response.items})
-                
-        })
+            .then(response => this.setState({ trackNamesArr: response.items })
+                // .then(console.log(response.items))
+            )
+        .then(this.state.trackNamesArr && 
+           this.state.trackNamesArr.map((trackName, i) => {
+               console.log(trackName.track)
+            //  return <div key={i}>{trackName.track.name}</div>
+            }))
+        
     }
    
     findRKelly() {
@@ -86,12 +94,13 @@ class App extends Component {
                     </a>
                     : <button onClick={() => this.getPlaylists()}>Check Your Playlists</button>}
                 
-                {this.state.playlistNames && this.state.playlistNames.map(playlist => (
-                    this.listTracksFromPlaylists(playlist.id)))}
+                {/* {this.state.playlistNames && this.state.playlistNames.map(playlist => (
+                    this.listTracksFromPlaylists(playlist.id)))} */}
                 {this.state.playlistNames &&
                     <PlaylistList
                     usersPlaylists={this.state.playlistNames}
                     tracksObject={this.state.trackNamesArr}
+                    trackList={this.listTracksFromPlaylists}
                     />}
                 {/* {this.state.playlistNames && this.state.playlistNames.map((title, i) => <div key={i} style={{ display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white" }}>{title.name}</div>)} */}
             </div>
