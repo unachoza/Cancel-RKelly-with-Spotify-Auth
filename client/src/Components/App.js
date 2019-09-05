@@ -3,7 +3,7 @@ import '../App.css'
 import Spotify from 'spotify-web-api-js'
 import PlaylistList from './PlaylistsList';
 
-const spotifyWebApi = new Spotify()
+const   spotifyWebApi = new Spotify()
 
 class App extends Component {
     constructor() {
@@ -13,12 +13,13 @@ class App extends Component {
         this.state = {
             loggedIn: token ? true : false,
             playlistNames: "",
-            trackNamesArr: "",
+            trackNamesArr: [],
             user: {
                 name: "", 
                 imageUrl: ""
             }
         }
+        this.listTracksFromPlaylists = this.listTracksFromPlaylists.bind(this)
         if (token) {
             console.log('got access token', token)
             spotifyWebApi.setAccessToken(token)
@@ -51,20 +52,46 @@ class App extends Component {
     }
     
     getPlaylists() {
-        spotifyWebApi.getUserPlaylists("1224023576", {limit: 3, offset: 90})
+        spotifyWebApi.getUserPlaylists("1224023576", {limit: 2, offset: 70})
             .then((response) => {
-                console.log("playing", response.items)
                 this.setState({ playlistNames: response.items })
+                console.log(this.state.playlistNames)
             })
     }
     listTracksFromPlaylists(trackID) {
+        console.log('clicked')
         //like a g6 playlist 27 tracks, 5th from the bottom is ignition
         // listTracksFromPlaylistsspotifyWebApi.getPlaylistTracks("10ts9epZnIHySy31AGHfmP")'
+        console.log(trackID)
         spotifyWebApi.getPlaylistTracks(trackID)
-            .then(response => {
-                this.setState({ trackNamesArr: response.items})
-                
+            .then((response ) => {
+                console.log(response)
+                let names = []
+                let artistArr = []
+                let deeperArtists = []
+
+          response.items.map((item) => {
+            names.push(item.track.name)
         })
+                console.log(names)
+                response.items.map(item => {
+                    artistArr.push(item.track.artists)
+                })
+                    console.log("this is the artist array",artistArr)
+                artistArr.map((artist) => {
+                    deeperArtists.push(artist[0].name)
+                })
+                console.log("this is deeper", deeperArtists)
+                return names
+                
+            })
+        
+            // .then(trackId&&
+                // this.state.trackNamesArr.map((trackName, i) => {
+            
+            //         return <div >{trackName.track.name}</div>
+            // }))
+        
     }
    
     findRKelly() {
@@ -86,12 +113,14 @@ class App extends Component {
                     </a>
                     : <button onClick={() => this.getPlaylists()}>Check Your Playlists</button>}
                 
-                {this.state.playlistNames && this.state.playlistNames.map(playlist => (
-                    this.listTracksFromPlaylists(playlist.id)))}
-                {this.state.playlistNames &&
+                {/* {this.state.playlistNames && this.state.playlistNames.map(playlist => (
+                    this.listTracksFromPlaylists(playlist.id)))} */}
+                {this.state.playlistNames && this.state.trackNamesArr &&
                     <PlaylistList
                     usersPlaylists={this.state.playlistNames}
                     tracksObject={this.state.trackNamesArr}
+                    trackList={this.listTracksFromPlaylists}
+                    names={this.names}
                     />}
                 {/* {this.state.playlistNames && this.state.playlistNames.map((title, i) => <div key={i} style={{ display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white" }}>{title.name}</div>)} */}
             </div>
