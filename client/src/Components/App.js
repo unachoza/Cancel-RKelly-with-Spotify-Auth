@@ -3,7 +3,7 @@ import '../App.css'
 import Spotify from 'spotify-web-api-js'
 import PlaylistList from './PlaylistsList';
 
-const spotifyWebApi = new Spotify()
+const   spotifyWebApi = new Spotify()
 
 class App extends Component {
     constructor() {
@@ -54,24 +54,31 @@ class App extends Component {
     getPlaylists() {
         spotifyWebApi.getUserPlaylists("1224023576", {limit: 2, offset: 70})
             .then((response) => {
-                console.log("playing", response.items)
                 this.setState({ playlistNames: response.items })
                 console.log(this.state.playlistNames)
             })
     }
     listTracksFromPlaylists(trackID) {
+        console.log('clicked')
         //like a g6 playlist 27 tracks, 5th from the bottom is ignition
         // listTracksFromPlaylistsspotifyWebApi.getPlaylistTracks("10ts9epZnIHySy31AGHfmP")'
         console.log(trackID)
         spotifyWebApi.getPlaylistTracks(trackID)
-            .then(response => this.setState({ trackNamesArr: response.items })
-                // .then(console.log(response.items))
-            )
-        .then(this.state.trackNamesArr && 
-           this.state.trackNamesArr.map((trackName, i) => {
-               console.log(trackName.track)
-            //  return <div key={i}>{trackName.track.name}</div>
-            }))
+            .then((response, ) => {
+                console.log(response)
+                    let names = []
+
+          response.items.map((item) => {
+            names.push(item.track.name)
+        })
+        console.log(names )
+                
+            })
+            // .then(trackId&&
+                // this.state.trackNamesArr.map((trackName, i) => {
+            
+            //         return <div >{trackName.track.name}</div>
+            // }))
         
     }
    
@@ -96,7 +103,7 @@ class App extends Component {
                 
                 {/* {this.state.playlistNames && this.state.playlistNames.map(playlist => (
                     this.listTracksFromPlaylists(playlist.id)))} */}
-                {this.state.playlistNames &&
+                {this.state.playlistNames && this.state.trackNamesArr &&
                     <PlaylistList
                     usersPlaylists={this.state.playlistNames}
                     tracksObject={this.state.trackNamesArr}
