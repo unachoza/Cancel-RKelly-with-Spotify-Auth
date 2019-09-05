@@ -73,15 +73,15 @@ class App extends Component {
           response.items.map((item) => {
             names.push(item.track.name)
         })
-                console.log(names)
                 response.items.map(item => {
                     artistArr.push(item.track.artists)
                 })
-                    console.log("this is the artist array",artistArr)
                 artistArr.map((artist) => {
                     deeperArtists.push(artist[0].name)
                 })
-                console.log("this is deeper", deeperArtists)
+                const verdict = deeperArtists.includes("R. Kelly")
+                console.log("this is deeper", deeperArtists, "songs", names, "and", verdict)
+
                 return names
                 
             })
