@@ -12,7 +12,7 @@ export const PlaylistList = ({ usersPlaylists, tracksObject, trackList, names}) 
                     trackList={trackList} names={names}
         />
             ))}
-        {names.map(name => <Songs name={name}/>)}
+        {/* {names.map(name => <Songs name={name}/>)} */}
 </div>
 )
 export default PlaylistList

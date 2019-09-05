@@ -64,18 +64,28 @@ class App extends Component {
         // listTracksFromPlaylistsspotifyWebApi.getPlaylistTracks("10ts9epZnIHySy31AGHfmP")'
         console.log(trackID)
         spotifyWebApi.getPlaylistTracks(trackID)
-            .then((response, ) => {
+            .then((response ) => {
                 console.log(response)
-                    let names = []
+                let names = []
+                let artistArr = []
+                let deeperArtists = []
 
           response.items.map((item) => {
             names.push(item.track.name)
         })
                 console.log(names)
+                response.items.map(item => {
+                    artistArr.push(item.track.artists)
+                })
+                    console.log("this is the artist array",artistArr)
+                artistArr.map((artist) => {
+                    deeperArtists.push(artist[0].name)
+                })
+                console.log("this is deeper", deeperArtists)
                 return names
                 
-                
             })
+        
             // .then(trackId&&
                 // this.state.trackNamesArr.map((trackName, i) => {
             
