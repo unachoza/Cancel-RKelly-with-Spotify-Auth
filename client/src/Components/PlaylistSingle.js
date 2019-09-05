@@ -1,7 +1,7 @@
 import React from 'react'
 import '../App.css'
 
-const PlaylistSingle = ({ playlistInfo, tracksObject, trackList }) => {
+const PlaylistSingle = ({ playlistInfo, tracksObject, trackList, names }) => {
     console.log('hit it',tracksObject)
    console.log(playlistInfo)
         
@@ -13,11 +13,13 @@ const PlaylistSingle = ({ playlistInfo, tracksObject, trackList }) => {
             style={{ display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white" }}>
             <div className="playlist-title">
                 {playlistInfo.name} 
-                {/* {tracksObject.tracks.name} */}
+                {/* {tracksObject.tracks.name && tracksObject.tracks.name } */}
                 
-                <button onClick={trackList(playlistInfo.id)}>Button</button>
+                {trackList(playlistInfo.id)}
+                {names}
                 
             </div>
+            <div>{names}</div>
           </div>      
             
         

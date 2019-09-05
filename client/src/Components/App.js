@@ -71,7 +71,9 @@ class App extends Component {
           response.items.map((item) => {
             names.push(item.track.name)
         })
-        console.log(names )
+                console.log(names)
+                return names
+                
                 
             })
             // .then(trackId&&
@@ -108,6 +110,7 @@ class App extends Component {
                     usersPlaylists={this.state.playlistNames}
                     tracksObject={this.state.trackNamesArr}
                     trackList={this.listTracksFromPlaylists}
+                    names={this.names}
                     />}
                 {/* {this.state.playlistNames && this.state.playlistNames.map((title, i) => <div key={i} style={{ display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white" }}>{title.name}</div>)} */}
             </div>
