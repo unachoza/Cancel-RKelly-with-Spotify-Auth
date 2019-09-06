@@ -21,12 +21,10 @@ class App extends Component {
         }
         this.listTracksFromPlaylists = this.listTracksFromPlaylists.bind(this)
         if (token) {
-            console.log('got access token', token)
             spotifyWebApi.setAccessToken(token)
             this.getUserInfo()
 
         }
-        console.log(this.state)
     }
     
 
@@ -37,7 +35,6 @@ class App extends Component {
         while (e = r.exec(q)) {
             hashParams[e[1]] = decodeURIComponent(e[2]);
         }
-        console.log('got hash params', hashParams)
         return hashParams;
     }
     getUserInfo() {
@@ -47,51 +44,48 @@ class App extends Component {
                     name: response.display_name,
                     imageUrl: response.images.url
                 })
-                console.log("this response", response, "and state", this.state)
             })
     }
-    
+    //getting list of User's Playlists: limit 50 
     getPlaylists() {
-        spotifyWebApi.getUserPlaylists("1224023576", {limit: 2, offset: 70})
+        spotifyWebApi.getUserPlaylists("1224023576", {limit: 50, offset: 50})
             .then((response) => {
                 this.setState({ playlistNames: response.items })
-                console.log(this.state.playlistNames)
+                // console.log(this.state.playlistNames)
             })
     }
+    //getting list of tracks in User's Playlists 
     listTracksFromPlaylists(trackID) {
-        console.log('clicked')
-        //like a g6 playlist 27 tracks, 5th from the bottom is ignition
-        // listTracksFromPlaylistsspotifyWebApi.getPlaylistTracks("10ts9epZnIHySy31AGHfmP")'
-        console.log(trackID)
+        console.log('checking Songs in playlist')
         spotifyWebApi.getPlaylistTracks(trackID)
             .then((response ) => {
-                console.log(response)
-                let names = []
-                let artistArr = []
-                let deeperArtists = []
+                // console.log(response)
+                //saving variables of interested data points in response obj
+                let trackNames = []
+                let artistObjArr = []
+                let artistsNamesArr = []
 
           response.items.map((item) => {
-            names.push(item.track.name)
+            trackNames.push(item.track.name)
         })
-                response.items.map(item => {
-                    artistArr.push(item.track.artists)
-                })
-                artistArr.map((artist) => {
-                    deeperArtists.push(artist[0].name)
-                })
-                const verdict = deeperArtists.includes("R. Kelly")
-                console.log("this is deeper", deeperArtists, "songs", names, "and", verdict)
+        response.items.map(item => {
+            artistObjArr.push(item.track.artists)
+        })
+        artistObjArr.map((artist) => {
+            artistsNamesArr.push(artist[0].name)
+        })
+        const rKellyVerdict = artistsNamesArr.indexOf("R. Kelly")
+        if (rKellyVerdict >= 0) {
+            console.log("Rkelly song here", trackNames[rKellyVerdict])
+        }
+            const chrisBrownVerdict = artistsNamesArr.indexOf("Chris Brown")
+        if (chrisBrownVerdict >= 0) {
+            console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
+        }
 
-                return names
+        return trackNames, artistObjArr, artistsNamesArr
                 
-            })
-        
-            // .then(trackId&&
-                // this.state.trackNamesArr.map((trackName, i) => {
-            
-            //         return <div >{trackName.track.name}</div>
-            // }))
-        
+        })
     }
    
     findRKelly() {
@@ -101,6 +95,25 @@ class App extends Component {
             console.log("this is the response ", response)
         })
     }
+    /* need following fuctions:
+       renderSongs()
+       highlightRkellySongs()
+       highlightChrisBrownSongs()
+       removeFromSelectedSongs()
+       shareThisAppViaText()
+       logOutOfSpoitify()
+
+    */
+    
+    /* Need following Components/ UI/UX
+    asthetically pleasing UI
+    buttons to do remaining functions
+    messages congradulating users of belieiving women, 
+    counter of how many songs removed from how many users 
+    resources 
+    send Cancel R Kelly App to a friend via text 
+
+     */
 
         
     render() {
@@ -113,8 +126,6 @@ class App extends Component {
                     </a>
                     : <button onClick={() => this.getPlaylists()}>Check Your Playlists</button>}
                 
-                {/* {this.state.playlistNames && this.state.playlistNames.map(playlist => (
-                    this.listTracksFromPlaylists(playlist.id)))} */}
                 {this.state.playlistNames && this.state.trackNamesArr &&
                     <PlaylistList
                     usersPlaylists={this.state.playlistNames}
@@ -122,7 +133,6 @@ class App extends Component {
                     trackList={this.listTracksFromPlaylists}
                     names={this.names}
                     />}
-                {/* {this.state.playlistNames && this.state.playlistNames.map((title, i) => <div key={i} style={{ display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white" }}>{title.name}</div>)} */}
             </div>
         )
     }

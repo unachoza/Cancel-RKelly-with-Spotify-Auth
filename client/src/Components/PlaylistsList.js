@@ -3,7 +3,10 @@ import '../App.css'
 import PlaylistSingle from './PlaylistSingle'
 import Songs from './Songs'
 
-export const PlaylistList = ({ usersPlaylists, tracksObject, trackList, names}) => (
+export const PlaylistList = ({ usersPlaylists, tracksObject, trackList, names }) => {
+    console.log('hit playlistList Component')
+    return (
+        (
 
     <div>
         {
@@ -12,7 +15,9 @@ export const PlaylistList = ({ usersPlaylists, tracksObject, trackList, names}) 
                     trackList={trackList} names={names}
         />
             ))}
-        {/* {names.map(name => <Songs name={name}/>)} */}
+        {names && names.map(name => <Songs name={name}/>)}
 </div>
 )
+    )
+}
 export default PlaylistList
