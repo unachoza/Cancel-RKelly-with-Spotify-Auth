@@ -21,7 +21,7 @@ class App extends Component {
             }
         }
         this.listTracksFromPlaylists = this.listTracksFromPlaylists.bind(this)
-        this.renderSongs = this.renderSongs.bind(this)
+        this.showSongs = this.showSongs.bind(this)
         if (token) {
             spotifyWebApi.setAccessToken(token)
             this.getUserInfo()
@@ -50,7 +50,7 @@ class App extends Component {
     }
     //getting list of User's Playlists: limit 50 
     getPlaylists() {
-        spotifyWebApi.getUserPlaylists("1224023576", {limit: 50, offset: 50})
+        spotifyWebApi.getUserPlaylists("1224023576", {limit: 4, offset: 3})
             .then((response) => {
                 this.setState({ playlistNames: response.items })
                 // console.log(this.state.playlistNames)
@@ -69,7 +69,9 @@ class App extends Component {
 
                 response.items.map((item) => {
                     trackNames.push(item.track.name)
-                    debugger
+                    this.setState({
+                        artistsNamesArr: trackNames
+                    })
                     return trackNames
                 })
                 response.items.map(item => {
@@ -90,17 +92,26 @@ class App extends Component {
                     console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
                     return chrisBrownVerdict
                 }
-        trackNames.map(track => <div>{track}</div>)
-                // this.renderVertics(this.rKellyVerdict, this.chrisBrownVerdict)
+           
             })
+    }
+
+    showSongs() {
+        console.log('showing songs')
+        return (
+            <div>
+            {/* {this.state.trackNamesArr.map(track => <div>{track}</div>)} */}
+            </div>
+        )
+
     }
     // renderVertics(rKellyVerdict, chrisBrownVerdict) {
     //     console.log('these vertics', rKellyVerdict, chrisBrownVerdict)
     // }
-    renderSongs(trackNames) {
-        console.log('please render the songs', trackNames)
-        console.log(typeof trackNames)
-    }
+    // renderSongs(trackNames) {
+    //     console.log('please render the songs', this.trackNames)
+    //     console.log(typeof this.trackNames)
+    // }
     // <Songs key={i} trackNames={this.trackNames} />
    
     findRKelly() {
@@ -153,8 +164,10 @@ class App extends Component {
                     tracksObject={this.state.trackNamesArr}
                     trackList={this.listTracksFromPlaylists}
                     trackNames={this.trackNames}
-                    renderSongs={this.renderSongs}
+                    showSongs={this.showSongs}
                     />}
+                {this.tracknames && 
+            <Songs trackNames={this.trackNames}/>}
             </div>
         )
     }

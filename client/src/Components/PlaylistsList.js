@@ -2,7 +2,7 @@ import React from 'react'
 import '../App.css'
 import PlaylistSingle from './PlaylistSingle'
 
-export const PlaylistList = ({ usersPlaylists, tracksObject, trackList, trackNames, renderSongs }) => {
+export const PlaylistList = ({ usersPlaylists, tracksObject, trackList, trackNames, showSongs }) => {
     console.log('hit playlistList Component', usersPlaylists)
     return (
         (
@@ -12,7 +12,7 @@ export const PlaylistList = ({ usersPlaylists, tracksObject, trackList, trackNam
         {
             usersPlaylists.map((title, i) => (
             <PlaylistSingle key={i} playlistInfo={title} tracksObject={tracksObject} 
-                    trackList={trackList} trackNames={trackNames} renderSongs={renderSongs}
+                    trackList={trackList} trackNames={trackNames} showSongs={showSongs}
         />
             ))}
 </div>
