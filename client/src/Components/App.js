@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import '../App.css'
 import Spotify from 'spotify-web-api-js'
 import PlaylistList from './PlaylistsList';
+import Songs from './Songs'
 
 const   spotifyWebApi = new Spotify()
 
@@ -20,6 +21,7 @@ class App extends Component {
             }
         }
         this.listTracksFromPlaylists = this.listTracksFromPlaylists.bind(this)
+        this.showSongs = this.showSongs.bind(this)
         if (token) {
             spotifyWebApi.setAccessToken(token)
             this.getUserInfo()
@@ -48,7 +50,7 @@ class App extends Component {
     }
     //getting list of User's Playlists: limit 50 
     getPlaylists() {
-        spotifyWebApi.getUserPlaylists("1224023576", {limit: 50, offset: 50})
+        spotifyWebApi.getUserPlaylists("1224023576", {limit: 4, offset: 3})
             .then((response) => {
                 this.setState({ playlistNames: response.items })
                 // console.log(this.state.playlistNames)
@@ -58,35 +60,57 @@ class App extends Component {
     listTracksFromPlaylists(trackID) {
         console.log('checking Songs in playlist')
         spotifyWebApi.getPlaylistTracks(trackID)
-            .then((response ) => {
+            .then((response) => {
                 // console.log(response)
                 //saving variables of interested data points in response obj
                 let trackNames = []
                 let artistObjArr = []
                 let artistsNamesArr = []
 
-          response.items.map((item) => {
-            trackNames.push(item.track.name)
-        })
-        response.items.map(item => {
-            artistObjArr.push(item.track.artists)
-        })
-        artistObjArr.map((artist) => {
-            artistsNamesArr.push(artist[0].name)
-        })
-        const rKellyVerdict = artistsNamesArr.indexOf("R. Kelly")
-        if (rKellyVerdict >= 0) {
-            console.log("Rkelly song here", trackNames[rKellyVerdict])
-        }
-            const chrisBrownVerdict = artistsNamesArr.indexOf("Chris Brown")
-        if (chrisBrownVerdict >= 0) {
-            console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
-        }
-
-        return trackNames, artistObjArr, artistsNamesArr
-                
-        })
+                response.items.map((item) => {
+                    trackNames.push(item.track.name)
+                    
+                    return trackNames
+                })
+                response.items.map(item => {
+                    artistObjArr.push(item.track.artists)
+                    return artistObjArr
+                })
+                artistObjArr.map((artist) => {
+                    artistsNamesArr.push(artist[0].name)
+                    return artistsNamesArr
+                })
+                const rKellyVerdict = artistsNamesArr.indexOf("R. Kelly")
+                if (rKellyVerdict >= 0) {
+                    console.log("Rkelly song here", trackNames[rKellyVerdict])
+                    return rKellyVerdict
+                }
+                const chrisBrownVerdict = artistsNamesArr.indexOf("Chris Brown")
+                if (chrisBrownVerdict >= 0) {
+                    console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
+                    return chrisBrownVerdict
+                }
+           
+            })
     }
+
+    showSongs() {
+        console.log('showing songs')
+        return (
+            <div>
+            {/* {this.state.trackNamesArr.map(track => <div>{track}</div>)} */}
+            </div>
+        )
+
+    }
+    // renderVertics(rKellyVerdict, chrisBrownVerdict) {
+    //     console.log('these vertics', rKellyVerdict, chrisBrownVerdict)
+    // }
+    // renderSongs(trackNames) {
+    //     console.log('please render the songs', this.trackNames)
+    //     console.log(typeof this.trackNames)
+    // }
+    // <Songs key={i} trackNames={this.trackNames} />
    
     findRKelly() {
     // rkelly id : "2mxe0TnaNL039ysAj51xPQ"
@@ -115,6 +139,12 @@ class App extends Component {
 
      */
 
+     /* Other artists to cancel 
+     OFSETT
+     XXX somone
+     Woody Allen
+     */
+
         
     render() {
         return (
@@ -131,8 +161,11 @@ class App extends Component {
                     usersPlaylists={this.state.playlistNames}
                     tracksObject={this.state.trackNamesArr}
                     trackList={this.listTracksFromPlaylists}
-                    names={this.names}
+                    trackNames={this.trackNames}
+                    showSongs={this.showSongs}
                     />}
+                {this.tracknames && 
+            <Songs trackNames={this.trackNames}/>}
             </div>
         )
     }
