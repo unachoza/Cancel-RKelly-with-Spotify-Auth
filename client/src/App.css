@@ -25,3 +25,19 @@ button{
   background-color: darkgreen;
 
 }
+.playlist-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: black
+}
+
+.song-title{
+font-weight: 200;
+}
+.verdict {
+  color: red;
+  font-size: 30px
+}
+.none {
+  display: none
+}
