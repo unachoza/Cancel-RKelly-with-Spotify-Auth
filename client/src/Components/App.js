@@ -53,7 +53,7 @@ class App extends Component {
         spotifyWebApi.getUserPlaylists("1224023576", {limit: 4, offset: 3})
             .then((response) => {
                 this.setState({ playlistNames: response.items })
-                // console.log(this.state.playlistNames)
+                console.log(this.state.playlistNames)
             })
     }
     //getting list of tracks in User's Playlists 
@@ -61,7 +61,7 @@ class App extends Component {
         console.log('checking Songs in playlist')
         spotifyWebApi.getPlaylistTracks(trackID)
             .then((response) => {
-                // console.log(response)
+                 console.log(response)
                 //saving variables of interested data points in response obj
                 let trackNames = []
                 let artistObjArr = []
