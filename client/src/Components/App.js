@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import '../App.css'
 import Spotify from 'spotify-web-api-js'
 import PlaylistList from './PlaylistsList';
+import Songs from './Songs'
 
 const   spotifyWebApi = new Spotify()
 
@@ -20,6 +21,7 @@ class App extends Component {
             }
         }
         this.listTracksFromPlaylists = this.listTracksFromPlaylists.bind(this)
+        this.renderSongs = this.renderSongs.bind(this)
         if (token) {
             spotifyWebApi.setAccessToken(token)
             this.getUserInfo()
@@ -58,35 +60,48 @@ class App extends Component {
     listTracksFromPlaylists(trackID) {
         console.log('checking Songs in playlist')
         spotifyWebApi.getPlaylistTracks(trackID)
-            .then((response ) => {
+            .then((response) => {
                 // console.log(response)
                 //saving variables of interested data points in response obj
                 let trackNames = []
                 let artistObjArr = []
                 let artistsNamesArr = []
 
-          response.items.map((item) => {
-            trackNames.push(item.track.name)
-        })
-        response.items.map(item => {
-            artistObjArr.push(item.track.artists)
-        })
-        artistObjArr.map((artist) => {
-            artistsNamesArr.push(artist[0].name)
-        })
-        const rKellyVerdict = artistsNamesArr.indexOf("R. Kelly")
-        if (rKellyVerdict >= 0) {
-            console.log("Rkelly song here", trackNames[rKellyVerdict])
-        }
-            const chrisBrownVerdict = artistsNamesArr.indexOf("Chris Brown")
-        if (chrisBrownVerdict >= 0) {
-            console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
-        }
-
-        return trackNames, artistObjArr, artistsNamesArr
-                
-        })
+                response.items.map((item) => {
+                    trackNames.push(item.track.name)
+                    debugger
+                    return trackNames
+                })
+                response.items.map(item => {
+                    artistObjArr.push(item.track.artists)
+                    return artistObjArr
+                })
+                artistObjArr.map((artist) => {
+                    artistsNamesArr.push(artist[0].name)
+                    return artistsNamesArr
+                })
+                const rKellyVerdict = artistsNamesArr.indexOf("R. Kelly")
+                if (rKellyVerdict >= 0) {
+                    console.log("Rkelly song here", trackNames[rKellyVerdict])
+                    return rKellyVerdict
+                }
+                const chrisBrownVerdict = artistsNamesArr.indexOf("Chris Brown")
+                if (chrisBrownVerdict >= 0) {
+                    console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
+                    return chrisBrownVerdict
+                }
+        trackNames.map(track => <div>{track}</div>)
+                // this.renderVertics(this.rKellyVerdict, this.chrisBrownVerdict)
+            })
     }
+    // renderVertics(rKellyVerdict, chrisBrownVerdict) {
+    //     console.log('these vertics', rKellyVerdict, chrisBrownVerdict)
+    // }
+    renderSongs(trackNames) {
+        console.log('please render the songs', trackNames)
+        console.log(typeof trackNames)
+    }
+    // <Songs key={i} trackNames={this.trackNames} />
    
     findRKelly() {
     // rkelly id : "2mxe0TnaNL039ysAj51xPQ"
@@ -115,6 +130,12 @@ class App extends Component {
 
      */
 
+     /* Other artists to cancel 
+     OFSETT
+     XXX somone
+     Woody Allen
+     */
+
         
     render() {
         return (
@@ -131,7 +152,8 @@ class App extends Component {
                     usersPlaylists={this.state.playlistNames}
                     tracksObject={this.state.trackNamesArr}
                     trackList={this.listTracksFromPlaylists}
-                    names={this.names}
+                    trackNames={this.trackNames}
+                    renderSongs={this.renderSongs}
                     />}
             </div>
         )

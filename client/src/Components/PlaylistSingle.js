@@ -1,8 +1,7 @@
 import React from 'react'
 import '../App.css'
-import Songs from './Songs'
 
-const PlaylistSingle = ({ playlistInfo, tracksObject, trackList, names }) => {
+const PlaylistSingle = ({ playlistInfo, tracksObject, trackList, trackNames, renderSongs}) => {
     // console.log('hit playListSingle Componenet")
     return (
         <div className="playlist-container"
@@ -10,10 +9,8 @@ const PlaylistSingle = ({ playlistInfo, tracksObject, trackList, names }) => {
             <div className="playlist-title">
                 {playlistInfo.name} 
                 {trackList(playlistInfo.id)}
-                {/* <button onclick={renderSongs()}>Show Songs</button> */}
-                {names &&
-                    <Songs names={names} />
-                }
+                <br></br>
+                <button onClick={(e) => renderSongs(e)}>Show Songs</button>
             </div>
         </div>      
     )

@@ -1,11 +1,13 @@
 import React from 'react'
 import '../App.css'
 
-export const Songs = ({ names }) => {
+export const Songs = (trackNames) => {
     console.log("Hit songs component")
+     const theseSongs = trackNames.map(name => <div>{name}</div>)
+
     return (
               <div> hey
-    {names.map(name => <div>{name}</div>)}
+            {theseSongs}
 
     </div>   
             )
