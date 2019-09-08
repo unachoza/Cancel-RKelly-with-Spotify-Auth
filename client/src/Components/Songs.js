@@ -2,10 +2,8 @@ import React, {
   Component
 } from 'react'
 import '../App.css'
-import Spotify from 'spotify-web-api-js'
 import SongSingle from './SongSingle'
 
-const spotifyWebApi = new Spotify()
 
 const Songs = ({ tracks }) => {
   
