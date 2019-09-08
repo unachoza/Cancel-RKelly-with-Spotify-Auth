@@ -8,9 +8,9 @@ export const PlaylistList = ({ usersPlaylists, tracksObject, trackList, trackNam
         (
 
             <div>
-                {trackNames && trackNames.map(track =>  <div>{track}</div>)}
         {
-            usersPlaylists.map((title, i) => (
+                    usersPlaylists.map((title, i) => (
+                
             <PlaylistSingle key={i} playlistInfo={title} tracksObject={tracksObject} 
                     trackList={trackList} trackNames={trackNames} showSongs={showSongs}
         />

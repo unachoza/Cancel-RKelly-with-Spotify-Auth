@@ -69,9 +69,7 @@ class App extends Component {
 
                 response.items.map((item) => {
                     trackNames.push(item.track.name)
-                    this.setState({
-                        artistsNamesArr: trackNames
-                    })
+                    
                     return trackNames
                 })
                 response.items.map(item => {
