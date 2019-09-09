@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import '../App.css'
 import Spotify from 'spotify-web-api-js'
 import Songs from './Songs'
+import SongsToRemove from './SongsToRemove'
 
 const spotifyWebApi = new Spotify()
 
@@ -11,14 +12,13 @@ class PlaylistSingle extends Component {
         super()
         this.state = {
             items: [],
-            tracks: [],
-            artists: [],
             rKellyVerdict: [],
             chrisBrownVerdict: [],
-            trackobj: []
+            
         }
     }
-    
+
+    //getting list of tracks in User's Playlists 
     listTracksFromPlaylists(trackID) {
         console.log('checking Songs in playlist')
         spotifyWebApi.getPlaylistTracks(trackID)
@@ -37,36 +37,29 @@ class PlaylistSingle extends Component {
                 })
                  response.items.map((item) => {
                     trackNames.push(item.name)
-                    return trackNames
                 })
-                response.items.map(item => {
-                    artistObjArr.push(item.track.artists)
-                    return artistObjArr
-                })
-                response.items.map(item => {
-                    trackobj.push(item.track)
-                    this.setState({trackobj: trackobj})
-                })
+                
                 artistObjArr.map((artist) => {
                     artistsNamesArr.push(artist[0].name)
-                    this.setState({ artists: artistsNamesArr})
                 })
                 
                 const rKellyVerdict = artistsNamesArr.indexOf("R. Kelly")
                 if (rKellyVerdict >= 0) {
                     console.log("Rkelly song here", trackNames[rKellyVerdict])
-                    this.setState({ rKellyVerdict: rKellyVerdict })
+                     
                 }
                 const chrisBrownVerdict = artistsNamesArr.indexOf("Chris Brown")
                 if (chrisBrownVerdict >= 0) {
                     console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
                     
-                    this.setState({ chrisBrownVerdict: chrisBrownVerdict })
-                    
-                }
+                } return rKellyVerdict
 
             })
-        return <div className={this.state.chrisBrownVerdict ? "verdict": "none"}>Chris</div>
+        this.findProblematicSongs()
+    }
+    findProblematicSongs() {
+        console.log(this.listTracksFromPlaylists())
+        
     }
 
     render() {
@@ -78,10 +71,10 @@ class PlaylistSingle extends Component {
                     {this.props.playlistInfo.name}
                     <br></br>
                     <button onClick={() => this.listTracksFromPlaylists(this.props.playlistInfo.id)}>Show Songs</button>
-                    
-                    {this.state.items &&
-                        <Songs  items={this.state.items}/>}
                 </div>
+                    {this.state.items &&
+                    <Songs items={this.state.items} />}
+                <SongsToRemove />
             </div>
         )
     }

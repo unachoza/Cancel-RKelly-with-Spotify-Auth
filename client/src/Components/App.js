@@ -15,13 +15,12 @@ class App extends Component {
             loggedIn: token ? true : false,
             playlistNames: "",
             trackNamesArr: [],
-            user: {
-                name: "", 
-                imageUrl: ""
-            }
+            
+                userName: "", 
+                userImageUrl: "", 
+                userId: ""
+            
         }
-        this.listTracksFromPlaylists = this.listTracksFromPlaylists.bind(this)
-        this.showSongs = this.showSongs.bind(this)
         if (token) {
             spotifyWebApi.setAccessToken(token)
             this.getUserInfo()
@@ -42,76 +41,27 @@ class App extends Component {
     getUserInfo() {
         spotifyWebApi.getMe()
             .then(response => {
+                console.log(response.id)
                 this.setState({
                     name: response.display_name,
                     imageUrl: response.images.url,
+                    userId: response.id
 
                 })
             })
+        console.log(this.state)
+                return this.state.userId
     }
     //getting list of User's Playlists: limit 50 
     getPlaylists() {
-        spotifyWebApi.getUserPlaylists("1224023576", { limit: 2, offset: 0 })
+        spotifyWebApi.getUserPlaylists(`${this.getUserInfo()}`,{ limit: 1, offset: 0 })
             .then((response) => {
                 this.setState({ playlistNames: response.items })
-                console.log(this.state.playlistNames)
+                // console.log(this.state.playlistNames)
             })
     }
-    //getting list of tracks in User's Playlists 
-    listTracksFromPlaylists(trackID) {
-        console.log('checking Songs in playlist')
-        spotifyWebApi.getPlaylistTracks(trackID)
-            .then((response) => {
-                 console.log(response)
-                //saving variables of interested data points in response obj
-                let trackNames = []
-                let artistObjArr = []
-                let artistsNamesArr = []
+  
 
-                response.items.map((item) => {
-                    trackNames.push(item.track.name)
-                    
-                    return trackNames
-                })
-                response.items.map(item => {
-                    artistObjArr.push(item.track.artists)
-                    return artistObjArr
-                })
-                artistObjArr.map((artist) => {
-                    artistsNamesArr.push(artist[0].name)
-                    return artistsNamesArr
-                })
-                const rKellyVerdict = artistsNamesArr.indexOf("R. Kelly")
-                if (rKellyVerdict >= 0) {
-                    console.log("Rkelly song here", trackNames[rKellyVerdict])
-                    return rKellyVerdict
-                }
-                const chrisBrownVerdict = artistsNamesArr.indexOf("Chris Brown")
-                if (chrisBrownVerdict >= 0) {
-                    console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
-                    return chrisBrownVerdict
-                }
-           
-            })
-    }
-
-    showSongs() {
-        console.log('showing songs')
-        return (
-            <div>
-            {/* {this.state.trackNamesArr.map(track => <div>{track}</div>)} */}
-            </div>
-        )
-
-    }
-    // renderVertics(rKellyVerdict, chrisBrownVerdict) {
-    //     console.log('these vertics', rKellyVerdict, chrisBrownVerdict)
-    // }
-    // renderSongs(trackNames) {
-    //     console.log('please render the songs', this.trackNames)
-    //     console.log(typeof this.trackNames)
-    // }
-    // <Songs key={i} trackNames={this.trackNames} />
    
     findRKelly() {
     // rkelly id : "2mxe0TnaNL039ysAj51xPQ"

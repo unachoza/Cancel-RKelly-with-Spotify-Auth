@@ -6,7 +6,6 @@ export const PlaylistList = ({ usersPlaylists, tracksObject, trackList, trackNam
     console.log('hit playlistList Component', usersPlaylists)
     return (
         (
-
             <div>
         {
                     usersPlaylists.map((title, i) => (

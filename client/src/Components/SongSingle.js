@@ -3,13 +3,13 @@ import '../App.css'
 
 // ({ track, chrisBrownVerdict }) 
 // class SongSingle extends Component {
-const SongSingle = ({ item, chris }) => {
-    console.log(item.track.name)
-    debugger
+const SongSingle = ({ item }) => {
+    
         return (
             <div>
-                debugger
-                <div className="song-title" style={{ display: "inline-block" }}> Song Title :  {item.track.name} by : {item.track.artists[0].name}</div>
+              
+                <div className="song-title" style={{ textAlign: "left" , fontSize: "18px"}}> <span style={{fontWeight: "bold"}}>{item.track.name.toUpperCase()} </span>by {item.track.artists[0].name}</div>
+                
 
             </div>
         )
