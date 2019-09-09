@@ -4,11 +4,11 @@ import SongSingle from './SongSingle'
 
 
 
-const Songs = ({ items, artists, rKellyVerdict, chrisBrownVerdict, trackobj }) => {
-
+const Songs = ({ items}) => {
+console.log(items)
         return (
                 <div>
-                        {items.map((item, i) => <SongSingle item={item} key={i} />)}
+                        {items.map(item => <SongSingle item={item} />)}
                
                 </div>)
                         

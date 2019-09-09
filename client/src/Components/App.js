@@ -44,7 +44,8 @@ class App extends Component {
             .then(response => {
                 this.setState({
                     name: response.display_name,
-                    imageUrl: response.images.url
+                    imageUrl: response.images.url,
+
                 })
             })
     }
@@ -152,7 +153,7 @@ class App extends Component {
                 <h1>Your Spotify Music Needs Help</h1>
                 {!this.state.loggedIn ?
                     <a href="http://localhost:8888">
-                        <button>Login to Spotify</button>
+                        <button>Login Spotify</button>
                     </a>
                     : <button onClick={() => this.getPlaylists()}>Check Your Playlists</button>}
                 

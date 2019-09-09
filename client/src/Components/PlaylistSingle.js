@@ -31,10 +31,13 @@ class PlaylistSingle extends Component {
                 let trackobj = []
 
                 response.items.map((item) => {
-                    console.log(item)
                     trackNames.push(item)
                     this.setState({ items: trackNames })
-                    console.log(this.state.items)
+                    
+                })
+                 response.items.map((item) => {
+                    trackNames.push(item.name)
+                    return trackNames
                 })
                 response.items.map(item => {
                     artistObjArr.push(item.track.artists)
@@ -56,13 +59,10 @@ class PlaylistSingle extends Component {
                 }
                 const chrisBrownVerdict = artistsNamesArr.indexOf("Chris Brown")
                 if (chrisBrownVerdict >= 0) {
-                    // console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
-                    // bummer = `Chris Brown song here" ${trackNames[chrisBrownVerdict]}`
-                    this.setState({ chrisBrownVerdict: chrisBrownVerdict })
-                    // console.log(bummer)
-                    // return bummer
+                    console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
                     
-                    // return <div className="verdict">Chris Brown Song: {trackNames[chrisBrownVerdict]}</div>
+                    this.setState({ chrisBrownVerdict: chrisBrownVerdict })
+                    
                 }
 
             })
@@ -71,15 +71,14 @@ class PlaylistSingle extends Component {
 
     render() {
         
-        console.log('hit playListSingle Componenet', this.bummer)
         return (
             <div className="playlist-container"
                 style={{ display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white" }}>
                 <div className="playlist-title">
-                    {this.bummer}
                     {this.props.playlistInfo.name}
                     <br></br>
                     <button onClick={() => this.listTracksFromPlaylists(this.props.playlistInfo.id)}>Show Songs</button>
+                    
                     {this.state.items &&
                         <Songs  items={this.state.items}/>}
                 </div>
