@@ -15,7 +15,6 @@ class PlaylistSingle extends Component {
             rKellyVerdict: [],
             chrisBrownVerdict: [],
             trackNames: [],
-            // artistObjArr: [],
             artistsNamesArr: []
             
         }
@@ -79,8 +78,8 @@ class PlaylistSingle extends Component {
                     <button onClick={() => this.listTracksFromPlaylists(this.props.playlistInfo.id)}>Show Songs</button>
                 </div>
                     {this.state.items &&
-                    <Songs items={this.state.items} />}
-                <SongsToRemove />
+                    <Songs items={this.state.items} rKellyVerdict={this.state.rKellyVerdict} chrisBrownVerdict={this.state.chrisBrownVerdict} trackNames={this.state.trackNames} artistsNamesArr={this.state.artistsNamesArr}/>}
+                <SongsToRemove items={this.state.items} rKellyVerdict={this.state.rKellyVerdict} chrisBrownVerdict={this.state.chrisBrownVerdict} trackNames={this.state.trackNames} artistsNamesArr={this.state.artistsNamesArr}/>
             </div>
         )
     }
