@@ -1,13 +1,14 @@
-import React from 'react'
+import React, {Component} from 'react'
 import '../App.css'
 import SongSingle from './SongSingle'
 
 
 
-const Songs = ({ tracks, artists, rKellyVerdict, chrisBrownVerdict, trackobj }) => {
+const Songs = ({ items, artists, rKellyVerdict, chrisBrownVerdict, trackobj }) => {
+
         return (
                 <div>
-                        {trackobj.map((track, i) => <SongSingle track={track} key={i} />)}
+                        {items.map((item, i) => <SongSingle item={item} key={i} />)}
                
                 </div>)
                         

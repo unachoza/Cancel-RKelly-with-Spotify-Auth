@@ -50,7 +50,7 @@ class App extends Component {
     }
     //getting list of User's Playlists: limit 50 
     getPlaylists() {
-        spotifyWebApi.getUserPlaylists("1224023576", {limit: 4, offset: 3})
+        spotifyWebApi.getUserPlaylists("1224023576", { limit: 2, offset: 0 })
             .then((response) => {
                 this.setState({ playlistNames: response.items })
                 console.log(this.state.playlistNames)

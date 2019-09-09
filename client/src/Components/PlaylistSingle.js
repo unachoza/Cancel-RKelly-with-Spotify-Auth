@@ -10,6 +10,7 @@ class PlaylistSingle extends Component {
     constructor() {
         super()
         this.state = {
+            items: [],
             tracks: [],
             artists: [],
             rKellyVerdict: [],
@@ -30,8 +31,10 @@ class PlaylistSingle extends Component {
                 let trackobj = []
 
                 response.items.map((item) => {
-                    trackNames.push(item.track.name)
-                    this.setState({tracks: trackNames})
+                    console.log(item)
+                    trackNames.push(item)
+                    this.setState({ items: trackNames })
+                    console.log(this.state.items)
                 })
                 response.items.map(item => {
                     artistObjArr.push(item.track.artists)
@@ -77,8 +80,8 @@ class PlaylistSingle extends Component {
                     {this.props.playlistInfo.name}
                     <br></br>
                     <button onClick={() => this.listTracksFromPlaylists(this.props.playlistInfo.id)}>Show Songs</button>
-                    {this.state.tracks &&
-                        <Songs  trackobj={this.state.trackobj} tracks={this.state.tracks} artists={this.state.artists} rKellyVerdict={this.state.rKellyVerdict} chrisBrownVerdict={this.state.chrisBrownVerdict}/>}
+                    {this.state.items &&
+                        <Songs  items={this.state.items}/>}
                 </div>
             </div>
         )
