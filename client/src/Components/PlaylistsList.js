@@ -3,7 +3,6 @@ import '../App.css'
 import PlaylistSingle from './PlaylistSingle'
 
 export const PlaylistList = ({ usersPlaylists, tracksObject, trackList, trackNames, showSongs }) => {
-    console.log('hit playlistList Component', usersPlaylists)
     return (
         (
             <div>

@@ -14,54 +14,60 @@ class PlaylistSingle extends Component {
             items: [],
             rKellyVerdict: [],
             chrisBrownVerdict: [],
+            trackNames: [],
+            // artistObjArr: [],
+            artistsNamesArr: []
             
         }
     }
 
     //getting list of tracks in User's Playlists 
     listTracksFromPlaylists(trackID) {
-        console.log('checking Songs in playlist')
         spotifyWebApi.getPlaylistTracks(trackID)
             .then((response) => {
-                console.log(response.items)
                 //saving variables of interested data points in response obj
                 let trackNames = []
                 let artistObjArr = []
                 let artistsNamesArr = []
-                let trackobj = []
+                let items = []
 
                 response.items.map((item) => {
-                    trackNames.push(item)
-                    this.setState({ items: trackNames })
+                    items.push(item)
+                    this.setState({ items })
                     
                 })
-                 response.items.map((item) => {
+                response.items.map((item) => {
                     trackNames.push(item.name)
+                    this.setState({ trackNames })
                 })
                 
                 artistObjArr.map((artist) => {
                     artistsNamesArr.push(artist[0].name)
+                    this.setState({ artistsNamesArr })
                 })
                 
-                const rKellyVerdict = artistsNamesArr.indexOf("R. Kelly")
-                if (rKellyVerdict >= 0) {
-                    console.log("Rkelly song here", trackNames[rKellyVerdict])
-                     
-                }
-                const chrisBrownVerdict = artistsNamesArr.indexOf("Chris Brown")
-                if (chrisBrownVerdict >= 0) {
-                    console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
-                    
-                } return rKellyVerdict
-
+            this.itsProblematic()
+                return trackNames, artistObjArr, artistsNamesArr
             })
-        this.findProblematicSongs()
+    
     }
-    findProblematicSongs() {
-        console.log(this.listTracksFromPlaylists())
-        
-    }
+    itsProblematic() {
+        const rKellyVerdict = this.state.artistsNamesArr.indexOf("R. Kelly")
+        if (rKellyVerdict >= 0) {
+            console('here')
+            console.log("Rkelly song here", this.state.trackNames[rKellyVerdict])
+                     
+        }
+        console.log(rKellyVerdict)
+        const chrisBrownVerdict = this.state.artistsNamesArr.indexOf("Chris Brown")
+        if (chrisBrownVerdict >= 0) {
+            console.log("Chris Brown song here", this.state.trackNames[chrisBrownVerdict])
+                    
 
+        }
+        console.log(chrisBrownVerdict)
+    }
+   
     render() {
         
         return (
