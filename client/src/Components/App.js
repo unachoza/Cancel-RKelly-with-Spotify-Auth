@@ -14,6 +14,7 @@ class App extends Component {
             loggedIn: token ? true : false,
             playlistNames: "",
             trackNamesArr: [],
+            offsetNum: 0,
             user: {
                 name: "", 
                 imageUrl: "",
@@ -52,21 +53,31 @@ class App extends Component {
                     name: response.display_name,
                     imageUrl: response.images.url, 
                     id: response.id
+                    
                 })
             })
         
     }
     //getting list of User's Playlists: limit 50 
-    getPlaylists() {
-                console.log("this is state", this.state.id)
-
-        spotifyWebApi.getUserPlaylists(this.state.id, {limit: 50, offset: 0})
+    
+    getPlaylists(){
+        this.increaseOffset()
+        // {limit: 50, offset: 0}
+        spotifyWebApi.getUserPlaylists(this.state.id, {limit: 50, offset: this.state.offsetNum})
            
             .then((response) => {
-                console.log(response)
+                console.log(response.items)
                 this.setState({ playlistNames: response.items })
                 // console.log(this.state.playlistNames)
             })
+    }
+    increaseOffset() {
+        this.setState(state => {
+            return {
+                offsetNum: state.offsetNum + 50
+            }
+        })
+        console.log(this.state)
     }
     //getting list of tracks in User's Playlists 
     listTracksFromPlaylists(trackID) {
@@ -88,18 +99,18 @@ class App extends Component {
         artistObjArr.map((artist) => {
             artistsNamesArr.push(artist[0].name)
         })
-                let rKellyVerdict = artistsNamesArr.indexOf("The Rolling Stones")
+                let stones = artistsNamesArr.indexOf("The Rolling Stones")
                 // console.log(trackNames[rKellyVerdict] , "here")
-        if (rKellyVerdict > -1) {
-            console.log("Stones Mac song here", trackNames[rKellyVerdict])
+        if (stones > -1) {
+            console.log("Stones song here", trackNames[stones])
         }
             const chrisBrownVerdict = artistsNamesArr.indexOf("Chris Brown")
         if (chrisBrownVerdict > -1 ) {
             console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
         }
-        const FleetwoodMac = artistsNamesArr.indexOf("Fleetwood Mac")
-        if (FleetwoodMac > -1) {
-            console.log("Fleetwood Mac song here", trackNames[FleetwoodMac])
+        const rkelly = artistsNamesArr.indexOf("R. Kelly")
+        if (rkelly > -1) {
+            console.log("R. Kelly song here", trackNames[rkelly])
         }
 // console.log(artistsNamesArr, trackNames, 'done')
         return trackNames, artistObjArr, artistsNamesArr
