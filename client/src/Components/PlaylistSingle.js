@@ -27,7 +27,11 @@ listTracksFromPlaylists(trackID) {
                 let artistsNamesArr = []
                 let items = []
               
-                
+               response.items.map((item) => {
+                    items.push(item)
+                    this.setState({ items })
+                    
+                }) 
           response.items.map((item) => {
             trackNames.push(item.track.name)
           })
@@ -67,9 +71,8 @@ listTracksFromPlaylists(trackID) {
                 Yes Mam'  {this.props.playlistInfo.name} 
                 <button onClick={(e) => this.listTracksFromPlaylists( this.props.playlistInfo.id)}>List Songs</button>
                 {/* <button onclick={renderSongs()}>Show Songs</button> */}
-                {this.props.names &&
-                    <Songs names={this.props.names} />
-                }
+                {this.state.items &&
+                    <Songs items={this.state.items} />}
             </div>
         </div>      
     )

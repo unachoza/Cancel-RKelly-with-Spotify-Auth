@@ -1,16 +1,14 @@
 import React from 'react'
 import '../App.css'
+import SongSingle from './SongSingle'
 
-export const Songs = ({ names }) => {
-    console.log("Hit songs component")
-    return (
-              <div> hey
-    {names.map(name => <div>{name}</div>)}
-
-    </div>   
-            )
-    
+const Songs = ({ items }) => {
+        return (
+                <div>
+                        {items.map((item, i ) => <SongSingle item={item} key={i}/>)}
+               
+                </div>)
+                        
 }
-
 
 export default Songs
