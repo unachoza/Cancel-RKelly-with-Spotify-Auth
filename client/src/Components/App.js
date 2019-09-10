@@ -16,7 +16,8 @@ class App extends Component {
             trackNamesArr: [],
             user: {
                 name: "", 
-                imageUrl: ""
+                imageUrl: "",
+                id: ""
             }
         }
         this.listTracksFromPlaylists = this.listTracksFromPlaylists.bind(this)
@@ -35,21 +36,34 @@ class App extends Component {
         while (e = r.exec(q)) {
             hashParams[e[1]] = decodeURIComponent(e[2]);
         }
+        console.log(hashParams)
         return hashParams;
+    }
+    logout(token) {
+        console.log('clicked logout')
+        token = false
+        console.log(token)
     }
     getUserInfo() {
         spotifyWebApi.getMe()
             .then(response => {
+                console.log(response)
                 this.setState({
                     name: response.display_name,
-                    imageUrl: response.images.url
+                    imageUrl: response.images.url, 
+                    id: response.id
                 })
             })
+        
     }
     //getting list of User's Playlists: limit 50 
     getPlaylists() {
-        spotifyWebApi.getUserPlaylists("1224023576", {limit: 50, offset: 50})
+                console.log("this is state", this.state.id)
+
+        spotifyWebApi.getUserPlaylists(this.state.id, {limit: 50, offset: 0})
+           
             .then((response) => {
+                console.log(response)
                 this.setState({ playlistNames: response.items })
                 // console.log(this.state.playlistNames)
             })
@@ -74,18 +88,24 @@ class App extends Component {
         artistObjArr.map((artist) => {
             artistsNamesArr.push(artist[0].name)
         })
-        const rKellyVerdict = artistsNamesArr.indexOf("R. Kelly")
-        if (rKellyVerdict >= 0) {
-            console.log("Rkelly song here", trackNames[rKellyVerdict])
+                let rKellyVerdict = artistsNamesArr.indexOf("The Rolling Stones")
+                // console.log(trackNames[rKellyVerdict] , "here")
+        if (rKellyVerdict > -1) {
+            console.log("Stones Mac song here", trackNames[rKellyVerdict])
         }
             const chrisBrownVerdict = artistsNamesArr.indexOf("Chris Brown")
-        if (chrisBrownVerdict >= 0) {
+        if (chrisBrownVerdict > -1 ) {
             console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
         }
-
+        const FleetwoodMac = artistsNamesArr.indexOf("Fleetwood Mac")
+        if (FleetwoodMac > -1) {
+            console.log("Fleetwood Mac song here", trackNames[FleetwoodMac])
+        }
+// console.log(artistsNamesArr, trackNames, 'done')
         return trackNames, artistObjArr, artistsNamesArr
                 
-        })
+            })
+        
     }
    
     findRKelly() {
@@ -124,7 +144,9 @@ class App extends Component {
                     <a href="http://localhost:8888">
                         <button>Login to Spotify</button>
                     </a>
-                    : <button onClick={() => this.getPlaylists()}>Check Your Playlists</button>}
+                    : <div><button onClick={() => this.getPlaylists()}>Check Your Playlists</button>
+                    <button onClick={(e)=> this.logout(this.token)}>Log Out</button>
+                    </div>}
                 
                 {this.state.playlistNames && this.state.trackNamesArr &&
                     <PlaylistList
