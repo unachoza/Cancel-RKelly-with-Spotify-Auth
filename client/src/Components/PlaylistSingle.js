@@ -35,25 +35,22 @@ class PlaylistSingle extends Component {
                 let artistObjArr = []
                 let artistsNamesArr = []
                 let items = []
-                let rKellyVerdict = []
-                let chrisBrownVerdict = []
-                let mJVerdict = []
-              
                response.items.map((item) => {
                     items.push(item)
                     this.setState({ items })
-                    
                 }) 
                 response.items.map((item) => {
                     trackNames.push(item.track.name)
                 })
-        
                 response.items.map(item => {
                     artistObjArr.push(item.track.artists)
                 })
                 artistObjArr.map((artist) => {
                     artistsNamesArr.push(artist[0].name)
                 })
+                // for (let i = 0; i < trackNames.length; i++){
+                this.searchForSongs(artistsNamesArr,trackNames)
+                // }
                 /********************
                  ****************
                  Problem: if two or more problems 
@@ -61,31 +58,44 @@ class PlaylistSingle extends Component {
                 it will find one and move on 
                 **********************
                 ********** */ 
-                let mJSong = artistsNamesArr.indexOf("Michael Jackson")
-                if (mJSong > -1) {
-                    console.log("Michael Jackson Song song here", trackNames[mJSong])
-                }
-                let chrisBrown = artistsNamesArr.indexOf("Chris Brown")
-                if (chrisBrown > -1 ) {
-                    console.log("Chris Brown song here", trackNames[chrisBrown])
-                    chrisBrownVerdict.push(`${trackNames[chrisBrown]} by Chris Brown`)
-                    console.log(chrisBrownVerdict)
-                    this.setState({ chrisBrownVerdict })
-                }
-                let rkelly = artistsNamesArr.indexOf("R. Kelly")
-                if (rkelly > -1) {
-                    console.log("R. Kelly song here", trackNames[rkelly])
-                    rKellyVerdict.push(`${trackNames[rkelly]} by R. Kelly`)
-                    console.log(rKellyVerdict)
-                    this.setState({rKellyVerdict})
-                }
-                let rihanna = artistsNamesArr.indexOf("Rihanna")
-                if (rihanna > -1) {
-                    console.log("Rihanna song here", trackNames[rihanna])
-                }
+               
                 
             })
         console.log(this.state)
+        
+    }
+    indexOfAll = (arr, val) => arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), [])
+
+
+    searchForSongs(artistsNamesArr, trackNames) {
+        console.log("from other function")
+        // let rKellyVerdict = []
+        // let chrisBrownVerdict = []
+        // let mJVerdict = []
+
+       console.log(this.indexOfAll(artistsNamesArr, "R. Kelly"))
+       console.log(this.indexOfAll(artistsNamesArr, "Chris Brown"))
+       console.log(this.indexOfAll(artistsNamesArr, "Michael Jackson"))
+
+        // let mJSong = artistsNamesArr.indexOf("Michael Jackson")
+        //         if (mJSong > -1) {
+        //             console.log("Michael Jackson Song song here", trackNames[mJSong])
+        //             mJVerdict.push(`${trackNames[mJSong]} by Michael Jackson`)
+        //         }
+        //         let chrisBrown = artistsNamesArr.indexOf("Chris Brown")
+        //         if (chrisBrown > -1 ) {
+        //             console.log("Chris Brown song here", trackNames[chrisBrown])
+        //             chrisBrownVerdict.push(`${trackNames[chrisBrown]} by Chris Brown`)
+        //             console.log(chrisBrownVerdict)
+        //             this.setState({ chrisBrownVerdict })
+        //         }
+        //         let rkelly = artistsNamesArr.indexOf("R. Kelly")
+        //         if (rkelly > -1) {
+        //             console.log("R. Kelly song here", trackNames[rkelly])
+        //             rKellyVerdict.push(`${trackNames[rkelly]} by R. Kelly`)
+        //             console.log(rKellyVerdict)
+        //             this.setState({rKellyVerdict})
+        //         }
         
     }
     render(){
