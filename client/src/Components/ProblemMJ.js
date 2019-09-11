@@ -16,7 +16,7 @@ class ProblemMJ extends Component{
         return (
             <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>
                   <hr></hr>
-                <div>This is a problem : {this.props.mjVerdict}</div> 
+                <div>This is a problem: {this.props.mjVerdict}</div> 
                 <hr></hr>
 
             </div>

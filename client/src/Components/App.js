@@ -94,9 +94,6 @@ class App extends Component {
         })
     }
     /* need following fuctions:
-       renderSongs()
-       highlightRkellySongs()
-       highlightChrisBrownSongs()
        removeFromSelectedSongs()
        shareThisAppViaText()
        logOutOfSpoitify()
@@ -134,16 +131,15 @@ class App extends Component {
                         <button>Login Spotify</button>
                     </a>
                     : <div><button onClick={() => this.getPlaylists()}>Check Your Playlists</button>
-                    <button onClick={(e)=> this.logout(this.token)}>Log Out</button>
-                    </div>}
+                    {/* <button onClick={(e)=> this.logout(this.token)}>Log Out</button> */}
+                        </div>}
+                    {this.state.offsetNum > 0 && <button onClick={() => this.getPlaylists()}>Check Next 20 playlists</button>}
                 </div>
                 
                 
                 {this.state.playlistNames && this.state.trackNamesArr &&
                     <PlaylistList
                     usersPlaylists={this.state.playlistNames}
-                    // tracksObject={this.state.trackNamesArr}
-                    // names={this.names}
                     items={this.state.items}
                     />}
                 {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}

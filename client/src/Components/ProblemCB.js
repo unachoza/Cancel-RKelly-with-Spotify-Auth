@@ -13,10 +13,12 @@ class ProblemCB extends Component{
     // callback?:
     // removeTracksFromPlaylist(playlistId: string, uris: Object[], callback?:
     render() {
+    console.log(this.props.chrisBrownVerdict)
+
         return (
             <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>
                   <hr></hr>
-                <div>This is a problem : {this.props.chrisBrownVerdict}</div> 
+                <div>This is a problem: {this.props.chrisBrownVerdict}</div> 
                 <hr></hr>
 
             </div>

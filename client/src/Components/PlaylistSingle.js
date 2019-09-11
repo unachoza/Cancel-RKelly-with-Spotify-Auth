@@ -75,15 +75,15 @@ class PlaylistSingle extends Component {
         let MJindexies = this.indexOfAll(artistsNamesArr, "Michael Jackson")
 
         for (let i = 0; i < CBindexies.length; i++){
-            chrisBrownVerdict.push(`${trackNames[CBindexies[i]]} by Chris Brown`)
+            chrisBrownVerdict.push(`${trackNames[CBindexies[i]]} by Chris Brown AND `)
         }
           
         for (let i = 0; i < RKindexies.length; i++){
-            rKellyVerdict.push(`${trackNames[RKindexies[i]]} by R. Kelly`)
+            rKellyVerdict.push(`${trackNames[RKindexies[i]]} by R. Kelly AND `)
         }
           
         for (let i = 0; i < MJindexies.length; i++){
-            mJVerdict.push(`${trackNames[MJindexies[i]]} by Michael Jackson`)
+            mJVerdict.push(`${trackNames[MJindexies[i]]} by Michael Jackson AND `)
         }
         this.setState({chrisBrownVerdict, rKellyVerdict, mJVerdict })
     }
