@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import '../App.css'
 import Spotify from 'spotify-web-api-js'
 import Songs from './Songs'
-import ProblematicSongs from './ProblematicSongs'
+import ProblemRK from './ProblemRK'
+import ProblemCB from './ProblemCB'
+import ProblemMJ from './ProblemMJ'
 
 const   spotifyWebApi = new Spotify()
 
@@ -53,17 +55,8 @@ class PlaylistSingle extends Component {
                     artistsNamesArr.push(artist[0].name)
                     return artistsNamesArr
                 })
-                // for (let i = 0; i < trackNames.length; i++){
+                
                 this.searchForSongs(artistsNamesArr,trackNames)
-                // }
-                /********************
-                 ****************
-                 Problem: if two or more problems 
-                 are by the same artist in a playlist,
-                it will find one and move on 
-                **********************
-                ********** */ 
-               
                 
             })
         
@@ -92,7 +85,7 @@ class PlaylistSingle extends Component {
         for (let i = 0; i < MJindexies.length; i++){
             mJVerdict.push(`${trackNames[MJindexies[i]]} by Michael Jackson`)
         }
-        console.log( chrisBrownVerdict, rKellyVerdict, mJVerdict)
+        this.setState({chrisBrownVerdict, rKellyVerdict, mJVerdict })
     }
     render(){
     return (
@@ -104,8 +97,12 @@ class PlaylistSingle extends Component {
                  <button onClick={(e) => this.listTracksFromPlaylists( this.props.playlistInfo.id)}>List Songs</button>
                
                 
-                {this.state.chrisBrownVerdict.length > 0 &&
-                    <ProblematicSongs chrisBrownVerdict={this.state.chrisBrownVerdict} rKellyVerdict={this.state.rKellyVerdict} items={this.state.items}/>}
+                {this.state.chrisBrownVerdict.length >  0 &&
+                    <ProblemCB chrisBrownVerdict={this.state.chrisBrownVerdict} /> }
+                    {this.state.rKellyVerdict.length >  0 &&
+                    <ProblemRK rKellyVerdict={this.state.rKellyVerdict} />}
+                {this.state.mJVerdict.length >  0 &&
+                    <ProblemMJ mJVerdict={this.state.mJVerdict} /> }
                    {this.state.items &&  <Songs items={this.state.items} showSongs={this.state.showSongs} />}
 
             </div>
