@@ -3,7 +3,6 @@ import '../App.css'
 import Spotify from 'spotify-web-api-js'
 import Songs from './Songs'
 import ProblematicSongs from './ProblematicSongs'
-import Spotify from 'spotify-web-api-js'
 
 const   spotifyWebApi = new Spotify()
 
@@ -94,11 +93,12 @@ class PlaylistSingle extends Component {
                    {this.state.items &&  <Songs items={this.state.items} />}
 
             </div>
+            </div>
         )
     }
 }
 
-}
+
 
   
 
