@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import '../App.css'
 import Spotify from 'spotify-web-api-js'
 import Songs from './Songs'
-import ProblematicSongs from './ProblematicSongs'
+import ProblemRK from './ProblemRK'
+import ProblemCB from './ProblemCB'
+import ProblemMJ from './ProblemMJ'
 
 const   spotifyWebApi = new Spotify()
 
@@ -29,7 +31,7 @@ class PlaylistSingle extends Component {
 
         spotifyWebApi.getPlaylistTracks(trackID)
             .then((response) => {
-                console.log(response)
+                console.log(response.items)
                 //saving variables of interested data points in response obj
                 let trackNames = []
                 let artistObjArr = []
@@ -37,31 +39,26 @@ class PlaylistSingle extends Component {
                 let items = []
                response.items.map((item) => {
                     items.push(item)
-                    this.setState({ items })
+                   this.setState({ items })
+                   return items
+                
                 }) 
                 response.items.map((item) => {
                     trackNames.push(item.track.name)
+                    return trackNames
                 })
                 response.items.map(item => {
                     artistObjArr.push(item.track.artists)
+                    return artistObjArr
                 })
                 artistObjArr.map((artist) => {
                     artistsNamesArr.push(artist[0].name)
+                    return artistsNamesArr
                 })
-                // for (let i = 0; i < trackNames.length; i++){
+                
                 this.searchForSongs(artistsNamesArr,trackNames)
-                // }
-                /********************
-                 ****************
-                 Problem: if two or more problems 
-                 are by the same artist in a playlist,
-                it will find one and move on 
-                **********************
-                ********** */ 
-               
                 
             })
-        console.log(this.state)
         
     }
     indexOfAll = (arr, val) => arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), [])
@@ -69,44 +66,43 @@ class PlaylistSingle extends Component {
 
     searchForSongs(artistsNamesArr, trackNames) {
         console.log("from other function")
-        // let rKellyVerdict = []
-        // let chrisBrownVerdict = []
-        // let mJVerdict = []
+        let rKellyVerdict = []
+        let chrisBrownVerdict = []
+        let mJVerdict = []
 
-       console.log(this.indexOfAll(artistsNamesArr, "R. Kelly"))
-       console.log(this.indexOfAll(artistsNamesArr, "Chris Brown"))
-       console.log(this.indexOfAll(artistsNamesArr, "Michael Jackson"))
+        let RKindexies = this.indexOfAll(artistsNamesArr, "R. Kelly")
+        let CBindexies = this.indexOfAll(artistsNamesArr, "Chris Brown")
+        let MJindexies = this.indexOfAll(artistsNamesArr, "Michael Jackson")
 
-        // let mJSong = artistsNamesArr.indexOf("Michael Jackson")
-        //         if (mJSong > -1) {
-        //             console.log("Michael Jackson Song song here", trackNames[mJSong])
-        //             mJVerdict.push(`${trackNames[mJSong]} by Michael Jackson`)
-        //         }
-        //         let chrisBrown = artistsNamesArr.indexOf("Chris Brown")
-        //         if (chrisBrown > -1 ) {
-        //             console.log("Chris Brown song here", trackNames[chrisBrown])
-        //             chrisBrownVerdict.push(`${trackNames[chrisBrown]} by Chris Brown`)
-        //             console.log(chrisBrownVerdict)
-        //             this.setState({ chrisBrownVerdict })
-        //         }
-        //         let rkelly = artistsNamesArr.indexOf("R. Kelly")
-        //         if (rkelly > -1) {
-        //             console.log("R. Kelly song here", trackNames[rkelly])
-        //             rKellyVerdict.push(`${trackNames[rkelly]} by R. Kelly`)
-        //             console.log(rKellyVerdict)
-        //             this.setState({rKellyVerdict})
-        //         }
-        
+        for (let i = 0; i < CBindexies.length; i++){
+            chrisBrownVerdict.push(`${trackNames[CBindexies[i]]} by Chris Brown AND `)
+        }
+          
+        for (let i = 0; i < RKindexies.length; i++){
+            rKellyVerdict.push(`${trackNames[RKindexies[i]]} by R. Kelly AND `)
+        }
+          
+        for (let i = 0; i < MJindexies.length; i++){
+            mJVerdict.push(`${trackNames[MJindexies[i]]} by Michael Jackson AND `)
+        }
+        this.setState({chrisBrownVerdict, rKellyVerdict, mJVerdict })
     }
     render(){
     return (
-        <div className="playlist-container">
-            <div className="playlist-title">
+        <div className={this.state.showSongs ? "playlist-container-closed" : "playlist-container-open"} >
+                <img style={{height: "220px", paddingTop:"20px" }}src={this.props.playlistInfo.images[0].url} alt="album art" />
+            <br></br>
+            <div className="playlist-container-open">
+                {this.props.playlistInfo.name} <br></br>
                  <button onClick={(e) => this.listTracksFromPlaylists( this.props.playlistInfo.id)}>List Songs</button>
-                {this.props.playlistInfo.name} 
+               
                 
-                {this.state.chrisBrownVerdict.length > 0 &&
-                    <ProblematicSongs chrisBrownVerdict={this.state.chrisBrownVerdict} rKellyVerdict={this.state.rKellyVerdict} items={this.state.items}/>}
+                {this.state.chrisBrownVerdict.length >  0 &&
+                    <ProblemCB chrisBrownVerdict={this.state.chrisBrownVerdict} /> }
+                    {this.state.rKellyVerdict.length >  0 &&
+                    <ProblemRK rKellyVerdict={this.state.rKellyVerdict} />}
+                {this.state.mJVerdict.length >  0 &&
+                    <ProblemMJ mJVerdict={this.state.mJVerdict} /> }
                    {this.state.items &&  <Songs items={this.state.items} showSongs={this.state.showSongs} />}
 
             </div>

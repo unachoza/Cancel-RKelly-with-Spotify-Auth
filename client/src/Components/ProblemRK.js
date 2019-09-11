@@ -4,7 +4,8 @@ import Spotify from 'spotify-web-api-js'
 
 const spotifyWebApi = new Spotify()
 
-class ProblematicSongs extends Component{
+class ProblemRK extends Component{
+
 
     // removeTracksFromPlaylist(playlistId, uris: Object[]) {
 
@@ -15,8 +16,7 @@ class ProblematicSongs extends Component{
         return (
             <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>
                   <hr></hr>
-                <div>This a problem : {this.props.chrisBrownVerdict}</div> 
-                <div>This is a problem : {this.props.rKellyVerdict}</div> 
+                <div>This is a problem: {this.props.rKellyVerdict}</div> 
                 <hr></hr>
 
             </div>
@@ -27,4 +27,4 @@ class ProblematicSongs extends Component{
 
 
 
-export default ProblematicSongs
+export default ProblemRK

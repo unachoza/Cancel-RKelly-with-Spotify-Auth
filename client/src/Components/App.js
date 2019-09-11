@@ -42,20 +42,18 @@ class App extends Component {
         while (e = r.exec(q)) {
             hashParams[e[1]] = decodeURIComponent(e[2]);
         }
-        console.log(hashParams)
         return hashParams;
     }
-    logout(token) {
+    logout() {
         console.log('clicked logout')
-        token = false
-        console.log(token)
+        window.location.reload()
+       
     }
     getUserInfo() {
         spotifyWebApi.getMe()
             .then(response => {
 
 
-                console.log(response)
                 this.setState({
                     name: response.display_name,
                     imageUrl: response.images.url, 
@@ -71,22 +69,35 @@ class App extends Component {
         this.setState({items: [], playlistNames: []})
         this.increaseOffset()
         // {limit: 50, offset: 0}
-        spotifyWebApi.getUserPlaylists(this.state.id, {limit: 20, offset: this.state.offsetNum})
+        spotifyWebApi.getUserPlaylists(this.state.id, {limit: 10, offset: this.state.offsetNum})
             .then((response) => {
-                console.log(response.items.length)
-                this.setState({ playlistNames: response.items })
+                console.log(response)
+                this.setState({ playlistNames: response.items, total: response.total })
                 // console.log(this.state.playlistNames)
             })
     }
-
+l
     increaseOffset() {
-        this.setState(state => {
+            this.setState(state => {
             return {
-                offsetNum: state.offsetNum + 20
+                offsetNum: state.offsetNum + 10
             }
-        })
-        console.log(this.state)
+            })
+            
+        if (this.state.total) {
+           this.stopClickingNext()
+        }
+      
     }
+       
+    
+    stopClickingNext() {
+        let totalClicksLeft = (Math.floor(this.state.total / 10)) - 1
+        this.setState({totalClicksLeft})
+    //    console.log( totalClicksLeft)
+    //     return totalClicksLeft
+    }
+    
 
    
    
@@ -98,9 +109,6 @@ class App extends Component {
         })
     }
     /* need following fuctions:
-       renderSongs()
-       highlightRkellySongs()
-       highlightChrisBrownSongs()
        removeFromSelectedSongs()
        shareThisAppViaText()
        logOutOfSpoitify()
@@ -127,21 +135,30 @@ class App extends Component {
     render() {
         return (
             <div className="home">
-                <Introduction loggedIn={this.state.loggedIn}/>
+                <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
+                <br></br>
+                <div className=
+                    {this.state.loggedIn ? "loggedIn" : "loggedOut"}>
+                    <Introduction loggedIn={this.state.loggedIn}/>
                 <UsageStats />
                 {!this.state.loggedIn ?
                     <a href="http://localhost:8888">
                         <button>Login Spotify</button>
                     </a>
                     : <div><button onClick={() => this.getPlaylists()}>Check Your Playlists</button>
-                    <button onClick={(e)=> this.logout(this.token)}>Log Out</button>
-                    </div>}
+                    {/* <button onClick={(e)=> this.logout(this.token)}>Log Out</button> */}
+                        </div>}
+                    </div>
+                    {this.state.offsetNum < this.state.total ?
+                    <button className={this.state.offsetNum > (this.state.total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>Check Next 20 playlists</button> 
+                    : " "}
+                    
+                
+                
                 
                 {this.state.playlistNames && this.state.trackNamesArr &&
                     <PlaylistList
                     usersPlaylists={this.state.playlistNames}
-                    // tracksObject={this.state.trackNamesArr}
-                    // names={this.names}
                     items={this.state.items}
                     />}
                 {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}

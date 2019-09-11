@@ -2,10 +2,11 @@ import React from 'react'
 import '../App.css'
 
 const Introduction = (loggedIn) => {
-    console.log(loggedIn.loggedIn)
+    // console.log(loggedIn.loggedIn)
     return (
-        <div>
+        <div className="Intro-page">
             <h1>Cancel R. Kelly</h1>
+
             {!loggedIn.loggedIn ?
                 <p>This app makes it super simple to get Rkelly out of your ears and life.<br></br> Listening to his music is problematic #BelieveVictims </p> : ""}
 
