@@ -10,6 +10,7 @@ class PlaylistSingle extends Component {
         constructor() {
             super()
             this.state = {
+                showSongs: true,
                 items: [],
                 trackNames: [],
                 artistsNamesArr: [],
@@ -22,8 +23,13 @@ class PlaylistSingle extends Component {
     //getting list of tracks in User's Playlists 
     listTracksFromPlaylists(trackID) {
         // console.log('checking Songs in playlist')
+        this.state.showSongs
+      ? this.setState({ showSongs: false })
+      : this.setState({ showSongs: true });
+
         spotifyWebApi.getPlaylistTracks(trackID)
             .then((response) => {
+                console.log(response)
                 //saving variables of interested data points in response obj
                 let trackNames = []
                 let artistObjArr = []
@@ -62,14 +68,14 @@ class PlaylistSingle extends Component {
                 let chrisBrown = artistsNamesArr.indexOf("Chris Brown")
                 if (chrisBrown > -1 ) {
                     console.log("Chris Brown song here", trackNames[chrisBrown])
-                    chrisBrownVerdict.push(trackNames[chrisBrown])
+                    chrisBrownVerdict.push(`${trackNames[chrisBrown]} by Chris Brown`)
                     console.log(chrisBrownVerdict)
                     this.setState({ chrisBrownVerdict })
                 }
                 let rkelly = artistsNamesArr.indexOf("R. Kelly")
                 if (rkelly > -1) {
                     console.log("R. Kelly song here", trackNames[rkelly])
-                    rKellyVerdict.push(trackNames[rkelly])
+                    rKellyVerdict.push(`${trackNames[rkelly]} by R. Kelly`)
                     console.log(rKellyVerdict)
                     this.setState({rKellyVerdict})
                 }
@@ -79,18 +85,19 @@ class PlaylistSingle extends Component {
                 }
                 
             })
+        console.log(this.state)
         
     }
     render(){
     return (
-        <div className="playlist-container"
-            style={{ display: "inline-block", padding: "1px", border: "1px solid black", borderRadius: "4px", backgroundColor: "lightpink", color: "black" }}>
+        <div className="playlist-container">
             <div className="playlist-title">
                  <button onClick={(e) => this.listTracksFromPlaylists( this.props.playlistInfo.id)}>List Songs</button>
-                 {this.props.playlistInfo.name} 
-                {this.state.items &&
-                    <ProblematicSongs chrisBrownVerdict={this.state.chrisBrownVerdict} rKellyVerdict={this.state.rKellyVerdict}/>}
-                   {this.state.items &&  <Songs items={this.state.items} />}
+                {this.props.playlistInfo.name} 
+                
+                {this.state.chrisBrownVerdict.length > 0 &&
+                    <ProblematicSongs chrisBrownVerdict={this.state.chrisBrownVerdict} rKellyVerdict={this.state.rKellyVerdict} items={this.state.items}/>}
+                   {this.state.items &&  <Songs items={this.state.items} showSongs={this.state.showSongs} />}
 
             </div>
             </div>

@@ -31,3 +31,22 @@ button{
   font-size: 20px
 
 }
+.playlist-container {
+  display: inline-block;
+  padding: 1px;
+  border: 1px solid black;
+  border-Radius: 4px;
+  background-Color: lightpink;
+  color: black 
+}
+.song-title{
+  text-Align: left;
+  font-Size: 20px
+}
+.show {
+  visibility: visible 
+}
+
+.hide {
+  display: none
+}

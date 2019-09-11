@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import '../App.css'
 import Spotify from 'spotify-web-api-js'
 import PlaylistList from './PlaylistsList';
-import Songs from './Songs'
 
 const   spotifyWebApi = new Spotify()
 
@@ -15,7 +14,6 @@ class App extends Component {
             loggedIn: token ? true : false,
             playlistNames: "",
             trackNamesArr: [],
-
             offsetNum: 0,
             items: [],
             user: {
@@ -23,6 +21,7 @@ class App extends Component {
                 imageUrl: "",
                 id: ""
             }
+            
         }
        
 
@@ -66,12 +65,11 @@ class App extends Component {
     }
     //getting list of User's Playlists: limit 50 
     
-    getPlaylists(){
+    getPlaylists() {
+        this.setState({items: [], playlistNames: []})
         this.increaseOffset()
         // {limit: 50, offset: 0}
         spotifyWebApi.getUserPlaylists(this.state.id, {limit: 20, offset: this.state.offsetNum})
-           
-
             .then((response) => {
                 console.log(response.items.length)
                 this.setState({ playlistNames: response.items })
@@ -139,9 +137,8 @@ class App extends Component {
                 {this.state.playlistNames && this.state.trackNamesArr &&
                     <PlaylistList
                     usersPlaylists={this.state.playlistNames}
-                    tracksObject={this.state.trackNamesArr}
-
-                    names={this.names}
+                    // tracksObject={this.state.trackNamesArr}
+                    // names={this.names}
                     items={this.state.items}
                     />}
                 {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}
