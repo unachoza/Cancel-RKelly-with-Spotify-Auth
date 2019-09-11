@@ -1,9 +1,8 @@
 import React from 'react'
 import '../App.css'
-import UsageStats from './UsageStats'
 
 const Introduction = (loggedIn) => {
-    console.log(loggedIn.loggedIn)
+    // console.log(loggedIn.loggedIn)
     return (
         <div className="Intro-page">
             <h1>Cancel R. Kelly</h1>

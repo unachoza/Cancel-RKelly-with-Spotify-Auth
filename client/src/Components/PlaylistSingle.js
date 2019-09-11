@@ -29,7 +29,7 @@ class PlaylistSingle extends Component {
 
         spotifyWebApi.getPlaylistTracks(trackID)
             .then((response) => {
-                console.log(response)
+                console.log(response.items)
                 //saving variables of interested data points in response obj
                 let trackNames = []
                 let artistObjArr = []
@@ -37,16 +37,21 @@ class PlaylistSingle extends Component {
                 let items = []
                response.items.map((item) => {
                     items.push(item)
-                    this.setState({ items })
+                   this.setState({ items })
+                   return items
+                
                 }) 
                 response.items.map((item) => {
                     trackNames.push(item.track.name)
+                    return trackNames
                 })
                 response.items.map(item => {
                     artistObjArr.push(item.track.artists)
+                    return artistObjArr
                 })
                 artistObjArr.map((artist) => {
                     artistsNamesArr.push(artist[0].name)
+                    return artistsNamesArr
                 })
                 // for (let i = 0; i < trackNames.length; i++){
                 this.searchForSongs(artistsNamesArr,trackNames)
@@ -61,7 +66,6 @@ class PlaylistSingle extends Component {
                
                 
             })
-        console.log(this.state)
         
     }
     indexOfAll = (arr, val) => arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), [])
@@ -69,41 +73,33 @@ class PlaylistSingle extends Component {
 
     searchForSongs(artistsNamesArr, trackNames) {
         console.log("from other function")
-        // let rKellyVerdict = []
-        // let chrisBrownVerdict = []
-        // let mJVerdict = []
+        let rKellyVerdict = []
+        let chrisBrownVerdict = []
+        let mJVerdict = []
 
-       console.log(this.indexOfAll(artistsNamesArr, "R. Kelly"))
-       console.log(this.indexOfAll(artistsNamesArr, "Chris Brown"))
-       console.log(this.indexOfAll(artistsNamesArr, "Michael Jackson"))
+        let RKindexies = this.indexOfAll(artistsNamesArr, "R. Kelly")
+        let CBindexies = this.indexOfAll(artistsNamesArr, "Chris Brown")
+        let MJindexies = this.indexOfAll(artistsNamesArr, "Michael Jackson")
 
-        // let mJSong = artistsNamesArr.indexOf("Michael Jackson")
-        //         if (mJSong > -1) {
-        //             console.log("Michael Jackson Song song here", trackNames[mJSong])
-        //             mJVerdict.push(`${trackNames[mJSong]} by Michael Jackson`)
-        //         }
-        //         let chrisBrown = artistsNamesArr.indexOf("Chris Brown")
-        //         if (chrisBrown > -1 ) {
-        //             console.log("Chris Brown song here", trackNames[chrisBrown])
-        //             chrisBrownVerdict.push(`${trackNames[chrisBrown]} by Chris Brown`)
-        //             console.log(chrisBrownVerdict)
-        //             this.setState({ chrisBrownVerdict })
-        //         }
-        //         let rkelly = artistsNamesArr.indexOf("R. Kelly")
-        //         if (rkelly > -1) {
-        //             console.log("R. Kelly song here", trackNames[rkelly])
-        //             rKellyVerdict.push(`${trackNames[rkelly]} by R. Kelly`)
-        //             console.log(rKellyVerdict)
-        //             this.setState({rKellyVerdict})
-        //         }
-        
+        for (let i = 0; i < CBindexies.length; i++){
+            chrisBrownVerdict.push(`${trackNames[CBindexies[i]]} by Chris Brown`)
+        }
+          
+        for (let i = 0; i < RKindexies.length; i++){
+            rKellyVerdict.push(`${trackNames[RKindexies[i]]} by R. Kelly`)
+        }
+          
+        for (let i = 0; i < MJindexies.length; i++){
+            mJVerdict.push(`${trackNames[MJindexies[i]]} by Michael Jackson`)
+        }
+        console.log( chrisBrownVerdict, rKellyVerdict, mJVerdict)
     }
     render(){
     return (
-        <div className="playlist-container" style={{width: "300px", height: "350px"}}>
+        <div className={this.state.showSongs ? "playlist-container-closed" : "playlist-container-open"} >
                 <img style={{height: "220px", paddingTop:"20px" }}src={this.props.playlistInfo.images[0].url} alt="album art" />
-            
-            <div className="playlist-title">
+            <br></br>
+            <div className="playlist-container-open">
                 {this.props.playlistInfo.name} <br></br>
                  <button onClick={(e) => this.listTracksFromPlaylists( this.props.playlistInfo.id)}>List Songs</button>
                

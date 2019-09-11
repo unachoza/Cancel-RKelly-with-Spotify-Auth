@@ -42,7 +42,6 @@ class App extends Component {
         while (e = r.exec(q)) {
             hashParams[e[1]] = decodeURIComponent(e[2]);
         }
-        console.log(hashParams)
         return hashParams;
     }
     logout() {
@@ -55,7 +54,6 @@ class App extends Component {
             .then(response => {
 
 
-                console.log(response)
                 this.setState({
                     name: response.display_name,
                     imageUrl: response.images.url, 
@@ -73,7 +71,6 @@ class App extends Component {
         // {limit: 50, offset: 0}
         spotifyWebApi.getUserPlaylists(this.state.id, {limit: 20, offset: this.state.offsetNum})
             .then((response) => {
-                console.log(response.items)
                 this.setState({ playlistNames: response.items })
                 // console.log(this.state.playlistNames)
             })
@@ -85,7 +82,6 @@ class App extends Component {
                 offsetNum: state.offsetNum + 20
             }
         })
-        console.log(this.state)
     }
 
    
