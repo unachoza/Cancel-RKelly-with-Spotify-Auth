@@ -2,9 +2,7 @@ import React, {Component} from 'react'
 import '../App.css'
 import SongSingle from './SongSingle'
 
-
-
-const Songs = ({items}) => {
+const Songs = ({ items }) => {
         return (
                 <div>
                         {items.map((item, i ) => <SongSingle item={item} key={i}/>)}
@@ -14,3 +12,4 @@ const Songs = ({items}) => {
 }
 
 export default Songs
+

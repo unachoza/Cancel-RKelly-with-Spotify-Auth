@@ -2,7 +2,7 @@ body {
   background-color: rgb(94, 91, 91)
 }
 div, button {
-  margin: 20px;
+  margin: 10px;
   
 }
 
@@ -20,27 +20,14 @@ button{
   font-size: 20px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   border-radius: 4px;
-  padding: 20px;
+  padding: 10px;
   color: white;
   background-color: darkgreen;
 
 }
-.playlist-title {
-  font-size: 16px;
-  font-weight: 800;
-  color: black
-}
 
-.song-title{
-font-weight: 200;
-}
-.verdict {
-  color: red;
-  font-size: 30px
-}
-.none {
-  display: none
-}
-.song-title {
-  color: black
+
+.playlist-title{
+  font-size: 20px
+
 }

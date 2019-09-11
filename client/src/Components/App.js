@@ -15,12 +15,17 @@ class App extends Component {
             loggedIn: token ? true : false,
             playlistNames: "",
             trackNamesArr: [],
-            
-                userName: "", 
-                userImageUrl: "", 
-                userId: ""
-            
+
+            offsetNum: 0,
+            items: [],
+            user: {
+                name: "", 
+                imageUrl: "",
+                id: ""
+            }
         }
+       
+
         if (token) {
             spotifyWebApi.setAccessToken(token)
             this.getUserInfo()
@@ -36,32 +41,54 @@ class App extends Component {
         while (e = r.exec(q)) {
             hashParams[e[1]] = decodeURIComponent(e[2]);
         }
+        console.log(hashParams)
         return hashParams;
+    }
+    logout(token) {
+        console.log('clicked logout')
+        token = false
+        console.log(token)
     }
     getUserInfo() {
         spotifyWebApi.getMe()
             .then(response => {
-                console.log(response.id)
+
+
+                console.log(response)
                 this.setState({
                     name: response.display_name,
-                    imageUrl: response.images.url,
-                    userId: response.id
-
+                    imageUrl: response.images.url, 
+                    id: response.id
+                    
                 })
             })
-        console.log(this.state)
-                return this.state.userId
+        
     }
     //getting list of User's Playlists: limit 50 
-    getPlaylists() {
-        spotifyWebApi.getUserPlaylists(`${this.getUserInfo()}`,{ limit: 1, offset: 0 })
+    
+    getPlaylists(){
+        this.increaseOffset()
+        // {limit: 50, offset: 0}
+        spotifyWebApi.getUserPlaylists(this.state.id, {limit: 20, offset: this.state.offsetNum})
+           
+
             .then((response) => {
+                console.log(response.items.length)
                 this.setState({ playlistNames: response.items })
                 // console.log(this.state.playlistNames)
             })
     }
-  
 
+    increaseOffset() {
+        this.setState(state => {
+            return {
+                offsetNum: state.offsetNum + 20
+            }
+        })
+        console.log(this.state)
+    }
+
+   
    
     findRKelly() {
     // rkelly id : "2mxe0TnaNL039ysAj51xPQ"
@@ -105,18 +132,20 @@ class App extends Component {
                     <a href="http://localhost:8888">
                         <button>Login Spotify</button>
                     </a>
-                    : <button onClick={() => this.getPlaylists()}>Check Your Playlists</button>}
+                    : <div><button onClick={() => this.getPlaylists()}>Check Your Playlists</button>
+                    <button onClick={(e)=> this.logout(this.token)}>Log Out</button>
+                    </div>}
                 
                 {this.state.playlistNames && this.state.trackNamesArr &&
                     <PlaylistList
                     usersPlaylists={this.state.playlistNames}
                     tracksObject={this.state.trackNamesArr}
-                    trackList={this.listTracksFromPlaylists}
-                    trackNames={this.trackNames}
-                    showSongs={this.showSongs}
+
+                    names={this.names}
+                    items={this.state.items}
                     />}
-                {this.tracknames && 
-            <Songs trackNames={this.trackNames}/>}
+                {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}
+
             </div>
         )
     }
