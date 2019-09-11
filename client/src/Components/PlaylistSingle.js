@@ -100,10 +100,13 @@ class PlaylistSingle extends Component {
     }
     render(){
     return (
-        <div className="playlist-container">
+        <div className="playlist-container" style={{width: "300px", height: "350px"}}>
+                <img style={{height: "220px", paddingTop:"20px" }}src={this.props.playlistInfo.images[0].url} alt="album art" />
+            
             <div className="playlist-title">
+                {this.props.playlistInfo.name} <br></br>
                  <button onClick={(e) => this.listTracksFromPlaylists( this.props.playlistInfo.id)}>List Songs</button>
-                {this.props.playlistInfo.name} 
+               
                 
                 {this.state.chrisBrownVerdict.length > 0 &&
                     <ProblematicSongs chrisBrownVerdict={this.state.chrisBrownVerdict} rKellyVerdict={this.state.rKellyVerdict} items={this.state.items}/>}

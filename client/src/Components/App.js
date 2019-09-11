@@ -73,7 +73,7 @@ class App extends Component {
         // {limit: 50, offset: 0}
         spotifyWebApi.getUserPlaylists(this.state.id, {limit: 20, offset: this.state.offsetNum})
             .then((response) => {
-                console.log(response.items.length)
+                console.log(response.items)
                 this.setState({ playlistNames: response.items })
                 // console.log(this.state.playlistNames)
             })
