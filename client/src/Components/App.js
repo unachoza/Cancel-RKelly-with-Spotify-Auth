@@ -127,7 +127,7 @@ class App extends Component {
     render() {
         return (
             <div className="home">
-                <Introduction />
+                <Introduction loggedIn={this.state.loggedIn}/>
                 <UsageStats />
                 {!this.state.loggedIn ?
                     <a href="http://localhost:8888">
