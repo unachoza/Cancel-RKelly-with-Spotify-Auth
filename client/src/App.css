@@ -1,3 +1,6 @@
+.module {
+  all: unset;
+}
 body {
   background-color: rgb(29, 28, 28)
 }
@@ -70,4 +73,13 @@ button{
   color: black;
 box-shadow: 0 12px 16px 0 rgba(126, 121, 121, 0.39),0 17px 50px 0 rgba(126, 121, 121, 0.61);
 /* rgb(126, 121, 121) */
+}
+.Intro-page{
+  justify-content: center
+}
+.loggedIn {
+  padding-top: 55px 
+}
+.loggedOut {
+  padding: 15%;
 }

@@ -45,10 +45,10 @@ class App extends Component {
         console.log(hashParams)
         return hashParams;
     }
-    logout(token) {
+    logout() {
         console.log('clicked logout')
-        token = false
-        console.log(token)
+        window.location.reload()
+       
     }
     getUserInfo() {
         spotifyWebApi.getMe()
@@ -127,7 +127,11 @@ class App extends Component {
     render() {
         return (
             <div className="home">
-                <Introduction loggedIn={this.state.loggedIn}/>
+                <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
+                <br></br>
+                <div className=
+                    {this.state.loggedIn ? "loggedIn" : "loggedOut"}>
+                    <Introduction loggedIn={this.state.loggedIn}/>
                 <UsageStats />
                 {!this.state.loggedIn ?
                     <a href="http://localhost:8888">
@@ -136,6 +140,8 @@ class App extends Component {
                     : <div><button onClick={() => this.getPlaylists()}>Check Your Playlists</button>
                     <button onClick={(e)=> this.logout(this.token)}>Log Out</button>
                     </div>}
+                </div>
+                
                 
                 {this.state.playlistNames && this.state.trackNamesArr &&
                     <PlaylistList
