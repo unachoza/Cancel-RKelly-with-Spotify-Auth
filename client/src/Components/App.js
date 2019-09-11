@@ -145,7 +145,7 @@ l
                     <a href="http://localhost:8888">
                         <button>Login Spotify</button>
                     </a>
-                    : <div><button onClick={() => this.getPlaylists()}>Check Your Playlists</button>
+                    : <div><button className={this.state.offsetNum > 0? "hide": "showIt" }onClick={() => this.getPlaylists()}>Check Your Playlists</button>
                     {/* <button onClick={(e)=> this.logout(this.token)}>Log Out</button> */}
                         </div>}
                     </div>

@@ -24,15 +24,16 @@ class PlaylistSingle extends Component {
     
     //getting list of tracks in User's Playlists 
     listTracksFromPlaylists(trackID) {
-        // console.log('checking Songs in playlist')
+         console.log(trackID)
         this.state.showSongs
       ? this.setState({ showSongs: false })
       : this.setState({ showSongs: true });
 
         spotifyWebApi.getPlaylistTracks(trackID)
             .then((response) => {
-                console.log(response.items)
+                console.log(response)
                 //saving variables of interested data points in response obj
+                let uri = []
                 let trackNames = []
                 let artistObjArr = []
                 let artistsNamesArr = []
@@ -65,7 +66,6 @@ class PlaylistSingle extends Component {
 
 
     searchForSongs(artistsNamesArr, trackNames) {
-        console.log("from other function")
         let rKellyVerdict = []
         let chrisBrownVerdict = []
         let mJVerdict = []
@@ -73,7 +73,7 @@ class PlaylistSingle extends Component {
         let RKindexies = this.indexOfAll(artistsNamesArr, "R. Kelly")
         let CBindexies = this.indexOfAll(artistsNamesArr, "Chris Brown")
         let MJindexies = this.indexOfAll(artistsNamesArr, "Michael Jackson")
-
+        console.log("mj", MJindexies, "cb", CBindexies, "rk", RKindexies)
         for (let i = 0; i < CBindexies.length; i++){
             chrisBrownVerdict.push(`${trackNames[CBindexies[i]]} by Chris Brown AND `)
         }
@@ -86,6 +86,13 @@ class PlaylistSingle extends Component {
             mJVerdict.push(`${trackNames[MJindexies[i]]} by Michael Jackson AND `)
         }
         this.setState({chrisBrownVerdict, rKellyVerdict, mJVerdict })
+    }
+
+    removeSongs(trackID) {
+        spotifyWebApi.removeTracksFromPlaylist(trackID, {
+            "tracks":
+                { "uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh", "positions": [2] }
+        })
     }
     render(){
     return (

@@ -1,19 +1,17 @@
 import React, {Component} from 'react'
 import '../App.css'
 import Spotify from 'spotify-web-api-js'
+import PlaylistList from './PlaylistsList'
 
 const spotifyWebApi = new Spotify()
 
 class ProblemCB extends Component{
 
+    
 
-    // removeTracksFromPlaylist(playlistId, uris: Object[]) {
-
-    // }
     // callback?:
     // removeTracksFromPlaylist(playlistId: string, uris: Object[], callback?:
     render() {
-    console.log(this.props.chrisBrownVerdict)
 
         return (
             <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>
