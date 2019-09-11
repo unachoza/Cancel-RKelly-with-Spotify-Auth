@@ -84,7 +84,7 @@ class PlaylistSingle extends Component {
     render(){
     return (
         <div className="playlist-container"
-            style={{ display: "inline-block", padding: "14px", border: "1px solid black", borderRadius: "4px", backgroundColor: "magenta", color: "white" }}>
+            style={{ display: "inline-block", padding: "1px", border: "1px solid black", borderRadius: "4px", backgroundColor: "lightpink", color: "black" }}>
             <div className="playlist-title">
                  <button onClick={(e) => this.listTracksFromPlaylists( this.props.playlistInfo.id)}>List Songs</button>
                  {this.props.playlistInfo.name} 

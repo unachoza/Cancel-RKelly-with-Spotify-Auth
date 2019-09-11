@@ -2,7 +2,7 @@ body {
   background-color: rgb(94, 91, 91)
 }
 div, button {
-  margin: 20px;
+  margin: 10px;
   
 }
 
@@ -20,8 +20,11 @@ button{
   font-size: 20px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   border-radius: 4px;
-  padding: 20px;
+  padding: 10px;
   color: white;
   background-color: darkgreen;
 
+}
+.playlist-title{
+  font-size: 20px
 }
