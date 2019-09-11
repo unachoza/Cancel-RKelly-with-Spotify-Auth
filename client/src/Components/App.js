@@ -81,46 +81,7 @@ class App extends Component {
         })
         console.log(this.state)
     }
-    //getting list of tracks in User's Playlists 
-    // listTracksFromPlaylists(trackID) {
-    //     // console.log('checking Songs in playlist')
-    //     spotifyWebApi.getPlaylistTracks(trackID)
-    //         .then((response) => {
-    //             //saving variables of interested data points in response obj
-    //             let trackNames = []
-    //             let artistObjArr = []
-    //             let artistsNamesArr = []
-    //             let items = []
-              
-                
-    //       response.items.map((item) => {
-    //         trackNames.push(item.track.name)
-    //       })
-        
-    //     response.items.map(item => {
-    //         artistObjArr.push(item.track.artists)
-    //     })
-    //     artistObjArr.map((artist) => {
-    //         artistsNamesArr.push(artist[0].name)
-    //     })
-    //             let mJSong = artistsNamesArr.indexOf("Michael Jackson")
-    //             // console.log(trackNames[rKellyVerdict] , "here")
-    //     if (mJSong > -1) {
-    //         console.log("mJSong song here", trackNames[mJSong])
-    //     }
-    //         const chrisBrownVerdict = artistsNamesArr.indexOf("Chris Brown")
-    //     if (chrisBrownVerdict > -1 ) {
-    //         console.log("Chris Brown song here", trackNames[chrisBrownVerdict])
-    //     }
-    //     const rkelly = artistsNamesArr.indexOf("R. Kelly")
-    //     if (rkelly > -1) {
-    //         console.log("R. Kelly song here", trackNames[rkelly])
-    //     }
-    //     return trackNames, artistObjArr, artistsNamesArr
-                
-    //         })
-        
-    // }
+   
    
     findRKelly() {
     // rkelly id : "2mxe0TnaNL039ysAj51xPQ"
@@ -166,7 +127,6 @@ class App extends Component {
                     <PlaylistList
                     usersPlaylists={this.state.playlistNames}
                     tracksObject={this.state.trackNamesArr}
-                    // trackList={this.listTracksFromPlaylists()}
                     names={this.names}
                     items={this.state.items}
                     />}
