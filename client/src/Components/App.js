@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import '../App.css'
 import Spotify from 'spotify-web-api-js'
 import PlaylistList from './PlaylistsList';
+import Introduction from './Introduction';
+import UsageStats from './UsageStats'
 
 const   spotifyWebApi = new Spotify()
 
@@ -125,7 +127,8 @@ class App extends Component {
     render() {
         return (
             <div className="home">
-                <h1>Your Spotify Music Needs Help</h1>
+                <Introduction />
+                <UsageStats />
                 {!this.state.loggedIn ?
                     <a href="http://localhost:8888">
                         <button>Login Spotify</button>
