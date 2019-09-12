@@ -20,6 +20,7 @@ class PlaylistSingle extends Component {
                 chrisBrownVerdict: [],
                 mJVerdict: []
             }
+            this.removeSongs = this.removeSongs.bind(this)
         }
     
     //getting list of tracks in User's Playlists 
@@ -56,6 +57,11 @@ class PlaylistSingle extends Component {
                     artistsNamesArr.push(artist[0].name)
                     return artistsNamesArr
                 })
+                response.items.map((item) => {
+                    uri.push(item.track.uri)
+                    return uri
+                })
+
                 
                 this.searchForSongs(artistsNamesArr,trackNames)
                 
@@ -75,45 +81,45 @@ class PlaylistSingle extends Component {
         let MJindexies = this.indexOfAll(artistsNamesArr, "Michael Jackson")
         console.log("mj", MJindexies, "cb", CBindexies, "rk", RKindexies)
         for (let i = 0; i < CBindexies.length; i++){
-            chrisBrownVerdict.push(`${trackNames[CBindexies[i]]} by Chris Brown AND `)
+            chrisBrownVerdict.push(`${trackNames[CBindexies[i]]} by Chris Brown  `)
         }
           
         for (let i = 0; i < RKindexies.length; i++){
-            rKellyVerdict.push(`${trackNames[RKindexies[i]]} by R. Kelly AND `)
+            rKellyVerdict.push(`${trackNames[RKindexies[i]]} by R. Kelly  `)
         }
           
         for (let i = 0; i < MJindexies.length; i++){
-            mJVerdict.push(`${trackNames[MJindexies[i]]} by Michael Jackson AND `)
+            mJVerdict.push(`${trackNames[MJindexies[i]]} by Michael Jackson  `)
         }
         this.setState({chrisBrownVerdict, rKellyVerdict, mJVerdict })
     }
 
-    removeSongs(trackID) {
-        spotifyWebApi.removeTracksFromPlaylist(trackID, {
-            "tracks":
-                { "uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh", "positions": [2] }
-        })
+    removeSongs(trackID, uri, i) { 
+        // spotifyWebApi.removeTracksFromPlaylist( trackID, {
+        //     "tracks":
+        //         { "uri": uri, "positions": [i] }
+        // })
+        // console.log('removed' )
     }
     render(){
     return (
         <div className={this.state.showSongs ? "playlist-container-closed" : "playlist-container-open"} >
                 <img style={{height: "220px", paddingTop:"20px" }}src={this.props.playlistInfo.images[0].url} alt="album art" />
             <br></br>
-            <div className="playlist-container-open">
+            <div className="songs-in-playlist-container-open">
                 {this.props.playlistInfo.name} <br></br>
                  <button onClick={(e) => this.listTracksFromPlaylists( this.props.playlistInfo.id)}>List Songs</button>
-               
                 
                 {this.state.chrisBrownVerdict.length >  0 &&
-                    <ProblemCB chrisBrownVerdict={this.state.chrisBrownVerdict} /> }
+                    <ProblemCB chrisBrownVerdict={this.state.chrisBrownVerdict} removeSongs={this.removeSongs()}/> }
                     {this.state.rKellyVerdict.length >  0 &&
-                    <ProblemRK rKellyVerdict={this.state.rKellyVerdict} />}
+                    <ProblemRK rKellyVerdict={this.state.rKellyVerdict} removeSongs={this.removeSongs()} />}
                 {this.state.mJVerdict.length >  0 &&
-                    <ProblemMJ mJVerdict={this.state.mJVerdict} /> }
+                    <ProblemMJ mJVerdict={this.state.mJVerdict} removeSongs={this.removeSongs()} /> }
                    {this.state.items &&  <Songs items={this.state.items} showSongs={this.state.showSongs} />}
 
             </div>
-            </div>
+        </div>
         )
     }
 }

@@ -49,15 +49,25 @@ button{
   width: "350px";
   height: "350px";
   display: inline-block;
+  /* border: blue solid ; */
   margin: 10px;
   padding-left: 50px;
   padding-right: 50px;
   border-Radius: 10px;
-  color: rgb(126, 121, 121) 
+  color: rgb(126, 121, 121) ;
+}
+.playlist-container-closed:hover {
+   box-shadow: 0 12px 16px 0 rgba(128, 125, 125, 0.39),0 17px 50px 0 rgba(128, 125, 125, 0.61);
+
+}
+.playlist-container-open:hover {
+   box-shadow: 0 12px 16px 0 rgba(128, 125, 125, 0.39),0 17px 50px 0 rgba(128, 125, 125, 0.61);
+
 }
 .playlist-container-open {
   /* width: "500px"; */
   /* height: "350px"; */
+  /* border: green solid ; */
   font-size: 20px;
   display: inline-block;
   padding: 1px;
@@ -65,11 +75,25 @@ button{
   color: rgb(126, 121, 121) 
 }
 
+.songs-in-playlist-container-open {
+  width: "530px";
+  /* border: green red ; */
+  text-align: center;
+  font-size: 20px;
+  display: inline-block;
+  padding: 1px;
+  border-Radius: 10px;
+  color: rgb(126, 121, 121) 
+}
+
+
 .song-title{
-  text-Align: left;
-  font-Size: 20px
+  text-Align: center;
+  font-Size: 20px;
+  width: 530px;
 }
 .show {
+  display: inline;
   visibility: visible ;
   width: 500px;
   background-color: none;

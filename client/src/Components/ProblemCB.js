@@ -8,17 +8,16 @@ const spotifyWebApi = new Spotify()
 class ProblemCB extends Component{
 
     
-
-    // callback?:
-    // removeTracksFromPlaylist(playlistId: string, uris: Object[], callback?:
     render() {
-
+    console.log(this.props.removeSongs)
+              let songs = this.props.chrisBrownVerdict.map((song, i) => {
+                return <div key={i}>This is a problem: {song} </div> 
+             })
         return (
             <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>
                   <hr></hr>
-                <div>This is a problem: {this.props.chrisBrownVerdict}</div> 
+                {songs}
                 <hr></hr>
-
             </div>
         )
     }

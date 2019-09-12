@@ -150,7 +150,7 @@ l
                         </div>}
                     </div>
                     {this.state.offsetNum < this.state.total ?
-                    <button className={this.state.offsetNum > (this.state.total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>Check Next 20 playlists</button> 
+                    <button className={this.state.offsetNum > (this.state.total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>Check Next 10 playlists</button> 
                     : " "}
                     
                 
