@@ -18,7 +18,8 @@ class PlaylistSingle extends Component {
                 artistsNamesArr: [],
                 rKellyVerdict: [],
                 chrisBrownVerdict: [],
-                mJVerdict: []
+                mJVerdict: [], 
+                length: []
             }
             this.removeSongs = this.removeSongs.bind(this)
         }
@@ -91,7 +92,8 @@ class PlaylistSingle extends Component {
         for (let i = 0; i < MJindexies.length; i++){
             mJVerdict.push(`${trackNames[MJindexies[i]]} by Michael Jackson  `)
         }
-        this.setState({chrisBrownVerdict, rKellyVerdict, mJVerdict })
+        this.setState({ chrisBrownVerdict, rKellyVerdict, mJVerdict })
+        this.problemLength(chrisBrownVerdict, rKellyVerdict, mJVerdict)
     }
 
     removeSongs(trackID, uri, i) { 
@@ -101,22 +103,31 @@ class PlaylistSingle extends Component {
         // })
         // console.log('removed' )
     }
+    problemLength(chrisBrownVerdict, rKellyVerdict, mJVerdict) {
+        const length = chrisBrownVerdict.length + rKellyVerdict.length + mJVerdict.length
+        // console.log(length)
+        this.setState({length})
+    }
     render(){
-    return (
-        <div className={this.state.showSongs ? "playlist-container-closed" : "playlist-container-open"} >
-                <img style={{height: "220px", paddingTop:"20px" }}src={this.props.playlistInfo.images[0].url} alt="album art" />
+        const { chrisBrownVerdict, rKellyVerdict, mJVerdict, showSongs, items, length } = this.state
+        const {playlistInfo} = this.props
+        
+        return (
+        <div className={showSongs ? "playlist-container-closed" : "playlist-container-open"} >
+                <img style={{height: "220px", paddingTop:"20px" }}src={playlistInfo.images[0].url} alt="album art" />
             <br></br>
             <div className="songs-in-playlist-container-open">
-                {this.props.playlistInfo.name} <br></br>
-                 <button onClick={(e) => this.listTracksFromPlaylists( this.props.playlistInfo.id)}>List Songs</button>
-                
-                {this.state.chrisBrownVerdict.length >  0 &&
-                    <ProblemCB chrisBrownVerdict={this.state.chrisBrownVerdict} removeSongs={this.removeSongs()}/> }
-                    {this.state.rKellyVerdict.length >  0 &&
-                    <ProblemRK rKellyVerdict={this.state.rKellyVerdict} removeSongs={this.removeSongs()} />}
-                {this.state.mJVerdict.length >  0 &&
-                    <ProblemMJ mJVerdict={this.state.mJVerdict} removeSongs={this.removeSongs()} /> }
-                   {this.state.items &&  <Songs items={this.state.items} showSongs={this.state.showSongs} />}
+                {playlistInfo.name} <br></br>
+                 <button onClick={(e) => this.listTracksFromPlaylists( playlistInfo.id)}>List Songs</button>
+                    {length > 0 && <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>This is a problem:</div>}
+                {chrisBrownVerdict.length >  0 &&
+                    <ProblemCB chrisBrownVerdict={chrisBrownVerdict} removeSongs={this.removeSongs()}/> }
+                    {rKellyVerdict.length >  0 &&
+                    <ProblemRK rKellyVerdict={rKellyVerdict} removeSongs={this.removeSongs()} />}
+                {mJVerdict.length >  0 &&
+                    <ProblemMJ mJVerdict={mJVerdict} removeSongs={this.removeSongs()} /> }
+                    {items && <Songs items={items} showSongs={showSongs} />}
+                    {length > 0 && <hr></hr>}
 
             </div>
         </div>

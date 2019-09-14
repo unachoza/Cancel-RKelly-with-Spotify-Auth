@@ -11,13 +11,11 @@ class ProblemCB extends Component{
     render() {
     console.log(this.props.removeSongs)
               let songs = this.props.chrisBrownVerdict.map((song, i) => {
-                return <div key={i}>This is a problem: {song} </div> 
+                return <div key={i}>{song} </div> 
              })
         return (
             <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>
-                  <hr></hr>
                 {songs}
-                <hr></hr>
             </div>
         )
     }
