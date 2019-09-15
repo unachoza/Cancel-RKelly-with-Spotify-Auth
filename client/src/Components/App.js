@@ -133,33 +133,31 @@ l
 
         
     render() {
+        const {loggedIn, offsetNum, total, playlistNames, items, trackNamesArr} = this.state
         return (
             <div className="home">
                 <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
                 <br></br>
                 <div className=
-                    {this.state.loggedIn ? "loggedIn" : "loggedOut"}>
-                    <Introduction loggedIn={this.state.loggedIn}/>
+                    {loggedIn ? "loggedIn" : "loggedOut"}>
+                    <Introduction loggedIn={loggedIn}/>
                 <UsageStats />
-                {!this.state.loggedIn ?
+                {!loggedIn ?
                     <a href="http://localhost:8888">
                         <button>Login Spotify</button>
                     </a>
-                    : <div><button className={this.state.offsetNum > 0? "hide": "showIt" }onClick={() => this.getPlaylists()}>Check Your Playlists</button>
+                    : <div><button className={offsetNum > 0? "hide": "showIt" }onClick={() => this.getPlaylists()}>Check Your Playlists</button>
                     {/* <button onClick={(e)=> this.logout(this.token)}>Log Out</button> */}
                         </div>}
                     </div>
-                    {this.state.offsetNum < this.state.total ?
-                    <button className={this.state.offsetNum > (this.state.total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>Check Next 10 playlists</button> 
+                    {offsetNum < total ?
+                    <button className={offsetNum > (total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>Check Next 10 playlists</button> 
                     : " "}
-                    
                 
-                
-                
-                {this.state.playlistNames && this.state.trackNamesArr &&
+                {playlistNames && trackNamesArr &&
                     <PlaylistList
-                    usersPlaylists={this.state.playlistNames}
-                    items={this.state.items}
+                    usersPlaylists={playlistNames}
+                    items={items}
                     />}
                 {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}
 

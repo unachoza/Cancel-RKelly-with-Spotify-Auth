@@ -19,19 +19,20 @@ class PlaylistSingle extends Component {
                 rKellyVerdict: [],
                 chrisBrownVerdict: [],
                 mJVerdict: [], 
-                length: []
+                length: [], 
+                uri: []
             }
             this.removeSongs = this.removeSongs.bind(this)
         }
     
     //getting list of tracks in User's Playlists 
-    listTracksFromPlaylists(trackID) {
-         console.log(trackID)
+    listTracksFromPlaylists(playlistID) {
+         console.log(playlistID)
         this.state.showSongs
       ? this.setState({ showSongs: false })
       : this.setState({ showSongs: true });
 
-        spotifyWebApi.getPlaylistTracks(trackID)
+        spotifyWebApi.getPlaylistTracks(playlistID)
             .then((response) => {
                 console.log(response)
                 //saving variables of interested data points in response obj
@@ -60,7 +61,7 @@ class PlaylistSingle extends Component {
                 })
                 response.items.map((item) => {
                     uri.push(item.track.uri)
-                    return uri
+                    this.setState({uri})
                 })
 
                 
@@ -80,7 +81,6 @@ class PlaylistSingle extends Component {
         let RKindexies = this.indexOfAll(artistsNamesArr, "R. Kelly")
         let CBindexies = this.indexOfAll(artistsNamesArr, "Chris Brown")
         let MJindexies = this.indexOfAll(artistsNamesArr, "Michael Jackson")
-        console.log("mj", MJindexies, "cb", CBindexies, "rk", RKindexies)
         for (let i = 0; i < CBindexies.length; i++){
             chrisBrownVerdict.push(`${trackNames[CBindexies[i]]} by Chris Brown  `)
         }
@@ -96,8 +96,10 @@ class PlaylistSingle extends Component {
         this.problemLength(chrisBrownVerdict, rKellyVerdict, mJVerdict)
     }
 
-    removeSongs(trackID, uri, i) { 
-        // spotifyWebApi.removeTracksFromPlaylist( trackID, {
+    removeSongs(playlistID, uri, i) { 
+        console.log('clicked' )
+        
+        // spotifyWebApi.removeTracksFromPlaylist( playlistID, {
         //     "tracks":
         //         { "uri": uri, "positions": [i] }
         // })
@@ -105,11 +107,10 @@ class PlaylistSingle extends Component {
     }
     problemLength(chrisBrownVerdict, rKellyVerdict, mJVerdict) {
         const length = chrisBrownVerdict.length + rKellyVerdict.length + mJVerdict.length
-        // console.log(length)
         this.setState({length})
     }
     render(){
-        const { chrisBrownVerdict, rKellyVerdict, mJVerdict, showSongs, items, length } = this.state
+        const { chrisBrownVerdict, rKellyVerdict, mJVerdict, showSongs, items, length, uri  } = this.state
         const {playlistInfo} = this.props
         
         return (
@@ -121,13 +122,13 @@ class PlaylistSingle extends Component {
                  <button onClick={(e) => this.listTracksFromPlaylists( playlistInfo.id)}>List Songs</button>
                     {length > 0 && <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>This is a problem:</div>}
                 {chrisBrownVerdict.length >  0 &&
-                    <ProblemCB chrisBrownVerdict={chrisBrownVerdict} removeSongs={this.removeSongs()}/> }
+                    <ProblemCB chrisBrownVerdict={chrisBrownVerdict} playlistId={playlistInfo.id} uri={uri} removeSongs={this.removeSongs()}/> }
                     {rKellyVerdict.length >  0 &&
-                    <ProblemRK rKellyVerdict={rKellyVerdict} removeSongs={this.removeSongs()} />}
+                    <ProblemRK rKellyVerdict={rKellyVerdict}  playlistId={playlistInfo.id} uri={uri} removeSongs={this.removeSongs()} />}
                 {mJVerdict.length >  0 &&
-                    <ProblemMJ mJVerdict={mJVerdict} removeSongs={this.removeSongs()} /> }
-                    {items && <Songs items={items} showSongs={showSongs} />}
+                    <ProblemMJ mJVerdict={mJVerdict}  playlistId={playlistInfo.id} uri={uri} removeSongs={this.removeSongs()} /> }
                     {length > 0 && <hr></hr>}
+                    {items && <Songs items={items} showSongs={showSongs} />}
 
             </div>
         </div>

@@ -95,7 +95,7 @@ button{
 .show {
   display: inline;
   visibility: visible ;
-  width: 500px;
+  /* width: 500px; */
   background-color: none;
   /* background-Color: rgba(104, 99, 99, 0.61);
   padding-bottom: 10px; */
