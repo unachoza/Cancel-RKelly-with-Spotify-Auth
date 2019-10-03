@@ -17,3 +17,10 @@ const Introduction = (loggedIn) => {
 }
 
 export default Introduction
+
+
+//table of user names 
+//table of removed songs instances
+//how many times has a user interacted before remove
+//how many quit; when did they quit
+//conversion 

@@ -8,12 +8,8 @@ class ProblemMJ extends Component{
    removeSongs(playlistID, uri, i) { 
         console.log('clicked' )
         
-        spotifyWebApi.removeTracksFromPlaylist( playlistID, {
-            "tracks":
-                { "uri": uri }
-        })
-        console.log('removed' )
-    }
+        spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri, "positions": []}])
+        console.log('removed' )}
     
 
     render() {

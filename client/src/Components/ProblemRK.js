@@ -9,12 +9,8 @@ class ProblemRK extends Component{
       removeSongs(playlistID, uri) { 
         console.log('clicked' )
         
-        spotifyWebApi.removeTracksFromPlaylist( playlistID, {
-            "tracks":
-                [{ "uri": uri}]
-        })
-        console.log('removed' )
-    }
+        spotifyWebApi.removeTracksFromPlaylist( playlistID, [ { "uri": uri }])
+        console.log('removed' )}
     render() {
         const { rKellyVerdict, uri, playlistId, i } = this.props
         console.log("these are uris" , uri, "and plahlist ides" ,playlistId)

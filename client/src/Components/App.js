@@ -52,6 +52,7 @@ class App extends Component {
     getUserInfo() {
         spotifyWebApi.getMe()
             .then(response => {
+                console.log(response)
 
 
                 this.setState({
