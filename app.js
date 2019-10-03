@@ -156,3 +156,9 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
+
+
+ // "start": "react-scripts start",
+    // "build": "react-scripts build",
+    // "test": "react-scripts test",
+    // "eject": "react-scripts eject",
