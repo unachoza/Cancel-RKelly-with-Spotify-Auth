@@ -36,13 +36,15 @@ button{
   border-radius: 40px;
   padding: 20px;
   color: white;
-  /* background-color:rgb(23, 138, 84) */
+  background-color:rgb(23, 138, 84);
   border:none;
 
-  background-color: #1bb954
+  /* background-color: #1bb954 */
 
 }
-
+button:hover {
+  background-color: #1bb954
+}
 
 .playlist-title{
   font-size: 20px

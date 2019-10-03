@@ -5,10 +5,11 @@ import Spotify from 'spotify-web-api-js'
 const spotifyWebApi = new Spotify()
 
 class ProblemMJ extends Component{
-   removeSongs(playlistID, uri, i) { 
+   removeSongs(playlistID, uri) { 
         console.log('clicked' )
-        
-        spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri, "positions": []}])
+        console.log(uri)
+        spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri[0]}])
+        console.log(uri[0])
         console.log('removed' )}
     
 
