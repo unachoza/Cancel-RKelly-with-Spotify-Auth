@@ -7,7 +7,7 @@ const SongSingle = ({ item }) => {
    
         return (
             <div>
-                <div className="song-title"> <span style={{fontWeight: "bold"}}>{item.track.name.toUpperCase()} </span>by {item.track.artists[0].name}</div>
+                <div className="song-title"style={{color: "#a7a19b", fontSize: "18px"}}> <span style={{fontSize: "20px", color: "white"}}>{item.track.name} </span><br></br>{item.track.artists[0].name}</div>
             </div>
         )
     }

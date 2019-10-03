@@ -147,12 +147,12 @@ l
                     <a href="http://localhost:8888">
                         <button>Login Spotify</button>
                     </a>
-                    : <div><button className={offsetNum > 0? "hide": "showIt" }onClick={() => this.getPlaylists()}>Check Your Playlists</button>
+                    : <div><button className={offsetNum > 0? "hide": "showIt" }onClick={() => this.getPlaylists()}>YOUR PLAYLISTS</button>
                     {/* <button onClick={(e)=> this.logout(this.token)}>Log Out</button> */}
                         </div>}
                     </div>
                     {offsetNum < total ?
-                    <button className={offsetNum > (total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>Check Next 10 playlists</button> 
+                    <button className={offsetNum > (total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>NEXT 10 PLAYLISTS</button> 
                     : " "}
                 
                 {playlistNames && trackNamesArr &&

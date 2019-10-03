@@ -82,15 +82,14 @@ class PlaylistSingle extends Component {
         let CBindexies = this.indexOfAll(artistsNamesArr, "Chris Brown")
         let MJindexies = this.indexOfAll(artistsNamesArr, "Michael Jackson")
         for (let i = 0; i < CBindexies.length; i++){
-            chrisBrownVerdict.push(`${trackNames[CBindexies[i]]} by Chris Brown  `)
+            chrisBrownVerdict.push(trackNames[CBindexies[i]])
         }
           
         for (let i = 0; i < RKindexies.length; i++){
-            rKellyVerdict.push(`${trackNames[RKindexies[i]]} by R. Kelly  `)
-        }
+            rKellyVerdict.push(trackNames[RKindexies[i]])}
           
         for (let i = 0; i < MJindexies.length; i++){
-            mJVerdict.push(`${trackNames[MJindexies[i]]} by Michael Jackson  `)
+            mJVerdict.push(trackNames[MJindexies[i]])
         }
         this.setState({ chrisBrownVerdict, rKellyVerdict, mJVerdict })
         this.problemLength(chrisBrownVerdict, rKellyVerdict, mJVerdict)
@@ -112,14 +111,14 @@ class PlaylistSingle extends Component {
     render(){
         const { chrisBrownVerdict, rKellyVerdict, mJVerdict, showSongs, items, length, uri  } = this.state
         const {playlistInfo} = this.props
-        
+        let buttonText = showSongs? "CHECK SONGS" : "CLOSE SONGS" 
         return (
         <div className={showSongs ? "playlist-container-closed" : "playlist-container-open"} >
-                <img style={{height: "220px", paddingTop:"20px" }}src={playlistInfo.images[0].url} alt="album art" />
+                <img className="album-image" src={playlistInfo.images[0].url} alt="album art" />
             <br></br>
             <div className="songs-in-playlist-container-open">
                 {playlistInfo.name} <br></br>
-                 <button onClick={(e) => this.listTracksFromPlaylists( playlistInfo.id)}>List Songs</button>
+                 <button onClick={(e) => this.listTracksFromPlaylists( playlistInfo.id)}>{buttonText}</button>
                     {length > 0 && <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>This is a problem:</div>}
                 {chrisBrownVerdict.length >  0 &&
                     <ProblemCB chrisBrownVerdict={chrisBrownVerdict} playlistId={playlistInfo.id} uri={uri} removeSongs={this.removeSongs()}/> }

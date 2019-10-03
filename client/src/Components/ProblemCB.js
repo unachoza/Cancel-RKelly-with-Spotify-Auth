@@ -5,11 +5,17 @@ import Spotify from 'spotify-web-api-js'
 const spotifyWebApi = new Spotify()
 
 class ProblemCB extends Component{
-   removeSongs(playlistID, uri, i) { 
-        console.log('clicked' )
+   onSuccess() {
+       return(
+           <div>
+
+           </div>
+       )
+   } 
+   removeSongs(playlistID, uri) { 
+        spotifyWebApi.removeTracksFromPlaylist( playlistID, [ { "uri": uri[1] }]  )
         
-        spotifyWebApi.removeTracksFromPlaylist( playlistID, [ { "uri": uri }])
-        console.log('removed' )}
+        }
     
     render() {
         const { chrisBrownVerdict, uri, i, playlistId } = this.props
@@ -17,13 +23,12 @@ class ProblemCB extends Component{
         
     console.log(this.props)
               let songs = chrisBrownVerdict.map((song, i) => {
-                return <div key={i}>{song} </div> 
+                return <div key={i}>{song}<br></br><span>Chris Brown</span> </div> 
              })
         return (
             <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>
                 {songs}
-<button onClick={(e) => this.removeSongs(playlistId, uri)}>Remove Song</button>
-
+<button className="remove-button"onClick={(e) => this.removeSongs(playlistId, uri)}>Remove</button>
             </div>
         )
     }
