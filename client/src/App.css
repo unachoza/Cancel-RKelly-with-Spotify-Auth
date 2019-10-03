@@ -33,10 +33,13 @@ button{
   background-color: lightgray;
   font-size: 20px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  border-radius: 4px;
-  padding: 10px;
+  border-radius: 40px;
+  padding: 20px;
   color: white;
-  background-color:rgb(23, 138, 84)
+  /* background-color:rgb(23, 138, 84) */
+  border:none;
+
+  background-color: #1bb954
 
 }
 
