@@ -44,4 +44,4 @@ cancelController.countSong = (req, res) => {
     })
 }
 
-module.export = controller 
+module.export = cancelController 

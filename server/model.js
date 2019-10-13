@@ -35,3 +35,5 @@ cancel.countSong = (song) => {
     [song.name, song.artist, song.deleted]
     )
 }
+
+module.exports = cancel
