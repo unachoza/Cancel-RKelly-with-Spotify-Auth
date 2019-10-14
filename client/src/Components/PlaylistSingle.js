@@ -65,15 +65,10 @@ class PlaylistSingle extends Component {
                     uri.push(item.track.uri)
                     this.setState({uri})
                 })
-
-                
                 this.searchForSongs(artistsNamesArr,trackNames)
-                
             })
-        
     }
     indexOfAll = (arr, val) => arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), [])
-
 
     searchForSongs(artistsNamesArr, trackNames) {
         let rKellyVerdict = []
@@ -85,27 +80,20 @@ class PlaylistSingle extends Component {
         let MJindexies = this.indexOfAll(artistsNamesArr, "Michael Jackson")
         for (let i = 0; i < CBindexies.length; i++){
             chrisBrownVerdict.push(trackNames[CBindexies[i]])
-            console.log("I have the index here, need to parse and bring to remove/problem page")
         }
-          
         for (let i = 0; i < RKindexies.length; i++){
             rKellyVerdict.push(trackNames[RKindexies[i]])
-            console.log("I have the index here, need to parse and bring to remove/problem page")
         }
-          
         for (let i = 0; i < MJindexies.length; i++){
             mJVerdict.push(trackNames[MJindexies[i]])
-            console.log("I have the index here, need to parse and bring to remove/problem page")
         }
         this.setState({ chrisBrownVerdict, rKellyVerdict, mJVerdict , MJindexies, RKindexies, CBindexies})
         this.problemLength(chrisBrownVerdict, rKellyVerdict, mJVerdict)
-        console.log("this is state", this.state)
     }
 
     problemLength(chrisBrownVerdict, rKellyVerdict, mJVerdict) {
         const length = chrisBrownVerdict.length + rKellyVerdict.length + mJVerdict.length
         this.setState({length})
-        console.log("this is state.length", this.state.length)
     }
     render(){
         const { chrisBrownVerdict, rKellyVerdict, mJVerdict, showSongs, items, length, uri , MJindexies, CBindexies, RKindexies } = this.state
@@ -120,11 +108,11 @@ class PlaylistSingle extends Component {
                  <button onClick={(e) => this.listTracksFromPlaylists( playlistInfo.id)}>{buttonText}</button>
                     {length > 0 && <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>This is a problem:</div>}
                 {chrisBrownVerdict.length >  0 &&
-                    <ProblemCB chrisBrownVerdict={chrisBrownVerdict} CBindexies={CBindexies} playlistId={playlistInfo.id} uri={uri} removeSongs={this.removeSongs()}/> }
+                    <ProblemCB chrisBrownVerdict={chrisBrownVerdict} CBindexies={CBindexies} playlistId={playlistInfo.id} uri={uri} /> }
                     {rKellyVerdict.length >  0 &&
-                    <ProblemRK rKellyVerdict={rKellyVerdict} RKindexies={RKindexies} playlistId={playlistInfo.id} uri={uri} removeSongs={this.removeSongs()} />}
+                    <ProblemRK rKellyVerdict={rKellyVerdict} RKindexies={RKindexies} playlistId={playlistInfo.id} uri={uri}  />}
                 {mJVerdict.length >  0 &&
-                    <ProblemMJ mJVerdict={mJVerdict} MJindexies={MJindexies} playlistId={playlistInfo.id} uri={uri} removeSongs={this.removeSongs()} /> }
+                    <ProblemMJ mJVerdict={mJVerdict} MJindexies={MJindexies} playlistId={playlistInfo.id} uri={uri}  /> }
                     {length > 0 && <hr></hr>}
                     {items && <Songs items={items} showSongs={showSongs} />}
 
