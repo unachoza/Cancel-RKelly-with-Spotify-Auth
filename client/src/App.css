@@ -81,6 +81,7 @@ button:hover {
   z-index: 1;
 }
 .all-playlists{
+  z-index: -1;
   
 }
 .all-playlist-fade-back{

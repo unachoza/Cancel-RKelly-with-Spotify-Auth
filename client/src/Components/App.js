@@ -95,8 +95,6 @@ l
     stopClickingNext() {
         let totalClicksLeft = (Math.floor(this.state.total / 10)) - 1
         this.setState({totalClicksLeft})
-    //    console.log( totalClicksLeft)
-    //     return totalClicksLeft
     }
     
 
@@ -109,30 +107,7 @@ l
             console.log("this is the response ", response)
         })
     }
-    /* need following fuctions:
-       removeFromSelectedSongs()
-       shareThisAppViaText()
-       logOutOfSpoitify()
 
-    */
-    
-    /* Need following Components/ UI/UX
-    asthetically pleasing UI
-    buttons to do remaining functions
-    messages congradulating users of belieiving women, 
-    counter of how many songs removed from how many users 
-    resources 
-    send Cancel R Kelly App to a friend via text 
-
-     */
-
-     /* Other artists to cancel 
-     OFSETT
-     XXX somone
-     Woody Allen
-     */
-
-        
     render() {
         const {loggedIn, offsetNum, total, playlistNames, items, trackNamesArr} = this.state
         return (

@@ -25,12 +25,11 @@ class PlaylistSingle extends Component {
                 length: [], 
                 uri: []
             }
-            this.removeSongs = this.removeSongs.bind(this)
+            // this.removeSongs = this.removeSongs.bind(this)
         }
     
     //getting list of tracks in User's Playlists 
     listTracksFromPlaylists(playlistID) {
-         console.log(playlistID)
         this.state.showSongs
       ? this.setState({ showSongs: false })
       : this.setState({ showSongs: true });
@@ -103,15 +102,6 @@ class PlaylistSingle extends Component {
         console.log("this is state", this.state)
     }
 
-    removeSongs(playlistID, uri, i) { 
-        console.log('clicked' )
-        
-        // spotifyWebApi.removeTracksFromPlaylist( playlistID, {
-        //     "tracks":
-        //         { "uri": uri, "positions": [i] }
-        // })
-        // console.log('removed' )
-    }
     problemLength(chrisBrownVerdict, rKellyVerdict, mJVerdict) {
         const length = chrisBrownVerdict.length + rKellyVerdict.length + mJVerdict.length
         this.setState({length})
