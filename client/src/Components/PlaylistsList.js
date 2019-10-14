@@ -4,7 +4,7 @@ import PlaylistSingle from './PlaylistSingle'
 
 export const PlaylistList = ({ usersPlaylists }) => {
     return (
-        ( <div>
+        ( <div className="all-playlists">
         {usersPlaylists.map((title, i) => (
             <PlaylistSingle key={i} playlistInfo={title} />))}
     </div>)

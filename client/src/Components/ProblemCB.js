@@ -13,7 +13,7 @@ class ProblemCB extends Component{
        )
    } 
    removeSongs(playlistID, uri) { 
-        spotifyWebApi.removeTracksFromPlaylist( playlistID, [ { "uri": uri[1] }]  )
+        spotifyWebApi.removeTracksFromPlaylist( playlistID, [ { "uri": uri[this.props.CBindexies] }]  )
         
         }
     

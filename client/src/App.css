@@ -72,16 +72,21 @@ button:hover {
 }
 
 .playlist-container-open {
-  /* width: "500px"; */
-  /* height: "350px"; */
-  /* border: green solid ; */
+ 
   font-size: 20px;
   display: inline-block;
   padding: 1px;
   border-Radius: 10px;
-  /* color: rgb(126, 121, 121)  */
-  color: white
+  color: white;
+  z-index: 1;
 }
+.all-playlists{
+  
+}
+.all-playlist-fade-back{
+  z-index: -1;
+}
+
 
 .songs-in-playlist-container-open {
   width: "530px";
