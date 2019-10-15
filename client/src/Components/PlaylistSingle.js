@@ -5,6 +5,7 @@ import Songs from './Songs'
 import ProblemRK from './ProblemRK'
 import ProblemCB from './ProblemCB'
 import ProblemMJ from './ProblemMJ'
+import FollowPlaylist from './FollowPlaylist'
 
 const   spotifyWebApi = new Spotify()
 
@@ -19,15 +20,17 @@ class PlaylistSingle extends Component {
                 rKellyVerdict: [],
                 chrisBrownVerdict: [],
                 mJVerdict: [], 
+                MJindexies: [],
+                RKindexies: [],
+                CBindexies: [],
                 length: [], 
                 uri: []
             }
-            this.removeSongs = this.removeSongs.bind(this)
+            // this.removeSongs = this.removeSongs.bind(this)
         }
     
     //getting list of tracks in User's Playlists 
     listTracksFromPlaylists(playlistID) {
-         console.log(playlistID)
         this.state.showSongs
       ? this.setState({ showSongs: false })
       : this.setState({ showSongs: true });
@@ -61,17 +64,12 @@ class PlaylistSingle extends Component {
                 })
                 response.items.map((item) => {
                     uri.push(item.track.uri)
-                    this.setState({uri})
+                    return this.setState({uri})
                 })
-
-                
                 this.searchForSongs(artistsNamesArr,trackNames)
-                
             })
-        
     }
     indexOfAll = (arr, val) => arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), [])
-
 
     searchForSongs(artistsNamesArr, trackNames) {
         let rKellyVerdict = []
@@ -84,48 +82,38 @@ class PlaylistSingle extends Component {
         for (let i = 0; i < CBindexies.length; i++){
             chrisBrownVerdict.push(trackNames[CBindexies[i]])
         }
-          
         for (let i = 0; i < RKindexies.length; i++){
-            rKellyVerdict.push(trackNames[RKindexies[i]])}
-          
+            rKellyVerdict.push(trackNames[RKindexies[i]])
+        }
         for (let i = 0; i < MJindexies.length; i++){
             mJVerdict.push(trackNames[MJindexies[i]])
         }
-        this.setState({ chrisBrownVerdict, rKellyVerdict, mJVerdict })
+        this.setState({ chrisBrownVerdict, rKellyVerdict, mJVerdict , MJindexies, RKindexies, CBindexies})
         this.problemLength(chrisBrownVerdict, rKellyVerdict, mJVerdict)
     }
 
-    removeSongs(playlistID, uri, i) { 
-        console.log('clicked' )
-        
-        // spotifyWebApi.removeTracksFromPlaylist( playlistID, {
-        //     "tracks":
-        //         { "uri": uri, "positions": [i] }
-        // })
-        // console.log('removed' )
-    }
     problemLength(chrisBrownVerdict, rKellyVerdict, mJVerdict) {
         const length = chrisBrownVerdict.length + rKellyVerdict.length + mJVerdict.length
         this.setState({length})
     }
     render(){
-        const { chrisBrownVerdict, rKellyVerdict, mJVerdict, showSongs, items, length, uri  } = this.state
+        const { chrisBrownVerdict, rKellyVerdict, mJVerdict, showSongs, items, length, uri , MJindexies, CBindexies, RKindexies } = this.state
         const {playlistInfo} = this.props
         let buttonText = showSongs? "CHECK SONGS" : "CLOSE SONGS" 
         return (
         <div className={showSongs ? "playlist-container-closed" : "playlist-container-open"} >
-                <img className="album-image" src={playlistInfo.images[0].url} alt="album art" />
+                <img className="album-image" src={playlistInfo.images.length ? playlistInfo.images[0].url : "https://res.cloudinary.com/dh41vh9dx/image/upload/v1568335617/Big_Note-512.png"} alt="album art" />
             <br></br>
             <div className="songs-in-playlist-container-open">
                 {playlistInfo.name} <br></br>
                  <button onClick={(e) => this.listTracksFromPlaylists( playlistInfo.id)}>{buttonText}</button>
                     {length > 0 && <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>This is a problem:</div>}
                 {chrisBrownVerdict.length >  0 &&
-                    <ProblemCB chrisBrownVerdict={chrisBrownVerdict} playlistId={playlistInfo.id} uri={uri} removeSongs={this.removeSongs()}/> }
+                    <ProblemCB chrisBrownVerdict={chrisBrownVerdict} CBindexies={CBindexies} playlistId={playlistInfo.id} uri={uri} /> }
                     {rKellyVerdict.length >  0 &&
-                    <ProblemRK rKellyVerdict={rKellyVerdict}  playlistId={playlistInfo.id} uri={uri} removeSongs={this.removeSongs()} />}
+                    <ProblemRK rKellyVerdict={rKellyVerdict} RKindexies={RKindexies} playlistId={playlistInfo.id} uri={uri}  />}
                 {mJVerdict.length >  0 &&
-                    <ProblemMJ mJVerdict={mJVerdict}  playlistId={playlistInfo.id} uri={uri} removeSongs={this.removeSongs()} /> }
+                    <ProblemMJ mJVerdict={mJVerdict} MJindexies={MJindexies} playlistId={playlistInfo.id} uri={uri}  /> }
                     {length > 0 && <hr></hr>}
                     {items && <Songs items={items} showSongs={showSongs} />}
 

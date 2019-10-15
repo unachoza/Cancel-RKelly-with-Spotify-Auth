@@ -4,6 +4,7 @@ import Spotify from 'spotify-web-api-js'
 import PlaylistList from './PlaylistsList';
 import Introduction from './Introduction';
 import UsageStats from './UsageStats'
+import FollowPlaylist from './FollowPlaylist';
 
 const   spotifyWebApi = new Spotify()
 
@@ -72,12 +73,11 @@ class App extends Component {
         // {limit: 50, offset: 0}
         spotifyWebApi.getUserPlaylists(this.state.id, {limit: 10, offset: this.state.offsetNum})
             .then((response) => {
-                console.log(response)
+                console.log(response.items)
                 this.setState({ playlistNames: response.items, total: response.total })
-                // console.log(this.state.playlistNames)
             })
     }
-l
+
     increaseOffset() {
             this.setState(state => {
             return {
@@ -95,12 +95,8 @@ l
     stopClickingNext() {
         let totalClicksLeft = (Math.floor(this.state.total / 10)) - 1
         this.setState({totalClicksLeft})
-    //    console.log( totalClicksLeft)
-    //     return totalClicksLeft
     }
     
-
-   
    
     findRKelly() {
     // rkelly id : "2mxe0TnaNL039ysAj51xPQ"
@@ -109,57 +105,35 @@ l
             console.log("this is the response ", response)
         })
     }
-    /* need following fuctions:
-       removeFromSelectedSongs()
-       shareThisAppViaText()
-       logOutOfSpoitify()
 
-    */
-    
-    /* Need following Components/ UI/UX
-    asthetically pleasing UI
-    buttons to do remaining functions
-    messages congradulating users of belieiving women, 
-    counter of how many songs removed from how many users 
-    resources 
-    send Cancel R Kelly App to a friend via text 
-
-     */
-
-     /* Other artists to cancel 
-     OFSETT
-     XXX somone
-     Woody Allen
-     */
-
-        
     render() {
         const {loggedIn, offsetNum, total, playlistNames, items, trackNamesArr} = this.state
         return (
-            <div className="home">
-                <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
-                <br></br>
+            // <div className="home">
+            //     <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
+            //     <br></br>
+            
                 <div className=
                     {loggedIn ? "loggedIn" : "loggedOut"}>
                     <Introduction loggedIn={loggedIn}/>
                 <UsageStats />
-                {!loggedIn ?
+                <FollowPlaylist />
+                 {!loggedIn ?
                     <a href="http://localhost:8888">
                         <button>Login Spotify</button>
                     </a>
                     : <div><button className={offsetNum > 0? "hide": "showIt" }onClick={() => this.getPlaylists()}>YOUR PLAYLISTS</button>
-                    {/* <button onClick={(e)=> this.logout(this.token)}>Log Out</button> */}
                         </div>}
-                    </div>
+                    {/* </div>
                     {offsetNum < total ?
                     <button className={offsetNum > (total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>NEXT 10 PLAYLISTS</button> 
-                    : " "}
-                
+                    : " "} */}
+                {/*
                 {playlistNames && trackNamesArr &&
                     <PlaylistList
                     usersPlaylists={playlistNames}
                     items={items}
-                    />}
+                    />} */}
                 {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}
 
             </div>

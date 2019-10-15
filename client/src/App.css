@@ -68,13 +68,29 @@ button:hover {
 
 }
 
+/* z-index: 1;
+opacity: .9;
+display: flex;
+width: 00px;
+position: absolute;
+} */
 .playlist-container-open {
+ 
   font-size: 20px;
   display: inline-block;
   padding: 1px;
   border-Radius: 10px;
-  color: white
+  color: white;
+  z-index: 1;
 }
+.all-playlists{
+  z-index: -1;
+  
+}
+.all-playlist-fade-back{
+  z-index: -1;
+}
+
 
 .songs-in-playlist-container-open {
   width: "530px";
@@ -121,3 +137,46 @@ visibility: visible ;
   font-size: 15px;
   padding: 8px;
 }
+
+/* 
+.boxShadow{
+  @include transition(
+    box-shadow 200ms ease-out,
+    transform 200ms ease-out,
+    opacity 200ms ease-in-out
+  );
+  &:after,
+  &:before{
+    @include transition(400ms linear);
+  }
+}
+
+.boxShadow:hover:not(.fadeOut){
+  @include box-shadow(0px 0px 0px 20px $red inset);
+  @include transform(scale(0.8));
+  &:after{
+    background-color: #fff;
+    @include transform(rotate(-45deg) scale(0.6));
+  }
+  &:before{
+    background-color: #fff;
+    @include transform(rotate(45deg) scale(0.6));
+  }
+}
+
+
+.fadeOut{
+  opacity:0;
+}
+
+.circle{
+  width:40px;
+  height:40px;
+  background:transparent;
+  border: 4px solid red;
+  @include border-radius(50%);
+  position:relative;
+  cursor: pointer;
+  display:inline-block;
+  margin: 10px 20px;
+} */

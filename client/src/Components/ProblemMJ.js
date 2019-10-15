@@ -5,23 +5,28 @@ import Spotify from 'spotify-web-api-js'
 const spotifyWebApi = new Spotify()
 
 class ProblemMJ extends Component{
-   removeSongs(playlistID, uri) { 
-        console.log('clicked' )
-        console.log(uri)
-        spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri[0]}])
-        console.log(uri[0])
-        console.log('removed' )}
+    removeSongs(playlistID, uri) { 
+        const {MJindexies} = this.props
+        if(MJindexies.length >1 ){
+          const multipleSongs = MJindexies.map(index => uri[index])
+        multipleSongs.map(index => spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": index}])
+        )
+      }
+      spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri[this.props.RKindexies] }])
+      }
     
 
     render() {
-        const {mJVerdict, playlistId, uri, i} = this.props
+        const {mJVerdict, playlistId, uri, MJindexies} = this.props
+        console.log('arrived at this page', mJVerdict, "here are the indexxx", MJindexies)
+
               let songs = mJVerdict.map((song, i) => {
-                return <div key={i}>{song}<br></br><span>Michael Jackson</span> </div> 
+                return <div style={{textAlign: "left"}} key={i}>{song} <br></br><span style={{color: 'white'}}>Michael Jackson</span> </div> 
              })
         return (
-            <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300", display: "inline-block" }}>
+            <div style={{ fontSize: "20px", fontWeight: "300", display: "inline-block" }}>
                 {songs}
-<button className="remove-button"onClick={(e) => this.removeSongs(playlistId, uri, i)}>Remove</button>
+<button className="remove-button"onClick={(e) => this.removeSongs(playlistId, uri)}>Remove</button>
 
             </div>
         )
