@@ -32,10 +32,19 @@ class FollowPlaylist extends Component{
             response.items.map((item) => {
                 uri.push(item.track.uri)
             });
-
-            // console.log(uri)
+          const indexOfAll = (arr, val) => arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), [])
+          let RKindexies = indexOfAll(artistsNamesArr, "R. Kelly")
+          let CBindexies = indexOfAll(artistsNamesArr, "Chris Brown")
+          let MJindexies = indexOfAll(artistsNamesArr, "Michael Jackson")
+          const allIndexx =MJindexies.push(RKindexies.push(CBindexies))
+          console.log(allIndexx)
+          const removedUris = []
+          allIndexx.forEach(index => {
+             
+             uri.splic(index,1)
+            })
         
-        spotifyWebApi.createPlaylist("1224023576", {"name": `${playlistName} (problem-free)`})
+        spotifyWebApi.createPlaylist("1224023576", {"name": `${playlistName} (problem-free!!)`})
             .then(response => {
                 const newPlaylistID = response.id
                 console.log(newPlaylistID, uri)
@@ -48,19 +57,19 @@ class FollowPlaylist extends Component{
            
         )
 
-    })}
+        })}
 
 
     render(){
         return(
             <div>
-                {this.createProblemFreePlaylist()}
-                <h1>Identify playlist</h1>
-                <h1>copy songs from playlist in array</h1>
+                {/* {this.createProblemFreePlaylist()} */}
+                {/* <h1>Identify playlist</h1> */}
+                {/* <h1>copy songs from playlist in array</h1> */}
                 <h1>filter out rkelly, splice</h1>
-                <h1>capture playlist name and add "(problem-free)"</h1>
-                <h1>create new playist with new name</h1>
-                <h1>add songsArray to created playlist with </h1>
+                {/* <h1>capture playlist name and add "(problem-free)"</h1> */}
+                {/* <h1>create new playist with new name</h1> */}
+                {/* <h1>add songsArray to created playlist with </h1> */}
                 <h2>Add the current user as a follower of Problem-free playlist</h2>
                 <h2> Removes the current user as a follower from public playlist</h2>
             </div>
