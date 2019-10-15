@@ -72,9 +72,8 @@ class App extends Component {
         // {limit: 50, offset: 0}
         spotifyWebApi.getUserPlaylists(this.state.id, {limit: 10, offset: this.state.offsetNum})
             .then((response) => {
-                console.log(response)
+                console.log(response.items)
                 this.setState({ playlistNames: response.items, total: response.total })
-                // console.log(this.state.playlistNames)
             })
     }
 l
@@ -97,8 +96,6 @@ l
         this.setState({totalClicksLeft})
     }
     
-
-   
    
     findRKelly() {
     // rkelly id : "2mxe0TnaNL039ysAj51xPQ"

@@ -9,9 +9,8 @@ class ProblemRK extends Component{
           const {RKindexies} = this.props
           if(RKindexies.length >1 ){
             const multipleSongs = RKindexies.map(index => uri[index])
-          multipleSongs.map(index => {
-            spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": index}])
-          })
+          multipleSongs.map(index => spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": index}])
+          )
         }
         spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri[this.props.RKindexies] }])
         }

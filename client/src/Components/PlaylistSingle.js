@@ -5,6 +5,7 @@ import Songs from './Songs'
 import ProblemRK from './ProblemRK'
 import ProblemCB from './ProblemCB'
 import ProblemMJ from './ProblemMJ'
+import FollowPlaylist from './FollowPlaylist'
 
 const   spotifyWebApi = new Spotify()
 
@@ -63,7 +64,7 @@ class PlaylistSingle extends Component {
                 })
                 response.items.map((item) => {
                     uri.push(item.track.uri)
-                    this.setState({uri})
+                    return this.setState({uri})
                 })
                 this.searchForSongs(artistsNamesArr,trackNames)
             })
@@ -101,7 +102,7 @@ class PlaylistSingle extends Component {
         let buttonText = showSongs? "CHECK SONGS" : "CLOSE SONGS" 
         return (
         <div className={showSongs ? "playlist-container-closed" : "playlist-container-open"} >
-                <img className="album-image" src={playlistInfo.images[0].url} alt="album art" />
+                <img className="album-image" src={playlistInfo.images.length ? playlistInfo.images[0].url : "https://res.cloudinary.com/dh41vh9dx/image/upload/v1568335617/Big_Note-512.png"} alt="album art" />
             <br></br>
             <div className="songs-in-playlist-container-open">
                 {playlistInfo.name} <br></br>

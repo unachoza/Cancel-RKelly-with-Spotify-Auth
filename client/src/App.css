@@ -71,6 +71,12 @@ button:hover {
 
 }
 
+/* z-index: 1;
+opacity: .9;
+display: flex;
+width: 00px;
+position: absolute;
+} */
 .playlist-container-open {
  
   font-size: 20px;
