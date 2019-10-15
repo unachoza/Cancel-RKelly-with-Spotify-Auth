@@ -32,8 +32,22 @@ class FollowPlaylist extends Component{
             response.items.map((item) => {
                 uri.push(item.track.uri)
             });
+
+            // console.log(uri)
         
         spotifyWebApi.createPlaylist("1224023576", {"name": `${playlistName} (problem-free)`})
+            .then(response => {
+                const newPlaylistID = response.id
+                console.log(newPlaylistID, uri)
+             
+                 
+                  spotifyWebApi.addTracksToPlaylist(newPlaylistID, uri )
+               
+                console.log(response, " new id",newPlaylistID)
+            }
+           
+        )
+
     })}
 
 

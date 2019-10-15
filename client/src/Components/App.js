@@ -4,6 +4,7 @@ import Spotify from 'spotify-web-api-js'
 import PlaylistList from './PlaylistsList';
 import Introduction from './Introduction';
 import UsageStats from './UsageStats'
+import FollowPlaylist from './FollowPlaylist';
 
 const   spotifyWebApi = new Spotify()
 
@@ -76,7 +77,7 @@ class App extends Component {
                 this.setState({ playlistNames: response.items, total: response.total })
             })
     }
-l
+
     increaseOffset() {
             this.setState(state => {
             return {
@@ -108,30 +109,31 @@ l
     render() {
         const {loggedIn, offsetNum, total, playlistNames, items, trackNamesArr} = this.state
         return (
-            <div className="home">
-                <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
-                <br></br>
+            // <div className="home">
+            //     <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
+            //     <br></br>
+            
                 <div className=
                     {loggedIn ? "loggedIn" : "loggedOut"}>
                     <Introduction loggedIn={loggedIn}/>
                 <UsageStats />
-                {!loggedIn ?
+                <FollowPlaylist />
+                 {!loggedIn ?
                     <a href="http://localhost:8888">
                         <button>Login Spotify</button>
                     </a>
                     : <div><button className={offsetNum > 0? "hide": "showIt" }onClick={() => this.getPlaylists()}>YOUR PLAYLISTS</button>
-                    {/* <button onClick={(e)=> this.logout(this.token)}>Log Out</button> */}
                         </div>}
-                    </div>
+                    {/* </div>
                     {offsetNum < total ?
                     <button className={offsetNum > (total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>NEXT 10 PLAYLISTS</button> 
-                    : " "}
-                
+                    : " "} */}
+                {/*
                 {playlistNames && trackNamesArr &&
                     <PlaylistList
                     usersPlaylists={playlistNames}
                     items={items}
-                    />}
+                    />} */}
                 {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}
 
             </div>
