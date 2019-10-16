@@ -109,9 +109,9 @@ class App extends Component {
     render() {
         const {loggedIn, offsetNum, total, playlistNames, items, trackNamesArr} = this.state
         return (
-            // <div className="home">
-            //     <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
-            //     <br></br>
+            <div className="home">
+                <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
+                <br></br>
             
                 <div className=
                     {loggedIn ? "loggedIn" : "loggedOut"}>
@@ -124,16 +124,16 @@ class App extends Component {
                     </a>
                     : <div><button className={offsetNum > 0? "hide": "showIt" }onClick={() => this.getPlaylists()}>YOUR PLAYLISTS</button>
                         </div>}
-                    {/* </div>
+                    </div>
                     {offsetNum < total ?
                     <button className={offsetNum > (total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>NEXT 10 PLAYLISTS</button> 
-                    : " "} */}
-                {/*
+                    : " "}
+                
                 {playlistNames && trackNamesArr &&
                     <PlaylistList
                     usersPlaylists={playlistNames}
                     items={items}
-                    />} */}
+                    />} 
                 {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}
 
             </div>

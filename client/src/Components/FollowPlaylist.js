@@ -37,22 +37,25 @@ class FollowPlaylist extends Component{
           let CBindexies = indexOfAll(artistsNamesArr, "Chris Brown")
           let MJindexies = indexOfAll(artistsNamesArr, "Michael Jackson")
           const allIndexx =MJindexies.push(RKindexies.push(CBindexies))
-          console.log(allIndexx)
-          const removedUris = []
-          allIndexx.forEach(index => {
-             
-             uri.splic(index,1)
-            })
+          console.log(allIndexx, uri.length)
+          
+       uri.splice(MJindexies, 1)
+         console.log(uri.length, "less")
+         let newURI = uri
+    //       allIndexx.forEach(index => {
+    //  uri.splice(index,1)
+    //         })
+    
         
-        spotifyWebApi.createPlaylist("1224023576", {"name": `${playlistName} (problem-free!!)`})
+        spotifyWebApi.createPlaylist("1224023576", {"name": `${playlistName} (free)`})
             .then(response => {
                 const newPlaylistID = response.id
                 console.log(newPlaylistID, uri)
              
                  
-                  spotifyWebApi.addTracksToPlaylist(newPlaylistID, uri )
+                  spotifyWebApi.addTracksToPlaylist(newPlaylistID, newURI )
                
-                console.log(response, " new id",newPlaylistID)
+                console.log(" maybe did it?")
             }
            
         )
@@ -66,12 +69,12 @@ class FollowPlaylist extends Component{
                 {/* {this.createProblemFreePlaylist()} */}
                 {/* <h1>Identify playlist</h1> */}
                 {/* <h1>copy songs from playlist in array</h1> */}
-                <h1>filter out rkelly, splice</h1>
+                {/* <h1>filter out rkelly, splice</h1> */}
                 {/* <h1>capture playlist name and add "(problem-free)"</h1> */}
                 {/* <h1>create new playist with new name</h1> */}
                 {/* <h1>add songsArray to created playlist with </h1> */}
-                <h2>Add the current user as a follower of Problem-free playlist</h2>
-                <h2> Removes the current user as a follower from public playlist</h2>
+                {/* <h2>Add the current user as a follower of Problem-free playlist</h2>
+                <h2> Removes the current user as a follower from public playlist</h2> */}
             </div>
         )
     }

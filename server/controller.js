@@ -1,9 +1,9 @@
-const {cancel} = require('../server/model')
+const {cancel} = require('./model')
 const cancelController = {}
 
 
 //Get All Users
-cancelController.allUsers = (req, res) => {
+exports.allUsers = (req, res) => {
     cancel.allUsers()
     .then(data => {
         res.json({
@@ -17,7 +17,7 @@ cancelController.allUsers = (req, res) => {
 }
 
 //Add User to Database
-cancelController.addUser = (req, res) => {
+exports.addUser = (req, res) => {
     cancel.addUser()
     .then(data => {
         res.json({
@@ -31,7 +31,7 @@ cancelController.addUser = (req, res) => {
 }
 
 //Add Songs to Datbase
-cancelController.countSong = (req, res) => {
+exports.countSong = (req, res) => {
     cancel.countSong()
     .then(data => {
         res.json({

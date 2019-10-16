@@ -24,8 +24,11 @@ cancel.addUser = (user) => {
     [user.display_name, user.email, user.country, user.songs]
     )
 }
+cancel.countUniqueUsers = () => {
 
-cancel.countSong = (song) => {
+}
+
+cancel.addSongs = (song) => {
     return db.one(`
     INSERT INTO songs
     (name, artist, deleted)
@@ -34,6 +37,14 @@ cancel.countSong = (song) => {
     `
     [song.name, song.artist, song.deleted]
     )
+}
+
+cancel.countDeletedSongs = () => {
+    return db.query(`
+    SELECT * FROM songs 
+    `
+    )
+
 }
 
 module.exports = cancel
