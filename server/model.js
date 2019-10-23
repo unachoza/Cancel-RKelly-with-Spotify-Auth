@@ -42,9 +42,9 @@ canceldatabase.addSong = (song) => {
 
 canceldatabase.countDeletedSongs = () => {
     return db.query(`
-    SELECT * FROM songs 
-    `
-    )
+    SELECT COUNT(1) FROM songs
+    WHERE deleted = true
+    `)
 
 }
 
