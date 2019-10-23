@@ -5,16 +5,16 @@
 */
 
 const db = require('../db/config')
-const cancel = {}
+const canceldatabase = {}
 
 
-cancel.allUsers = () => {
+canceldatabase.allUsers = () => {
     return db.query(`
     SELECT * FROM users
     `)
 }
 
-cancel.addUser = (user) => {
+canceldatabase.addUser = (user) => {
     return db.one(`
     INSERT INTO users
     (display_name, email, country, songs)
@@ -24,11 +24,11 @@ cancel.addUser = (user) => {
     [user.display_name, user.email, user.country, user.songs]
     )
 }
-cancel.countUniqueUsers = () => {
+canceldatabase.countUniqueUsers = () => {
 
 }
 
-cancel.addSongs = (song) => {
+canceldatabase.addSongs = (song) => {
     return db.one(`
     INSERT INTO songs
     (name, artist, deleted)
@@ -39,7 +39,7 @@ cancel.addSongs = (song) => {
     )
 }
 
-cancel.countDeletedSongs = () => {
+canceldatabase.countDeletedSongs = () => {
     return db.query(`
     SELECT * FROM songs 
     `
@@ -47,4 +47,4 @@ cancel.countDeletedSongs = () => {
 
 }
 
-module.exports = cancel
+module.exports = canceldatabase

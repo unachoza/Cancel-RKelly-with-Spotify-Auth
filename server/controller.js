@@ -1,11 +1,11 @@
-const cancel = require('./model')
+const canceldatabase = require('./model')
 const cancelController = {}
-console.log("this is the cancel", cancel)
+console.log("this is the cancel", canceldatabase)
 
 
 //Get All Users
 cancelController.allUsers = (req, res) => {
-    cancel.allUsers()
+    canceldatabase.allUsers()
     .then(data => {
         res.json({
             message: 'all users here',
@@ -19,7 +19,7 @@ cancelController.allUsers = (req, res) => {
 
 //Add User to Database
 cancelController.addUser = (req, res) => {
-    cancel.addUser()
+    canceldatabase.addUser()
     .then(data => {
         res.json({
             message: "added user",
@@ -33,7 +33,7 @@ cancelController.addUser = (req, res) => {
 
 //Add Songs to Datbase
 cancelController.countSong = (req, res) => {
-    cancel.countSong()
+    canceldatabase.countSong()
     .then(data => {
         res.json({
             message: "counting this song",
