@@ -63,7 +63,18 @@ cancelController.countDeletedSongs = (req, res) => {
     
 }
 
-
 //Change delted from false to true
+cancelController.updateSong = (req, res) => {
+    canceldatabase.updateSong(req.body.id)
+    .then(data => {
+        res.json({
+            message: " song was changed to deleted ",
+            // data: data
+        })
+    })
+    .catch(err => {
+        res.status(500).json(err)
+    })
+}
 
 module.exports = cancelController 

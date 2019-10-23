@@ -48,4 +48,14 @@ canceldatabase.countDeletedSongs = () => {
 
 }
 
+canceldatabase.updateSong = (id) => {
+    return db.one(`
+    UPDATE songs 
+    SET deleted = TRUE
+    WHERE id = $1
+    `,
+    [id]
+    )
+}
+
 module.exports = canceldatabase
