@@ -28,13 +28,14 @@ canceldatabase.countUniqueUsers = () => {
 
 }
 
-canceldatabase.addSongs = (song) => {
+canceldatabase.addSong = (song) => {
+    console.log('thisis song', song)
     return db.one(`
     INSERT INTO songs
     (name, artist, deleted)
-    VALUES ($1, $2)
+    VALUES ($1, $2, $3)
     RETURNING *
-    `
+    `,
     [song.name, song.artist, song.deleted]
     )
 }

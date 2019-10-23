@@ -6,6 +6,6 @@ console.log("this is cancelController", cancelController)
 
 router.get('/', cancelController.allUsers)
 router.post('/users', cancelController.addUser)
-router.post('/songs', cancelController.countSong)
+router.post('/songs', cancelController.addSong)
 
 module.exports = router

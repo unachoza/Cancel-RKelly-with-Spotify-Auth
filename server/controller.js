@@ -33,8 +33,9 @@ cancelController.addUser = (req, res) => {
 }
 
 //Add Songs to Datbase
-cancelController.countSong = (req, res) => {
-    canceldatabase.countSong(req.body)
+cancelController.addSong = (req, res) => {
+    console.log("addSong")
+    canceldatabase.addSong(req.body)
     .then(data => {
         res.json({
             message: "counting this song",

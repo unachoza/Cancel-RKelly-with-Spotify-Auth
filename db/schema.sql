@@ -1,10 +1,12 @@
 DROP DATABASE cancel;
 CREATE DATABASE cancel;
+\c cancel;
 
 CREATE TABLE songs(
 id SERIAL PRIMARY KEY,
 name text NOT NULL,
-artist text NOT NULL
+artist text NOT NULL,
+deleted BOOLEAN 
 );
 
 CREATE TABLE users(
