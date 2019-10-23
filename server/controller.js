@@ -19,7 +19,8 @@ cancelController.allUsers = (req, res) => {
 
 //Add User to Database
 cancelController.addUser = (req, res) => {
-    canceldatabase.addUser()
+    console.log( "this is req", req)
+    canceldatabase.addUser(req.body) 
     .then(data => {
         res.json({
             message: "added user",
@@ -33,7 +34,7 @@ cancelController.addUser = (req, res) => {
 
 //Add Songs to Datbase
 cancelController.countSong = (req, res) => {
-    canceldatabase.countSong()
+    canceldatabase.countSong(req.body)
     .then(data => {
         res.json({
             message: "counting this song",
