@@ -5,6 +5,8 @@ import PlaylistList from './PlaylistsList';
 import Introduction from './Introduction';
 import UsageStats from './UsageStats'
 import FollowPlaylist from './FollowPlaylist';
+import axios from 'axios'
+
 
 const   spotifyWebApi = new Spotify()
 
@@ -19,11 +21,10 @@ class App extends Component {
             trackNamesArr: [],
             offsetNum: 0,
             items: [],
-            user: {
-                name: "", 
-                imageUrl: "",
-                id: ""
-            }
+            display_name: "",
+            email: "",
+            country: ""
+            
             
         }
        
@@ -52,22 +53,40 @@ class App extends Component {
     }
     getUserInfo() {
         spotifyWebApi.getMe()
-            .then(response => {
-                console.log(response)
-
-
+            .then((response) => {
+                // console.log(response.display_name)
                 this.setState({
-                    name: response.display_name,
-                    imageUrl: response.images.url, 
-                    id: response.id
+                    display_name: response.display_name,
+                    email: response.email,
+                    country: response.country
+                    // name: response.display_name,
+                    // imageUrl: response.images.url, 
+                    // id: response.id
                     
                 })
             })
+            .then(console.log("state", this.state))
         
+    }
+    //add User to database
+    addUser = () => {
+        console.log('instide of adduser()',this.state)
+        const {display_name, email, country} = this.state
+        axios.post('http://localhost:3001/db/users', 
+        {
+            display_name,
+            email,
+            country
+        })
+        .then((data) => {
+            console.log('success', data)
+        })
+
     }
     //getting list of User's Playlists: limit 50 
     
     getPlaylists() {
+        console.log(this.state)
         this.setState({items: [], playlistNames: []})
         this.increaseOffset()
         // {limit: 50, offset: 0}
@@ -107,9 +126,11 @@ class App extends Component {
     }
 
     render() {
+       
         const {loggedIn, offsetNum, total, playlistNames, items, trackNamesArr} = this.state
         return (
             <div className="home">
+                {loggedIn? this.addUser() : ''}
                 <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
                 <br></br>
             

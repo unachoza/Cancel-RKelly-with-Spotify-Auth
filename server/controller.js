@@ -19,7 +19,6 @@ cancelController.allUsers = (req, res) => {
 
 //Add User to Database
 cancelController.addUser = (req, res) => {
-    console.log( "this is req", req)
     canceldatabase.addUser(req.body) 
     .then(data => {
         res.json({
