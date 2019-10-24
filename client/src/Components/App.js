@@ -70,17 +70,23 @@ class App extends Component {
     }
     //add User to database
     addUser = () => {
-        console.log('instide of adduser()',this.state)
-        const {display_name, email, country} = this.state
-        axios.post('http://localhost:3001/db/users', 
-        {
-            display_name,
-            email,
-            country
-        })
-        .then((data) => {
-            console.log('success', data)
-        })
+        
+        const time = new Date().toString()
+        console.log(time)
+        const {display_name, email, country, loggedIn} = this.state
+        if(display_name){
+            axios.post('http://localhost:3001/db/users', 
+            {
+                display_name,
+                email,
+                country, 
+                time
+            })
+            .then((data) => {
+                console.log('success', data)
+            })
+        }
+        
 
     }
     //getting list of User's Playlists: limit 50 
@@ -124,13 +130,14 @@ class App extends Component {
             console.log("this is the response ", response)
         })
     }
+    
 
     render() {
        
-        const {loggedIn, offsetNum, total, playlistNames, items, trackNamesArr} = this.state
+        const {loggedIn, offsetNum, total, playlistNames, items, trackNamesArr, display_name} = this.state
         return (
             <div className="home">
-                {loggedIn? this.addUser() : ''}
+                {display_name? this.addUser() : ''}
                 <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
                 <br></br>
             
