@@ -76,4 +76,17 @@ cancelController.updateSong = (req, res) => {
     })
 }
 
+cancelController.countUniqueUsers = (req,res) => {
+    canceldatabase.countUniqueUsers()
+    .then(data => {
+        res.json({
+            message: 'all users here',
+            data: data
+        })
+    })
+    .catch(err => {
+        res.status(500).json({err})
+    })
+}
+
 module.exports = cancelController 

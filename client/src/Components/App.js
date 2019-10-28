@@ -8,7 +8,7 @@ import FollowPlaylist from './FollowPlaylist';
 import axios from 'axios'
 
 
-const   spotifyWebApi = new Spotify()
+const spotifyWebApi = new Spotify()
 
 class App extends Component {
     constructor() {
@@ -24,96 +24,77 @@ class App extends Component {
             display_name: "",
             email: "",
             country: ""
-            
-            
         }
-       
-
         if (token) {
             spotifyWebApi.setAccessToken(token)
             this.getUserInfo()
-
         }
     }
-    
 
     getHashParams() {
         let hashParams = {};
         let e, r = /([^&;=]+)=?([^&;]*)/g,
             q = window.location.hash.substring(1);
-        while (e = r.exec(q)) {
-            hashParams[e[1]] = decodeURIComponent(e[2]);
-        }
+        while (e = r.exec(q)) {hashParams[e[1]] = decodeURIComponent(e[2]) }
         return hashParams;
     }
     logout() {
         console.log('clicked logout')
         window.location.reload()
-       
     }
+    //From Spotify Auth
     getUserInfo() {
         spotifyWebApi.getMe()
             .then((response) => {
-                // console.log(response.display_name)
                 this.setState({
                     display_name: response.display_name,
                     email: response.email,
                     country: response.country
-                    // name: response.display_name,
-                    // imageUrl: response.images.url, 
-                    // id: response.id
-                    
                 })
             })
             .then(console.log("state", this.state))
-        
     }
     //add User to database
-    addUser = () => {
-        
-        const time = new Date().toString()
-        console.log(time)
-        const {display_name, email, country, loggedIn} = this.state
-        if(display_name){
-            axios.post('http://localhost:3001/db/users', 
-            {
-                display_name,
-                email,
-                country, 
-                time
-            })
-            .then((data) => {
-                console.log('success', data)
-            })
-        }
-        
+    // addUser = () => {
+    //     const time = new Date().toString()
+    //     const {display_name, email, country} = this.state
+    //     if(display_name){
+    //         axios.post('http://localhost:3001/db/users', 
+    //         {
+    //             display_name,
+    //             email,
+    //             country, 
+    //             time
+    //         })
+    //         .then((data) => {
+    //             console.log('success', data)
+    //         })
+    //     }
+    // }
 
-    }
     //getting list of User's Playlists: limit 50 
-    
     getPlaylists() {
         console.log(this.state)
         this.setState({items: [], playlistNames: []})
         this.increaseOffset()
         // {limit: 50, offset: 0}
-        spotifyWebApi.getUserPlaylists(this.state.id, {limit: 10, offset: this.state.offsetNum})
+        console.log('ofset inside func', this.state.offsetNum)
+        spotifyWebApi.getUserPlaylists(this.state.id, {limit: 2, offset: this.state.offsetNum})
             .then((response) => {
                 console.log(response.items)
                 this.setState({ playlistNames: response.items, total: response.total })
             })
+            console.log('this is the total?', this.state.total)
     }
 
     increaseOffset() {
+        console.log('offset num ', this.state)
             this.setState(state => {
-            return {
-                offsetNum: state.offsetNum + 10
-            }
-            })
-            
+            return { offsetNum: state.offsetNum + 10 }
+         })
         if (this.state.total) {
            this.stopClickingNext()
         }
-      
     }
        
     
@@ -137,15 +118,15 @@ class App extends Component {
         const {loggedIn, offsetNum, total, playlistNames, items, trackNamesArr, display_name} = this.state
         return (
             <div className="home">
-                {display_name? this.addUser() : ''}
+                {/* {display_name? this.addUser() : ''} */}
                 <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
                 <br></br>
             
                 <div className=
                     {loggedIn ? "loggedIn" : "loggedOut"}>
                     <Introduction loggedIn={loggedIn}/>
-                <UsageStats />
-                <FollowPlaylist />
+                {/* <UsageStats /> */}
+                {/* <FollowPlaylist /> */}
                  {!loggedIn ?
                     <a href="http://localhost:8888">
                         <button>Login Spotify</button>

@@ -25,11 +25,14 @@ canceldatabase.addUser = (user) => {
     )
 }
 canceldatabase.countUniqueUsers = () => {
-
+    return db.query(`
+    SELECT COUNT (DISTINCT display_name)
+    FROM users
+    `)
 }
 
 canceldatabase.addSong = (song) => {
-    console.log('thisis song', song)
+    console.log('this is song', song)
     return db.one(`
     INSERT INTO songs
     (name, artist, deleted)
@@ -45,7 +48,6 @@ canceldatabase.countDeletedSongs = () => {
     SELECT COUNT(1) FROM songs
     WHERE deleted = true
     `)
-
 }
 
 canceldatabase.updateSong = (id) => {
