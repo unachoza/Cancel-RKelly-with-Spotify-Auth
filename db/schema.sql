@@ -14,6 +14,7 @@ id SERIAL PRIMARY KEY,
 display_name text NOT NULL,
 email text NOT NULL,
 country text NOT NULL,
+time text,
 songs INT REFERENCES songs(id)
 );
 

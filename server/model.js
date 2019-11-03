@@ -17,11 +17,11 @@ canceldatabase.allUsers = () => {
 canceldatabase.addUser = (user) => {
     return db.one(`
     INSERT INTO users
-    (display_name, email, country, songs)
-    VALUES ($1, $2, $3, $4)
+    (display_name, email, country, time, songs)
+    VALUES ($1, $2, $3, $4, $5)
     RETURNING *
     `,
-    [user.display_name, user.email, user.country, user.songs]
+    [user.display_name, user.email, user.country, user.time, user.songs]
     )
 }
 canceldatabase.countUniqueUsers = () => {
