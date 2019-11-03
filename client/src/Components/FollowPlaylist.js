@@ -6,7 +6,8 @@ const   spotifyWebApi = new Spotify()
 
 class FollowPlaylist extends Component{
 
-    createProblemFreePlaylist = () => {
+   async createProblemFreePlaylist(){
+    
         let trackNames = []
         let artistsNamesArr = []
         let artistObjArr = []
@@ -37,36 +38,35 @@ class FollowPlaylist extends Component{
           let CBindexies = indexOfAll(artistsNamesArr, "Chris Brown")
           let MJindexies = indexOfAll(artistsNamesArr, "Michael Jackson")
           const allIndexx =MJindexies.push(RKindexies.push(CBindexies))
-          console.log(allIndexx, uri.length)
+          console.log(allIndexx, uri.length, 'this are mj indexs', MJindexies)
           
        uri.splice(MJindexies, 1)
-         console.log(uri.length, "less")
+         console.log(uri.length, "less", MJindexies)
          let newURI = uri
     //       allIndexx.forEach(index => {
     //  uri.splice(index,1)
     //         })
-    
-        
-        spotifyWebApi.createPlaylist("1224023576", {"name": `${playlistName} (free)`})
-            .then(response => {
-                const newPlaylistID = response.id
-                console.log(newPlaylistID, uri)
-             
-                 
-                  spotifyWebApi.addTracksToPlaylist(newPlaylistID, newURI )
-               
-                console.log(" maybe did it?")
-            }
-           
-        )
+      
+        //  let new = await newPlaylistID 
+        //     console.log(newPlaylistID)
+        spotifyWebApi.createPlaylist("1224023576", {"name": `${playlistName} more`})
+    .then((response) => {
+         const newPlaylistID = response.id
+         console.log(newPlaylistID, uri.length)
+         spotifyWebApi.addTracksToPlaylist(newPlaylistID, newURI )
 
-        })}
+     })
+
+        })
+    }
+        
 
 
     render(){
+        this.createProblemFreePlaylist()
         return(
             <div>
-                {/* {this.createProblemFreePlaylist()} */}
+                <p>follow/unfollow</p>
                 {/* <h1>Identify playlist</h1> */}
                 {/* <h1>copy songs from playlist in array</h1> */}
                 {/* <h1>filter out rkelly, splice</h1> */}
