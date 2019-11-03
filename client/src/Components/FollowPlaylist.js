@@ -9,65 +9,68 @@ class FollowPlaylist extends Component{
         super()
     }
 
-    // createProblemFreePlaylist = () => {
-    //     let trackNames = []
-    //     let artistsNamesArr = []
-    //     let artistObjArr = []
-    //     let uri = []
-    //     let newURI = []
-    //     const playlistID = '37i9dQZF1DX07vKD9l5Yfi'
-    //     const playlistName = "00 hits"
-    //         spotifyWebApi.getPlaylistTracks(playlistID)
+   async createProblemFreePlaylist(){
+    
+        let trackNames = []
+        let artistsNamesArr = []
+        let artistObjArr = []
+        let uri = []
+        const playlistID = '37i9dQZF1DX07vKD9l5Yfi'
+        const playlistName = "00 hits"
+            spotifyWebApi.getPlaylistTracks(playlistID)
             
-    //         .then((response) => {
-    //         console.log(response)
-    //         response.items.map((item) => {
-    //             trackNames.push(item.track.name)
-    //             return trackNames
-    //         })
-    //         response.items.map(item => {
-    //             artistObjArr.push(item.track.artists)
-    //             return artistObjArr
-    //         })
-    //         artistObjArr.map((artist) => {
-    //             artistsNamesArr.push(artist[0].name)
-    //             return artistsNamesArr
-    //         })
-    //         response.items.map((item) => {
-    //             uri.push(item.track.uri)
-    //         });
-    //       const indexOfAll = (arr, val) => arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), [])
-    //       let RKindexies = indexOfAll(artistsNamesArr, "R. Kelly")
-    //       let CBindexies = indexOfAll(artistsNamesArr, "Chris Brown")
-    //       let MJindexies = indexOfAll(artistsNamesArr, "Michael Jackson")
-    //       const allIndexx =MJindexies.push(RKindexies.push(CBindexies))
-    //       console.log(allIndexx, uri.length)
+            .then((response) => {
+            console.log(response)
+            response.items.map((item) => {
+                trackNames.push(item.track.name)
+                return trackNames
+            })
+            response.items.map(item => {
+                artistObjArr.push(item.track.artists)
+                return artistObjArr
+            })
+            artistObjArr.map((artist) => {
+                artistsNamesArr.push(artist[0].name)
+                return artistsNamesArr
+            })
+            response.items.map((item) => {
+                uri.push(item.track.uri)
+            });
+          const indexOfAll = (arr, val) => arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), [])
+          let RKindexies = indexOfAll(artistsNamesArr, "R. Kelly")
+          let CBindexies = indexOfAll(artistsNamesArr, "Chris Brown")
+          let MJindexies = indexOfAll(artistsNamesArr, "Michael Jackson")
+          const allIndexx =MJindexies.push(RKindexies.push(CBindexies))
+          console.log(allIndexx, uri.length, 'this are mj indexs', MJindexies)
           
-    //       //only when URI has length from copying playlist, can splice out problem
-    //       return uri.length? newURI =  uri.splice(MJindexies,1):""
-            // console.log(uri.length, "less")
-    //       allIndexx.forEach(index => {uri.splice(index,1)})
-    
-    
-    //only when there is a newURI array can a problem free playlist be made
-    //  newURI.length? 
-        // spotifyWebApi.createPlaylist("1224023576", {"name": `${playlistName} (free)`})
-        // .then(response => {
-        //     const newPlaylistID = response.id
-        //     console.log(newPlaylistID, uri)
-        //       spotifyWebApi.addTracksToPlaylist(newPlaylistID, newURI )
-       
-        // }) : console.log('no')
-    //  })
-    // }
-    
-        //unfollowUsers : Remove the current user as a follower of one playlist.
+       uri.splice(MJindexies, 1)
+         console.log(uri.length, "less", MJindexies)
+         let newURI = uri
+    //       allIndexx.forEach(index => {
+    //  uri.splice(index,1)
+    //         })
+      
+        //  let new = await newPlaylistID 
+        //     console.log(newPlaylistID)
+        spotifyWebApi.createPlaylist("1224023576", {"name": `${playlistName} more`})
+    .then((response) => {
+         const newPlaylistID = response.id
+         console.log(newPlaylistID, uri.length)
+         spotifyWebApi.addTracksToPlaylist(newPlaylistID, newURI )
+
+     })
+
+        })
+    }
+        
+
 
 
     render(){
+        this.createProblemFreePlaylist()
         return(
             <div>
-                {/* {this.createProblemFreePlaylist()} */}
+                <p>follow/unfollow</p>
                 {/* <h1>Identify playlist</h1> */}
                 {/* <h1>copy songs from playlist in array</h1> */}
                 {/* <h1>filter out rkelly, splice</h1> */}

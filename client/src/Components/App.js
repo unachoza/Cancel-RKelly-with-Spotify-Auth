@@ -25,9 +25,14 @@ class App extends Component {
             email: "",
             country: ""
         }
+     
         if (token) {
-            spotifyWebApi.setAccessToken(token)
+           spotifyWebApi.setAccessToken(token)
             this.getUserInfo()
+
+           
+
+
         }
     }
 
@@ -53,24 +58,30 @@ class App extends Component {
                 })
             })
             .then(console.log("state", this.state))
+
+            .then(() => {
+                this.addUser()})
+        
     }
     //add User to database
-    // addUser = () => {
-    //     const time = new Date().toString()
-    //     const {display_name, email, country} = this.state
-    //     if(display_name){
-    //         axios.post('http://localhost:3001/db/users', 
-    //         {
-    //             display_name,
-    //             email,
-    //             country, 
-    //             time
-    //         })
-    //         .then((data) => {
-    //             console.log('success', data)
-    //         })
-    //     }
-    // }
+    addUser = () => {
+        
+        const time = new Date().toString()
+        console.log(time)
+        const {display_name, email, country} = this.state
+        if(display_name){
+            axios.post('http://localhost:3001/db/users', 
+            {
+                display_name,
+                email,
+                country, 
+                time
+            })
+            .then((data) => {
+                console.log('success', data)
+            })
+        }
+        
 
     //getting list of User's Playlists: limit 50 
     getPlaylists() {
@@ -124,9 +135,10 @@ class App extends Component {
             
                 <div className=
                     {loggedIn ? "loggedIn" : "loggedOut"}>
-                    <Introduction loggedIn={loggedIn}/>
-                {/* <UsageStats /> */}
-                {/* <FollowPlaylist /> */}
+
+                <Introduction loggedIn={loggedIn}/>
+                <UsageStats />
+                <FollowPlaylist />
                  {!loggedIn ?
                     <a href="http://localhost:8888">
                         <button>Login Spotify</button>
