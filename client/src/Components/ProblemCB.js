@@ -13,18 +13,18 @@ class ProblemCB extends Component{
        )
    } 
    removeSongs(playlistID, uri) { 
-    const {CBindexies} = this.props
-    if(CBindexies.length >1 ){
-      const multipleSongs = CBindexies.map(index => uri[index])
+    const {iofCBsong} = this.props
+    if(iofCBsong.length >1 ){
+      const multipleSongs = iofCBsong.map(index => uri[index])
     multipleSongs.map(index => spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": index}] ))
   }
-  spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri[this.props.CBindexies] }])
+  spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri[this.props.iofCBsong] }])
   }
     
     render() {
-        const { chrisBrownVerdict, uri, playlistId } = this.props
+        const { CBSongTitle, uri, playlistId } = this.props
         
-              let songs = chrisBrownVerdict.map((song, i) => {
+              let songs = CBSongTitle.map((song, i) => {
                 return <div style={{textAlign: "left"}} key={i}>{song} <br></br><span style={{color: 'white'}}>Chris Brown</span> </div> 
              })
         return (

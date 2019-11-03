@@ -6,20 +6,20 @@ const spotifyWebApi = new Spotify()
 
 class ProblemRK extends Component{
       removeSongs(playlistID, uri) { 
-          const {RKindexies} = this.props
-          if(RKindexies.length >1 ){
-            const multipleSongs = RKindexies.map(index => uri[index])
+          const {iofRKsong} = this.props
+          if(iofRKsong.length >1 ){
+            const multipleSongs = iofRKsong.map(index => uri[index])
           multipleSongs.map(index => spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": index}])
           )
         }
-        spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri[this.props.RKindexies] }])
+        spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri[this.props.iofRKsong] }])
         }
 
 
     render() {
-        const { rKellyVerdict, uri, playlistId } = this.props
+        const { RKSongTitle, uri, playlistId } = this.props
         
-           let songs = rKellyVerdict.map((song, i) => {
+           let songs = RKSongTitle.map((song, i) => {
           return <div style={{textAlign: "left"}} key={i}>{song} <br></br><span style={{color: 'white'}}>R. Kelly</span></div> 
      })
         return (

@@ -17,13 +17,14 @@ class App extends Component {
         const token = params.access_token
         this.state = {
             loggedIn: token ? true : false,
-            playlistNames: "",
+            playListObject: "",
             trackNamesArr: [],
             offsetNum: 0,
             items: [],
             display_name: "",
             email: "",
-            country: ""
+            country: "",
+            id: ''
         }
      
         if (token) {
@@ -54,7 +55,8 @@ class App extends Component {
                 this.setState({
                     display_name: response.display_name,
                     email: response.email,
-                    country: response.country
+                    country: response.country,
+                    id: response.id
                 })
             })
             .then(console.log("state", this.state))
@@ -81,19 +83,19 @@ class App extends Component {
                 console.log('success', data)
             })
         }
-        
+    }   
 
     //getting list of User's Playlists: limit 50 
     getPlaylists() {
         console.log(this.state)
-        this.setState({items: [], playlistNames: []})
+        this.setState({items: [], playListObject: []})
         this.increaseOffset()
         // {limit: 50, offset: 0}
         console.log('ofset inside func', this.state.offsetNum)
-        spotifyWebApi.getUserPlaylists(this.state.id, {limit: 2, offset: this.state.offsetNum})
+        spotifyWebApi.getUserPlaylists(this.state.id, {limit: 20, offset: this.state.offsetNum})
             .then((response) => {
                 console.log(response.items)
-                this.setState({ playlistNames: response.items, total: response.total })
+                this.setState({ playListObject: response.items, total: response.total })
             })
             console.log('this is the total?', this.state.total)
     }
@@ -101,7 +103,7 @@ class App extends Component {
     increaseOffset() {
         console.log('offset num ', this.state)
             this.setState(state => {
-            return { offsetNum: state.offsetNum + 10 }
+            return { offsetNum: state.offsetNum + 20 }
          })
         if (this.state.total) {
            this.stopClickingNext()
@@ -126,7 +128,7 @@ class App extends Component {
 
     render() {
        
-        const {loggedIn, offsetNum, total, playlistNames, items, trackNamesArr, display_name} = this.state
+        const {loggedIn, offsetNum, total, playListObject, items, trackNamesArr, display_name} = this.state
         return (
             <div className="home">
                 {/* {display_name? this.addUser() : ''} */}
@@ -150,9 +152,9 @@ class App extends Component {
                     <button className={offsetNum > (total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>NEXT 10 PLAYLISTS</button> 
                     : " "}
                 
-                {playlistNames && trackNamesArr &&
+                {playListObject && trackNamesArr &&
                     <PlaylistList
-                    usersPlaylists={playlistNames}
+                    usersPlaylists={playListObject}
                     items={items}
                     />} 
                 {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}

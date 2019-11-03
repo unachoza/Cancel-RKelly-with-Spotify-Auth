@@ -46,14 +46,9 @@ class FollowPlaylist extends Component{
        uri.splice(MJindexies, 1)
          console.log(uri.length, "less", MJindexies)
          let newURI = uri
-    //       allIndexx.forEach(index => {
-    //  uri.splice(index,1)
-    //         })
-      
-        //  let new = await newPlaylistID 
-        //     console.log(newPlaylistID)
+    
         spotifyWebApi.createPlaylist("1224023576", {"name": `${playlistName} more`})
-    .then((response) => {
+        .then((response) => {
          const newPlaylistID = response.id
          console.log(newPlaylistID, uri.length)
          spotifyWebApi.addTracksToPlaylist(newPlaylistID, newURI )
@@ -67,7 +62,7 @@ class FollowPlaylist extends Component{
 
 
     render(){
-        this.createProblemFreePlaylist()
+        // this.createProblemFreePlaylist()
         return(
             <div>
                 <p>follow/unfollow</p>

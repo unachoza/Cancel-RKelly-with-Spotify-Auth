@@ -10,19 +10,19 @@ import FollowPlaylist from './FollowPlaylist'
 const   spotifyWebApi = new Spotify()
 
 class PlaylistSingle extends Component {
-        constructor() {
-            super()
+        constructor(props) {
+            super(props)
             this.state = {
                 showSongs: true,
                 items: [],
                 trackNames: [],
                 artistsNamesArr: [],
-                rKellyVerdict: [],
-                chrisBrownVerdict: [],
-                mJVerdict: [], 
-                MJindexies: [],
-                RKindexies: [],
-                CBindexies: [],
+                RKSongTitle: [],
+                CBSongTitle: [],
+                MJsongTitle: [], 
+                iofMJsong: [],
+                iofRKsong: [],
+                iofCBsong: [],
                 length: [], 
                 uri: []
             }
@@ -72,32 +72,33 @@ class PlaylistSingle extends Component {
     indexOfAll = (arr, val) => arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), [])
 
     searchForSongs(artistsNamesArr, trackNames) {
-        let rKellyVerdict = []
-        let chrisBrownVerdict = []
-        let mJVerdict = []
+        let RKSongTitle = []
+        let CBSongTitle = []
+        let MJsongTitle = []
 
-        let RKindexies = this.indexOfAll(artistsNamesArr, "R. Kelly")
-        let CBindexies = this.indexOfAll(artistsNamesArr, "Chris Brown")
-        let MJindexies = this.indexOfAll(artistsNamesArr, "Michael Jackson")
-        for (let i = 0; i < CBindexies.length; i++){
-            chrisBrownVerdict.push(trackNames[CBindexies[i]])
+        let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly")
+        let iofCBsong = this.indexOfAll(artistsNamesArr, "Chris Brown")
+        let iofMJsong = this.indexOfAll(artistsNamesArr, "Michael Jackson")
+        for (let i = 0; i < iofCBsong.length; i++){
+            CBSongTitle.push(trackNames[iofCBsong[i]])
         }
-        for (let i = 0; i < RKindexies.length; i++){
-            rKellyVerdict.push(trackNames[RKindexies[i]])
+        for (let i = 0; i < iofRKsong.length; i++){
+            RKSongTitle.push(trackNames[iofRKsong[i]])
         }
-        for (let i = 0; i < MJindexies.length; i++){
-            mJVerdict.push(trackNames[MJindexies[i]])
+        for (let i = 0; i < iofMJsong.length; i++){
+            MJsongTitle.push(trackNames[iofMJsong[i]])
         }
-        this.setState({ chrisBrownVerdict, rKellyVerdict, mJVerdict , MJindexies, RKindexies, CBindexies})
-        this.problemLength(chrisBrownVerdict, rKellyVerdict, mJVerdict)
+        this.setState({ CBSongTitle, RKSongTitle, MJsongTitle , iofMJsong, iofRKsong, iofCBsong})
+        this.problemLength(CBSongTitle, RKSongTitle, MJsongTitle)
     }
 
-    problemLength(chrisBrownVerdict, rKellyVerdict, mJVerdict) {
-        const length = chrisBrownVerdict.length + rKellyVerdict.length + mJVerdict.length
+    problemLength(CBSongTitle, RKSongTitle, MJsongTitle) {
+        console.log(MJsongTitle, "MJsongTitle is the song" , this.state, "state")
+        const length = CBSongTitle.length + RKSongTitle.length + MJsongTitle.length
         this.setState({length})
     }
     render(){
-        const { chrisBrownVerdict, rKellyVerdict, mJVerdict, showSongs, items, length, uri , MJindexies, CBindexies, RKindexies } = this.state
+        const { CBSongTitle, RKSongTitle, MJsongTitle, showSongs, items, length, uri , iofMJsong, iofCBsong, iofRKsong } = this.state
         const {playlistInfo} = this.props
         let buttonText = showSongs? "CHECK SONGS" : "CLOSE SONGS" 
         return (
@@ -108,12 +109,12 @@ class PlaylistSingle extends Component {
                 {playlistInfo.name} <br></br>
                  <button onClick={(e) => this.listTracksFromPlaylists( playlistInfo.id)}>{buttonText}</button>
                     {length > 0 && <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>This is a problem:</div>}
-                {chrisBrownVerdict.length >  0 &&
-                    <ProblemCB chrisBrownVerdict={chrisBrownVerdict} CBindexies={CBindexies} playlistId={playlistInfo.id} uri={uri} /> }
-                    {rKellyVerdict.length >  0 &&
-                    <ProblemRK rKellyVerdict={rKellyVerdict} RKindexies={RKindexies} playlistId={playlistInfo.id} uri={uri}  />}
-                {mJVerdict.length >  0 &&
-                    <ProblemMJ mJVerdict={mJVerdict} MJindexies={MJindexies} playlistId={playlistInfo.id} uri={uri}  /> }
+                {CBSongTitle.length >  0 &&
+                    <ProblemCB CBSongTitle={CBSongTitle} iofCBsong={iofCBsong} playlistId={playlistInfo.id} uri={uri} /> }
+                    {RKSongTitle.length >  0 &&
+                    <ProblemRK RKSongTitle={RKSongTitle} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri}  />}
+                {MJsongTitle.length >  0 &&
+                    <ProblemMJ MJsongTitle={MJsongTitle} iofMJsong={iofMJsong} playlistId={playlistInfo.id} uri={uri}  /> }
                     {length > 0 && <hr></hr>}
                     {items && <Songs items={items} showSongs={showSongs} />}
 
