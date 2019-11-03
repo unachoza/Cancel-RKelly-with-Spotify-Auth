@@ -24,14 +24,14 @@ class App extends Component {
             display_name: "",
             email: "",
             country: ""
-            
-            
         }
        
-
+   
+     
         if (token) {
-            spotifyWebApi.setAccessToken(token)
+           spotifyWebApi.setAccessToken(token)
             this.getUserInfo()
+           
 
         }
     }
@@ -66,6 +66,8 @@ class App extends Component {
                 })
             })
             .then(console.log("state", this.state))
+            .then(() => {
+                this.addUser()})
         
     }
     //add User to database
@@ -73,7 +75,7 @@ class App extends Component {
         
         const time = new Date().toString()
         console.log(time)
-        const {display_name, email, country, loggedIn} = this.state
+        const {display_name, email, country} = this.state
         if(display_name){
             axios.post('http://localhost:3001/db/users', 
             {
@@ -137,13 +139,13 @@ class App extends Component {
         const {loggedIn, offsetNum, total, playlistNames, items, trackNamesArr, display_name} = this.state
         return (
             <div className="home">
-                {display_name? this.addUser() : ''}
+                {/* {display_name? this.addUser() : ''} */}
                 <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
                 <br></br>
             
                 <div className=
                     {loggedIn ? "loggedIn" : "loggedOut"}>
-                    <Introduction loggedIn={loggedIn}/>
+                <Introduction loggedIn={loggedIn}/>
                 <UsageStats />
                 <FollowPlaylist />
                  {!loggedIn ?
