@@ -88,16 +88,29 @@ class App extends Component {
     //getting list of User's Playlists: limit 50 
     getPlaylists() {
         console.log(this.state)
+        let playlistOwnerId = []
         this.setState({items: [], playListObject: []})
         this.increaseOffset()
         // {limit: 50, offset: 0}
-        console.log('ofset inside func', this.state.offsetNum)
+        console.log('ofset inside func', this.state.id)
         spotifyWebApi.getUserPlaylists(this.state.id, {limit: 20, offset: this.state.offsetNum})
             .then((response) => {
                 console.log(response.items)
                 this.setState({ playListObject: response.items, total: response.total })
             })
-            console.log('this is the total?', this.state.total)
+            .then(() => {
+
+                this.state.playListObject.map((item) => {
+                    playlistOwnerId.push(item.owner.id)
+                })
+                return playlistOwnerId
+            })
+            .then(() => {
+                this.setState({playlistOwnerId})
+            })
+            .then(() => {
+                console.log(this.state.playlistOwnerId)
+            })
     }
 
     increaseOffset() {
@@ -128,7 +141,7 @@ class App extends Component {
 
     render() {
        
-        const {loggedIn, offsetNum, total, playListObject, items, trackNamesArr, display_name} = this.state
+        const {loggedIn, offsetNum, total, playListObject, items, trackNamesArr, playlistOwnerId, id} = this.state
         return (
             <div className="home">
                 {/* {display_name? this.addUser() : ''} */}
@@ -155,7 +168,9 @@ class App extends Component {
                 {playListObject && trackNamesArr &&
                     <PlaylistList
                     usersPlaylists={playListObject}
+                    playlistOwnerId={playlistOwnerId}
                     items={items}
+                    CurrentUserid={id}
                     />} 
                 {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}
 

@@ -5,6 +5,7 @@ import Songs from './Songs'
 import ProblemRK from './ProblemRK'
 import ProblemCB from './ProblemCB'
 import ProblemMJ from './ProblemMJ'
+import UnfollowPlaylist from './UnfollowPlaylist'
 import FollowPlaylist from './FollowPlaylist'
 
 const   spotifyWebApi = new Spotify()
@@ -24,7 +25,8 @@ class PlaylistSingle extends Component {
                 iofRKsong: [],
                 iofCBsong: [],
                 length: [], 
-                uri: []
+                uri: [],
+                publicPlaylistArr: []
             }
             // this.removeSongs = this.removeSongs.bind(this)
         }
@@ -75,10 +77,18 @@ class PlaylistSingle extends Component {
         let RKSongTitle = []
         let CBSongTitle = []
         let MJsongTitle = []
+        let publicPlaylistArr = []
 
         let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly")
         let iofCBsong = this.indexOfAll(artistsNamesArr, "Chris Brown")
         let iofMJsong = this.indexOfAll(artistsNamesArr, "Michael Jackson")
+        //checking if the playlist is public
+        iofRKsong.map( index => {
+            !this.props.CurrentUserid[index] === this.props.playlistOwnerId[index] &&
+            publicPlaylistArr.push(index)
+        })
+
+        console.log(this.props, 'this is props', this.props.CurrentUserid, 'current user id')
         for (let i = 0; i < iofCBsong.length; i++){
             CBSongTitle.push(trackNames[iofCBsong[i]])
         }
@@ -88,7 +98,7 @@ class PlaylistSingle extends Component {
         for (let i = 0; i < iofMJsong.length; i++){
             MJsongTitle.push(trackNames[iofMJsong[i]])
         }
-        this.setState({ CBSongTitle, RKSongTitle, MJsongTitle , iofMJsong, iofRKsong, iofCBsong})
+        this.setState({ CBSongTitle, RKSongTitle, MJsongTitle , iofMJsong, iofRKsong, iofCBsong, publicPlaylistArr})
         this.problemLength(CBSongTitle, RKSongTitle, MJsongTitle)
     }
 
@@ -98,7 +108,7 @@ class PlaylistSingle extends Component {
         this.setState({length})
     }
     render(){
-        const { CBSongTitle, RKSongTitle, MJsongTitle, showSongs, items, length, uri , iofMJsong, iofCBsong, iofRKsong } = this.state
+        const { CBSongTitle, RKSongTitle, MJsongTitle, showSongs, items, length, uri , iofMJsong, iofCBsong, iofRKsong , publicPlaylistArr} = this.state
         const {playlistInfo} = this.props
         let buttonText = showSongs? "CHECK SONGS" : "CLOSE SONGS" 
         return (
@@ -112,9 +122,10 @@ class PlaylistSingle extends Component {
                 {CBSongTitle.length >  0 &&
                     <ProblemCB CBSongTitle={CBSongTitle} iofCBsong={iofCBsong} playlistId={playlistInfo.id} uri={uri} /> }
                     {RKSongTitle.length >  0 &&
-                    <ProblemRK RKSongTitle={RKSongTitle} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri}  />}
+                    <ProblemRK RKSongTitle={RKSongTitle} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri} publicPlaylistArr={publicPlaylistArr} />}
                 {MJsongTitle.length >  0 &&
                     <ProblemMJ MJsongTitle={MJsongTitle} iofMJsong={iofMJsong} playlistId={playlistInfo.id} uri={uri}  /> }
+                    {publicPlaylistArr.length && <UnfollowPlaylist publicPlaylistArr={publicPlaylistArr} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri}/>}
                     {length > 0 && <hr></hr>}
                     {items && <Songs items={items} showSongs={showSongs} />}
 
