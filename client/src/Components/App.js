@@ -62,7 +62,8 @@ class App extends Component {
             .then(console.log("state", this.state))
 
             .then(() => {
-                this.addUser()})
+                this.addUser()
+                console.log('added')})
         
     }
     //add User to database
@@ -153,6 +154,7 @@ class App extends Component {
 
                 <Introduction loggedIn={loggedIn}/>
                 <UsageStats />
+
                 <FollowPlaylist />
                  {!loggedIn ?
                     <a href="http://localhost:8888">

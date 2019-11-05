@@ -86,6 +86,7 @@ class PlaylistSingle extends Component {
         iofRKsong.map( index => {
             !this.props.CurrentUserid[index] === this.props.playlistOwnerId[index] &&
             publicPlaylistArr.push(index)
+            console.log(false)
         })
 
         console.log(this.props, 'this is props', this.props.CurrentUserid, 'current user id')
