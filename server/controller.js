@@ -68,7 +68,7 @@ cancelController.updateSong = (req, res) => {
     .then(data => {
         res.json({
             message: " song was changed to deleted ",
-            // data: data
+            data: data
         })
     })
     .catch(err => {

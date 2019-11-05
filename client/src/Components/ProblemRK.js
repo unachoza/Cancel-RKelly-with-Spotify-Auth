@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import '../App.css'
 import Spotify from 'spotify-web-api-js'
+import axios from 'axios'
 
 const spotifyWebApi = new Spotify()
 
@@ -11,8 +12,15 @@ class ProblemRK extends Component{
             const multipleSongs = iofRKsong.map(index => uri[index])
           multipleSongs.map(index => spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": index}])
           )
+         
         }
         spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri[this.props.iofRKsong] }])
+        axios.put('http://localhost:3001/db/songs/${this.props.match.params.id}', {
+            deleted: true
+        })
+        .then(res => {
+            console.log(res.data.data)
+        })
         }
 
 

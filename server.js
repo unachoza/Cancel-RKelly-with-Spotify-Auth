@@ -19,7 +19,7 @@ server.get('/', (req, res) => {
     res.send('hello world; you have connected')
 })
 
-
+// app.use(cors({ origin: 'http://localhost3001/db:3030', credentials: true }))
 // server.use( (req, res, next)=> {
 //     /*var err = new Error('Not Found');
 //      err.status = 404;

@@ -7,6 +7,7 @@ import ProblemCB from './ProblemCB'
 import ProblemMJ from './ProblemMJ'
 import UnfollowPlaylist from './UnfollowPlaylist'
 import FollowPlaylist from './FollowPlaylist'
+import axios from 'axios'
 
 const   spotifyWebApi = new Spotify()
 
@@ -101,6 +102,12 @@ class PlaylistSingle extends Component {
         }
         this.setState({ CBSongTitle, RKSongTitle, MJsongTitle , iofMJsong, iofRKsong, iofCBsong, publicPlaylistArr})
         this.problemLength(CBSongTitle, RKSongTitle, MJsongTitle)
+        axios.post('http://localhost:3001/db/songs', {
+            name: trackNames[iofRKsong],
+            artist: 'R Kelly',
+            deleted: false
+        })
+        .then(console.log('might have posted'))
     }
 
     problemLength(CBSongTitle, RKSongTitle, MJsongTitle) {
