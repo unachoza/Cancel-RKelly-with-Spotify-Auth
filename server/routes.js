@@ -17,7 +17,7 @@ router.get('/', cancelController.allUsers)
 router.post('/users', cancelController.addUser)
 router.post('/songs/', cancelController.addSong)
 router.get('/deletedsongs', cancelController.countDeletedSongs)
-router.put('/songs/', cancelController.updateSong)
+router.put('/songs/:id', cancelController.updateSong)
 router.get('/users/unique', cancelController.countUniqueUsers)
 
 module.exports = router

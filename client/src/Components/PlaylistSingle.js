@@ -102,12 +102,42 @@ class PlaylistSingle extends Component {
         }
         this.setState({ CBSongTitle, RKSongTitle, MJsongTitle , iofMJsong, iofRKsong, iofCBsong, publicPlaylistArr})
         this.problemLength(CBSongTitle, RKSongTitle, MJsongTitle)
+        //needs to be somewhere else post only if i of RK has length
         axios.post('http://localhost:3001/db/songs', {
             name: trackNames[iofRKsong],
             artist: 'R Kelly',
             deleted: false
+    })
+    .then((res) => {
+        console.log(res.data.data.id)
+        this.setState({
+            songRouteID: res.data.data.id
         })
-        .then(console.log('might have posted'))
+
+    })
+    .then(()=> {
+        console.log(this.state)
+    })
+        
+       
+    
+        // .then(console.log('might have posted'))
+    }
+    postProblems(){
+        const {iofRKsong, trackNames} = this.state
+        iofRKsong.length &&
+            axios.post('http://localhost:3001/db/songs', {
+                name: trackNames[iofRKsong],
+                artist: 'R Kelly',
+                deleted: false
+        })
+        .then((res) => {
+            // this.setState({
+            // songRouteID: res.data.data.
+
+            // })
+            console.log(res)
+        })
     }
 
     problemLength(CBSongTitle, RKSongTitle, MJsongTitle) {
@@ -116,6 +146,7 @@ class PlaylistSingle extends Component {
         this.setState({length})
     }
     render(){
+        // this.postProblems()
         const { CBSongTitle, RKSongTitle, MJsongTitle, showSongs, items, length, uri , iofMJsong, iofCBsong, iofRKsong , publicPlaylistArr} = this.state
         const {playlistInfo} = this.props
         let buttonText = showSongs? "CHECK SONGS" : "CLOSE SONGS" 
@@ -130,12 +161,14 @@ class PlaylistSingle extends Component {
                 {CBSongTitle.length >  0 &&
                     <ProblemCB CBSongTitle={CBSongTitle} iofCBsong={iofCBsong} playlistId={playlistInfo.id} uri={uri} /> }
                     {RKSongTitle.length >  0 &&
-                    <ProblemRK RKSongTitle={RKSongTitle} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri} publicPlaylistArr={publicPlaylistArr} />}
+                    <ProblemRK songRouteID={this.state.songRouteID} RKSongTitle={RKSongTitle} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri} publicPlaylistArr={publicPlaylistArr}
+                    />}
                 {MJsongTitle.length >  0 &&
                     <ProblemMJ MJsongTitle={MJsongTitle} iofMJsong={iofMJsong} playlistId={playlistInfo.id} uri={uri}  /> }
                     {publicPlaylistArr.length && <UnfollowPlaylist publicPlaylistArr={publicPlaylistArr} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri}/>}
                     {length > 0 && <hr></hr>}
                     {items && <Songs items={items} showSongs={showSongs} />}
+                    {/* RKSongTitle={RKSongTitle} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri} publicPlaylistArr={publicPlaylistArr} */}
 
             </div>
         </div>

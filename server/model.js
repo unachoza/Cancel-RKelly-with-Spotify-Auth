@@ -51,10 +51,11 @@ canceldatabase.countDeletedSongs = () => {
 }
 
 canceldatabase.updateSong = (id) => {
+    console.log(id)
     return db.one(`
     UPDATE songs 
     SET deleted = TRUE
-    WHERE id = 16
+    WHERE id = $1
     `,
     [id]
     )

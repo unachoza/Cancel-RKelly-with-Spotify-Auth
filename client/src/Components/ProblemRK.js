@@ -7,7 +7,8 @@ const spotifyWebApi = new Spotify()
 
 class ProblemRK extends Component{
       removeSongs(playlistID, uri) { 
-          const {iofRKsong} = this.props
+          const {iofRKsong, songRouteID} = this.props
+          console.log(this.props, "how did it go")
           if(iofRKsong.length >1 ){
             const multipleSongs = iofRKsong.map(index => uri[index])
           multipleSongs.map(index => spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": index}])
@@ -15,7 +16,7 @@ class ProblemRK extends Component{
          
         }
         spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri[this.props.iofRKsong] }])
-        axios.put('http://localhost:3001/db/songs/', {
+        axios.put(`http://localhost:3001/db/songs/${songRouteID}`, {
             deleted: true
         })
         .then(res => {
