@@ -15,11 +15,11 @@ class ProblemRK extends Component{
          
         }
         spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": uri[this.props.iofRKsong] }])
-        axios.put('http://localhost:3001/db/songs/${this.props.match.params.id}', {
+        axios.put('http://localhost:3001/db/songs/', {
             deleted: true
         })
         .then(res => {
-            console.log(res.data.data)
+            console.log(res.data.data, 'might have delet43ed')
         })
         }
 

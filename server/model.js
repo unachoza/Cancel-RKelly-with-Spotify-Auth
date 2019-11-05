@@ -54,7 +54,7 @@ canceldatabase.updateSong = (id) => {
     return db.one(`
     UPDATE songs 
     SET deleted = TRUE
-    WHERE id = $1
+    WHERE id = 16
     `,
     [id]
     )

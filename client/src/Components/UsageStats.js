@@ -29,7 +29,7 @@ this.songsRemovedCounter()
         axios.get('localhost:3001/db/deletedsongs')
         .then(res => {
             console.log(res)
-            // this.setState({deletedSongsCount: res})
+            this.setState({deletedSongsCount: res})
         })
         return this.state.deletedSongsCount
 
