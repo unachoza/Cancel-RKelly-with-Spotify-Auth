@@ -119,26 +119,13 @@ class PlaylistSingle extends Component {
     .then(() => {
        if(iofRKsong.length > 1){  
         iofRKsong.forEach(i => {
-            console.log(i)
             axios.post('http://localhost:3001/db/songs', {
                 name: trackNames[i],
                 artist: 'R Kelly',
                 deleted: false
         })
-        .then((res) => {
-            console.log(res.data.data.id)
-            // this.setState({
-            //     songRouteID: res.data.data.id
-            // })
-    
-        })   
-            
         });
     }
-    })
-    
-    .then(()=> {
-        console.log(this.state)
     })
     }
     
@@ -159,13 +146,27 @@ class PlaylistSingle extends Component {
             <br></br>
             <div className="songs-in-playlist-container-open">
                 {playlistInfo.name} <br></br>
-                 <button onClick={(e) => this.listTracksFromPlaylists( playlistInfo.id)}>{buttonText}</button>
-                    {length > 0 && <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>This is a problem:</div>}
+
+
+                 <button onClick={(e) => this.listTracksFromPlaylists( playlistInfo.id)}>
+
+                 {buttonText}
+
+                 </button>
+
+                    {length > 0 && <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>
+                        This is a problem:</div>}
+
+                
                 {CBSongTitle.length >  0 &&
+                    
                     <ProblemCB CBSongTitle={CBSongTitle} iofCBsong={iofCBsong} playlistId={playlistInfo.id} uri={uri} /> }
+
                     {RKSongTitle.length >  0 &&
+                    
                     <ProblemRK songRouteID={this.state.songRouteID} RKSongTitle={RKSongTitle} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri} publicPlaylistArr={publicPlaylistArr}
                     />}
+                    
                 {MJsongTitle.length >  0 &&
                     <ProblemMJ MJsongTitle={MJsongTitle} iofMJsong={iofMJsong} playlistId={playlistInfo.id} uri={uri}  /> }
                     {publicPlaylistArr.length && <UnfollowPlaylist publicPlaylistArr={publicPlaylistArr} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri}/>}

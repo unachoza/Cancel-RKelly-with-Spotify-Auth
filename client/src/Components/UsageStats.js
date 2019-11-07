@@ -37,7 +37,7 @@ this.songsRemovedCounter()
     render() {
         const {userCount, deletedSongsCount} = this.state        
         return (
-            <div>
+            <div style={{marginBottom: "40px"}}>
                <p>{userCount} People have used this App </p> 
                 <p>{deletedSongsCount} Songs have been removed</p>
             </div>

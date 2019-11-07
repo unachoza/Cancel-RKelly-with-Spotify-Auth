@@ -10,7 +10,16 @@ div, button {
  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   
 }
-
+a {
+  display: flex;
+  text-align: center;
+  margin-bottom: 5px;
+  text-decoration: none;
+  color:rgb(126, 121, 121)
+}
+a:hover{
+  color: green
+}
 h1{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 45px;
@@ -19,7 +28,8 @@ h1{
 p {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 20px;
-  margin: auto;
+  text-align: justify;
+  text-justify: inter-word;
   width: 70%;
   color: rgb(126, 121, 121)
 
@@ -130,7 +140,7 @@ visibility: visible ;
   
 }
 .loggedOut {
-  padding: 15%;
+  padding: 8%;
 }
 #remove-button {
   width: 100px;

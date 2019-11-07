@@ -39,21 +39,21 @@ class ProblemRK extends Component{
 
 deleteAnimation = () => {
     return this.state.deleteing ?
- "animated zoomOut"
- : ""
-}
+        "animated zoomOut delay-2s"
+        : ""
+    }
 
     render() {
         const { RKSongTitle, uri, playlistId } = this.props
         const {deleteing } = this.state
         
            let songs = RKSongTitle.map((song, i) => {
-          return <div  className={this.deleteAnimation()} style={{textAlign: "left"}} key={i}>{song}  <br></br><span style={{color: 'white'}}>R. Kelly</span></div> 
+          return <div   style={{textAlign: "left"}} key={i}>{song}  <br></br><span style={{color: 'white'}}>R. Kelly</span></div> 
      })
         return (
-            <div className={this.deleteAnimation()} style={{ fontSize: "20px", fontWeight: "300" }}>
+            <div  style={{ fontSize: "20px", fontWeight: "300" }}>
                 {songs}
-<button id="remove-button"  className="animated zoomOut" onClick={(e) => this.removeSongs(playlistId, uri)}>Remove</button>
+<button id="remove-button"   onClick={(e) => this.removeSongs(playlistId, uri)}>Remove</button>
             </div>
         )
     }
@@ -63,3 +63,11 @@ deleteAnimation = () => {
 
 
 export default ProblemRK
+
+
+//singular function to check all playlist
+//user feedback on deleting songs
+//only post one user per session 
+//post songs when there are multiple problems in playlist 
+//close song button confusing
+//rows of playlist need to maintain horizontal lines when songs open 

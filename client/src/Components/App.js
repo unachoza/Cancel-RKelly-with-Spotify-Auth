@@ -5,6 +5,7 @@ import PlaylistList from './PlaylistsList';
 import Introduction from './Introduction';
 import UsageStats from './UsageStats'
 import FollowPlaylist from './FollowPlaylist';
+import AboutMe from './AboutMe'
 import axios from 'axios'
 
 
@@ -140,22 +141,78 @@ class App extends Component {
     }
     
 
+    //Search ALL Playlist for Problems; Diplay Playlist Names with Problems
+    searchAllPlaylists(artistsNamesArr, trackNames) {
+        let RKSongTitle = []
+        let CBSongTitle = []
+        let MJsongTitle = []
+        let publicPlaylistArr = []
+
+        let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly")
+        let iofCBsong = this.indexOfAll(artistsNamesArr, "Chris Brown")
+        let iofMJsong = this.indexOfAll(artistsNamesArr, "Michael Jackson")
+        //checking if the playlist is public
+        iofRKsong.map( index => {
+            !this.props.CurrentUserid[index] === this.props.playlistOwnerId[index] &&
+            publicPlaylistArr.push(index)
+            console.log(false)
+        })
+
+        console.log(this.props, 'this is props', this.props.CurrentUserid, 'current user id')
+        for (let i = 0; i < iofCBsong.length; i++){
+            CBSongTitle.push(trackNames[iofCBsong[i]])
+        }
+        for (let i = 0; i < iofRKsong.length; i++){
+            RKSongTitle.push(trackNames[iofRKsong[i]])
+        }
+        for (let i = 0; i < iofMJsong.length; i++){
+            MJsongTitle.push(trackNames[iofMJsong[i]])
+        }
+        this.setState({ CBSongTitle, RKSongTitle, MJsongTitle , iofMJsong, iofRKsong, iofCBsong, publicPlaylistArr})
+        this.problemLength(CBSongTitle, RKSongTitle, MJsongTitle)
+        //needs to be somewhere else post only if i of RK has length
+        axios.post('http://localhost:3001/db/songs', {
+            name: trackNames[iofRKsong],
+            artist: 'R Kelly',
+            deleted: false
+    })
+    .then((res) => {
+        console.log(res.data.data.id)
+        this.setState({
+            songRouteID: res.data.data.id
+        })
+
+    })
+    .then(() => {
+       if(iofRKsong.length > 1){  
+        iofRKsong.forEach(i => {
+            axios.post('http://localhost:3001/db/songs', {
+                name: trackNames[i],
+                artist: 'R Kelly',
+                deleted: false
+        })
+        });
+    }
+    })
+    }
+    
+
     render() {
        
         const {loggedIn, offsetNum, total, playListObject, items, trackNamesArr, playlistOwnerId, id} = this.state
         return (
             <div className="home">
+                <img style={{height: "300px", float: "right"}}src="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/40277228_10216026287943858_1264951152382836736_o.jpg?_nc_cat=106&_nc_oc=AQlLeViBKfP1gdqsiRHwlPRL1_klKVgsmh3Wpic977FBqw_C8t7dEYVIW5iQOllukPs&_nc_ht=scontent-lga3-1.xx&oh=74c429cebe0022f28a2c49b8d08bc5ae&oe=5E5280AE" alt="img of app creator"/>
                 {/* {display_name? this.addUser() : ''} */}
                 <img style={{ height: "80px", float: "left" }} src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png" alt="spotify logo" />
                 <br></br>
             
                 <div className=
                     {loggedIn ? "loggedIn" : "loggedOut"}>
-
                 <Introduction loggedIn={loggedIn}/>
                 <UsageStats />
 
-                <FollowPlaylist />
+                {/* <FollowPlaylist /> */}
                  {!loggedIn ?
                     <a href="http://localhost:8888">
                         <button>Login Spotify</button>
