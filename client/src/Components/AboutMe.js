@@ -3,14 +3,15 @@ import "../App.css"
 
 const AboutMe = () => {
     return (
-        <div>
-            
-            <p>
-               Arianna Choza is a FullStack Engineer who is driven to design a world that promotes equality by creating products that re-image existing conditions, pushing the future forward by build products that            inform users of their potential and empower them to realize it. 
+        <div style={{float: "right" }}>
+            <img  className="profile" src="https://scontent.fewr1-5.fna.fbcdn.net/v/t1.0-9/75271448_10219372809804813_5965959957852454912_n.jpg?_nc_cat=105&_nc_oc=AQkRtf6zIxiJnA6gz1A-uA0m270HFgjyPh8N9HWzZkZm3oVlALBaI0A3y7jmVoR6pkQ&_nc_ht=scontent.fewr1-5.fna&oh=dca570a8e26443cb901f55d59a0c188e&oe=5E4466C4" alt="img of app creator"/>
+            <p style={{width: "260px", textAlign: "left"}}>
+               Arianna Choza <br></br>
+               <span style={{fontSize: "15px"}}>is a FullStack Engineer driven to design a world that promotes equality by creating products that re-image existing conditions, pushing the future forward by building products that inform users of their potential and empower them to realize it. </span>
             </p>
-            <a href="www.linkedIn.com/in/arianna-choza">Find me on Linked In</a>
+            <a href="www.linkedIn.com/in/arianna-choza">Find me on LinkedIn</a>
             <a href="www.arianna-choza.surge.sh">Other Projects</a>
-            <a href="www.unachoza@gmail.com">Contact Me</a>
+            <a href="unachoza@gmail.com">Contact Me</a>
         </div>
     )
 }

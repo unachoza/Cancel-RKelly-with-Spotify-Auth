@@ -10,6 +10,15 @@ div, button {
  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   
 }
+.profile {
+  width: 250px;
+  float: right;
+  margin-Bottom: 10px;
+  /* margin: 80px 60px 0px 0px; */
+  /* border: 2px white solid; */
+  border-radius: 15px;
+}
+
 a {
   display: flex;
   text-align: center;
@@ -18,19 +27,21 @@ a {
   color:rgb(126, 121, 121)
 }
 a:hover{
-  color: green
+  color: #1bb954
 }
 h1{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 45px;
-    color: white
+    color: white;
+    margin:0px;
+    
 }
 p {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 20px;
+  font-size: 23px;
   text-align: justify;
   text-justify: inter-word;
-  width: 70%;
+  width: 65%;
   color: rgb(126, 121, 121)
 
 }
