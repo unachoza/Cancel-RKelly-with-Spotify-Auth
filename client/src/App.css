@@ -11,14 +11,17 @@ div, button {
   
 }
 .profile {
-  width: 250px;
+  width: 230px;
   float: right;
-  margin-Bottom: 10px;
-  /* margin: 80px 60px 0px 0px; */
-  /* border: 2px white solid; */
+  margin: -65px 60px 10px 0px;
   border-radius: 15px;
+  box-shadow: 0 8px 8px 0 rgba(128, 125, 125, 0.39),0 17px 50px 0 rgba(128, 125, 125, 0.61);
+
 }
 
+.usage{
+  margin: 0px
+}
 a {
   display: flex;
   text-align: center;

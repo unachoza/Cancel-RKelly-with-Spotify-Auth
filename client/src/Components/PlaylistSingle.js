@@ -30,7 +30,6 @@ class PlaylistSingle extends Component {
                 publicPlaylistArr: [], 
                 songRouteID: []
             }
-            // this.removeSongs = this.removeSongs.bind(this)
         }
     
     //getting list of tracks in User's Playlists 
@@ -166,14 +165,12 @@ class PlaylistSingle extends Component {
                     
                     <ProblemRK songRouteID={this.state.songRouteID} RKSongTitle={RKSongTitle} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri} publicPlaylistArr={publicPlaylistArr}
                     />}
-                    
+
                 {MJsongTitle.length >  0 &&
                     <ProblemMJ MJsongTitle={MJsongTitle} iofMJsong={iofMJsong} playlistId={playlistInfo.id} uri={uri}  /> }
                     {publicPlaylistArr.length && <UnfollowPlaylist publicPlaylistArr={publicPlaylistArr} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri}/>}
                     {length > 0 && <hr></hr>}
                     {items && <Songs items={items} showSongs={showSongs} />}
-                    {/* RKSongTitle={RKSongTitle} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri} publicPlaylistArr={publicPlaylistArr} */}
-
             </div>
         </div>
         )

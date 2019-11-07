@@ -4,8 +4,6 @@ import Spotify from 'spotify-web-api-js'
 import PlaylistList from './PlaylistsList';
 import Introduction from './Introduction';
 import UsageStats from './UsageStats'
-import FollowPlaylist from './FollowPlaylist';
-import PhotoLinks from './PhotoLinks'
 import axios from 'axios'
 
 
@@ -144,56 +142,12 @@ class App extends Component {
     //Search ALL Playlist for Problems; Diplay Playlist Names with Problems
     searchAllPlaylists(artistsNamesArr, trackNames) {
         let RKSongTitle = []
-        let CBSongTitle = []
-        let MJsongTitle = []
-        let publicPlaylistArr = []
-
         let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly")
-        let iofCBsong = this.indexOfAll(artistsNamesArr, "Chris Brown")
-        let iofMJsong = this.indexOfAll(artistsNamesArr, "Michael Jackson")
-        //checking if the playlist is public
-        iofRKsong.map( index => {
-            !this.props.CurrentUserid[index] === this.props.playlistOwnerId[index] &&
-            publicPlaylistArr.push(index)
-            console.log(false)
-        })
-
-        console.log(this.props, 'this is props', this.props.CurrentUserid, 'current user id')
-        for (let i = 0; i < iofCBsong.length; i++){
-            CBSongTitle.push(trackNames[iofCBsong[i]])
-        }
         for (let i = 0; i < iofRKsong.length; i++){
             RKSongTitle.push(trackNames[iofRKsong[i]])
         }
-        for (let i = 0; i < iofMJsong.length; i++){
-            MJsongTitle.push(trackNames[iofMJsong[i]])
-        }
-        this.setState({ CBSongTitle, RKSongTitle, MJsongTitle , iofMJsong, iofRKsong, iofCBsong, publicPlaylistArr})
-        this.problemLength(CBSongTitle, RKSongTitle, MJsongTitle)
-        //needs to be somewhere else post only if i of RK has length
-        axios.post('http://localhost:3001/db/songs', {
-            name: trackNames[iofRKsong],
-            artist: 'R Kelly',
-            deleted: false
-    })
-    .then((res) => {
-        console.log(res.data.data.id)
-        this.setState({
-            songRouteID: res.data.data.id
-        })
-
-    })
-    .then(() => {
-       if(iofRKsong.length > 1){  
-        iofRKsong.forEach(i => {
-            axios.post('http://localhost:3001/db/songs', {
-                name: trackNames[i],
-                artist: 'R Kelly',
-                deleted: false
-        })
-        });
-    }
-    })
+        
+        this.setState({  RKSongTitle, iofRKsong, })
     }
     
 
@@ -211,19 +165,34 @@ class App extends Component {
                     {loggedIn ? "loggedIn" : "loggedOut"}>
                         
                 <Introduction loggedIn={loggedIn}/>
-                <UsageStats />
 
                 {/* <FollowPlaylist /> */}
-                 {!loggedIn ?
-                    <a href="http://localhost:8888">
-                        <button>Login Spotify</button>
-                    </a>
-                    : <div><button className={offsetNum > 0? "hide": "showIt" }onClick={() => this.getPlaylists()}>YOUR PLAYLISTS</button>
-                        </div>}
+                <div style={{margin: "0px"}}>
+                    <div>
+                        <UsageStats />
                     </div>
-                    {offsetNum < total ?
-                    <button className={offsetNum > (total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>NEXT 10 PLAYLISTS</button> 
-                    : " "}
+                    <div style={{ display: "flex",justifyContent: "center"}}>
+                        {!loggedIn ?
+                        <a href="http://localhost:8888">
+                            {/* <button>How it works</button> */}
+                            <button>Login to Spotify</button>
+                        </a>
+                        : <div><button className={offsetNum > 0? "hide": "showIt" }         onClick={() => this.getPlaylists()}>YOUR PLAYLISTS</button>
+                            </div>}
+                    </div>        
+                    </div>
+
+                     
+                <div>
+                
+                        
+                        {offsetNum < total ?
+                        <button className={offsetNum > (total - 12)  ? "hide": "showIt" } onClick={() => this.getPlaylists()}>NEXT 10 PLAYLISTS</button> 
+                        : " "}
+                </div>
+                 
+                </div>
+                       
                 
                 {playListObject && trackNamesArr &&
                     <PlaylistList
