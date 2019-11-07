@@ -27,7 +27,8 @@ class PlaylistSingle extends Component {
                 iofCBsong: [],
                 length: [], 
                 uri: [],
-                publicPlaylistArr: []
+                publicPlaylistArr: [], 
+                songRouteID: []
             }
             // this.removeSongs = this.removeSongs.bind(this)
         }
@@ -115,38 +116,40 @@ class PlaylistSingle extends Component {
         })
 
     })
-    .then(()=> {
-        console.log(this.state)
-    })
-        
-       
-    
-        // .then(console.log('might have posted'))
-    }
-    postProblems(){
-        const {iofRKsong, trackNames} = this.state
-        iofRKsong.length &&
+    .then(() => {
+       if(iofRKsong.length > 1){  
+        iofRKsong.forEach(i => {
+            console.log(i)
             axios.post('http://localhost:3001/db/songs', {
-                name: trackNames[iofRKsong],
+                name: trackNames[i],
                 artist: 'R Kelly',
                 deleted: false
         })
         .then((res) => {
+            console.log(res.data.data.id)
             // this.setState({
-            // songRouteID: res.data.data.
-
+            //     songRouteID: res.data.data.id
             // })
-            console.log(res)
-        })
+    
+        })   
+            
+        });
     }
+    })
+    
+    .then(()=> {
+        console.log(this.state)
+    })
+    }
+    
+    
 
     problemLength(CBSongTitle, RKSongTitle, MJsongTitle) {
-        console.log(MJsongTitle, "MJsongTitle is the song" , this.state, "state")
+        console.log(RKSongTitle, "MJsongTitle is the song" , this.state, "state")
         const length = CBSongTitle.length + RKSongTitle.length + MJsongTitle.length
         this.setState({length})
     }
     render(){
-        // this.postProblems()
         const { CBSongTitle, RKSongTitle, MJsongTitle, showSongs, items, length, uri , iofMJsong, iofCBsong, iofRKsong , publicPlaylistArr} = this.state
         const {playlistInfo} = this.props
         let buttonText = showSongs? "CHECK SONGS" : "CLOSE SONGS" 

@@ -5,9 +5,6 @@ import Spotify from 'spotify-web-api-js'
 const   spotifyWebApi = new Spotify()
 
 class FollowPlaylist extends Component{
-    constructor(){
-        super()
-    }
 
    async createProblemFreePlaylist(){
     
