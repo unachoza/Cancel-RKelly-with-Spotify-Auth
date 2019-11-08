@@ -203,3 +203,11 @@ visibility: visible ;
   display:inline-block;
   margin: 10px 20px;
 } */
+
+.deleted {
+  animation: strikethru 0.5s ease forwards;
+}
+@keyframes strikethru {
+	0% { width: calc(0% - 2em);	}
+	100% { width: calc(100% - 2em);	}
+}
