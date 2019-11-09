@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import "../App.css";
 
 class Nav extends Component {
-  render() {
+    render() {
+        console.log(this.props)
+        const { aboutme, howItWorks, login, home } = this.props
+        
     return (
       <div>
         <div>
@@ -15,10 +18,10 @@ class Nav extends Component {
 
         <div className="nav-container">
           <ul className="nav-list">
-            <li id="home">HOME</li>
-            <li id="login">LOGIN</li>
-            <li id="how-it-works">HOW IT WORKS</li>
-            <li id="about-me">ABOUT ME</li>
+            <li id="home" onClick={(e) => this.props.changeNav(e)}>HOME</li>
+            <li id="login" onClick={(e) => this.props.changeNav(e)}>LOGIN</li>
+            <li id="how-it-works" onClick={(e) => this.props.changeNav(e)}>HOW IT WORKS</li>
+            <li id="about-me" onClick={(e) => this.props.changeNav(e)}>ABOUT ME</li>
           </ul>
         </div>
       </div>

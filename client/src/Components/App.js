@@ -19,10 +19,10 @@ class App extends Component {
     const token = params.access_token;
     this.state = {
       loggedIn: token ? true : false,
-      home: true,
-      login: false,
-      HowItWorks: false,
-      aboutMe: false,
+        home: true,
+        login: false,
+        HowItWorks: false,
+        aboutMe: false,
       playListObject: "",
       trackNamesArr: [],
       offsetNum: 0,
@@ -256,56 +256,61 @@ class App extends Component {
 
     this.setState({ RKSongTitle, iofRKsong });
   }
+  navigate = (e) => {
+    let name = e.target.id
+    console.log(name)
+    this.setState({
+      [name]: true
+    })
+    let navArr = ["home", "howItWorks", "login", "aboutMe"]
+   let newNavArr =  navArr.filter((nav) => {
+      return  nav != name
+    })
+   
+    newNavArr.forEach((nav) => {
+      this.setState({
+        [nav]: false
+      })
+    })
+    console.log("this is the ",  newNavArr)
+    console.log('this is nav state', this.state)
+  }
+   
 
   render() {
-    const {
-      loggedIn,
-      offsetNum,
-      total,
-      playListObject,
-      items,
-      trackNamesArr,
-      playlistOwnerId,
-      id,
-      home,
-      aboutMe,
-      HowItWorks,
-      login
-    } = this.state;
+    const { loggedIn, offsetNum, total, playListObject, items,  trackNamesArr, playlistOwnerId, id, home, aboutMe, HowItWorks, login } = this.state;
     return (
       <div className="home">
-        <Nav />
-        <h1 >Cancel R. Kelly</h1>
-       
+        <Nav changeNav={this.navigate} navState={this.state}/>
+        <h1>Cancel R. Kelly</h1>
         {home && <Home />}
-
         <br></br>
-
         <div className={loggedIn ? "loggedIn" : "loggedOut"}>
           {HowItWorks && <Introduction loggedIn={loggedIn} />}
           {aboutMe && <AboutMe />}
-          
+
           <div style={{ margin: "0px" }}>
-            <div>
-            </div>
+            <div></div>
             <div style={{ display: "flex", justifyContent: "center" }}>
-             { login && <div>
-                {!loggedIn ? (
-                  <a href="http://localhost:8888">
-                    {/* <button>How it works</button> */}
-                    <button>Login to Spotify</button>
-                  </a>
-                ) : (
-                  <div>
-                    <button
-                      className={offsetNum > 0 ? "hide" : "showIt"}
-                      onClick={() => this.getPlaylists()}
-                    >
-                      YOUR PLAYLISTS
-                    </button>
-                  </div>
-                )}
-              </div>}
+              {login && (
+                <div>
+                  {!loggedIn ? (
+                    <a href="http://localhost:8888">
+                      {/* <button>How it works</button> */}
+                      <button>Login to Spotify</button>
+                    </a>
+                  ) : (
+                    <div>
+                      <button
+                        className={offsetNum > 0 ? "hide" : "showIt"}
+                        onClick={() => this.getPlaylists()}
+                      >
+                        YOUR PLAYLISTS
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
