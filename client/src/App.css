@@ -19,7 +19,8 @@ button {
 }
 
 .usage {
-  margin: 0px;
+  margin: auto;
+  margin-top: -130px;
 }
 a {
   display: flex;
@@ -37,7 +38,7 @@ h1 {
   font-size: 52px;
   color: white;
   margin: 90px 0px 70px 0px;
-  width: 100%
+  width: 100%;
 }
 p {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -45,7 +46,7 @@ p {
   font-size: 23px;
   text-align: justify;
   text-justify: inter-word;
-  width: 65%;
+  /* width: 65%; */
   color: rgb(126, 121, 121);
 }
 

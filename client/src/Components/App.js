@@ -287,7 +287,6 @@ class App extends Component {
           
           <div style={{ margin: "0px" }}>
             <div>
-              {/* <UsageStats /> */}
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
              { login && <div>
@@ -332,6 +331,7 @@ class App extends Component {
             CurrentUserid={id}
           />
         )}
+        {home && <UsageStats />}
         {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}
       </div>
     );
