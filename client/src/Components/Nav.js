@@ -7,12 +7,7 @@ class Nav extends Component {
       <div>
         <div>
           <img
-            style={{
-              height: "80px",
-              position: "absolute",
-              left: "30px",
-              top: "30px"
-            }}
+            className="spotify-logo"
             src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png"
             alt="spotify logo"
           />

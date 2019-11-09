@@ -2,75 +2,74 @@
   all: unset;
 }
 body {
-  background-color: rgb(29, 28, 28)
+  background-color: rgb(29, 28, 28);
 }
-div, button {
+div,
+button {
   margin: 10px;
   font-weight: 200;
- font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 .profile {
   width: 230px;
   float: right;
   margin: -65px 60px 10px 0px;
   border-radius: 15px;
-
 }
 
-.usage{
-  margin: 0px
+.usage {
+  margin: 0px;
 }
 a {
   display: flex;
   text-align: center;
   margin-bottom: 5px;
   text-decoration: none;
-  color:rgb(126, 121, 121)
+  color: rgb(126, 121, 121);
 }
-a:hover{
-  color: #1bb954
+a:hover {
+  color: #1bb954;
 }
-h1{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 45px;
-    color: white;
-    margin:0px;
-    
+h1 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 52px;
+  color: white;
+  margin: 90px 0px 70px 0px;
+  width: 100%
 }
 p {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   font-size: 23px;
   text-align: justify;
   text-justify: inter-word;
   width: 65%;
-  color: rgb(126, 121, 121)
-
+  color: rgb(126, 121, 121);
 }
 
 .home {
   text-align: center;
-
 }
 
-button{
+button {
   background-color: lightgray;
   font-size: 20px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   border-radius: 40px;
   padding: 15px;
   color: white;
-  background-color:rgb(23, 138, 84);
-  border:none;
-
+  background-color: rgb(23, 138, 84);
+  border: none;
 }
 button:hover {
-  background-color: #1bb954
+  background-color: #1bb954;
 }
 
-.playlist-title{
-  font-size: 20px
-
+.playlist-title {
+  font-size: 20px;
 }
 .playlist-container-closed {
   width: "350px";
@@ -79,16 +78,16 @@ button:hover {
   margin: 10px;
   padding-left: 50px;
   padding-right: 50px;
-  border-Radius: 10px;
-  color: rgb(126, 121, 121) ;
+  border-radius: 10px;
+  color: rgb(126, 121, 121);
 }
-.album-image{
+.album-image {
   height: "220px";
   width: 200px;
 }
-.album-image:hover{
-  box-shadow: 0 12px 16px 0 rgba(128, 125, 125, 0.39),0 17px 50px 0 rgba(128, 125, 125, 0.61);
-
+.album-image:hover {
+  box-shadow: 0 12px 16px 0 rgba(128, 125, 125, 0.39),
+    0 17px 50px 0 rgba(128, 125, 125, 0.61);
 }
 
 /* z-index: 1;
@@ -98,22 +97,19 @@ width: 00px;
 position: absolute;
 } */
 .playlist-container-open {
- 
   font-size: 20px;
   display: inline-block;
   padding: 1px;
-  border-Radius: 10px;
+  border-radius: 10px;
   color: white;
   z-index: 1;
 }
-.all-playlists{
-  z-index: -1;
-  
-}
-.all-playlist-fade-back{
+.all-playlists {
   z-index: -1;
 }
-
+.all-playlist-fade-back {
+  z-index: -1;
+}
 
 .songs-in-playlist-container-open {
   width: "530px";
@@ -121,36 +117,33 @@ position: absolute;
   font-size: 20px;
   display: inline-block;
   padding: 1px;
-  border-Radius: 10px;
-  color: rgb(126, 121, 121) 
+  border-radius: 10px;
+  color: rgb(126, 121, 121);
 }
 
-
-.song-title{
-  text-Align: left;
-  font-Size: 20px;
+.song-title {
+  text-align: left;
+  font-size: 20px;
   width: 300px;
 }
 .show {
   display: inline;
-  visibility: visible ;
+  visibility: visible;
   background-color: none;
-
 }
 .showIt {
-visibility: visible ;
+  visibility: visible;
 }
 
 .hide {
-  display: none
+  display: none;
 }
 
-.Intro-page{
-  justify-content: center
+.Intro-page {
+  justify-content: center;
 }
 .loggedIn {
-  padding-top: 55px 
-  
+  padding-top: 55px;
 }
 .loggedOut {
   padding: 8%;
@@ -208,30 +201,44 @@ visibility: visible ;
   animation: strikethru 0.5s ease forwards;
 }
 @keyframes strikethru {
-	0% { width: calc(0% - 2em);	}
-	100% { width: calc(100% - 2em);	}
+  0% {
+    width: calc(0% - 2em);
+  }
+  100% {
+    width: calc(100% - 2em);
+  }
 }
 
 .nav-list {
-    display: flex;
-    font-size: 20px;
-    margin: 65px 100px 50px 300px;
-    justify-content: space-around;
-    list-style-type: none;
-    color:rgb(126, 121, 121)
+  display: flex;
+  font-size: 20px;
+  margin: 65px 100px 50px 320px;
+  justify-content: space-around;
+  list-style-type: none;
+  color: rgb(126, 121, 121);
 }
-.nav-container{
+.nav-container {
   margin: 55px, 20px;
 }
 .nav-container:hover {
-  color:white;
+  color: white;
 }
 li:hover {
-  color:white;
+  color: white;
 }
 a:active {
   background-color: #1bb954;
 }
-.cancel-img{
+.cancel-img {
   height: 300px;
+  opacity: 0.6;
+  border-radius: 10px;
+  margin: auto;
+  display: flex;
+}
+.spotify-logo {
+  height: 80px;
+  position: absolute;
+  left: 110px;
+  top: 35px;
 }

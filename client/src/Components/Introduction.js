@@ -5,7 +5,6 @@ import '../App.css'
 const Introduction = (loggedIn) => {
     return (
         <div className="Intro-page">
-            <AboutMe />
             <h1 style={{width: "65%"}}>Cancel R. Kelly</h1>
             {!loggedIn.loggedIn &&
             <div>

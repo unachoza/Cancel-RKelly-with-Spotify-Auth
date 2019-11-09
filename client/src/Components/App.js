@@ -275,6 +275,7 @@ class App extends Component {
     return (
       <div className="home">
         <Nav />
+        <h1 >Cancel R. Kelly</h1>
        
         {home && <Home />}
 
@@ -282,7 +283,8 @@ class App extends Component {
 
         <div className={loggedIn ? "loggedIn" : "loggedOut"}>
           {HowItWorks && <Introduction loggedIn={loggedIn} />}
-
+          {aboutMe && <AboutMe />}
+          
           <div style={{ margin: "0px" }}>
             <div>
               {/* <UsageStats /> */}
