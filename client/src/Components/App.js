@@ -21,7 +21,7 @@ class App extends Component {
       loggedIn: token ? true : false,
         home: true,
         login: false,
-        HowItWorks: false,
+        howItWorks: false,
         aboutMe: false,
       playListObject: "",
       trackNamesArr: [],
@@ -268,12 +268,13 @@ class App extends Component {
         [nav]: false
       })
     })
+    console.log(this.state)
     
   }
    
 
   render() {
-    const { loggedIn, offsetNum, total, playListObject, items,  trackNamesArr, playlistOwnerId, id, home, aboutMe, HowItWorks, login } = this.state;
+    const { loggedIn, offsetNum, total, playListObject, items,  trackNamesArr, playlistOwnerId, id, home, aboutMe, howItWorks, login } = this.state;
     return (
       <div className="home">
         <Nav changeNav={this.navigate} navState={this.state}/>
@@ -281,7 +282,7 @@ class App extends Component {
         {home && <Home />}
         <br></br>
         {aboutMe && <AboutMe />}
-
+      {howItWorks && <HowItWorks/>}
         <div className={loggedIn ? "loggedIn" : "loggedOut"}>
           {login && <Introduction loggedIn={loggedIn} />}
 
