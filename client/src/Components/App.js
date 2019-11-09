@@ -283,7 +283,7 @@ class App extends Component {
         {aboutMe && <AboutMe />}
 
         <div className={loggedIn ? "loggedIn" : "loggedOut"}>
-          {HowItWorks && <Introduction loggedIn={loggedIn} />}
+          {login && <Introduction loggedIn={loggedIn} />}
 
           <div style={{ margin: "0px" }}>
             <div></div>

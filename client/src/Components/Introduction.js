@@ -5,7 +5,7 @@ import '../App.css'
 const Introduction = (loggedIn) => {
     return (
         <div className="Intro-page">
-            <h1 style={{width: "65%"}}>Cancel R. Kelly</h1>
+            {/* <h1 style={{width: "65%"}}>Cancel R. Kelly</h1> */}
             {!loggedIn.loggedIn &&
             <div>
                 <p style={{marginBottom: "40px"}}>This app effortlessly removes R Kelly from our lives. Listening to his music is problematic #BelieveWomen</p>
