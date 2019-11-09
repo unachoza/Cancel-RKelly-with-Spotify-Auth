@@ -257,23 +257,18 @@ class App extends Component {
     this.setState({ RKSongTitle, iofRKsong });
   }
   navigate = (e) => {
+    let navArr = ["home", "howItWorks", "login", "aboutMe"]
     let name = e.target.id
-    console.log(name)
     this.setState({
       [name]: true
     })
-    let navArr = ["home", "howItWorks", "login", "aboutMe"]
-   let newNavArr =  navArr.filter((nav) => {
-      return  nav != name
-    })
-   
-    newNavArr.forEach((nav) => {
+    navArr =  navArr.filter(nav => nav !== name )
+    navArr.forEach((nav) => {
       this.setState({
         [nav]: false
       })
     })
-    console.log("this is the ",  newNavArr)
-    console.log('this is nav state', this.state)
+    
   }
    
 
@@ -285,9 +280,10 @@ class App extends Component {
         <h1>Cancel R. Kelly</h1>
         {home && <Home />}
         <br></br>
+        {aboutMe && <AboutMe />}
+
         <div className={loggedIn ? "loggedIn" : "loggedOut"}>
           {HowItWorks && <Introduction loggedIn={loggedIn} />}
-          {aboutMe && <AboutMe />}
 
           <div style={{ margin: "0px" }}>
             <div></div>
