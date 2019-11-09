@@ -211,3 +211,27 @@ visibility: visible ;
 	0% { width: calc(0% - 2em);	}
 	100% { width: calc(100% - 2em);	}
 }
+
+.nav-list {
+    display: flex;
+    font-size: 20px;
+    margin: 65px 100px 50px 300px;
+    justify-content: space-around;
+    list-style-type: none;
+    color:rgb(126, 121, 121)
+}
+.nav-container{
+  margin: 55px, 20px;
+}
+.nav-container:hover {
+  color:white;
+}
+li:hover {
+  color:white;
+}
+a:active {
+  background-color: #1bb954;
+}
+.cancel-img{
+  height: 300px;
+}

@@ -5,6 +5,9 @@ import PlaylistList from "./PlaylistsList";
 import Introduction from "./Introduction";
 import UsageStats from "./UsageStats";
 import HowItWorks from "./HowItWorks";
+import AboutMe from "./AboutMe";
+import Nav from "./Nav";
+import Home from "./Home";
 import axios from "axios";
 
 const spotifyWebApi = new Spotify();
@@ -16,6 +19,10 @@ class App extends Component {
     const token = params.access_token;
     this.state = {
       loggedIn: token ? true : false,
+      home: true,
+      login: false,
+      HowItWorks: false,
+      aboutMe: false,
       playListObject: "",
       trackNamesArr: [],
       offsetNum: 0,
@@ -141,24 +148,23 @@ class App extends Component {
     let ALLplaylistNameArray = [];
     for (let i = 0; i < loopsCount; i++) {
       offsetNum += 50;
-      spotifyWebApi.getUserPlaylists(this.state.id, {
-        limit: 50,
-        offset: offsetNum
-      })
-        .then(res => {
-            console.log(res)
-            res.items.map(item => {
-                ALLplaylistID.push(item.id)
-            })
-          res.items.map(item => {
-            ALLplaylistNameArray.push(item.name)
-          })
-            console.log(ALLplaylistID, ALLplaylistNameArray)
-            return ALLplaylistID 
+      spotifyWebApi
+        .getUserPlaylists(this.state.id, {
+          limit: 50,
+          offset: offsetNum
         })
-        .then(() => {
-        
-      })
+        .then(res => {
+          console.log(res);
+          res.items.map(item => {
+            ALLplaylistID.push(item.id);
+          });
+          res.items.map(item => {
+            ALLplaylistNameArray.push(item.name);
+          });
+          console.log(ALLplaylistID, ALLplaylistNameArray);
+          return ALLplaylistID;
+        })
+        .then(() => {});
       // .then((res) => {
       //     let itemsaa = 0
       //     res.items.map((item) => {
@@ -260,43 +266,45 @@ class App extends Component {
       items,
       trackNamesArr,
       playlistOwnerId,
-      id
+      id,
+      home,
+      aboutMe,
+      HowItWorks,
+      login
     } = this.state;
     return (
       <div className="home">
-        {/* {display_name? this.addUser() : ''} */}
-        <img
-          style={{ height: "80px", float: "left" }}
-          src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1568208607/Spotify_Logo_CMYK_Green.png"
-          alt="spotify logo"
-        />
+        <Nav />
+       
+        {home && <Home />}
+
         <br></br>
 
         <div className={loggedIn ? "loggedIn" : "loggedOut"}>
-          <Introduction loggedIn={loggedIn} />
-          <HowItWorks />
+          {HowItWorks && <Introduction loggedIn={loggedIn} />}
 
-          {/* <FollowPlaylist /> */}
           <div style={{ margin: "0px" }}>
             <div>
-              <UsageStats />
+              {/* <UsageStats /> */}
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              {!loggedIn ? (
-                <a href="http://localhost:8888">
-                  {/* <button>How it works</button> */}
-                  <button>Login to Spotify</button>
-                </a>
-              ) : (
-                <div>
-                  <button
-                    className={offsetNum > 0 ? "hide" : "showIt"}
-                    onClick={() => this.getPlaylists()}
-                  >
-                    YOUR PLAYLISTS
-                  </button>
-                </div>
-              )}
+             { login && <div>
+                {!loggedIn ? (
+                  <a href="http://localhost:8888">
+                    {/* <button>How it works</button> */}
+                    <button>Login to Spotify</button>
+                  </a>
+                ) : (
+                  <div>
+                    <button
+                      className={offsetNum > 0 ? "hide" : "showIt"}
+                      onClick={() => this.getPlaylists()}
+                    >
+                      YOUR PLAYLISTS
+                    </button>
+                  </div>
+                )}
+              </div>}
             </div>
           </div>
 
