@@ -10,7 +10,7 @@ const HowItWorks = () => {
 
     return (
         <div>
-            <button className="right-arrow-description" onClick={nextDescription()}>How It Works</button>
+            {/* <button className="right-arrow-description" onClick={nextDescription()}>How It Works</button> */}
             <p className="paragraph">
                 Login with your Spotify credentials. This app will display your playlists and filter through each one to find any problematic / RKelly Songs. 
             </p>

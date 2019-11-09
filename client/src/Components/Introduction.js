@@ -6,7 +6,7 @@ const Introduction = (loggedIn) => {
     return (
         <div className="Intro-page">
             {/* <h1 style={{width: "65%"}}>Cancel R. Kelly</h1> */}
-            {!loggedIn.loggedIn &&
+            {loggedIn &&
             <div>
                 <p style={{marginBottom: "40px"}}>This app effortlessly removes R Kelly from our lives. Listening to his music is problematic #BelieveWomen</p>
                 <p style={{marginBottom: "40px"}}>Given the recent climant of believing women, I have built an app that removes problematic songs from users Spotify Playlists, starting with R. Kelly. I'm defining problematic as an artist who has committed domestic abuse and or sexual assault against others. This app empowers users to painlessly remove R. Kelly's songs without hunting through their playlists. Removing problematic music from our lives is just one way we can fight the patriarchy</p>

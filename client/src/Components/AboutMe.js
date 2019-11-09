@@ -8,7 +8,7 @@ const AboutMe = () => {
             <div className="bio" >
             <p >
                <span style={{fontSize: "20px"}}>Built by </span> Arianna Choza, <br></br>
-               <span style={{fontSize: "20px"}}>a FullStack Engineer driven to design a world that promotes equality by creating products that re-image existing conditions, pushing the future forward by building products that inform users of their potential and empower them to realize it. </span>
+               <span style={{fontSize: "20px"}}>a FullStack Engineer driven to design a world that promotes equality, creating products that re-image existing conditions, pushing the future forward by building products that inform users of their potential and empower them to realize it. </span>
             </p>
             
                 <a href="www.linkedIn.com/in/arianna-choza">Find me on LinkedIn</a>

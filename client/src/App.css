@@ -12,17 +12,12 @@ button {
     "Lucida Sans", Arial, sans-serif;
 }
 .profile-container {
-  /* display:flex;
-  align-items: center;
-  justify-items: center;
-  margin: auto; */
+
   width: 790px;
   margin: auto;
-  /* border: 3px solid rebeccapurple */
 }
 .profile {
   width: 260px;
-  /* margin: -60px 0px 0px 100px; */
   border-radius: 15px;
   float: left;
 }
@@ -30,10 +25,14 @@ button {
  width: 460px;
  float: right;
 }
+.paragraph {
+  width: 65%;
+  margin: auto
+}
 
 .usage {
   margin: auto;
-  margin-top: -130px;
+  margin-top: -30px;
 }
 a {
   display: flex;
