@@ -154,6 +154,8 @@ position: absolute;
 
 .Intro-page {
   justify-content: center;
+  width: 60%;
+  margin: auto
 }
 .loggedIn {
   padding-top: 55px;

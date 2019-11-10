@@ -258,11 +258,10 @@ class App extends Component {
         <Nav changeNav={this.navigate} navState={this.state}/>
         <h1>Cancel R. Kelly</h1>
         {home && <Home />}
-        <br></br>
         {aboutMe && <AboutMe />}
         {howItWorks && <HowItWorks />}
         
-        <div className={loggedIn ? "loggedIn" : "loggedOut"}>
+        {/* <div className={loggedIn ? "loggedIn" : "loggedOut"}> */}
           {login && <Introduction loggedIn={loggedIn} />}
 
           <div style={{ margin: "0px" }}>
@@ -302,7 +301,7 @@ class App extends Component {
               " "
             )}
           </div>
-        </div>
+        {/* </div> */}
 
         {playListObject && trackNamesArr && (
           <PlaylistList
