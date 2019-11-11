@@ -3,7 +3,7 @@ import "../App.css";
 import Spotify from "spotify-web-api-js";
 import PlaylistList from "./PlaylistsList";
 import Introduction from "./Introduction";
-import UsageStats from "./UsageStats";
+// import UsageStats from "./UsageStats";
 import HowItWorks from "./HowItWorks";
 import AboutMe from "./AboutMe";
 import Nav from "./Nav";

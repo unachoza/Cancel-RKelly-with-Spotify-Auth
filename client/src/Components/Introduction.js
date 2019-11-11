@@ -1,5 +1,5 @@
 import React from 'react'
-import AboutMe from './AboutMe'
+// import AboutMe from './AboutMe'
 import '../App.css'
 
 const Introduction = (loggedIn) => {
