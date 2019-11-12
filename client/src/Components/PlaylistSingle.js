@@ -40,7 +40,7 @@ class PlaylistSingle extends Component {
 
         spotifyWebApi.getPlaylistTracks(playlistID)
             .then((response) => {
-                console.log(response)
+                // console.log(response)
                 //saving variables of interested data points in response obj
                 let uri = []
                 let trackNames = []
@@ -131,7 +131,6 @@ class PlaylistSingle extends Component {
     
 
     problemLength(CBSongTitle, RKSongTitle, MJsongTitle) {
-        console.log(RKSongTitle, "MJsongTitle is the song" , this.state, "state")
         const length = CBSongTitle.length + RKSongTitle.length + MJsongTitle.length
         this.setState({length})
     }

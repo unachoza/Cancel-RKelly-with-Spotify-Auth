@@ -275,6 +275,9 @@ position: absolute;
 li:hover {
   color: white;
 }
+.nothing{
+  background-color: rebeccapurple;
+}
 a:active {
   background-color: #1bb954;
 }
@@ -283,6 +286,7 @@ a:active {
   opacity: 0.6;
   border-radius: 10px;
   margin: auto;
+  margin-bottom: 80px;
   display: flex;
 }
 .spotify-logo {

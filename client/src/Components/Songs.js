@@ -4,7 +4,7 @@ import SongSingle from "./SongSingle";
 
 const Songs = ({ items, showSongs }) => {
   return (
-    <div className={!showSongs ? "show" : "hide"}>
+    <div >
       {items.map((item, i) => (
         <SongSingle item={item} key={i} />
       ))}

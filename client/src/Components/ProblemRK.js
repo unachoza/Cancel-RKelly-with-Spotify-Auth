@@ -20,7 +20,7 @@ class ProblemRK extends Component{
           console.log(this.props.songRouteID, "how did it go", this.state)
           if(iofRKsong.length >1 ){
             const multipleSongs = iofRKsong.map(index => uri[index])
-          multipleSongs.map(index => spotifyWebApi.removeTracksFromPlaylist( playlistID, [{ "uri": index}])
+              multipleSongs.map(index => spotifyWebApi.removeTracksFromPlaylist(playlistID, [{ "uri": index }])
           )
 
          
@@ -35,21 +35,22 @@ class ProblemRK extends Component{
         this.setState({
             deleting: true
         })
-        
+        this.deleteAnimation()
         }
 
-deleteAnimation = () => {
-    return this.state.deleteing ?
-        "animated zoomOut delay-2s"
+    deleteAnimation = () => {
+    console.log('deleiting thisotha')
+    return this.state.deleting ?
+        "animated zoomOut"
         : ""
     }
 
     render() {
         const { RKSongTitle, uri, playlistId } = this.props
-        const {deleted } = this.state
+        const {deleted, deleting } = this.state
         
            let songs = RKSongTitle.map((song, i) => {
-          return <div  className={deleted? "deleted": ""} style={{textAlign: "left"}} key={i}>{song}  <br></br><span style={{color: 'white'}}>R. Kelly</span></div> 
+          return <div  className={!deleting ? "nothing": "animated zoomOut"} style={{textAlign: "left"}} key={i}>{song}  <br></br><span style={{color: 'white'}}>R. Kelly</span></div> 
      })
         return (
             <div  style={{ fontSize: "20px", fontWeight: "300" }}>

@@ -3,7 +3,7 @@ import "../App.css";
 import Spotify from "spotify-web-api-js";
 import PlaylistList from "./PlaylistsList";
 import Introduction from "./Introduction";
-// import UsageStats from "./UsageStats";
+import UsageStats from "./UsageStats";
 import HowItWorks from "./HowItWorks";
 import AboutMe from "./AboutMe";
 import Nav from "./Nav";
@@ -232,6 +232,10 @@ class App extends Component {
     });
   }
 
+  
+/************************************************/
+/************************************************/
+/************************************************/
   //Search ALL Playlist for Problems; Display Playlist Names with Problems
   searchAllPlaylists(artistsNamesArr, trackNames) {
     let RKSongTitle = [];
@@ -262,10 +266,7 @@ class App extends Component {
         {home && <Home />}
         {aboutMe && <AboutMe />}
         {howItWorks && <HowItWorks />}
-        
-        {/* <div className={loggedIn ? "loggedIn" : "loggedOut"}> */}
           {login && <Introduction loggedIn={loggedIn} />}
-
           <div style={{ margin: "0px" }}>
             <div></div>
             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -313,7 +314,7 @@ class App extends Component {
             CurrentUserid={id}
           />
         )}
-        {/* {home && <UsageStats />} */}
+        {home && <UsageStats />}
         {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}
       </div>
     );
