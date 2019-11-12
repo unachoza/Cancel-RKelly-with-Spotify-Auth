@@ -61,7 +61,8 @@ class MakingHash extends Component {
       })
 
       console.log(count)
-      console.log(this.state.playlists.playlistIds[0])
+     let  currentPlaylistName = this.state.playlists.playlistNames[0]
+      console.log(currentPlaylistName)
     const song =  await spotifyWebApi.getPlaylistTracks(
       this.state.playlists.playlistIds[1]);
       console.log(song.items);
@@ -72,7 +73,14 @@ class MakingHash extends Component {
      })
       
       //find rkelly and find out what playlist the song belongs to
-      artistsFromOnePlaylist.includes('R. Kelly')
+      if (artistsFromOnePlaylist.includes('R. Kelly')) {
+          console.log("The Playlist", currentPlaylistName, " has a Problem")
+          this.setState({
+              problem: currentPlaylistName
+          })
+          
+      }
+      
       //from what playlist
       console.log(artistsFromOnePlaylist)
 
@@ -80,7 +88,7 @@ class MakingHash extends Component {
     
 
   render() {
-    return <div>hash</div>;
+    return <div>{`${this.state.problem} This playlist has a Problem`}</div>;
   }
 }
 
