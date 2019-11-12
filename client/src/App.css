@@ -4,6 +4,9 @@
 body {
   background-color: rgb(29, 28, 28);
 }
+ul{
+  background-color: "rgb(29, 28, 28)"
+}
 div,
 button {
   margin: 10px;
@@ -27,7 +30,32 @@ button {
 }
 .paragraph {
   width: 65%;
-  margin: auto
+  margin: auto;
+  background-color:  rgb(29, 28, 28);
+}
+.selected {
+  background-color:  rgb(29, 28, 28);
+  
+}
+.slide {
+  
+  background-color:  rgb(29, 28, 28);
+  
+
+}
+li {
+  background-color:  rgb(29, 28, 28);
+
+}
+.carousel {
+  min-width: 100%;
+  margin: 0;
+  position: relative;
+  text-align: center;
+  background-color:  rgb(29, 28, 28);
+}
+.carousel-slider {
+  background-color: rgb(29, 28, 28);
 }
 
 .usage {
@@ -101,6 +129,12 @@ button:hover {
 .album-image:hover {
   box-shadow: 0 12px 16px 0 rgba(128, 125, 125, 0.39),
     0 17px 50px 0 rgba(128, 125, 125, 0.61);
+}
+.my-slide-container {
+  background-Color: "rgb(29, 28, 28)";
+  margin: "0px" ;
+  width: "100%";
+   height: "100%"
 }
 
 /* z-index: 1;
