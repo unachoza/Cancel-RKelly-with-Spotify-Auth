@@ -23,8 +23,9 @@ class MakingHash extends Component {
     console.log("this is stateu", this.state);
     let offsetNum = -50;
     let playlistResults = [];
-    let playlistPartialResults = [];
-    //geting playlists ids & names only 20
+      let playlistPartialResults = [];
+      
+    //geting playlists ids & names only 50
     const loops = await spotifyWebApi.getUserPlaylists(this.state.id);
     this.setState({ totalPlaylists: loops.total });
     let loopsCount = Math.ceil(this.state.totalPlaylists / 50);
@@ -37,11 +38,14 @@ class MakingHash extends Component {
       })
       playlistResults.push.apply(playlistResults, temp.items);
       let playlistIds = [];
-      let playlistNames = [];
+        let playlistNames = [];
+        console.log(playlistResults)
       playlistResults.map(index => {
         playlistIds.push(index.id);
         playlistNames.push(index.name);
       });
+        
+        //State now has all PlayListIDS and their Names 
       this.setState(prevState => ({
         playlists: {
           ...prevState.playlists,
@@ -55,16 +59,35 @@ class MakingHash extends Component {
       this.state.playlists.playlistIds.map( async (id)  =>  {
           let tracks = await spotifyWebApi.getPlaylistTracks(id)
           tracks = tracks.items
-          count ++
-      console.log(tracks)
+          let artistsObj = []
+          for (let i = 0; i < tracks.length; i++){
+            artistsObj.push(tracks[i].track.artists)
+          } let artistsNames = []
+          console.log(artistsObj)
+          for (let i = 0; i < artistsObj.length; i++) {
+            artistsNames.push(artistsObj[i][0].name)
+          }
+
+          ///*****************looping and getting an array of all artist names for each playlist */
+          console.log(artistsNames)
+  
           
-      })
+      }) 
 
       console.log(count)
      let  currentPlaylistName = this.state.playlists.playlistNames[0]
       console.log(currentPlaylistName)
     const song =  await spotifyWebApi.getPlaylistTracks(
-      this.state.playlists.playlistIds[1]);
+        this.state.playlists.playlistIds.map((indexOfPlaylist) => {
+            let artistsFromOnePlaylist = []
+
+     song.items.map((index) => {
+         artistsFromOnePlaylist.push(index.track.artists[0].name)
+     })
+        })
+        
+        
+        [1]);
       console.log(song.items);
       let artistsFromOnePlaylist = []
 
@@ -72,7 +95,9 @@ class MakingHash extends Component {
          artistsFromOnePlaylist.push(index.track.artists[0].name)
      })
       
-      //find rkelly and find out what playlist the song belongs to
+      //***********find rkelly and find out what playlist the song belongs to
+      ///**********FINDS RKELLY AND PRINTS PLAYLISTNAME*/
+      
       if (artistsFromOnePlaylist.includes('R. Kelly')) {
           console.log("The Playlist", currentPlaylistName, " has a Problem")
           this.setState({
