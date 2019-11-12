@@ -88,7 +88,7 @@ class MakingHash extends Component {
     
 
   render() {
-    return <div>{`${this.state.problem} This playlist has a Problem`}</div>;
+    return <div>{`The Playlist, ${this.state.problem},  has a Problem`}</div>;
   }
 }
 
