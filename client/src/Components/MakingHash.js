@@ -8,91 +8,75 @@ class MakingHash extends Component {
     playlists: []
   };
 
-    async componentDidMount() {
-        // const {user} = this.state
-        spotifyWebApi.getMe();
-        const userRes = await spotifyWebApi.getMe();
-        console.log(userRes);
-        this.setState({
-            id: userRes.id,
-            name: userRes.display_name,
-            email: userRes.email,
-            country: userRes.country,
-            totalPlaylists: userRes.total
-        });
-        console.log("this is stateu", this.state);
-        let offsetNum = -50;
-        let playlistResults = [];
-        let playlistPartialResults = [];
-        //geting playlists ids & names only 20
-        const loops = await spotifyWebApi.getUserPlaylists(this.state.id);
-        this.setState({ totalPlaylists: loops.total });
-        let loopsCount = Math.ceil(this.state.totalPlaylists / 50);
-        for (let i = 0; i < loopsCount; i++) {
-            offsetNum += 50;
-            const temp = await spotifyWebApi.getUserPlaylists(this.state.id, { limit: 50, offset: offsetNum })
-            playlistResults.push.apply(playlistResults, temp.items)
-            console.log("I have the state", this.state, "other long everythign", playlistResults)
-            let playlistIds = []
-            let playlistNames = []
-            playlistResults.map((index) => {
-                playlistIds.push(index.id)
-                playlistNames.push(index.name)
-            })
-            this.setState(prevState => ({
-                playlists: {
-                    ...prevState.playlists,
-                    playlistIds: [...playlistIds, playlistIds],
-                    playlistNames: [...playlistNames, playlistNames]
-             }
-            }))
-            console.log('my state', this.state)
+  async componentDidMount() {
+    // const {user} = this.state
+    spotifyWebApi.getMe();
+    const userRes = await spotifyWebApi.getMe();
+    console.log(userRes);
+    this.setState({
+      id: userRes.id,
+      name: userRes.display_name,
+      email: userRes.email,
+      country: userRes.country,
+      totalPlaylists: userRes.total
+    });
+    console.log("this is stateu", this.state);
+    let offsetNum = -50;
+    let playlistResults = [];
+    let playlistPartialResults = [];
+    //geting playlists ids & names only 20
+    const loops = await spotifyWebApi.getUserPlaylists(this.state.id);
+    this.setState({ totalPlaylists: loops.total });
+    let loopsCount = Math.ceil(this.state.totalPlaylists / 50);
+    for (let i = 0; i < loopsCount; i++) {
+        offsetNum += 50;
+        
+      const temp = await spotifyWebApi.getUserPlaylists("8mcnehzy9pqb74j65vsfzhluu", {
+        limit: 50,
+        offset: offsetNum
+      })
+      playlistResults.push.apply(playlistResults, temp.items);
+      let playlistIds = [];
+      let playlistNames = [];
+      playlistResults.map(index => {
+        playlistIds.push(index.id);
+        playlistNames.push(index.name);
+      });
+      this.setState(prevState => ({
+        playlists: {
+          ...prevState.playlists,
+          playlistIds: [...playlistIds, playlistIds],
+          playlistNames: [...playlistNames, playlistNames]
         }
+      }));
+      console.log("my state", this.state);
     }
+      let count = 0
+      this.state.playlists.playlistIds.map( async (id)  =>  {
+          let tracks = await spotifyWebApi.getPlaylistTracks(id)
+          tracks = tracks.items
+          count ++
+      console.log(tracks)
+          
+      })
 
+      console.log(count)
+      console.log(this.state.playlists.playlistIds[0])
+    const song =  await spotifyWebApi.getPlaylistTracks(
+      this.state.playlists.playlistIds[1]);
+      console.log(song.items);
+      let artistsFromOnePlaylist = []
 
+     song.items.map((index) => {
+         artistsFromOnePlaylist.push(index.track.artists[0].name)
+     })
+      
+      //find rkelly and find out what playlist the song belongs to
+      artistsFromOnePlaylist.includes('R. Kelly')
+      //from what playlist
+      console.log(artistsFromOnePlaylist)
 
-
-
-
-
-
-            // console.log('get em ', playlistIds)
-            // let one = Object.keys(playlistResults[0])
-            // console.log(Object.entries(one))
-            //   let filtered = (Object.entries(one).filter( only => 
-            //         only[1] === "name"
-            //   ))
-            //     console.log(filtered)
-            // }
-        //    theMost= playlistResults.concat(playlistPartialResults)
-        //     console.log(theMost)
-        
-            //     console.log(theTotal.concat(temp))
-            // }
-            // })
-
-            //            playlistPartialResults.items.map((one) => {
-            //                console.log(one)
-            //            })
-
-            //            let temp = playlistPartialResults.items
-            //            console.log(temp, playlistResults)
-            //    let  concated =  playlistResults.concat(temp)
-            //        console.log(concated)
-
-            //   
-            //    let playlistNames = []
-            //    playlistResults.items.map((item) => {
-            //        playlistIds.push(item.id)
-            //        playlistNames.push(item.name)
-            //    })
-               
-
-            //
-
-            //    console.log('this is state now', this.state)
-        
+  }
     
 
   render() {
@@ -101,3 +85,6 @@ class MakingHash extends Component {
 }
 
 export default MakingHash;
+
+
+// edge case: what if playlist has more than 100 songs
