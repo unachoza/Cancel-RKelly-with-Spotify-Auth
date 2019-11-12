@@ -3,8 +3,6 @@ import '../App.css'
 import Spotify from 'spotify-web-api-js'
 import Songs from './Songs'
 import ProblemRK from './ProblemRK'
-import ProblemCB from './ProblemCB'
-import ProblemMJ from './ProblemMJ'
 import UnfollowPlaylist from './UnfollowPlaylist'
 import FollowPlaylist from './FollowPlaylist'
 import axios from 'axios'
@@ -20,12 +18,7 @@ class PlaylistSingle extends Component {
                 trackNames: [],
                 artistsNamesArr: [],
                 RKSongTitle: [],
-                CBSongTitle: [],
-                MJsongTitle: [], 
-                iofMJsong: [],
                 iofRKsong: [],
-                iofCBsong: [],
-                length: [], 
                 uri: [],
                 publicPlaylistArr: [], 
                 songRouteID: []
@@ -76,13 +69,9 @@ class PlaylistSingle extends Component {
 
     searchForSongs(artistsNamesArr, trackNames) {
         let RKSongTitle = []
-        let CBSongTitle = []
-        let MJsongTitle = []
         let publicPlaylistArr = []
-
         let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly")
-        let iofCBsong = this.indexOfAll(artistsNamesArr, "Chris Brown")
-        let iofMJsong = this.indexOfAll(artistsNamesArr, "Michael Jackson")
+
         //checking if the playlist is public
         iofRKsong.map( index => {
             !this.props.CurrentUserid[index] === this.props.playlistOwnerId[index] &&
@@ -91,17 +80,13 @@ class PlaylistSingle extends Component {
         })
 
         console.log(this.props, 'this is props', this.props.CurrentUserid, 'current user id')
-        for (let i = 0; i < iofCBsong.length; i++){
-            CBSongTitle.push(trackNames[iofCBsong[i]])
-        }
+        
         for (let i = 0; i < iofRKsong.length; i++){
             RKSongTitle.push(trackNames[iofRKsong[i]])
         }
-        for (let i = 0; i < iofMJsong.length; i++){
-            MJsongTitle.push(trackNames[iofMJsong[i]])
-        }
-        this.setState({ CBSongTitle, RKSongTitle, MJsongTitle , iofMJsong, iofRKsong, iofCBsong, publicPlaylistArr})
-        this.problemLength(CBSongTitle, RKSongTitle, MJsongTitle)
+        
+        this.setState({  RKSongTitle, iofRKsong, publicPlaylistArr})
+        this.problemLength(RKSongTitle )
         //needs to be somewhere else post only if i of RK has length
         axios.post('http://localhost:3001/db/songs', {
             name: trackNames[iofRKsong],
@@ -128,18 +113,13 @@ class PlaylistSingle extends Component {
     })
     }
     
-    
-
-    problemLength(CBSongTitle, RKSongTitle, MJsongTitle) {
-        const length = CBSongTitle.length + RKSongTitle.length + MJsongTitle.length
-        this.setState({length})
-    }
+  
     render(){
-        const { CBSongTitle, RKSongTitle, MJsongTitle, showSongs, items, length, uri , iofMJsong, iofCBsong, iofRKsong , publicPlaylistArr} = this.state
+        const {RKSongTitle, showSongs, items, uri , iofRKsong , publicPlaylistArr} = this.state
         const {playlistInfo} = this.props
         let buttonText = showSongs? "CHECK SONGS" : "CLOSE SONGS" 
         return (
-        <div className={showSongs ? "playlist-container-closed" : "playlist-container-open"} >
+        <div className={showSongs ? "playlist-container-closed" : "playlist-container-open fadeIndown"} >
                 <img className="album-image" src={playlistInfo.images.length ? playlistInfo.images[0].url : "https://res.cloudinary.com/dh41vh9dx/image/upload/v1568335617/Big_Note-512.png"} alt="album art" />
             <br></br>
             <div className="songs-in-playlist-container-open">
@@ -152,23 +132,17 @@ class PlaylistSingle extends Component {
 
                  </button>
 
-                    {length > 0 && <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>
+                    {iofRKsong > 0 && <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>
                         This is a problem:</div>}
 
                 
-                {CBSongTitle.length >  0 &&
-                    
-                    <ProblemCB CBSongTitle={CBSongTitle} iofCBsong={iofCBsong} playlistId={playlistInfo.id} uri={uri} /> }
-
                     {RKSongTitle.length >  0 &&
                     
                     <ProblemRK songRouteID={this.state.songRouteID} RKSongTitle={RKSongTitle} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri} publicPlaylistArr={publicPlaylistArr}
                     />}
-
-                {MJsongTitle.length >  0 &&
-                    <ProblemMJ MJsongTitle={MJsongTitle} iofMJsong={iofMJsong} playlistId={playlistInfo.id} uri={uri}  /> }
+                
                     {publicPlaylistArr.length && <UnfollowPlaylist publicPlaylistArr={publicPlaylistArr} iofRKsong={iofRKsong} playlistId={playlistInfo.id} uri={uri}/>}
-                    {length > 0 && <hr></hr>}
+                    {iofRKsong > 0 && <hr></hr>}
                     {items && <Songs items={items} showSongs={showSongs} />}
             </div>
         </div>

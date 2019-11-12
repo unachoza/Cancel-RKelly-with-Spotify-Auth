@@ -232,7 +232,7 @@ class App extends Component {
     });
   }
 
-  
+
 /************************************************/
 /************************************************/
 /************************************************/
@@ -314,7 +314,7 @@ class App extends Component {
             CurrentUserid={id}
           />
         )}
-        {home && <UsageStats />}
+        {/* {home && <UsageStats />} */}
         {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}
       </div>
     );
