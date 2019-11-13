@@ -47,7 +47,7 @@ class ProblemRK extends Component{
 
     render() {
         const { RKSongTitle, uri, playlistId } = this.props
-        const {deleted, deleting } = this.state
+        const { deleting } = this.state
         
            let songs = RKSongTitle.map((song, i) => {
           return <div  className={!deleting ? "nothing": "animated zoomOut"} style={{textAlign: "left"}} key={i}>{song}  <br></br><span style={{color: 'white'}}>R. Kelly</span></div> 

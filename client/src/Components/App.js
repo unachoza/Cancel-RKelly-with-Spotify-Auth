@@ -3,7 +3,7 @@ import "../App.css";
 import Spotify from "spotify-web-api-js";
 import PlaylistList from "./PlaylistsList";
 import Introduction from "./Introduction";
-import UsageStats from "./UsageStats";
+// import UsageStats from "./UsageStats";
 import HowItWorks from "./HowItWorks";
 import AboutMe from "./AboutMe";
 import Nav from "./Nav";
@@ -113,10 +113,8 @@ class App extends Component {
         this.getAllPlaylists(num);
       })
       .then(() => {
-        this.state.playListObject.map(item => {
-          playlistOwnerId.push(item.owner.id);
-        });
-        return playlistOwnerId;
+        this.state.playListObject.map(item => playlistOwnerId.push(item.owner.id));
+       
       })
       //checking to see who owns playlist (if public)
       .then(() => {
@@ -142,35 +140,13 @@ class App extends Component {
         })
         .then(res => {
           console.log(res);
-          res.items.map(item => {
-            ALLplaylistID.push(item.id);
-          });
-          res.items.map(item => {
-            ALLplaylistNameArray.push(item.name);
-          });
+          res.items.map(item => ALLplaylistID.push(item.id));
+          res.items.map(item => ALLplaylistNameArray.push(item.name))
           console.log(ALLplaylistID, ALLplaylistNameArray);
           return ALLplaylistID;
         })
         .then(() => {});
-      // .then((res) => {
-      //     let itemsaa = 0
-      //     res.items.map((item) => {
-      //         itemsaa.push(item)
-      //        return items
-
-      //     })
-      //     console.log(res)
-      //     res.items.map((item) => {
-      //         ALLplaylistIdArray.push(item.id)
-      //         ALLplaylistNameArray.push(item.name)
-      //     console.log('playlistidarr', ALLplaylistIdArray, 'playlistnamearr', ALLplaylistNameArray)
-
-      //         return (ALLplaylistIdArray, ALLplaylistNameArray)
-      //     })
-      //     .then(() => {
-      //         this.listTracksFromPlaylists(ALLplaylistIdArray, ALLplaylistNameArray)
-      //     })
-      // })
+    
     }
   }
 
@@ -181,10 +157,7 @@ class App extends Component {
       //saving variables of interested data points in response obj
       let trackNames = [];
       let artistsNamesArr = [];
-      items.map(item => {
-        trackNames.push(item.track.name);
-        return trackNames;
-      });
+      items.map(item => trackNames.push(item.track.name));
       this.searchForSongs(artistsNamesArr, trackNames);
     });
   }
@@ -197,18 +170,6 @@ class App extends Component {
     //checking if the playlist is public
     console.log("this is idexs of playslist with problems", iofRKsong);
 
-    // console.log(this.props, 'this is props', this.props.CurrentUserid, 'current user id')
-    // for (let i = 0; i < iofCBsong.length; i++){
-    //     CBSongTitle.push(trackNames[iofCBsong[i]])
-    // }
-    // for (let i = 0; i < iofRKsong.length; i++){
-    //     RKSongTitle.push(trackNames[iofRKsong[i]])
-    // }
-    // for (let i = 0; i < iofMJsong.length; i++){
-    //     MJsongTitle.push(trackNames[iofMJsong[i]])
-    // }
-    // this.setState({ CBSongTitle, RKSongTitle, MJsongTitle , iofMJsong, iofRKsong, iofCBsong, publicPlaylistArr})
-    // this.problemLength(CBSongTitle, RKSongTitle, MJsongTitle)
   }
 
   increaseOffset() {
@@ -223,13 +184,6 @@ class App extends Component {
   stopClickingNext() {
     let totalClicksLeft = Math.floor(this.state.total / 10) - 1;
     this.setState({ totalClicksLeft });
-  }
-
-  findRKelly() {
-    // rkelly id : "2mxe0TnaNL039ysAj51xPQ"
-    spotifyWebApi.search("r kelly", ["artist"]).then(response => {
-      console.log("this is the response ", response);
-    });
   }
 
 
