@@ -11,7 +11,7 @@ class PlaylistSingle extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showSongs: true,
+      showSongs: false,
       items: [],
       RKSongTitle: [],
       iofRKsong: [],
@@ -21,10 +21,13 @@ class PlaylistSingle extends Component {
   }
 
   //getting list of tracks in User's Playlists
-  async listTracksFromPlaylists(playlistID) {
-    this.state.showSongs
-      ? this.setState({ showSongs: false })
-      : this.setState({ showSongs: true });
+    async listTracksFromPlaylists(playlistID) {
+        this.setState(prevState => ({
+            showSongs: !prevState.showSongs}))
+    //     this.state.showSongs
+    //   ? this.setState({ showSongs: false })
+    //   : this.setState({ showSongs: true });
+      
 
     //saving variables of neccesary data points in response obj
     const response = await spotifyWebApi.getPlaylistTracks(playlistID);
@@ -81,7 +84,8 @@ class PlaylistSingle extends Component {
         }
   }
 
-  render() {
+    render() {
+      console.log(this.state.showSongs)
     const { RKSongTitle, showSongs, items, uri, iofRKsong } = this.state;
     const { playlistInfo } = this.props;
     let buttonText = showSongs ? "CHECK SONGS" : "CLOSE SONGS";

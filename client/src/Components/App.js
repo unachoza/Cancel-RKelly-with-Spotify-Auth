@@ -50,12 +50,6 @@ class App extends Component {
     }
     return hashParams;
   }
-
-  //doesn't work yet
-  logout() {
-    console.log("clicked logout");
-    window.location.reload();
-  }
   //From Spotify Auth
   async getUserInfo() {
     let response = await spotifyWebApi.getMe()
