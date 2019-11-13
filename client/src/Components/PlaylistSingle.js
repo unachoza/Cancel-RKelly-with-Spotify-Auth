@@ -13,8 +13,6 @@ class PlaylistSingle extends Component {
     this.state = {
       showSongs: true,
       items: [],
-      trackNames: [],
-      artistsNamesArr: [],
       RKSongTitle: [],
       iofRKsong: [],
       uri: [],
@@ -23,65 +21,41 @@ class PlaylistSingle extends Component {
   }
 
   //getting list of tracks in User's Playlists
-  listTracksFromPlaylists(playlistID) {
+  async listTracksFromPlaylists(playlistID) {
     this.state.showSongs
       ? this.setState({ showSongs: false })
       : this.setState({ showSongs: true });
 
-    spotifyWebApi.getPlaylistTracks(playlistID).then(response => {
-      // console.log(response)
-      //saving variables of interested data points in response obj
-      let uri = [];
-      let trackNames = [];
-      let artistObjArr = [];
-      let artistsNamesArr = [];
-      let items = [];
-      response.items.map(item => {
-        items.push(item);
-        this.setState({ items });
-        return items;
-      });
-      response.items.map(item => {
-        trackNames.push(item.track.name);
-        return trackNames;
-      });
-      response.items.map(item => {
-        artistObjArr.push(item.track.artists);
-        return artistObjArr;
-      });
-      artistObjArr.map(artist => {
-        artistsNamesArr.push(artist[0].name);
-        return artistsNamesArr;
-      });
-      response.items.map(item => {
-        uri.push(item.track.uri);
-        return this.setState({ uri });
-      });
-      this.searchForSongs(artistsNamesArr, trackNames);
+    //saving variables of neccesary data points in response obj
+    const response = await spotifyWebApi.getPlaylistTracks(playlistID);
+    let uri = [];
+    let trackNames = [];
+    let artistObjArr = [];
+    let artistsNamesArr = [];
+    let items = [];
+    response.items.map(item => {
+      artistObjArr.push(item.track.artists);
+      trackNames.push(item.track.name);
+      items.push(item);
+      uri.push(item.track.uri);
+      return this.setState({ items, uri });
     });
+    artistObjArr.map(artist => artistsNamesArr.push(artist[0].name));
+    this.searchForSongs(artistsNamesArr, trackNames);
   }
+    
   indexOfAll = (arr, val) =>
     arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), []);
 
-  searchForSongs(artistsNamesArr, trackNames) {
+  async searchForSongs(artistsNamesArr, trackNames) {
     let RKSongTitle = [];
     let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly");
 
     //checking if the playlist is public
-      if (iofRKsong.length) {
-        this.props.CurrentUserid !== this.props.playlistOwnerId &&
-          console.log(false)
-      } else {
-          console.log('this playlist is yours')
-      }
-      
-
-    console.log(
-      this.props,
-      "this is props",
-      this.props.CurrentUserid,
-      "current user id"
-    );
+    iofRKsong.length ?
+      this.props.CurrentUserid !== this.props.playlistOwnerId &&
+     console.log(false)
+      :console.log("this playlist is yours");
 
     for (let i = 0; i < iofRKsong.length; i++) {
       RKSongTitle.push(trackNames[iofRKsong[i]]);
@@ -89,19 +63,13 @@ class PlaylistSingle extends Component {
 
     this.setState({ RKSongTitle, iofRKsong });
     //needs to be somewhere else post only if i of RK has length
-    axios
-      .post("http://localhost:3001/db/songs", {
+    const res = await axios.post("http://localhost:3001/db/songs", {
         name: trackNames[iofRKsong],
         artist: "R Kelly",
         deleted: false
       })
-      .then(res => {
         console.log(res.data.data.id);
-        this.setState({
-          songRouteID: res.data.data.id
-        });
-      })
-      .then(() => {
+        this.setState({songRouteID: res.data.data.id});
         if (iofRKsong.length > 1) {
           iofRKsong.forEach(i => {
             axios.post("http://localhost:3001/db/songs", {
@@ -111,25 +79,16 @@ class PlaylistSingle extends Component {
             });
           });
         }
-      });
   }
 
   render() {
-    const {
-      RKSongTitle,
-      showSongs,
-      items,
-      uri,
-      iofRKsong,
-    } = this.state;
+    const { RKSongTitle, showSongs, items, uri, iofRKsong } = this.state;
     const { playlistInfo } = this.props;
     let buttonText = showSongs ? "CHECK SONGS" : "CLOSE SONGS";
     return (
       <div
         className={
-          showSongs
-            ? "playlist-container-closed"
-            : "playlist-container-open fadeIndown"
+          showSongs ? "playlist-container-closed" : "playlist-container-open"
         }
       >
         <img
@@ -144,7 +103,7 @@ class PlaylistSingle extends Component {
         <br></br>
         <div className="songs-in-playlist-container-open">
           {playlistInfo.name} <br></br>
-          <button onClick={e => this.listTracksFromPlaylists(playlistInfo.id)}>
+          <button onClick={()=> this.listTracksFromPlaylists(playlistInfo.id)}>
             {buttonText}
           </button>
           {iofRKsong > 0 && (

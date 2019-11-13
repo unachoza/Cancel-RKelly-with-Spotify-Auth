@@ -57,20 +57,17 @@ class App extends Component {
     window.location.reload();
   }
   //From Spotify Auth
-  getUserInfo() {
-    spotifyWebApi.getMe()
-      .then(response => {
-        this.setState({
+  async getUserInfo() {
+    let response = await spotifyWebApi.getMe()
+    this.setState({
           display_name: response.display_name,
           email: response.email,
           country: response.country,
           id: response.id
         });
-      })
-      .then(() => {
         this.addUser();
         console.log("added");
-      });
+      
   }
 
   //add User to database
@@ -87,42 +84,32 @@ class App extends Component {
   };
 
   //getting total number of users playslist to make one 1 array in next function
-  getplaylistTotal = () => {
+   getplaylistTotal = async () => {
     const { totalPlaylists, id } = this.state;
-    spotifyWebApi.getUserPlaylists(id).then(res => {
+   const res = await spotifyWebApi.getUserPlaylists(id)
       this.setState({ totalPlaylists: res.total });
-    });
     console.log(totalPlaylists);
   };
 
   //getting list of User's Playlists: limit 50
-  getPlaylists = () => {
+  getPlaylists = async () => {
     let playlistOwnerId = [];
     this.setState({ items: [], playListObject: [] });
     this.increaseOffset();
     // {limit: 50, offset: 0} default limit: 20
-    spotifyWebApi.getUserPlaylists(this.state.id, { offset: this.state.offsetNum })
-      .then(response => {
+   const response = await spotifyWebApi.getUserPlaylists(this.state.id, { offset: this.state.offsetNum })
         this.setState({
           playListObject: response.items,
           total: response.total
         });
-      })
-      .then(() => {
-        const num = this.getplaylistTotal();
+        const num =  await this.getplaylistTotal();
         this.getAllPlaylists(num);
-      })
-      .then(() => {
         this.state.playListObject.map(item => playlistOwnerId.push(item.owner.id));
-       
-      })
+     
       //checking to see who owns playlist (if public)
-      .then(() => {
+     
         this.setState({ playlistOwnerId });
-      })
-      .then(() => {
         console.log(this.state.playlistOwnerId);
-      });
   };
   
   getAllPlaylists(totalPlaylists) {
