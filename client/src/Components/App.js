@@ -155,11 +155,8 @@ class App extends Component {
 
   increaseOffset() {
     this.setState(state => {
-      return { offsetNum: state.offsetNum + 20 };
-    });
-    if (this.state.total) {
-      this.stopClickingNext();
-    }
+      return { offsetNum: state.offsetNum + 20 } });
+    this.state.total && this.stopClickingNext(); 
   }
 
   stopClickingNext() {

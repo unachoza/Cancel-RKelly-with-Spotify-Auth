@@ -10,7 +10,6 @@ class MakingHash extends Component {
   };
 
   async componentDidMount() {
-    spotifyWebApi.getMe();
     const userRes = await spotifyWebApi.getMe();
     console.log(userRes);
     this.setState({
@@ -19,7 +18,6 @@ class MakingHash extends Component {
       email: userRes.email,
       country: userRes.country,
     });
-    console.log("this is stateu", this.state);
     let offsetNum = -50;
     let playlistResults = [];
 
@@ -29,7 +27,6 @@ class MakingHash extends Component {
     let loopsCount = Math.ceil(this.state.totalPlaylists / 50);
     for (let i = 0; i < loopsCount; i++) {
       offsetNum += 50;
-
       const temp = await spotifyWebApi.getUserPlaylists(
         this.state.id,
         {
@@ -40,6 +37,7 @@ class MakingHash extends Component {
       playlistResults.push.apply(playlistResults, temp.items);
       let playlistIds = [];
       let playlistNames = [];
+      console.log(playlistResults);
       playlistResults.map(index => {
         playlistIds.push(index.id);
        return playlistNames.push(index.name);
@@ -71,7 +69,6 @@ class MakingHash extends Component {
       }
 
       ///*****************looping and getting an array of all artist names for each playlist */
-      console.log(count);
       let currentPlaylistName = this.state.playlists.playlistNames[count];
       if (artistsNames.includes("R. Kelly")) {
         console.log("yes", currentPlaylistName);
