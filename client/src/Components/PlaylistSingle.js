@@ -46,7 +46,9 @@ class PlaylistSingle extends Component {
     artistObjArr.map(artist => artistsNamesArr.push(artist[0].name));
     this.searchForSongs(artistsNamesArr, trackNames);
   }
-    
+   
+  
+  //function to find all indexes
   indexOfAll = (arr, val) =>
     arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), []);
 
@@ -54,19 +56,10 @@ class PlaylistSingle extends Component {
     let RKSongTitle = [];
     let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly");
 
-    //checking if the playlist is public
-    iofRKsong.length ?
-      this.props.CurrentUserid !== this.props.playlistOwnerId &&
-     console.log(false)
-      :console.log("this playlist is yours");
 
-    for (let i = 0; i < iofRKsong.length; i++) {
-      RKSongTitle.push(trackNames[iofRKsong[i]]);
-    }
-
-    this.setState({ RKSongTitle, iofRKsong });
     //needs to be somewhere else post only if i of RK has length
-    const res = await axios.post("http://localhost:3001/db/songs", {
+    if (iofRKsong.length > 1) {
+      const res = await axios.post("http://localhost:3001/db/songs", {
         name: trackNames[iofRKsong],
         artist: "R Kelly",
         deleted: false
@@ -82,6 +75,23 @@ class PlaylistSingle extends Component {
             });
           });
         }
+ }
+    
+
+    //checking if the playlist is public
+    iofRKsong.length ?
+      this.props.CurrentUserid !== this.props.playlistOwnerId &&
+     console.log(false)
+      :console.log("this playlist is yours");
+
+    for (let i = 0; i < iofRKsong.length; i++) {
+      RKSongTitle.push(trackNames[iofRKsong[i]]);
+    }
+
+    this.setState({ RKSongTitle, iofRKsong });
+
+
+   
   }
 
     render() {

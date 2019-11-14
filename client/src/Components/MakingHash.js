@@ -67,29 +67,45 @@ class MakingHash extends Component {
       for (let i = 0; i < artistsObj.length; i++) {
         artistsNames.push(artistsObj[i][0].name);
       }
+      console.log(artistsNames)
 
       ///*****************looping and getting an array of all artist names for each playlist */
       let currentPlaylistName = this.state.playlists.playlistNames[count];
-      if (artistsNames.includes("R. Kelly")) {
-        console.log("yes", currentPlaylistName);
-        this.setState(prevState => ({
-          problem: [...prevState.problem, currentPlaylistName]
-        }));
-      }
+      // if (artistsNames.includes("R. Kelly")) {  
+      //   console.log("yes", currentPlaylistName);
+      //   this.setState(prevState => ({
+      //     problem: [...prevState.problem, currentPlaylistName]
+      //   }));
+      // } 
+      console.log(this.state.problem)
       count++;
     });
   }
+  componentDidUpdate() {
+    const { problem } = this.state
+      console.log('this renders', problem)
+      if (problem.length > 1) {
+        problem.map((index) => {
+          console.log('I agree', index )
+          return(<div>{`The Playlist, ${index} has a Problem`} </div>)
+        })
+      }
+    }
+  
 
   //***********find rkelly and find out what playlist the song belongs to
   ///**********FINDS RKELLY AND PRINTS PLAYLISTNAME*/
 
   render() {
+
+    
+      
+
     return (
+      
       <div>
-        {/* <div>{`The Playlist, ${this.state.problem[0]}  has a Problem`}</div>)
-          <div>{`The Playlist, ${this.state.problem[1]}  has a Problem`}</div>)
-          <div>{`The Playlist, ${this.state.problem[2]}  has a Problem`}</div>)
-     */}
+
+        <h1>hash</h1>
       </div>
     );
   }
