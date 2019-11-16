@@ -11,7 +11,6 @@ class MakingHash extends Component {
 
   async componentDidMount() {
     const userRes = await spotifyWebApi.getMe();
-    console.log(userRes);
     this.setState({
       id: userRes.id,
       name: userRes.display_name,
@@ -25,14 +24,12 @@ class MakingHash extends Component {
     const loops = await spotifyWebApi.getUserPlaylists(this.state.id);
     this.setState({ totalPlaylists: loops.total });
     let loopsCount = Math.ceil(this.state.totalPlaylists / 50);
+    //needs to loop if user has more than 50 playlists
     for (let i = 0; i < loopsCount; i++) {
       offsetNum += 50;
-      const temp = await spotifyWebApi.getUserPlaylists(
-        this.state.id,
-        {
-          limit: 50,
-          offset: offsetNum
-        }
+      console.log(offsetNum)
+      const temp = await spotifyWebApi.getUserPlaylists( this.state.id,
+        {limit: 50, offset: offsetNum}
       );
       playlistResults.push.apply(playlistResults, temp.items);
       let playlistIds = [];
@@ -44,42 +41,47 @@ class MakingHash extends Component {
       });
 
       //State now has all PlayListIDS and their Names
+      console.log(" before adding to state with prevState", this.state)
       this.setState(prevState => ({
         playlists: {
           ...prevState.playlists,
-          playlistIds: [...playlistIds, playlistIds],
-          playlistNames: [...playlistNames, playlistNames]
+          playlistIds: [ playlistIds],
+          playlistNames: [ playlistNames]
         }
       }));
       console.log("my state", this.state);
     }
     let count = 0;
-    this.state.playlists.playlistIds.map(async id => {
-      let tracks = await spotifyWebApi.getPlaylistTracks(id);
-      tracks = tracks.items;
-      let artistsObj = [];
-
-      // getting the artist object, because the name is nested deeply
-      for (let i = 0; i < tracks.length; i++) {
-        artistsObj.push(tracks[i].track.artists);
-      }
-      let artistsNames = [];
-      for (let i = 0; i < artistsObj.length; i++) {
-        artistsNames.push(artistsObj[i][0].name);
-      }
-      console.log(artistsNames)
-
-      ///*****************looping and getting an array of all artist names for each playlist */
-      let currentPlaylistName = this.state.playlists.playlistNames[count];
-      // if (artistsNames.includes("R. Kelly")) {  
-      //   console.log("yes", currentPlaylistName);
-      //   this.setState(prevState => ({
-      //     problem: [...prevState.problem, currentPlaylistName]
-      //   }));
-      // } 
-      console.log(this.state.problem)
-      count++;
-    });
+    if (this.state.playlists.playlistIds.length > 1) {
+      this.state.playlists.playlistIds.map(async id => {
+        let tracks = await spotifyWebApi.getPlaylistTracks(id);
+        tracks = tracks.items;
+        let artistsObj = [];
+  
+        // getting the artist object, because the name is nested deeply
+        for (let i = 0; i < tracks.length; i++) {
+          artistsObj.push(tracks[i].track.artists);
+        }
+        let artistsNames = [];
+        for (let i = 0; i < artistsObj.length; i++) {
+          artistsNames.push(artistsObj[i][0].name);
+        }
+        // console.log(artistsNames)
+  
+        ///*****************looping and getting an array of all artist names for each playlist */
+        let currentPlaylistName = this.state.playlists.playlistNames[count];
+        console.log('this is count', count, currentPlaylistName)
+        if (artistsNames.includes("R. Kelly")) {  
+          console.log("yes", artistsNames);
+          this.setState(prevState => ({
+            problem: [...prevState.problem, currentPlaylistName]
+          }));
+        } 
+        console.log(this.state.problem)
+        count++;
+      });
+    }
+    
   }
   componentDidUpdate() {
     const { problem } = this.state

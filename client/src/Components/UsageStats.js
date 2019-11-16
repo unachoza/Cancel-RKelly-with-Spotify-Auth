@@ -14,24 +14,14 @@ componentDidMount(){
 this.userCounter()
 this.songsRemovedCounter()
 }
-    userCounter = ()=> {
-            axios.get('http://localhost:3001/db/users/unique')
-            .then(res => {
-                console.log('thisvale',res.data.data[0].count)
+   userCounter = async ()=> {
+           const res = await axios.get('http://localhost:3001/db/users/unique')
             this.setState({userCount: res.data.data[0].count})
-    
-            })
-        
-        return this.state.userCount
     }
 
-    songsRemovedCounter() {
-        axios.get('http://localhost:3001/db/deletedsongs')
-        .then(res => {
-            console.log(res)
+    songsRemovedCounter = async () => {
+       const res = await axios.get('http://localhost:3001/db/deletedsongs')
             this.setState({deletedSongsCount: res.data.data[0].count})
-        })
-        return this.state.deletedSongsCount
 
     }
     render() {
