@@ -9,6 +9,7 @@ class ProblemRK extends Component {
   constructor() {
     super();
     this.state = {
+
       deleted: false
     };
   }
@@ -47,6 +48,7 @@ class ProblemRK extends Component {
           style={{ textAlign: "left" }}
           key={i}
         >
+
           {song} <br></br>
           <span style={{ color: "white" }}>R. Kelly</span>
         </div>
@@ -57,8 +59,9 @@ class ProblemRK extends Component {
         {songs}
         <button
           id="remove-button"
-          onClick={e => this.removeSongs(playlistId, uri)}
-        >
+
+          onClick={e => this.removeSongs(playlistId, uri)}>
+
           Remove
         </button>
       </div>

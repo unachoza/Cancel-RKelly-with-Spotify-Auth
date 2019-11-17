@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react'
 import '../App.css'
 import Spotify from 'spotify-web-api-js'
@@ -6,9 +7,11 @@ import ProblemRK from './ProblemRK'
 import axios from 'axios'
 import SlideToggle from "react-slide-toggle"
 
-const   spotifyWebApi = new Spotify()
+
+const spotifyWebApi = new Spotify();
 
 class PlaylistSingle extends Component {
+
         constructor(props) {
             super(props)
             this.state = {
@@ -20,8 +23,11 @@ class PlaylistSingle extends Component {
                 publicPlaylistArr: [], 
                 songRouteID: []
             }
+
         }
+ }
     
+
     //getting list of tracks in User's Playlists 
     listTracksFromPlaylists  = async (playlistID) =>{
         this.setState(prevState => ({
@@ -114,9 +120,12 @@ console.log('once through')
                 {playlistInfo.name} <br></br>
 
 
-                 <button onClick={(e) => this.listTracksFromPlaylists( playlistInfo.id)}>
+    this.setState({ RKSongTitle, iofRKsong });
 
-                 {buttonText}
+
+   
+  }
+
 
                  </button>
 
@@ -134,16 +143,24 @@ console.log('once through')
                
                     {iofRKsong > 0 && <hr></hr>}
                     {items && <Songs items={items} showSongs={showSongs} />}
+
             </div>
+          )}
+          {RKSongTitle.length > 0 && (
+            <ProblemRK
+              songRouteID={this.state.songRouteID}
+              RKSongTitle={RKSongTitle}
+              iofRKsong={iofRKsong}
+              playlistId={playlistInfo.id}
+              uri={uri}
+            />
+          )}
+          {iofRKsong > 0 && <hr></hr>}
+          {items && <Songs items={items} showSongs={showSongs} />}
         </div>
-        )
-    }
+      </div>
+    );
+  }
 }
 
-
-
-  
-
-
-export default PlaylistSingle
-
+export default PlaylistSingle;

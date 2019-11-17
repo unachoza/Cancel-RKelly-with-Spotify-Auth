@@ -39,7 +39,9 @@ class App extends Component {
       this.getUserInfo();
     }
   }
-
+//   componentDidMount = () => {
+//   this.addUser()
+// }
   getHashParams() {
     let hashParams = {};
     let e,
@@ -49,9 +51,8 @@ class App extends Component {
       hashParams[e[1]] = decodeURIComponent(e[2]);
     }
     return hashParams;
-  }
 
-
+    
   //From Spotify Auth
   async getUserInfo() {
     let response = await spotifyWebApi.getMe()
@@ -61,8 +62,10 @@ class App extends Component {
           country: response.country,
           id: response.id
         });
+
     this.addUser();
     console.log("added");
+
       
   }
 
@@ -79,11 +82,13 @@ class App extends Component {
   };
 
   //getting total number of users playslist to make one 1 array in next function
+
   getplaylistTotal = async () => {
     const { totalPlaylists, id } = this.state;
     const res = await spotifyWebApi.getUserPlaylists(id)
     this.setState({ totalPlaylists: res.total });
 };
+
 
   //getting list of User's Playlists: limit 50
   getPlaylists = async () => {
@@ -101,6 +106,7 @@ class App extends Component {
         this.state.playListObject.map(item => playlistOwnerId.push(item.owner.id));
      
       //checking to see who owns playlist (if public)
+
         this.setState({ playlistOwnerId });
         console.log(this.state.playlistOwnerId);
   };
@@ -118,11 +124,13 @@ class App extends Component {
           limit: 50,
           offset: offsetNum
         })
+
       res.items.map(item => ALLplaylistID.push(item.id));
       res.items.map(item => ALLplaylistNameArray.push(item.name))
       console.log(ALLplaylistID, ALLplaylistNameArray);
       return ALLplaylistID;
      
+
     }
   }
 
@@ -144,7 +152,7 @@ class App extends Component {
   //Search ALL Playlist for Problems; Display Playlist Names with Problems
   searchForSongs(artistsNamesArr) {
     let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly");
-    console.log("this is idexs of playslist with problems", iofRKsong)
+
   }
 
   increaseOffset() {
@@ -157,10 +165,6 @@ class App extends Component {
     let totalClicksLeft = Math.floor(this.state.total / 10) - 1;
     this.setState({ totalClicksLeft });
   }
-
-
-
-
 
 
   //toggling through nav 
@@ -183,9 +187,8 @@ class App extends Component {
         {home && <Home />}
         {aboutMe && <AboutMe />}
         {howItWorks && <HowItWorks />}
-        
-          {login && <Introduction loggedIn={loggedIn} />}
 
+          {login && <Introduction loggedIn={loggedIn} />}
           <div style={{ margin: "0px" }}>
             <div></div>
             <div style={{ display: "flex", justifyContent: "center" }}>

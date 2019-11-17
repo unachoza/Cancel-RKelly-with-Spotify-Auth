@@ -9,12 +9,12 @@ class MakingHash extends Component {
   };
 
   async componentDidMount() {
-    // const {user} = this.state
     const userRes = await spotifyWebApi.getMe();
     this.setState({
       id: userRes.id,
       name: userRes.display_name,
       email: userRes.email,
+
       country: userRes.country
     });
     let offsetNum = -50;
@@ -32,19 +32,23 @@ class MakingHash extends Component {
         limit: 50,
         offset: offsetNum
       });
+
       playlistResults.push.apply(playlistResults, temp.items);
       let playlistIds = [];
       let playlistNames = [];
       console.log(playlistResults);
       playlistResults.map(index => {
         playlistIds.push(index.id);
+
         playlistNames.push(index.name);
+
       });
 
       //State now has all PlayListIDS and their Names
       this.setState(prevState => ({
         playlists: {
           ...prevState.playlists,
+
           playlistIds: playlistIds,
           playlistNames: playlistNames
         }
@@ -72,8 +76,10 @@ class MakingHash extends Component {
     });
   }
 
+
   //***********find rkelly and find out what playlist the song belongs to
   ///**********FINDS RKELLY AND PRINTS PLAYLISTNAME*/
+
 
  
 
@@ -83,6 +89,7 @@ class MakingHash extends Component {
         <div>{`The Playlist, ${this.state.problem[0]}  has a Problem`}</div>
         <div>{`The Playlist, ${this.state.problem[1]}  has a Problem`}</div>
         {/* <div>{`The Playlist, ${this.state.problem[2]}  has a Problem`}</div> */}
+
       </div>
     );
   }

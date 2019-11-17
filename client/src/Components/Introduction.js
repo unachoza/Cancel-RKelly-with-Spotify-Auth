@@ -3,6 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import "../App.css";
 
+
 const Introduction = loggedIn => {
   return (
     <div className="Intro-page">
@@ -25,6 +26,7 @@ const Introduction = loggedIn => {
                       I'm defining problematic as an artist who has committed domestic abuse and or sexual assault against others.
                       </p>
           </div>  
+
 
           <div className="carousel-divs">
             <p className="paragraph">
