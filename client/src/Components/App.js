@@ -8,7 +8,7 @@ import HowItWorks from "./HowItWorks";
 import AboutMe from "./AboutMe";
 import Nav from "./Nav";
 import Home from "./Home";
-import MakingHash from './MakingHash'
+// import MakingHash from './MakingHash'
 import axios from "axios";
 
 const spotifyWebApi = new Spotify();
@@ -51,173 +51,106 @@ class App extends Component {
     return hashParams;
   }
 
-  //doesn't work yet
-  logout() {
-    console.log("clicked logout");
-    window.location.reload();
-  }
+
   //From Spotify Auth
-  getUserInfo() {
-    spotifyWebApi.getMe()
-      .then(response => {
-        this.setState({
+  async getUserInfo() {
+    let response = await spotifyWebApi.getMe()
+    this.setState({
           display_name: response.display_name,
           email: response.email,
           country: response.country,
           id: response.id
         });
-      })
-      .then(() => {
-        this.addUser();
-        console.log("added");
-      });
+    this.addUser();
+    console.log("added");
+      
   }
 
   //add User to database
   addUser = () => {
     const time = new Date().toString();
     const { display_name, email, country } = this.state;
-    if (display_name) {
-      axios.post("http://localhost:3001/db/users", {
-          display_name,
-          email,
-          country,
-          time
-        })}
+    axios.post("http://localhost:3001/db/users", {
+        display_name,
+        email,
+        country,
+        time
+      })
   };
 
   //getting total number of users playslist to make one 1 array in next function
-  getplaylistTotal = () => {
+  getplaylistTotal = async () => {
     const { totalPlaylists, id } = this.state;
-    spotifyWebApi.getUserPlaylists(id).then(res => {
-      this.setState({ totalPlaylists: res.total });
-    });
-    console.log(totalPlaylists);
-  };
+    const res = await spotifyWebApi.getUserPlaylists(id)
+    this.setState({ totalPlaylists: res.total });
+};
 
   //getting list of User's Playlists: limit 50
-  getPlaylists = () => {
+  getPlaylists = async () => {
     let playlistOwnerId = [];
     this.setState({ items: [], playListObject: [] });
     this.increaseOffset();
     // {limit: 50, offset: 0} default limit: 20
-    spotifyWebApi.getUserPlaylists(this.state.id, { offset: this.state.offsetNum })
-      .then(response => {
+   const response = await spotifyWebApi.getUserPlaylists(this.state.id, { offset: this.state.offsetNum })
         this.setState({
           playListObject: response.items,
           total: response.total
         });
-      })
-      .then(() => {
-        const num = this.getplaylistTotal();
+        const num =  await this.getplaylistTotal();
         this.getAllPlaylists(num);
-      })
-      .then(() => {
-        this.state.playListObject.map(item => {
-          playlistOwnerId.push(item.owner.id);
-        });
-        return playlistOwnerId;
-      })
+        this.state.playListObject.map(item => playlistOwnerId.push(item.owner.id));
+     
       //checking to see who owns playlist (if public)
-      .then(() => {
         this.setState({ playlistOwnerId });
-      })
-      .then(() => {
         console.log(this.state.playlistOwnerId);
-      });
   };
-  
-  getAllPlaylists(totalPlaylists) {
+
+   //  using number of total playlists to decided if need for looping to fetch more than 50 
+  getAllPlaylists = async (totalPlaylists) => {
     let loopsCount = Math.ceil(totalPlaylists / 50);
-    console.log(loopsCount);
     let offsetNum = -50;
     let ALLplaylistID = [];
     let ALLplaylistNameArray = [];
     for (let i = 0; i < loopsCount; i++) {
       offsetNum += 50;
-      spotifyWebApi
+      const res = await spotifyWebApi
         .getUserPlaylists(this.state.id, {
           limit: 50,
           offset: offsetNum
         })
-        .then(res => {
-          console.log(res);
-          res.items.map(item => {
-            ALLplaylistID.push(item.id);
-          });
-          res.items.map(item => {
-            ALLplaylistNameArray.push(item.name);
-          });
-          console.log(ALLplaylistID, ALLplaylistNameArray);
-          return ALLplaylistID;
-        })
-        .then(() => {});
-      // .then((res) => {
-      //     let itemsaa = 0
-      //     res.items.map((item) => {
-      //         itemsaa.push(item)
-      //        return items
-
-      //     })
-      //     console.log(res)
-      //     res.items.map((item) => {
-      //         ALLplaylistIdArray.push(item.id)
-      //         ALLplaylistNameArray.push(item.name)
-      //     console.log('playlistidarr', ALLplaylistIdArray, 'playlistnamearr', ALLplaylistNameArray)
-
-      //         return (ALLplaylistIdArray, ALLplaylistNameArray)
-      //     })
-      //     .then(() => {
-      //         this.listTracksFromPlaylists(ALLplaylistIdArray, ALLplaylistNameArray)
-      //     })
-      // })
+      res.items.map(item => ALLplaylistID.push(item.id));
+      res.items.map(item => ALLplaylistNameArray.push(item.name))
+      console.log(ALLplaylistID, ALLplaylistNameArray);
+      return ALLplaylistID;
+     
     }
   }
 
-  listTracksFromPlaylists(playlistIDArr, playlistNameArr) {
-    spotifyWebApi.getPlaylistTracks(playlistIDArr).then(res => {
+  listTracksFromPlaylists = async (playlistIDArr) => {
+    const res = await spotifyWebApi.getPlaylistTracks(playlistIDArr)
       let items = res.items;
       console.log(res);
       //saving variables of interested data points in response obj
       let trackNames = [];
       let artistsNamesArr = [];
-      items.map(item => {
-        trackNames.push(item.track.name);
-        return trackNames;
-      });
+      items.map(item => trackNames.push(item.track.name));
       this.searchForSongs(artistsNamesArr, trackNames);
-    });
   }
+  
   indexOfAll = (arr, val) =>
     arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), []);
-
-  searchForSongs(artistsNamesArr, trackNames) {
+  
+  
+  //Search ALL Playlist for Problems; Display Playlist Names with Problems
+  searchForSongs(artistsNamesArr) {
     let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly");
-
-    //checking if the playlist is public
-    console.log("this is idexs of playslist with problems", iofRKsong);
-
-    // console.log(this.props, 'this is props', this.props.CurrentUserid, 'current user id')
-    // for (let i = 0; i < iofCBsong.length; i++){
-    //     CBSongTitle.push(trackNames[iofCBsong[i]])
-    // }
-    // for (let i = 0; i < iofRKsong.length; i++){
-    //     RKSongTitle.push(trackNames[iofRKsong[i]])
-    // }
-    // for (let i = 0; i < iofMJsong.length; i++){
-    //     MJsongTitle.push(trackNames[iofMJsong[i]])
-    // }
-    // this.setState({ CBSongTitle, RKSongTitle, MJsongTitle , iofMJsong, iofRKsong, iofCBsong, publicPlaylistArr})
-    // this.problemLength(CBSongTitle, RKSongTitle, MJsongTitle)
+    console.log("this is idexs of playslist with problems", iofRKsong)
   }
 
   increaseOffset() {
     this.setState(state => {
-      return { offsetNum: state.offsetNum + 20 };
-    });
-    if (this.state.total) {
-      this.stopClickingNext();
-    }
+      return { offsetNum: state.offsetNum + 20 } });
+    this.state.total && this.stopClickingNext(); 
   }
 
   stopClickingNext() {
@@ -225,22 +158,11 @@ class App extends Component {
     this.setState({ totalClicksLeft });
   }
 
-  findRKelly() {
-    // rkelly id : "2mxe0TnaNL039ysAj51xPQ"
-    spotifyWebApi.search("r kelly", ["artist"]).then(response => {
-      console.log("this is the response ", response);
-    });
-  }
 
-  //Search ALL Playlist for Problems; Display Playlist Names with Problems
-  searchAllPlaylists(artistsNamesArr, trackNames) {
-    let RKSongTitle = [];
-    let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly");
-    for (let i = 0; i < iofRKsong.length; i++) {
-      RKSongTitle.push(trackNames[iofRKsong[i]]);
-    }
-    this.setState({ RKSongTitle, iofRKsong });
-  }
+
+
+
+
   //toggling through nav 
   navigate = (e) => {
     let navArr = ["home", "howItWorks", "login", "aboutMe"]
@@ -248,7 +170,6 @@ class App extends Component {
     this.setState({ [name]: true })
     navArr =  navArr.filter(nav => nav !== name )
     navArr.forEach(nav => this.setState({ [nav]: false }))
-    console.log(`${name}`, ', should be on this page')
   }
    
 
@@ -256,14 +177,13 @@ class App extends Component {
     const { loggedIn, offsetNum, total, playListObject, items, trackNamesArr, playlistOwnerId, id, home, aboutMe, howItWorks, login } = this.state;
     return (
       <div className="home">
-        <MakingHash />
+        {/* <MakingHash /> */}
         <Nav changeNav={this.navigate} navState={this.state}/>
         <h1>Cancel R. Kelly</h1>
         {home && <Home />}
         {aboutMe && <AboutMe />}
         {howItWorks && <HowItWorks />}
         
-        {/* <div className={loggedIn ? "loggedIn" : "loggedOut"}> */}
           {login && <Introduction loggedIn={loggedIn} />}
 
           <div style={{ margin: "0px" }}>
@@ -303,7 +223,6 @@ class App extends Component {
               " "
             )}
           </div>
-        {/* </div> */}
 
         {playListObject && trackNamesArr && (
           <PlaylistList
