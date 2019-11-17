@@ -41,21 +41,20 @@ class MakingHash extends Component {
       });
 
       //State now has all PlayListIDS and their Names
-      console.log(" before adding to state with prevState", this.state)
       this.setState(prevState => ({
         playlists: {
           ...prevState.playlists,
-          playlistIds: [ playlistIds],
-          playlistNames: [ playlistNames]
+          playlistIds:  playlistIds,
+          playlistNames:  playlistNames
         }
       }));
-      console.log("my state", this.state);
     }
     let count = 0;
-    if (this.state.playlists.playlistIds.length > 1) {
+    if (this.state.playlists.playlistIds.length > 0) {
       this.state.playlists.playlistIds.map(async id => {
         let tracks = await spotifyWebApi.getPlaylistTracks(id);
         tracks = tracks.items;
+        console.log(tracks, 'on this count', count)
         let artistsObj = [];
   
         // getting the artist object, because the name is nested deeply
@@ -80,7 +79,7 @@ class MakingHash extends Component {
         console.log(this.state.problem)
         count++;
       });
-    }
+    } 
     
   }
   componentDidUpdate() {
