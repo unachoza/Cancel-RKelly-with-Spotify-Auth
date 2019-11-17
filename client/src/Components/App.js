@@ -177,7 +177,7 @@ class App extends Component {
     const { loggedIn, offsetNum, total, playListObject, items, trackNamesArr, playlistOwnerId, id, home, aboutMe, howItWorks, login } = this.state;
     return (
       <div className="home">
-        <MakingHash />
+        {/* <MakingHash /> */}
         <Nav changeNav={this.navigate} navState={this.state}/>
         <h1>Cancel R. Kelly</h1>
         {home && <Home />}
@@ -229,7 +229,7 @@ class App extends Component {
             usersPlaylists={playListObject}
             playlistOwnerId={playlistOwnerId}
             items={items}
-            CurrentUserid={id}
+             Userid={id}
           />
         )}
         {home && <UsageStats />}

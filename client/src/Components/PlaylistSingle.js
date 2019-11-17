@@ -4,6 +4,7 @@ import Spotify from 'spotify-web-api-js'
 import Songs from './Songs'
 import ProblemRK from './ProblemRK'
 import axios from 'axios'
+import SlideToggle from "react-slide-toggle"
 
 const   spotifyWebApi = new Spotify()
 
@@ -33,10 +34,10 @@ class PlaylistSingle extends Component {
             let artistObjArr = [];
             let artistsNamesArr = [];
             let items = [];
-            response.items.map(item => {
+        response.items.map(item => {
               artistObjArr.push(item.track.artists);
               trackNames.push(item.track.name);
-              items.push(item);
+              items.push(item.track);
               uri.push(item.track.uri);
               return this.setState({ items, uri });
             });
@@ -50,23 +51,23 @@ class PlaylistSingle extends Component {
         let RKSongTitle = []
         let publicPlaylistArr = []
         let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly")
+        console.log('these are the props', this.props)
 
 
-
+console.log('once through')
         ////////////checking if the playlist is public
-        iofRKsong.map( index => {
-            !this.props.CurrentUserid[index] === this.props.playlistOwnerId[index] &&
-            publicPlaylistArr.push(index)
-            console.log(false)
-        })
+      
+        if (this.props.CurrentUserid !== this.props.playlistOwnerId[0]) {
+            console.log(this.props.playlistInfo.name, 'and these',this.props.CurrentUserid, this.props.playlistOwnerId[0] );
+            console.log(this.props.CurrentUserid === this.props.playlistOwnerId)
+       
+           }
+            // this.props.CurrentUserid !== this.props.playlistOwnerId
 /////////////
         
+      iofRKsong.forEach(i => RKSongTitle.push(trackNames[i]))
       
-        for (let i = 0; i < iofRKsong.length; i++){
-            RKSongTitle.push(trackNames[iofRKsong[i]])
-        }
         this.setState({ RKSongTitle, iofRKsong, publicPlaylistArr })
-        console.log('going to post',trackNames[iofRKsong] )
    //checking if there is more than one r kelly song, different logic to post two songs, 
         if (iofRKsong.length > 1) {  
             console.log('yes its more than one')
@@ -82,7 +83,7 @@ class PlaylistSingle extends Component {
              
          });
             
-            
+            //only one song
         } else {
             const res =  await axios.post('http://localhost:3001/db/songs', {
                 name: trackNames[iofRKsong],
