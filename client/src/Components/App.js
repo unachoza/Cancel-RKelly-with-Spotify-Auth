@@ -8,7 +8,7 @@ import HowItWorks from "./HowItWorks";
 import AboutMe from "./AboutMe";
 import Nav from "./Nav";
 import Home from "./Home";
-// import MakingHash from './MakingHash'
+import MakingHash from './MakingHash'
 import axios from "axios";
 
 const spotifyWebApi = new Spotify();
@@ -177,7 +177,7 @@ class App extends Component {
     const { loggedIn, offsetNum, total, playListObject, items, trackNamesArr, playlistOwnerId, id, home, aboutMe, howItWorks, login } = this.state;
     return (
       <div className="home">
-        {/* <MakingHash /> */}
+        <MakingHash />
         <Nav changeNav={this.navigate} navState={this.state}/>
         <h1>Cancel R. Kelly</h1>
         {home && <Home />}

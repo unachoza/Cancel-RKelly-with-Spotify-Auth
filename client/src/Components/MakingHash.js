@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import "./App.css";
 import Spotify from "spotify-web-api-js";
 const spotifyWebApi = new Spotify();
 
@@ -11,32 +10,25 @@ class MakingHash extends Component {
 
     async componentDidMount() {
         // const {user} = this.state
-        spotifyWebApi.getMe();
         const userRes = await spotifyWebApi.getMe();
-        console.log(userRes);
         this.setState({
             id: userRes.id,
             name: userRes.display_name,
             email: userRes.email,
             country: userRes.country,
-            totalPlaylists: userRes.total
         });
-        console.log("this is stateu", this.state);
         let offsetNum = -50;
         let playlistResults = [];
-        let playlistPartialResults = [];
       
         //geting playlists ids & names only 50
         const loops = await spotifyWebApi.getUserPlaylists(this.state.id);
         this.setState({ totalPlaylists: loops.total });
         let loopsCount = Math.ceil(this.state.totalPlaylists / 50);
+        //needs to loop if user has more than 50 playlists
         for (let i = 0; i < loopsCount; i++) {
             offsetNum += 50;
         
-            const temp = await spotifyWebApi.getUserPlaylists("8mcnehzy9pqb74j65vsfzhluu", {
-                limit: 50,
-                offset: offsetNum
-            })
+            const temp = await spotifyWebApi.getUserPlaylists(this.state.id, {limit: 50, offset: offsetNum })
             playlistResults.push.apply(playlistResults, temp.items);
             let playlistIds = [];
             let playlistNames = [];
@@ -50,70 +42,38 @@ class MakingHash extends Component {
             this.setState(prevState => ({
                 playlists: {
                     ...prevState.playlists,
-                    playlistIds: [...playlistIds, playlistIds],
-                    playlistNames: [...playlistNames, playlistNames]
+                    playlistIds:  playlistIds,
+                    playlistNames:  playlistNames
                 }
             }));
-            console.log("my state", this.state);
         }
-        let count = 0
-        this.state.playlists.playlistIds.map(async (id) => {
-          let tracks = await spotifyWebApi.getPlaylistTracks(id)
-          console.log("before items", tracks,)
+        //getting the songs &aritist from each playlist
+        this.state.playlists.playlistIds.map(async id => {
+            let tracks = await spotifyWebApi.getPlaylistTracks(id)
             tracks = tracks.items
             let artistsObj = []
 
             // getting the artist object, because the name is nested deeply
-            for (let i = 0; i < tracks.length; i++) {
-                artistsObj.push(tracks[i].track.artists)
-            }
+            tracks.forEach(i => artistsObj.push(i.track.artists))
             let artistsNames = []
-            console.log(artistsObj)
-            for (let i = 0; i < artistsObj.length; i++) {
-                artistsNames.push(artistsObj[i][0].name)
-            }
+            artistsObj.forEach(obj => artistsNames.push(obj[0].name))
 
-            ///*****************looping and getting an array of all artist names for each playlist */
-            console.log(artistsNames)
-            console.log(count)
-            let currentPlaylistName = this.state.playlists.playlistNames[count]
-            if (artistsNames.includes('R. Kelly')){
-                console.log('yes', artistsNames)
-                this.setState(prevState => ({
-                    problem: [ ...prevState.problem, currentPlaylistName]
+           //checking if rkelly is in array of artists
+            if (artistsNames.includes('R. Kelly')) {
+                const res = await spotifyWebApi.getPlaylist(id)
+                console.log(res)
+                this.setState((prevState) => ({
+                    problem: prevState.problem.concat(res.name)
                 }))
 
-                // this.setState(prevState => ({
-                //     myArray: [...prevState.myArray, "new value"]
-                //   }))
             } else {
                 console.log('no')
             }
              
-            console.log(this.state)
-            
-              count++
+             console.log(this.state.problem)
             
         }
             
-          
-            //   tracks = tracks[id].track.name
-            //   count ++
-            //   console.log()
-          
-            //   }) 
-
-            //   console.log(count)
-            //  let  currentPlaylistName = this.state.playlists.playlistNames[0]
-            //   console.log(currentPlaylistName)
-            // const song =  await spotifyWebApi.getPlaylistTracks(
-            //     this.state.playlists.playlistIds.map((indexOfPlaylist) => {
-            //         let artistsFromOnePlaylist = []
-
-            //  song.items.map((index) => {
-            //      artistsFromOnePlaylist.push(index.track.artists[0].name)
-            //  })
-    
         )
         
     }

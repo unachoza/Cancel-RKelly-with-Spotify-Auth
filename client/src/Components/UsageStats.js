@@ -20,7 +20,7 @@ this.songsRemovedCounter()
     }
 
     songsRemovedCounter = async () => {
-      const res =  axios.get('http://localhost:3001/db/deletedsongs')
+      const res = await axios.get('http://localhost:3001/db/deletedsongs')
             this.setState({deletedSongsCount: res.data.data[0].count})
     }
     render() {
