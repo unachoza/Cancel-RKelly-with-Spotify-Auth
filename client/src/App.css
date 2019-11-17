@@ -182,8 +182,9 @@ position: absolute;
 
 .Intro-page {
   justify-content: center;
-  width: 60%;
-  margin: auto;
+
+  margin: auto
+
 }
 .loggedIn {
   padding-top: 55px;
@@ -290,62 +291,9 @@ a:active {
   top: 35px;
 }
 
-#content {
-  margin: 50px;
-}
-a {
-  text-decoration: none;
-}
-
-.expandable {
-  background: #fff;
-  overflow: hidden;
-  color: #000;
-  line-height: 50px;
-
-  transition: all 0.5s ease-in-out;
-  height: 0;
-}
-
-.expandable:target {
-  height: 50px;
-}
-
-@-webkit-keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.fadeInDown {
-  -webkit-animation-name: fadeInDown;
-  animation-name: fadeInDown;
-}
 .carousel-divs {
   background-color: rgb(29, 28, 28);
   margin: 0px;
   width: 100%;
   height: 100%;
-}
+

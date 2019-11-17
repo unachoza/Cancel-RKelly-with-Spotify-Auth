@@ -10,10 +10,10 @@ const SongSingle = ({ item }) => {
       >
         {" "}
         <span style={{ fontSize: "20px", color: "white" }}>
-          {item.track.name}{" "}
+          {item.name}{" "}
         </span>
         <br></br>
-        {item.track.artists[0].name}
+        {item.artists[0].name}
       </div>
     </div>
   );

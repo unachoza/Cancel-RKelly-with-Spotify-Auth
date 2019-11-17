@@ -9,45 +9,46 @@ class ProblemRK extends Component {
   constructor() {
     super();
     this.state = {
-      deleting: false,
+
       deleted: false
     };
   }
 
-  async removeSongs(playlistID, uri) {
+  removeSongs = (playlistID, uri) => {
     const { iofRKsong, songRouteID } = this.props;
     this.setState({ deleted: true });
+
+    //first check if removing more than on problem
     if (iofRKsong.length > 1) {
       const multipleSongs = iofRKsong.map(index => uri[index]);
-      multipleSongs.map(index =>
-        spotifyWebApi.removeTracksFromPlaylist(playlistID, [{ uri: index }])
-      );
+      multipleSongs.map(index => spotifyWebApi.removeTracksFromPlaylist(playlistID, [{ uri: index }]));
+      songRouteID.forEach(i => {
+        axios.put(`http://localhost:3001/db/songs/${i}`, {
+          deleted: true
+        });
+      });
     }
+    /// only one song
     spotifyWebApi.removeTracksFromPlaylist(playlistID, [
       { uri: uri[this.props.iofRKsong] }
     ]);
-    const res = await axios.put(
-      `http://localhost:3001/db/songs/${songRouteID}`,
-        { deleted: true });
-    console.log(res.data.data, "might have delet43ed");
-    this.setState({ deleting: true });
-    this.deleteAnimation();
-  }
-
-  deleteAnimation = () => {
-    console.log("deleiting thisotha");
-    return this.state.deleting ? "animated zoomOut" : "";
+    axios.put(`http://localhost:3001/db/songs/${songRouteID}`, {
+      deleted: true
+    });
   };
 
   render() {
     const { RKSongTitle, uri, playlistId } = this.props;
-    const { deleting } = this.state;
+    const { deleted } = this.state;
+
     let songs = RKSongTitle.map((song, i) => {
       return (
         <div
-          className={!deleting ? "nothing" : "animated zoomOut"}
+          className={deleted ? "animated zoomOut" : ""}
           style={{ textAlign: "left" }}
-          key={i}>
+          key={i}
+        >
+
           {song} <br></br>
           <span style={{ color: "white" }}>R. Kelly</span>
         </div>
@@ -58,7 +59,9 @@ class ProblemRK extends Component {
         {songs}
         <button
           id="remove-button"
+
           onClick={e => this.removeSongs(playlistId, uri)}>
+
           Remove
         </button>
       </div>
