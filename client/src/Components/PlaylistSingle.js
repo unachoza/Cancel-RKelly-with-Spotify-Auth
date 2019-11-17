@@ -76,12 +76,9 @@ class PlaylistSingle extends Component {
                  artist: 'R Kelly',
                  deleted: false
              })
-             //need to be settin state with prevstate to maintain array spread opperator
-
              this.setState((prevState) => ({
                 songRouteID:  prevState.songRouteID.concat(res.data.data.id)
              }))
-             console.log(this.state)
              
          });
             
@@ -122,7 +119,7 @@ class PlaylistSingle extends Component {
 
                  </button>
 
-                    {iofRKsong > 0 && <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>
+                    {RKSongTitle.length > 0 && <div style={{ color: "darkred", fontSize: "20px", fontWeight: "300" }}>
                         This is a problem:</div>}
 
                
