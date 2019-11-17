@@ -102,6 +102,7 @@ class PlaylistSingle extends Component {
         }
         this.setState({ CBSongTitle, RKSongTitle, MJsongTitle , iofMJsong, iofRKsong, iofCBsong, publicPlaylistArr})
         this.problemLength(CBSongTitle, RKSongTitle, MJsongTitle)
+        console.log('going to post',trackNames[iofRKsong] )
         //needs to be somewhere else post only if i of RK has length
         axios.post('http://localhost:3001/db/songs', {
             name: trackNames[iofRKsong],

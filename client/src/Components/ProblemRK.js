@@ -49,7 +49,7 @@ deleteAnimation = () => {
         const {deleted } = this.state
         
            let songs = RKSongTitle.map((song, i) => {
-          return <div  className={deleted? "deleted": ""} style={{textAlign: "left"}} key={i}>{song}  <br></br><span style={{color: 'white'}}>R. Kelly</span></div> 
+          return <div  className={deleted? "animated zoomOut": ""} style={{textAlign: "left"}} key={i}>{song}  <br></br><span style={{color: 'white'}}>R. Kelly</span></div> 
      })
         return (
             <div  style={{ fontSize: "20px", fontWeight: "300" }}>
