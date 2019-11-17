@@ -58,7 +58,8 @@ class MakingHash extends Component {
         }
         let count = 0
         this.state.playlists.playlistIds.map(async (id) => {
-            let tracks = await spotifyWebApi.getPlaylistTracks(id)
+          let tracks = await spotifyWebApi.getPlaylistTracks(id)
+          console.log("before items", tracks,)
             tracks = tracks.items
             let artistsObj = []
 
@@ -77,7 +78,7 @@ class MakingHash extends Component {
             console.log(count)
             let currentPlaylistName = this.state.playlists.playlistNames[count]
             if (artistsNames.includes('R. Kelly')){
-                console.log('yes', currentPlaylistName)
+                console.log('yes', artistsNames)
                 this.setState(prevState => ({
                     problem: [ ...prevState.problem, currentPlaylistName]
                 }))
@@ -131,10 +132,10 @@ class MakingHash extends Component {
   render() {
       return (
           <div>
-          {/* <div>{`The Playlist, ${this.state.problem[0]}  has a Problem`}</div>)
-          <div>{`The Playlist, ${this.state.problem[1]}  has a Problem`}</div>)
-          <div>{`The Playlist, ${this.state.problem[2]}  has a Problem`}</div>)
-     */}
+            <div>{`The Playlist, ${this.state.problem[0]}  has a Problem`}</div>
+            <div>{`The Playlist, ${this.state.problem[1]}  has a Problem`}</div>
+            {/* <div>{`The Playlist, ${this.state.problem[2]}  has a Problem`}</div> */}
+    
           </div>
       )
   }
