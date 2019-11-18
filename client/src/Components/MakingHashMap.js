@@ -9,7 +9,7 @@ class MakingHash extends Component {
   };
 
   async componentDidMount() {
-    // const {user} = this.state
+    const {id} = this.state
     const userRes = await spotifyWebApi.getMe();
     this.setState({
       id: userRes.id,
@@ -21,14 +21,14 @@ class MakingHash extends Component {
     let playlistResults = [];
 
     //geting playlists ids & names only 50
-    const loops = await spotifyWebApi.getUserPlaylists(this.state.id);
+    const loops = await spotifyWebApi.getUserPlaylists(id);
     this.setState({ totalPlaylists: loops.total });
     let loopsCount = Math.ceil(this.state.totalPlaylists / 50);
     //needs to loop if user has more than 50 playlists
     for (let i = 0; i < loopsCount; i++) {
       offsetNum += 50;
 
-      const temp = await spotifyWebApi.getUserPlaylists(this.state.id, {
+      const temp = await spotifyWebApi.getUserPlaylists(id, {
         limit: 50,
         offset: offsetNum
       });
@@ -78,11 +78,13 @@ class MakingHash extends Component {
  
 
   render() {
+
+const {problem } = this.state
     return (
       <div>
-        <div>{`The Playlist, ${this.state.problem[0]}  has a Problem`}</div>
-        <div>{`The Playlist, ${this.state.problem[1]}  has a Problem`}</div>
-        {/* <div>{`The Playlist, ${this.state.problem[2]}  has a Problem`}</div> */}
+        {problem.length > 0 ? problem.map(playlist => <div>{`The Playlist, ${playlist} has a Problem`}</div>)
+        : <div>Congrat's no r kelly songs</div>}
+       
       </div>
     );
   }

@@ -8,7 +8,7 @@ import HowItWorks from "./HowItWorks";
 import AboutMe from "./AboutMe";
 import Nav from "./Nav";
 import Home from "./Home";
-import MakingHash from './MakingHash'
+import MakingHashMap from './MakingHashMap'
 import axios from "axios";
 
 const spotifyWebApi = new Spotify();
@@ -24,10 +24,8 @@ class App extends Component {
         login: false,
         howItWorks: false,
         aboutMe: false,
-      playListObject: "",
-      trackNamesArr: [],
+      playListObject: [],
       offsetNum: 0,
-      items: [],
       display_name: "",
       email: "",
       country: "",
@@ -62,7 +60,6 @@ class App extends Component {
           id: response.id
         });
     this.addUser();
-    console.log("added");
       
   }
 
@@ -80,18 +77,18 @@ class App extends Component {
 
   //getting total number of users playslist to make one 1 array in next function
   getplaylistTotal = async () => {
-    const { totalPlaylists, id } = this.state;
+    const { id } = this.state;
     const res = await spotifyWebApi.getUserPlaylists(id)
     this.setState({ totalPlaylists: res.total });
 };
 
   //getting list of User's Playlists: limit 50
   getPlaylists = async () => {
+    const {id } = this.state
     let playlistOwnerId = [];
-    this.setState({ items: [], playListObject: [] });
     this.increaseOffset();
     // {limit: 50, offset: 0} default limit: 20
-   const response = await spotifyWebApi.getUserPlaylists(this.state.id, { offset: this.state.offsetNum })
+   const response = await spotifyWebApi.getUserPlaylists( id, { offset: this.state.offsetNum })
         this.setState({
           playListObject: response.items,
           total: response.total
@@ -107,7 +104,7 @@ class App extends Component {
 
    //  using number of total playlists to decided if need for looping to fetch more than 50 
   getAllPlaylists = async (totalPlaylists) => {
-    let loopsCount = Math.ceil(totalPlaylists / 50);
+    let loopsCount = Math.ceil(totalPlaylists / 20);
     let offsetNum = -50;
     let ALLplaylistID = [];
     let ALLplaylistNameArray = [];
@@ -116,36 +113,15 @@ class App extends Component {
       const res = await spotifyWebApi
         .getUserPlaylists(this.state.id, {
           limit: 50,
-          offset: offsetNum
+          offset: this.state.offsetNum
         })
       res.items.map(item => ALLplaylistID.push(item.id));
       res.items.map(item => ALLplaylistNameArray.push(item.name))
-      console.log(ALLplaylistID, ALLplaylistNameArray);
       return ALLplaylistID;
      
     }
   }
 
-  listTracksFromPlaylists = async (playlistIDArr) => {
-    const res = await spotifyWebApi.getPlaylistTracks(playlistIDArr)
-      let items = res.items;
-      console.log(res);
-      //saving variables of interested data points in response obj
-      let trackNames = [];
-      let artistsNamesArr = [];
-      items.map(item => trackNames.push(item.track.name));
-      this.searchForSongs(artistsNamesArr, trackNames);
-  }
-  
-  indexOfAll = (arr, val) =>
-    arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), []);
-  
-  
-  //Search ALL Playlist for Problems; Display Playlist Names with Problems
-  searchForSongs(artistsNamesArr) {
-    let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly");
-    console.log("this is idexs of playslist with problems", iofRKsong)
-  }
 
   increaseOffset() {
     this.setState(state => {
@@ -161,8 +137,6 @@ class App extends Component {
 
 
 
-
-
   //toggling through nav 
   navigate = (e) => {
     let navArr = ["home", "howItWorks", "login", "aboutMe"]
@@ -174,12 +148,12 @@ class App extends Component {
    
 
   render() {
-    const { loggedIn, offsetNum, total, playListObject, items, trackNamesArr, playlistOwnerId, id, home, aboutMe, howItWorks, login } = this.state;
+    const { loggedIn, offsetNum, total, playListObject, playlistOwnerId, id, home, aboutMe, howItWorks, login } = this.state;
     return (
       <div className="home">
-        {/* <MakingHash /> */}
         <Nav changeNav={this.navigate} navState={this.state}/>
         <h1>Cancel R. Kelly</h1>
+        < MakingHashMap />
         {home && <Home />}
         {aboutMe && <AboutMe />}
         {howItWorks && <HowItWorks />}
@@ -193,7 +167,6 @@ class App extends Component {
                 <div>
                   {!loggedIn ? (
                     <a href="http://localhost:8888">
-                      {/* <button>How it works</button> */}
                       <button>Login to Spotify</button>
                     </a>
                   ) : (
@@ -224,16 +197,13 @@ class App extends Component {
             )}
           </div>
 
-        {playListObject && trackNamesArr && (
+        {playListObject && 
           <PlaylistList
             usersPlaylists={playListObject}
             playlistOwnerId={playlistOwnerId}
-            items={items}
              Userid={id}
-          />
-        )}
+          />}
         {home && <UsageStats />}
-        {/* {this.listTracksFromPlaylists("1ZmR4C1R0clb32v25PWzvD")} */}
       </div>
     );
   }
