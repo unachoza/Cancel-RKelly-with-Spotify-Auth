@@ -14,8 +14,8 @@ import axios from "axios";
 const spotifyWebApi = new Spotify();
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     const params = this.getHashParams();
     const token = params.access_token;
     this.state = {
@@ -85,7 +85,8 @@ class App extends Component {
 
   //getting list of User's Playlists: limit 50
   getPlaylists = async () => {
-    const {id } = this.state
+    const { id } = this.state
+    // this.setState({login: false})
     let playlistOwnerId = [];
     this.increaseOffset();
     // {limit: 50, offset: 0} default limit: 20
@@ -152,7 +153,7 @@ class App extends Component {
     const { loggedIn, offsetNum, total, playListObject, playlistOwnerId, id, home, aboutMe, howItWorks, login } = this.state;
     return (
       <div className="home">
-        <Nav changeNav={this.navigate} navState={this.state}/>
+        <Nav changeNav={this.navigate} />
         <h1>Cancel R. Kelly</h1>
       { loggedIn &&  < MakingHashMap />}
         {home && <Home />}

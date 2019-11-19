@@ -84,8 +84,8 @@ class MakingHash extends Component {
 const {problem } = this.state
     return (
       <div>
-        {problem.length > 0 ? problem.map(playlist => <div>{`The Playlist, ${playlist} has a Problem`}</div>)
-        : <div>Congrat's no r kelly songs</div>}
+        {problem.length > 0 ? problem.map(playlist => <div className="hashResults" >{`The Playlist, ${playlist} has a Problem`}</div>)
+        : <div className="hashResults blinking" >Congrats! No R Kelly songs were found!</div>}
        
       </div>
     );

@@ -224,3 +224,28 @@ a:active {
 .control-arrow{
   margin: 0px 12%
 }
+
+/*///// Display Problems  \\\*/
+@keyframes blinkingText{
+  0%{     color: white;    }
+  10%{    color: transparent; }
+  20%{    color: white;  }
+  30%{    color:transparent;  }
+  40%{    color: transparent; }
+  50%{    color: white;  }
+  60%{    color:transparent;  }
+  70%{    color: transparent; }
+  80%{    color: white;  }
+  90%{    color:transparent;  }
+  100%{   color: white;    }
+}
+.blinking{
+  animation:blinkingText 3s ;
+}
+
+.hashResults{
+  margin: auto;
+  font-size: 30px;
+  color: white;
+  
+}
