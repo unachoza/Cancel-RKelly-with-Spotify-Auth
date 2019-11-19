@@ -22,20 +22,22 @@ class MakingHash extends Component {
 
     //geting playlists ids & names only 50
     const loops = await spotifyWebApi.getUserPlaylists(id);
+    console.log("these are the loops", loops)
     this.setState({ totalPlaylists: loops.total });
     let loopsCount = Math.ceil(this.state.totalPlaylists / 50);
     //needs to loop if user has more than 50 playlists
     for (let i = 0; i < loopsCount; i++) {
       offsetNum += 50;
 
-      const temp = await spotifyWebApi.getUserPlaylists(id, {
+      const temp = await spotifyWebApi.getUserPlaylists(this.state.id, {
         limit: 50,
         offset: offsetNum
       });
+      console.log("these are temp", temp, i)
       playlistResults.push.apply(playlistResults, temp.items);
       let playlistIds = [];
       let playlistNames = [];
-      console.log(playlistResults);
+      console.log(playlistResults, i);
       playlistResults.map(index => {
         playlistIds.push(index.id);
         playlistNames.push(index.name);
@@ -61,7 +63,7 @@ class MakingHash extends Component {
       let artistsNames = [];
       artistsObj.forEach(obj => artistsNames.push(obj[0].name));
 
-      //checking if rkelly is in array of artists
+      // checking if rkelly is in array of artists
       if (artistsNames.includes("R. Kelly")) {
         const res = await spotifyWebApi.getPlaylist(id);
         //saving playlist name to state, if problem present

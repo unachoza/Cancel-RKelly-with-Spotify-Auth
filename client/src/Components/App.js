@@ -33,6 +33,7 @@ class App extends Component {
     };
 
     if (token) {
+      console.log(token)
       spotifyWebApi.setAccessToken(token);
       this.getUserInfo();
     }
@@ -105,9 +106,9 @@ class App extends Component {
    //  using number of total playlists to decided if need for looping to fetch more than 50 
   getAllPlaylists = async (totalPlaylists) => {
     let loopsCount = Math.ceil(totalPlaylists / 20);
-    let offsetNum = -50;
     let ALLplaylistID = [];
     let ALLplaylistNameArray = [];
+    let offsetNum = -50;
     for (let i = 0; i < loopsCount; i++) {
       offsetNum += 50;
       const res = await spotifyWebApi
