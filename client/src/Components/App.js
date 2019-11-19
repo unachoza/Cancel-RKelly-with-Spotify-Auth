@@ -154,7 +154,7 @@ class App extends Component {
       <div className="home">
         <Nav changeNav={this.navigate} navState={this.state}/>
         <h1>Cancel R. Kelly</h1>
-        < MakingHashMap />
+      { loggedIn &&  < MakingHashMap />}
         {home && <Home />}
         {aboutMe && <AboutMe />}
         {howItWorks && <HowItWorks />}
