@@ -38,9 +38,7 @@ class App extends Component {
       this.getUserInfo();
     }
   }
-//   componentDidMount = () => {
-//   this.addUser()
-// }
+
   getHashParams() {
     let hashParams = {};
     let e,
@@ -90,7 +88,6 @@ class App extends Component {
   //getting list of User's Playlists: limit 50
   getPlaylists = async () => {
     const { id } = this.state
-    // this.setState({login: false})
     let playlistOwnerId = [];
     this.increaseOffset();
     // {limit: 50, offset: 0} default limit: 20
@@ -106,7 +103,6 @@ class App extends Component {
       //checking to see who owns playlist (if public)
 
         this.setState({ playlistOwnerId });
-        console.log(this.state.playlistOwnerId);
   };
 
    //  using number of total playlists to decided if need for looping to fetch more than 50 

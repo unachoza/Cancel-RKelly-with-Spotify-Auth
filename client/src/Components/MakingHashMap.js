@@ -23,7 +23,6 @@ class MakingHash extends Component {
 
     //geting playlists ids & names only 50
     const loops = await spotifyWebApi.getUserPlaylists(id);
-    // console.log("these are the loops", loops)
     this.setState({ totalPlaylists: loops.total });
     let loopsCount = Math.ceil(this.state.totalPlaylists / 50);
     //needs to loop if user has more than 50 playlists
@@ -37,7 +36,6 @@ class MakingHash extends Component {
       playlistResults.push.apply(playlistResults, temp.items);
       let playlistIds = [];
       let playlistNames = [];
-      console.log(playlistResults, i);
       playlistResults.map(index => {
         playlistIds.push(index.id);
 

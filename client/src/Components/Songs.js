@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import SongSingle from "./SongSingle";
 
-const Songs = ({ items, showSongs }) => {
+const Songs = ({ items }) => {
   return (
     <div >
       {items.map((item, i) => (

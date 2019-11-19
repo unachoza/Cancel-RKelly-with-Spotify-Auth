@@ -11,7 +11,7 @@ const Conclusion = () => {
       <body>
         <p className="paragraph">
           Congradulations! your actions demonstrate that black girls matter,
-          that you believe women that abusers shall face consequences no matter
+          that you believe women and that abusers shall face consequences no matter
           how many bangers they pump out
         </p>
       </body>

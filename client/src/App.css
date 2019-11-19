@@ -108,7 +108,7 @@ button:hover {
 }
 .playlist-container-closed {
   width: "350px";
-  height: "350px";
+  /* height: "350px"; */
   display: inline-block;
   margin: 10px;
   padding-left: 50px;
@@ -156,7 +156,9 @@ button:hover {
   border-radius: 10px;
   color: rgb(126, 121, 121);
 }
-
+.songs-in-playlist-container-closed {
+  display: none;
+}
 .song-title {
   text-align: left;
   font-size: 20px;

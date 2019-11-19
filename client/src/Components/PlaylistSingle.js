@@ -26,7 +26,6 @@ class PlaylistSingle extends Component {
     this.setState(prevState => ({
       showSongs: !prevState.showSongs
     }));
-console.log(this.state.showSongs)
     const response = await spotifyWebApi.getPlaylistTracks(playlistID);
     let uri = [];
     let trackNames = [];
@@ -64,14 +63,12 @@ console.log(this.state.showSongs)
 
     this.setState({ RKSongTitle, iofRKsong, publicPlaylistArr });
 
-    console.log(iofRKsong);
     iofRKsong.forEach(async i => {
       let res = await axios.post("http://localhost:3001/db/songs", {
         name: trackNames[i],
         artist: "R Kelly",
         deleted: false
       });
-      console.log(res.data.data.id);
       this.setState(prevState => ({
         songRouteID: prevState.songRouteID.concat(res.data.data.id)
       }));
@@ -82,11 +79,10 @@ console.log(this.state.showSongs)
     const { RKSongTitle, showSongs, items, uri, iofRKsong } = this.state;
     const { playlistInfo } = this.props;
     let buttonText = showSongs ? "CHECK SONGS" : "CLOSE SONGS";
+    let songsVisible = showSongs ? "playlist-container-closed" : "playlist-container-open"
     return (
       <div
-        className={
-          showSongs ? "playlist-container-closed" : "playlist-container-open"
-        }
+        className={songsVisible}
       >
         <img
           className="album-image"
