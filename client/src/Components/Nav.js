@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import "../App.css";
 
-class Nav extends Component {
-    render() {
+const Nav = ({ changeNav }) => {
         
     return (
       <div>
@@ -16,14 +15,14 @@ class Nav extends Component {
 
         <div className="nav-container">
           <ul className="nav-list">
-            <li id="home" onClick={(e) => this.props.changeNav(e)}>HOME</li>
-            <li id="login" onClick={(e) => this.props.changeNav(e)}>LOGIN</li>
-            <li id="howItWorks" onClick={(e) => this.props.changeNav(e)}>HOW IT WORKS</li>
-            <li id="aboutMe" onClick={(e) => this.props.changeNav(e)}>ABOUT ME</li>
+            <li id="home" onClick={(e) => changeNav(e)}>HOME</li>
+            <li id="login" onClick={(e) => changeNav(e)}>LOGIN</li>
+            <li id="howItWorks" onClick={(e) => changeNav(e)}>HOW IT WORKS</li>
+            <li id="aboutMe" onClick={(e) => changeNav(e)}>ABOUT ME</li>
           </ul>
         </div>
       </div>
     );
   }
-}
+
 export default Nav;

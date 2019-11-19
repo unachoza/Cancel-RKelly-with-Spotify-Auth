@@ -19,7 +19,6 @@ class ProblemRK extends Component {
     this.setState({ deleted: true });
 
     //first check if removing more than on problem
-    if (iofRKsong.length > 1) {
       const multipleSongs = iofRKsong.map(index => uri[index]);
       multipleSongs.map(index => spotifyWebApi.removeTracksFromPlaylist(playlistID, [{ uri: index }]));
       songRouteID.forEach(i => {
@@ -27,14 +26,7 @@ class ProblemRK extends Component {
           deleted: true
         });
       });
-    }
-    /// only one song
-    spotifyWebApi.removeTracksFromPlaylist(playlistID, [
-      { uri: uri[this.props.iofRKsong] }
-    ]);
-    axios.put(`http://localhost:3001/db/songs/${songRouteID}`, {
-      deleted: true
-    });
+ 
   };
 
   render() {

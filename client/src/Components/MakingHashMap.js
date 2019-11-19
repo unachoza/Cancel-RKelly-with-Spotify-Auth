@@ -9,6 +9,7 @@ class MakingHash extends Component {
   };
 
   async componentDidMount() {
+    const {id} = this.state
     const userRes = await spotifyWebApi.getMe();
     this.setState({
       id: userRes.id,
@@ -21,7 +22,8 @@ class MakingHash extends Component {
     let playlistResults = [];
 
     //geting playlists ids & names only 50
-    const loops = await spotifyWebApi.getUserPlaylists(this.state.id);
+    const loops = await spotifyWebApi.getUserPlaylists(id);
+    // console.log("these are the loops", loops)
     this.setState({ totalPlaylists: loops.total });
     let loopsCount = Math.ceil(this.state.totalPlaylists / 50);
     //needs to loop if user has more than 50 playlists
@@ -32,11 +34,10 @@ class MakingHash extends Component {
         limit: 50,
         offset: offsetNum
       });
-
       playlistResults.push.apply(playlistResults, temp.items);
       let playlistIds = [];
       let playlistNames = [];
-      console.log(playlistResults);
+      console.log(playlistResults, i);
       playlistResults.map(index => {
         playlistIds.push(index.id);
 
@@ -65,7 +66,7 @@ class MakingHash extends Component {
       let artistsNames = [];
       artistsObj.forEach(obj => artistsNames.push(obj[0].name));
 
-      //checking if rkelly is in array of artists
+      // checking if rkelly is in array of artists
       if (artistsNames.includes("R. Kelly")) {
         const res = await spotifyWebApi.getPlaylist(id);
         //saving playlist name to state, if problem present
@@ -84,12 +85,13 @@ class MakingHash extends Component {
  
 
   render() {
+
+const {problem } = this.state
     return (
       <div>
-        <div>{`The Playlist, ${this.state.problem[0]}  has a Problem`}</div>
-        <div>{`The Playlist, ${this.state.problem[1]}  has a Problem`}</div>
-        {/* <div>{`The Playlist, ${this.state.problem[2]}  has a Problem`}</div> */}
-
+        {problem.length > 0 ? problem.map(playlist => <div className="hashResults" >{`The Playlist, ${playlist} has a Problem`}</div>)
+        : <div className="hashResults blinking" >Congrats! No R Kelly songs were found!</div>}
+       
       </div>
     );
   }

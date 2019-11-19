@@ -115,6 +115,7 @@ button:hover {
   padding-right: 50px;
   border-radius: 10px;
   color: rgb(126, 121, 121);
+  
 }
 .album-image {
   height: "220px";
@@ -131,12 +132,6 @@ button:hover {
   height: "100%";
 }
 
-/* z-index: 1;
-opacity: .9;
-display: flex;
-width: 00px;
-position: absolute;
-} */
 .playlist-container-open {
   font-size: 20px;
   display: inline-block;
@@ -198,48 +193,6 @@ position: absolute;
   padding: 8px;
 }
 
-/* 
-.boxShadow{
-  @include transition(
-    box-shadow 200ms ease-out,
-    transform 200ms ease-out,
-    opacity 200ms ease-in-out
-  );
-  &:after,
-  &:before{
-    @include transition(400ms linear);
-  }
-}
-
-.boxShadow:hover:not(.fadeOut){
-  @include box-shadow(0px 0px 0px 20px $red inset);
-  @include transform(scale(0.8));
-  &:after{
-    background-color: #fff;
-    @include transform(rotate(-45deg) scale(0.6));
-  }
-  &:before{
-    background-color: #fff;
-    @include transform(rotate(45deg) scale(0.6));
-  }
-}
-
-
-.fadeOut{
-  opacity:0;
-}
-
-.circle{
-  width:40px;
-  height:40px;
-  background:transparent;
-  border: 4px solid red;
-  @include border-radius(50%);
-  position:relative;
-  cursor: pointer;
-  display:inline-block;
-  margin: 10px 20px;
-} */
 
 .deleted {
   animation: strikethru 0.5s ease forwards;
@@ -252,7 +205,7 @@ position: absolute;
     width: calc(100% - 2em);
   }
 }
-
+/* ///////Navigation Header\\\\\\ */
 .nav-list {
   display: flex;
   font-size: 20px;
@@ -291,9 +244,43 @@ a:active {
   top: 35px;
 }
 
+/* /// Carousel \\\\ */
 .carousel-divs {
   background-color: rgb(29, 28, 28);
   margin: 0px;
   width: 100%;
   height: 100%;
+}
+.control-dots {
+  position: relative;
+    margin-top: 30px;
+    display: none;
+}
+.control-arrow{
+  margin: 0px 12%
+}
 
+/*///// Display Problems  \\\*/
+@keyframes blinkingText{
+  0%{     color: white;    }
+  10%{    color: transparent; }
+  20%{    color: white;  }
+  30%{    color:transparent;  }
+  40%{    color: transparent; }
+  50%{    color: white;  }
+  60%{    color:transparent;  }
+  70%{    color: transparent; }
+  80%{    color: white;  }
+  90%{    color:transparent;  }
+  100%{   color: white;    }
+}
+.blinking{
+  animation:blinkingText 3s ;
+}
+
+.hashResults{
+  margin: auto;
+  font-size: 30px;
+  color: white;
+  
+}
