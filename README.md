@@ -1,4 +1,17 @@
-User flow: 
+
+
+## Installation
+
+cd into authorization_code 
+
+node app.js
+
+then cd .. back to root and run 
+
+npm run dev
+
+
+## User flow 
 
 login in with Spotify Credentials 
 splash page with app details:
