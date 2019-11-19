@@ -1,26 +1,54 @@
-import React from 'react'
-import '../App.css'
-
-const Introduction = (loggedIn) => {
-    // console.log(loggedIn.loggedIn)
-    return (
-        <div className="Intro-page">
-            <h1>Cancel R. Kelly</h1>
-
-            {!loggedIn.loggedIn ?
-                <p>This app makes it super simple to get Rkelly out of your ears and life.<br></br> Listening to his music is problematic #BelieveWomen </p> : ""}
+import React from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import "../App.css";
 
 
-            {/* <p>Given the recent climant of believing women, I have built an app that removes problematic songs from Users Spotify Playlists, starting with R. Kelly. I'm choosing to define problematic as Artist who commit domestic abuse and or sexual assault. The purpose of this app is to empower users to painlessly remove R. Kelly's songs from their spotify without having to hunt for where ever they are hidden. Removing problematic music from our lives is just one way we can fight the patriarchy</p> */}
-        </div>
-    )
-}
+const Introduction = loggedIn => {
+  return (
+    <div className="Intro-page">
+      <Carousel showThumbs={false} showStatus={false}>
+        
+          <div className="carousel-divs">
+            <p className="paragraph">
+              This app effortlessly removes R Kelly from our lives. Listening to
+              his music is problematic #BelieveWomen
+            </p>
+          </div>
+          <div className="carousel-divs">
+            <p className="paragraph">
+              Given the recent climant of believing women, I have built an app that removes problematic songs from users Spotify Playlists, starting with R. Kelly. 
+              </p>
+          </div>        
+                      
+              <div className="carousel-divs">
+            <p className="paragraph">
+                      I'm defining problematic as an artist who has committed domestic abuse and or sexual assault against others.
+                      </p>
+          </div>  
 
-export default Introduction
 
+          <div className="carousel-divs">
+            <p className="paragraph">
+                       This app empowers users to painlessly remove R. Kelly's songs without hunting through their playlists.
+                       </p>
+          </div>  
 
-//table of user names 
+          <div className="carousel-divs">
+            <p className="paragraph">
+                        Removing problematic music from our lives is just one way we can fight the patriarchy
+            </p>
+          </div>
+        
+      </Carousel>
+    </div>
+  );
+};
+
+export default Introduction;
+
+//table of user names
 //table of removed songs instances
 //how many times has a user interacted before remove
 //how many quit; when did they quit
-//conversion 
+//conversion

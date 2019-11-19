@@ -1,25 +1,23 @@
-import React, {Component} from 'react'
-import '../App.css'
-import Spotify from 'spotify-web-api-js'
+import React, { Component } from "react";
+import "../App.css";
+import Spotify from "spotify-web-api-js";
 
-const spotifyWebApi = new Spotify()
+const spotifyWebApi = new Spotify();
 
 class UnfollowPlaylist extends Component {
-    
-
-    render(){
-        return(
-            <div>
-            <div>unfollow</div>
-                <div style={{ fontSize: "20px", fontWeight: "300" }}>
-                {/* {songs} */}
-            {/* <button className="remove-button"onClick={(e) => this.removeSongs(playlistId, uri)}>Remove</button> */}
-            </div>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <div>unfollow</div>
+        <div style={{ fontSize: "20px", fontWeight: "300" }}>
+          {/* {songs} */}
+          {/* <button className="remove-button"onClick={(e) => this.removeSongs(playlistId, uri)}>Remove</button> */}
+        </div>
+      </div>
+    );
+  }
 }
-export default UnfollowPlaylist
+export default UnfollowPlaylist;
 
 //get tracks  spotifyWebApi.getPlaylistTracks(playlistID)
 
