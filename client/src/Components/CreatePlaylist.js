@@ -6,43 +6,45 @@ const spotifyWebApi = new Spotify();
 
 class CreatePlaylist extends Component {
   async createProblemFreePlaylist() {
-    const { playlistInfo } = this.props;
-    let trackNames = [];
-    let artistsNamesArr = [];
-    let artistObjArr = [];
+
+    const { playlistInfo, iofRKsong } = this.props;
     let uri = [];
-    const playlistName = "00 hits";
     const response = await spotifyWebApi.getPlaylistTracks(playlistInfo.id);
     console.log(response);
-    response.items.map(item => {
-      uri.push(item.track.uri);
-      trackNames.push(item.track.name);
-      artistObjArr.push(item.track.artists);
-    });
-    artistObjArr.map(artist => {
-      artistsNamesArr.push(artist[0].name);
-    });
+    response.items.map(async item => {
+      uri.push(item.track.uri)
+    })
     
-    const indexOfAll = (arr, val) =>
-      arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), []);
-    let RKindexies = indexOfAll(artistsNamesArr, "R. Kelly");
+//need to create a new array of URIs without iofRKsong
+// splice returns an array of removed items
+//I need to mutate original array, and remove the items from original 
+      
+// try filter 
+// creates an array filled with all array elements that pass a test (provided as a function).
+      for (let i = 0; i < iofRKsong.length; i++){
+        uri.splice(iofRKsong[i], 1)
+        console.log(i)
+      }
+      console.log(uri)
+      // uri.filter(uri => uri)
+      // iofRKsong.forEach((i) =>
+      //   uri.splice(i, 1))
+      // let newURI = uri;
 
-    uri.splice(RKindexies, 1);
-    // console.log(uri.length, "less", RKindexies);
-    let newURI = uri;
-
-   const res = await spotifyWebApi.createPlaylist("1224023576", {
-        name: `${playlistInfo.name} - Problem Free`
-      })
-        const newPlaylistID = res.id;
-        console.log(newPlaylistID, uri.length);
-        spotifyWebApi.addTracksToPlaylist(newPlaylistID, newURI);
+    //   const res = await spotifyWebApi.createPlaylist(this.props.userId, {
+    //     name: `${playlistInfo.name} - Problem Free`
+    //   })
+    //   console.log(res)
+    //   const newPlaylistID = res.id;
+    //   console.log(newPlaylistID, uri.length);
+    //   spotifyWebApi.addTracksToPlaylist(newPlaylistID, newURI);
      
+    // })
   }
 
   render() {
-    // console.log("arrived on his page");
-    // console.log("what is props", this.props);
+    console.log("arrived on his page");
+    console.log("what is props", this.props);
     // this.createProblemFreePlaylist()
     return (
       <div>
@@ -51,7 +53,7 @@ class CreatePlaylist extends Component {
           This is a public playlist that you follow. Click to make a new
           playlist without problems
         </p>
-        <button>Make New Playlist</button>
+        <button onClick={()=> this.createProblemFreePlaylist()}>Make New Playlist</button>
         {/* <h1>Identify playlist</h1> */}
         {/* <h1>copy songs from playlist in array</h1> */}
         {/* <h1>filter out rkelly, splice</h1> */}

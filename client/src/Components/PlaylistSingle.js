@@ -83,11 +83,11 @@ class PlaylistSingle extends Component {
   // }
 
   render() {
+    console.log(this.state.iofRKsong)
     const { RKSongTitle, showSongs, items, uri, iofRKsong } = this.state;
     const { playlistInfo, CurrentUserid } = this.props;
     let buttonText = showSongs ? "CHECK SONGS" : "CLOSE SONGS";
     let songsVisible = showSongs ? "playlist-container-closed" : "playlist-container-open"
-    console.log(songsVisible)
     return (
       <div
         className={songsVisible}
@@ -115,7 +115,7 @@ class PlaylistSingle extends Component {
             </div>
           )}
           {/***** if Playlist is public, need to make a new playlist *****/}
-          {RKSongTitle.length > 0 && CurrentUserid !== playlistInfo.owner.id && <CreatePlaylist playlisbutInfo={this.props.playlistInfo }userId={this.props.CurrentUserid} />}
+          {RKSongTitle.length > 0 && CurrentUserid !== playlistInfo.owner.id && <CreatePlaylist playlistInfo={this.props.playlistInfo} userId={this.props.CurrentUserid} iofRKsong={this.state.iofRKsong}/>}
           {RKSongTitle.length > 0 && (
             <ProblemRK
               songRouteID={this.state.songRouteID}
