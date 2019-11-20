@@ -9,20 +9,23 @@ class CreatePlaylist extends Component {
     const { playlistInfo, iofRKsong, userId } = this.props;
     let uri = [];
     const response = await spotifyWebApi.getPlaylistTracks(playlistInfo.id);
-    console.log(response);
     response.items.map(async item => {
       uri.push(item.track.uri);
     });
 
     //create a new array of URIs without iofRKsong
 
+    // ************ Current Error, 
+    // each time this loops, uri array length is decrementing because of splice, 
+    // making the iofRKsong indexes off by one / one more following each new loop ***
+    
     for (let i = 0; i < iofRKsong.length; i++) {
+      console.log('this song should be removed', iofRKsong[i], uri)
       uri.splice(iofRKsong[i], 1);
-      console.log(i);
     }
     console.log(uri);
       const NewPlaylistRes = await spotifyWebApi.createPlaylist(userId, {
-        name: `${playlistInfo.name} - Problem Free`
+        name: `${playlistInfo.name} - 3nd try`
       })
       console.log(NewPlaylistRes)
       const newPlaylistID = NewPlaylistRes.id;
