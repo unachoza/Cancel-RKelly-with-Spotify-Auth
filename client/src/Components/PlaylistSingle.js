@@ -76,14 +76,9 @@ class PlaylistSingle extends Component {
       }));
     });
   };
-  // publicProblem = () => {
-  //   if (CurrentUserid !== playlistInfo.owner.id) {
-     
-  //  }
-  // }
+ 
 
   render() {
-    console.log(this.state.iofRKsong)
     const { RKSongTitle, showSongs, items, uri, iofRKsong } = this.state;
     const { playlistInfo, CurrentUserid } = this.props;
     let buttonText = showSongs ? "CHECK SONGS" : "CLOSE SONGS";
