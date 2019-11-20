@@ -18,14 +18,24 @@ class CreatePlaylist extends Component {
     // ************ Current Error, 
     // each time this loops, uri array length is decrementing because of splice, 
     // making the iofRKsong indexes off by one / one more following each new loop ***
-    
+    // removeArr[0, 8]
+    // uri length 10
+    // removeArr [8-1]
+    // uri length 9
+
     for (let i = 0; i < iofRKsong.length; i++) {
       console.log('this song should be removed', iofRKsong[i], uri)
       uri.splice(iofRKsong[i], 1);
+      uri.unshift(0)
+    }
+    console.log(uri)
+    for (let i = 0; i < iofRKsong.length; i++){
+      uri.shift()
     }
     console.log(uri);
+
       const NewPlaylistRes = await spotifyWebApi.createPlaylist(userId, {
-        name: `${playlistInfo.name} - 3nd try`
+        name: `${playlistInfo.name} - 4th try`
       })
       console.log(NewPlaylistRes)
       const newPlaylistID = NewPlaylistRes.id;
