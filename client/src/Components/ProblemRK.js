@@ -6,14 +6,13 @@ import axios from "axios";
 const spotifyWebApi = new Spotify();
 
 class ProblemRK extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
 
       deleted: false
     };
   }
-
   removeSongs = (playlistID, uri) => {
     const { iofRKsong, songRouteID } = this.props;
     this.setState({ deleted: true });
@@ -28,19 +27,23 @@ class ProblemRK extends Component {
       });
  
   };
-
+  isProblemPersonal = async () => {
+    const res = await spotifyWebApi.getPlaylist(this.props.playlistID)
+    console.log(res)
+}
   render() {
+
     const { RKSongTitle, uri, playlistId } = this.props;
     const { deleted } = this.state;
-
-    let songs = RKSongTitle.map((song, i) => {
+const
+    songs = RKSongTitle.map((song, i) => {
       return (
         <div
           className={deleted ? "animated zoomOut" : ""}
           style={{ textAlign: "left" }}
           key={i}
         >
-
+{this.isProblemPersonal}
           {song} <br></br>
           <span style={{ color: "white" }}>R. Kelly</span>
         </div>
