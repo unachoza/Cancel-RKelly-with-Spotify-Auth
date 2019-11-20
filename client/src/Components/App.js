@@ -20,8 +20,8 @@ class App extends Component {
     const token = params.access_token;
     this.state = {
       loggedIn: token ? true : false,
-        home: true,
-        login: false,
+        home: false,
+        login: true,
         howItWorks: false,
         aboutMe: false,
       playListObject: [],

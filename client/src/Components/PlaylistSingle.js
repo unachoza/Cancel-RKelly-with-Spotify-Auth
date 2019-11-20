@@ -25,11 +25,12 @@ class PlaylistSingle extends Component {
 
   //getting list of tracks in User's Playlists
   listTracksFromPlaylists = async playlistID => {
+    // this.state.showSongs ? this.setState({ showSongs: false })
+    //   :this.setState({showSongs: true})
     this.setState(prevState => ({
       showSongs: !prevState.showSongs
-    }));
+     }));
     const response = await spotifyWebApi.getPlaylistTracks(playlistID);
-    console.log(response)
     let uri = [];
     let trackNames = [];
     let artistObjArr = [];
@@ -86,6 +87,7 @@ class PlaylistSingle extends Component {
     const { playlistInfo, CurrentUserid } = this.props;
     let buttonText = showSongs ? "CHECK SONGS" : "CLOSE SONGS";
     let songsVisible = showSongs ? "playlist-container-closed" : "playlist-container-open"
+    console.log(songsVisible)
     return (
       <div
         className={songsVisible}
@@ -113,7 +115,7 @@ class PlaylistSingle extends Component {
             </div>
           )}
           {/***** if Playlist is public, need to make a new playlist *****/}
-          {RKSongTitle.length > 0 && CurrentUserid !== playlistInfo.owner.id && <CreatePlaylist playlistInfo={this.props.playlistInfo }userId={this.props.CurrentUserid} />}
+          {RKSongTitle.length > 0 && CurrentUserid !== playlistInfo.owner.id && <CreatePlaylist playlisbutInfo={this.props.playlistInfo }userId={this.props.CurrentUserid} />}
           {RKSongTitle.length > 0 && (
             <ProblemRK
               songRouteID={this.state.songRouteID}

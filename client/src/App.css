@@ -108,12 +108,13 @@ button:hover {
 }
 .playlist-container-closed {
   width: "350px";
-  /* height: "350px"; */
+  height: "350px";
   display: inline-block;
   margin: 10px;
   padding-left: 50px;
   padding-right: 50px;
   border-radius: 10px;
+  border: 1px green solid;
   color: rgb(126, 121, 121);
   
 }
@@ -137,6 +138,8 @@ button:hover {
   display: inline-block;
   padding: 1px;
   border-radius: 10px;
+  border:1px blue solid;
+
   color: white;
   z-index: 1;
 }
@@ -151,9 +154,9 @@ button:hover {
   width: "530px";
   text-align: center;
   font-size: 20px;
-  display: inline-block;
   padding: 1px;
   border-radius: 10px;
+  border:1px red solid;
   color: rgb(126, 121, 121);
 }
 .songs-in-playlist-container-closed {

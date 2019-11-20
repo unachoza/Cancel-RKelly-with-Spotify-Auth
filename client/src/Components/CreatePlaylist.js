@@ -28,7 +28,7 @@ class CreatePlaylist extends Component {
     let RKindexies = indexOfAll(artistsNamesArr, "R. Kelly");
 
     uri.splice(RKindexies, 1);
-    console.log(uri.length, "less", RKindexies);
+    // console.log(uri.length, "less", RKindexies);
     let newURI = uri;
 
    const res = await spotifyWebApi.createPlaylist("1224023576", {
@@ -41,8 +41,8 @@ class CreatePlaylist extends Component {
   }
 
   render() {
-    console.log("arrived on his page");
-    console.log("what is props", this.props);
+    // console.log("arrived on his page");
+    // console.log("what is props", this.props);
     // this.createProblemFreePlaylist()
     return (
       <div>
