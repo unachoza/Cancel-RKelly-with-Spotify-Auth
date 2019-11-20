@@ -20,13 +20,16 @@ class PlaylistSingle extends Component {
       songRouteID: []
     };
   }
+  
 
   //getting list of tracks in User's Playlists
   listTracksFromPlaylists = async playlistID => {
     this.setState(prevState => ({
       showSongs: !prevState.showSongs
     }));
-    const response = await spotifyWebApi.getPlaylistTracks(playlistID);
+    const response = await spotifyWebApi.getPlaylistTracks
+      (playlistID);
+    console.log(response)
     let uri = [];
     let trackNames = [];
     let artistObjArr = [];
@@ -51,10 +54,13 @@ class PlaylistSingle extends Component {
     let publicPlaylistArr = [];
     let iofRKsong = this.indexOfAll(artistsNamesArr, "R. Kelly");
 
-    ////////////checking if the playlist is public
 
-    if (this.props.CurrentUserid !== this.props.playlistOwnerId[0]) {
-      // console.log(this.props.CurrentUserid === this.props.playlistOwnerId, "not owned", this.props.CurrentUserid,this.props.playlistOwnerId[0]);
+      //checking to see who owns playlist (if public)
+
+    ////////////checking if the playlist is public
+    console.log('props',this.props.CurrentUserid,  this.props.playlistInfo.owner.id);
+    if (this.props.CurrentUserid !== this.props.playlistInfo.owner.id) {
+      console.log('this is the current id', this.props.playlistOwnerId );
     }
     // this.props.CurrentUserid !== this.props.playlistOwnerId
     /////////////

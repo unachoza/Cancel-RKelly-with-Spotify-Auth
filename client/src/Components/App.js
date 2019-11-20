@@ -33,7 +33,6 @@ class App extends Component {
     };
 
     if (token) {
-      console.log(token)
       spotifyWebApi.setAccessToken(token);
       this.getUserInfo();
     }
@@ -88,7 +87,6 @@ class App extends Component {
   //getting list of User's Playlists: limit 50
   getPlaylists = async () => {
     const { id } = this.state
-    let playlistOwnerId = [];
     this.increaseOffset();
     // {limit: 50, offset: 0} default limit: 20
    const response = await spotifyWebApi.getUserPlaylists( id, { offset: this.state.offsetNum })
@@ -96,13 +94,9 @@ class App extends Component {
           playListObject: response.items,
           total: response.total
         });
-        const num =  await this.getplaylistTotal();
-        this.getAllPlaylists(num);
-        this.state.playListObject.map(item => playlistOwnerId.push(item.owner.id));
-     
-      //checking to see who owns playlist (if public)
-
-        this.setState({ playlistOwnerId });
+        this.getAllPlaylists(this.state.totalPlaylists);
+        
+ 
   };
 
    //  using number of total playlists to decided if need for looping to fetch more than 50 
@@ -153,7 +147,7 @@ class App extends Component {
    
 
   render() {
-    const { loggedIn, offsetNum, total, playListObject, playlistOwnerId, id, home, aboutMe, howItWorks, login } = this.state;
+    const { loggedIn, offsetNum, total, playListObject, id, home, aboutMe, howItWorks, login } = this.state;
     return (
       <div className="home">
         <Nav changeNav={this.navigate} />
@@ -204,8 +198,7 @@ class App extends Component {
         {playListObject && 
           <PlaylistList
             usersPlaylists={playListObject}
-            playlistOwnerId={playlistOwnerId}
-             Userid={id}
+             CurrentUserid={id}
           />}
         {home && <UsageStats />}
       </div>
