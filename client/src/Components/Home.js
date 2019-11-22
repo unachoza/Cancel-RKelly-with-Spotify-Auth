@@ -1,6 +1,7 @@
 import React from "react";
 
-const Home = () => {
+const Home = ({ loggedin }) => {
+    console.log(loggedin)
   return (
     <div>
       <div className="title" style={{ margin: "20px" }}>
@@ -15,9 +16,9 @@ const Home = () => {
         src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1573269837/no-eyesR-Kelly-Mugshot.jpg"
         alt="cancel"
       />
-      <a href="http://localhost:8888">
-        <button>Login to Spotify</button>
-      </a>
+     { loggedin && <a href="http://localhost:8888">
+        <button style={{margin: "auto"}}>Login to Spotify</button>
+      </a>}
     </div>
   );
 };

@@ -156,7 +156,7 @@ class App extends Component {
       
 
         {loggedIn && !home  && <MakingHashMap />}
-        {home && <Home />}
+        {home && <Home loggedIn={loggedIn}/>}
         {aboutMe && <AboutMe />}
         {howItWorks && <HowItWorks />}
 
@@ -165,13 +165,8 @@ class App extends Component {
             {userPlaylists && (
               <div>
                 {/* WETHER TO SHOW LOGIN BUTTON OR YOUR PLAYLISTS */}
-
-                {/* {!loggedIn ? (
-                  <a href="http://localhost:8888">
-                    <button>Login to Spotify</button>
-                  </a>
-                ) : ( */}
-                    <div>
+              
+                    {loggedIn && (<div>
                       <button
                       className={offsetNum > 0 ? "hide" : "showIt"}
                       onClick={() => this.getPlaylists()}
@@ -184,7 +179,7 @@ class App extends Component {
                     >
                       Next 10 PLAYLISTS
                     </button>
-                  </div>
+                  </div>)}
                 )
               </div>
             )}
@@ -192,7 +187,7 @@ class App extends Component {
 
         <div>
           {/* SHOWING THE NEXT PLAYLISTS */}
-          {offsetNum < total ? (
+          {offsetNum < total && (
             <button
               // NEED TO CHECK THIS -12 SITUATION
               className={offsetNum > total - 12 ? "hide" : "showIt"}
@@ -200,8 +195,6 @@ class App extends Component {
             >
               NEXT 10 PLAYLISTS
             </button>
-          ) : (
-            " "
           )}
         </div>
 

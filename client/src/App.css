@@ -9,7 +9,7 @@ ul {
 }
 div,
 button {
-  margin: auto;
+  margin: 0px 10px;
   font-weight: 200;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
