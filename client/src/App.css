@@ -72,9 +72,9 @@ a:hover {
 h1 {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  font-size: 52px;
+  font-size: 42px;
   color: white;
-  margin: 70px 0px 12px 0px;
+  margin: 35px 0px 12px 0px;
   width: 100%;
 }
 p {
@@ -246,7 +246,7 @@ a:active {
   opacity: 0.6;
   border-radius: 10px;
   margin: auto;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
   margin-top: 40px;
   display: flex;
 }
