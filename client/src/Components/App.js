@@ -60,7 +60,7 @@ class App extends Component {
       id: response.id
     });
 
-    this.addUser();
+    // this.addUser();
   };
 
   //add User to database
@@ -75,12 +75,12 @@ class App extends Component {
     });
   };
 
-  // after user logs in they are routed to UserPlaylist Page
-  //  routeToUserPlaylists = () => {
-  //   this.setState({
-  //     home:
-  //   })
-  //   }
+
+  
+
+
+
+
 
   //getting total number of users playslist to make one 1 array in next function
 
@@ -145,7 +145,24 @@ class App extends Component {
     navArr.forEach(nav => this.setState({ [nav]: false }));
   };
 
+
+    // after user logs in they are routed to UserPlaylist Page
+  //once you are logged in, user never sees home
+  componentDidUpdate() {
+    console.log('inside' , this.state.userPlaylists, this.state.loggedIn)
+    if (this.state.userPlaylists) {
+      return
+    } else if (this.state.loggedIn) {
+      this.setState({
+        userPlaylists: true,
+      home: false})
+    }
+  }
+
   render() {
+
+   
+
     console.log(this.state)
     const {
       loggedIn,
@@ -165,7 +182,7 @@ class App extends Component {
 
         {loggedIn && !home  && <MakingHashMap />}
         {home && <Home loggedIn={loggedIn} />}
-        {!loggedIn && <Login />}
+        {!loggedIn && !userPlaylists && <Login loggedIn={loggedIn} userPlaylists={userPlaylists} home={home} route={(e) => this.routeToUserPlaylists(e)}/>}
         {aboutMe && <AboutMe />}
         {howItWorks && <HowItWorks />}
 
@@ -174,7 +191,6 @@ class App extends Component {
             {userPlaylists && (
               <div>
                 {/* WETHER TO SHOW LOGIN BUTTON OR YOUR PLAYLISTS */}
-              
                     {loggedIn && (<div>
                       <button
                       className={offsetNum > 0 ? "hide" : "showIt"}
