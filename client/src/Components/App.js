@@ -3,6 +3,7 @@ import "../App.css";
 import Spotify from "spotify-web-api-js";
 import PlaylistList from "./PlaylistsList";
 import Introduction from "./Introduction";
+import Login from './Login'
 import UsageStats from "./UsageStats";
 import HowItWorks from "./HowItWorks";
 import AboutMe from "./AboutMe";
@@ -73,6 +74,13 @@ class App extends Component {
       time
     });
   };
+
+  // after user logs in they are routed to UserPlaylist Page
+  //  routeToUserPlaylists = () => {
+  //   this.setState({
+  //     home:
+  //   })
+  //   }
 
   //getting total number of users playslist to make one 1 array in next function
 
@@ -156,7 +164,8 @@ class App extends Component {
       
 
         {loggedIn && !home  && <MakingHashMap />}
-        {home && <Home loggedIn={loggedIn}/>}
+        {home && <Home loggedIn={loggedIn} />}
+        {!loggedIn && <Login />}
         {aboutMe && <AboutMe />}
         {howItWorks && <HowItWorks />}
 
