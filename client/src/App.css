@@ -9,7 +9,7 @@ ul {
 }
 div,
 button {
-  margin: 10px;
+  margin: auto;
   font-weight: 200;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
@@ -28,9 +28,12 @@ button {
   float: right;
 }
 .paragraph {
-  width: 65%;
+  width: 35%;
   margin: auto;
   background-color: rgb(29, 28, 28);
+}
+.title{
+  margin: 20px;
 }
 .selected {
   background-color: rgb(29, 28, 28);
@@ -71,7 +74,7 @@ h1 {
     "Lucida Sans", Arial, sans-serif;
   font-size: 52px;
   color: white;
-  margin: 90px 0px 70px 0px;
+  margin: 70px 0px 12px 0px;
   width: 100%;
 }
 p {
@@ -237,6 +240,7 @@ a:active {
   border-radius: 10px;
   margin: auto;
   margin-bottom: 80px;
+  margin-top: 40px;
   display: flex;
 }
 .spotify-logo {

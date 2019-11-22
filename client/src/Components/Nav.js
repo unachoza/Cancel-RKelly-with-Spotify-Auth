@@ -16,8 +16,8 @@ const Nav = ({ changeNav }) => {
         <div className="nav-container">
           <ul className="nav-list">
             <li id="home" onClick={(e) => changeNav(e)}>HOME</li>
-            <li id="login" onClick={(e) => changeNav(e)}>LOGIN</li>
-            <li id="howItWorks" onClick={(e) => changeNav(e)}>VIEW YOUR PLAYLISTS</li>
+            <li id="login" onClick={(e) => changeNav(e)}>VIEW YOUR PLAYLISTS</li>
+            <li id="howItWorks" onClick={(e) => changeNav(e)}>HOW IT WORKS</li>
             <li id="aboutMe" onClick={(e) => changeNav(e)}>ABOUT ME</li>
           </ul>
         </div>

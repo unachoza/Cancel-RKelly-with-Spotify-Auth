@@ -79,7 +79,7 @@ class PlaylistSingle extends Component {
  
 
   render() {
-    const { RKSongTitle, showSongs, items, uri, iofRKsong } = this.state;
+    const { RKSongTitle, showSongs, items, uri, iofRKsong, home } = this.state;
     const { playlistInfo, CurrentUserid } = this.props;
     let buttonText = showSongs ? "CHECK SONGS" : "CLOSE SONGS";
     let songsVisible = showSongs ? "playlist-container-closed" : "playlist-container-open"
@@ -122,7 +122,7 @@ class PlaylistSingle extends Component {
             />
           )}
           {iofRKsong > 0 && <hr></hr>}
-          {items && <Songs items={items} showSongs={showSongs} />}
+          {items && <Songs items={items} showSongs={showSongs} home={home}/>}
         </div>
       </div>
     );
