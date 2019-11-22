@@ -21,7 +21,7 @@ class App extends Component {
     this.state = {
       loggedIn: token ? true : false,
       home: true,
-      login: false,
+      userPlaylists: false,
       howItWorks: false,
       aboutMe: false,
       playListObject: [],
@@ -130,7 +130,7 @@ class App extends Component {
 
   //toggling through nav
   navigate = e => {
-    let navArr = ["home", "howItWorks", "login", "aboutMe"];
+    let navArr = ["home", "howItWorks", "userPlaylists", "aboutMe"];
     let name = e.target.id;
     this.setState({ [name]: true });
     navArr = navArr.filter(nav => nav !== name);
@@ -138,6 +138,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state)
     const {
       loggedIn,
       offsetNum,
@@ -147,44 +148,47 @@ class App extends Component {
       home,
       aboutMe,
       howItWorks,
-      login
+      userPlaylists
     } = this.state;
     return (
       <div className="home">
         <Nav changeNav={this.navigate} />
       
 
-        {loggedIn && <MakingHashMap />}
+        {loggedIn && !home  && <MakingHashMap />}
         {home && <Home />}
         {aboutMe && <AboutMe />}
         {howItWorks && <HowItWorks />}
 
-        {login && <Introduction loggedIn={loggedIn} />}
-        <div style={{ margin: "0px" }}>
-          <div></div>
+        {/* {userPlaylists && <Introduction loggedIn={loggedIn} />} */}
           <div style={{ display: "flex", justifyContent: "center" }}>
-            {login && (
+            {userPlaylists && (
               <div>
                 {/* WETHER TO SHOW LOGIN BUTTON OR YOUR PLAYLISTS */}
 
-                {!loggedIn ? (
+                {/* {!loggedIn ? (
                   <a href="http://localhost:8888">
                     <button>Login to Spotify</button>
                   </a>
-                ) : (
-                  <div>
+                ) : ( */}
+                    <div>
+                      <button
+                      className={offsetNum > 0 ? "hide" : "showIt"}
+                      onClick={() => this.getPlaylists()}
+                    >
+                      Back 10 PLAYLISTS
+                    </button>
                     <button
                       className={offsetNum > 0 ? "hide" : "showIt"}
                       onClick={() => this.getPlaylists()}
                     >
-                      YOUR PLAYLISTS
+                      Next 10 PLAYLISTS
                     </button>
                   </div>
-                )}
+                )
               </div>
             )}
           </div>
-        </div>
 
         <div>
           {/* SHOWING THE NEXT PLAYLISTS */}

@@ -14,6 +14,9 @@ button {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
+
+
+/* ////  Navigation ///////// */
 .profile-container {
   width: 790px;
   margin: auto;
@@ -27,6 +30,14 @@ button {
   width: 460px;
   float: right;
 }
+
+
+/* ////////// Containers ////  */
+
+.hash-container{
+margin: 80px 80px 30px 80px;
+}
+
 .paragraph {
   width: 35%;
   margin: auto;
@@ -242,7 +253,7 @@ a:active {
   background-color: #1bb954;
 }
 .cancel-img {
-  height: 300px;
+  height: 270px;
   opacity: 0.6;
   border-radius: 10px;
   margin: auto;
