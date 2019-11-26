@@ -5,10 +5,13 @@ import Songs from "./Songs";
 import ProblemRK from "./ProblemRK";
 import axios from "axios";
 import CreatePlaylist from "./CreatePlaylist";
+import { Playlists } from "../services/playlists";
 
 const spotifyWebApi = new Spotify();
 
 class PlaylistSingle extends Component {
+  new Playlists().getPlaylist();
+  
   constructor(props) {
     super(props);
     this.state = {
