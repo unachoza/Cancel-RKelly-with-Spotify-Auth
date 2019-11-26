@@ -1,28 +1,28 @@
 import React, { Component, useState, useEffect } from 'react';
 import { SpotifyApi } from '../services/spotify-api';
-
+const spotifyWebApi = new SpotifyApi
 const spotifyApi = new SpotifyApi();
 
-const Problems = () => {
-  const [problems, setProblems] = useState([]);
+// const Problems = () => {
+//   const [problems, setProblems] = useState([]);
 
-  useEffect(() => {
-    const results = await spotifyApi.getProblemsMap();
-    setProblems(results);
-  }, []);
+//   useEffect(() => {
+//     const results = await spotifyApi.getProblemsMap();
+//     setProblems(results);
+//   }, []);
 
-  return (
-    <div className="hash-container">
-        {problem.length > 0 ? (
-          problem.map((playlist, i) => (
-            <div key={i} className="hashResults">{`The Playlist, ${playlist} has a Problem`}</div>
-          ))
-        ) : (
-          <div className="hashResults blinking">Congrats! No R Kelly songs were found!</div>
-        )}
-      </div>
-  )
-};
+//   return (
+//     <div className="hash-container">
+//         {problem.length > 0 ? (
+//           problem.map((playlist, i) => (
+//             <div key={i} className="hashResults">{`The Playlist, ${playlist} has a Problem`}</div>
+//           ))
+//         ) : (
+//           <div className="hashResults blinking">Congrats! No R Kelly songs were found!</div>
+//         )}
+//       </div>
+//   )
+// };
 
 // todo: rename like: <Problems /> :)
 // problems

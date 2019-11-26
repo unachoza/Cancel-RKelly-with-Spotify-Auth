@@ -4,14 +4,14 @@ import Spotify from "spotify-web-api-js";
 import Songs from "./Songs";
 import ProblemRK from "./ProblemRK";
 import axios from "axios";
-import CreatePlaylist from "./CreatePlaylist";
+import CreatePlaylist from "./CreateNewPlaylist";
 import { Playlists } from "../services/playlists";
 
 const spotifyWebApi = new Spotify();
 
 class PlaylistSingle extends Component {
-  new Playlists().getPlaylist();
-  
+  // new Playlists().getPlaylist();
+
   constructor(props) {
     super(props);
     this.state = {
