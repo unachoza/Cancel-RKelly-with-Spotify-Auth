@@ -1,5 +1,5 @@
 import React from 'react'
-import '../App.css'
+import '../CSS/App.css'
 import PlaylistSingle from './PlaylistSingle'
 
 export const PlaylistList = ({ usersPlaylists, playlistOwnerId, CurrentUserid , home}) => {

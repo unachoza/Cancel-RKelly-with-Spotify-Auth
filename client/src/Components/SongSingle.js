@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css";
+import '../CSS/App.css'
 
 const SongSingle = ({ item }) => {
   return (

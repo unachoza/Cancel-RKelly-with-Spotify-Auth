@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../App.css";
+import "../CSS/App.css";
 import Spotify from "spotify-web-api-js";
 import Songs from "./Songs";
 import ProblemRK from "./ProblemRK";

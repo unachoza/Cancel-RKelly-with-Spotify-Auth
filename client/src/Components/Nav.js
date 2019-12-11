@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css";
+import '../CSS/App.css'
 
 const Nav = ({ changeNav }) => {
         

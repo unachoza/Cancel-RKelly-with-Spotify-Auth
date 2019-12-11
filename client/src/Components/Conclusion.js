@@ -1,7 +1,7 @@
 import React from "react";
 import UsageStats from "./UsageStats";
 import AboutMe from "./AboutMe";
-import "./App.css";
+import '../CSS/App.css'
 
 const Conclusion = () => {
   return (
