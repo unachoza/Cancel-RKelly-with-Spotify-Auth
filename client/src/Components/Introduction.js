@@ -8,13 +8,7 @@ const Introduction = loggedIn => {
   return (
     <div className="Intro-page">
       <Carousel showThumbs={false} showStatus={false}>
-        
-          <div className="carousel-divs">
-            <p className="paragraph">
-              This app effortlessly removes R Kelly from our lives. Listening to
-              his music is problematic #BelieveWomen
-            </p>
-          </div>
+         
           <div className="carousel-divs">
             <p className="paragraph">
               Given the recent climant of believing women, I have built an app that removes problematic songs from users Spotify Playlists, starting with R. Kelly. 
