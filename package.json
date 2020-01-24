@@ -16,8 +16,9 @@
     "request": "^2.83.0"
   },
   "scripts": {
-    "start": "concurrently --kill-others-on-fail \"npm run spotify\" \"npm run server\" \"npm run client\"",
-    "dev": "node server.js",
+    "start": "node server.js",
+
+    "dev": "concurrently --kill-others-on-fail \"npm run spotify\" \"npm run server\" \"npm run client\"",
     "db": "psql -f db/schema.sql && psql -f db/seed.sql",
     "server": "nodemon server.js",
     "client": "npm run dev --prefix client",
