@@ -148,16 +148,16 @@ class App extends Component {
 
     // after user logs in they are routed to UserPlaylist Page
   //once you are logged in, user never sees home
-  componentDidUpdate() {
-    console.log('inside' , this.state.userPlaylists, this.state.loggedIn)
-    if (this.state.userPlaylists) {
-      return
-    } else if (this.state.loggedIn) {
-      this.setState({
-        userPlaylists: true,
-      home: false})
-    }
-  }
+  // componentDidUpdate() {
+  //   console.log('inside' , this.state.userPlaylists, this.state.loggedIn)
+  //   if (this.state.userPlaylists) {
+  //     return
+  //   } else if (this.state.loggedIn) {
+  //     this.setState({
+  //       userPlaylists: true,
+  //     home: false})
+  //   }
+  // }
 
   render() {
 
