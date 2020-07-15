@@ -38,14 +38,14 @@ class MakingHash extends Component {
       playlistResults.push.apply(playlistResults, temp.items);
       let playlistIds = [];
       let playlistNames = [];
-      playlistResults.map(index => {
+      playlistResults.map((index) => {
         playlistIds.push(index.id);
 
         playlistNames.push(index.name);
       });
 
       //State now has all PlayListIDS and their Names
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         playlists: {
           ...prevState.playlists,
 
@@ -55,21 +55,22 @@ class MakingHash extends Component {
       }));
     }
     //getting the songs &aritist from each playlist
-    this.state.playlists.playlistIds.map(async id => {
+    this.state.playlists.playlistIds.map(async (id) => {
       let tracks = await spotifyWebApi.getPlaylistTracks(id);
       tracks = tracks.items;
       let artistsObj = [];
 
       // getting the artist object, because the name is nested deeply
-      tracks.forEach(i => artistsObj.push(i.track.artists));
+      tracks.forEach((i) => artistsObj.push(i.track.artists));
       let artistsNames = [];
-      artistsObj.forEach(obj => artistsNames.push(obj[0].name));
+      artistsObj.forEach((obj) => artistsNames.push(obj[0].name));
 
       // checking if rkelly is in array of artists
       if (artistsNames.includes(PROBLEMATIC_ARTIST)) {
         const res = await spotifyWebApi.getPlaylist(id);
+        console.log(res, 'if problematic');
         //saving playlist name to state, if problem present
-        this.setState(prevState => ({
+        this.setState((prevState) => ({
           problem: prevState.problem.concat(res.name),
         }));
       }

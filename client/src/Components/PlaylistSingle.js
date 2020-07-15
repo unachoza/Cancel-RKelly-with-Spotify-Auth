@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import "../App.css";
+import "App.css";
 import Spotify from "spotify-web-api-js";
-import Songs from "./Songs";
-import ProblemRK from "./ProblemRK";
+import Songs from "Components/Songs";
+import ProblemRK from "Components/ProblemRK";
 import axios from "axios";
-import CreatePlaylist from "./CreatePlaylist";
+import CreatePlaylist from "Components/CreatePlaylist";
 
 const spotifyWebApi = new Spotify();
 

@@ -1,14 +1,9 @@
 import React from "react";
-import "../App.css";
+import "App.css";
 
-const Nav = ({ changeNav }) => {
-        
-    return (
+const Nav = ({ changeNav }) => (
       <div>
-        
-
         <div className="nav-container">
-       
           <ul className="nav-list">
             <li> <img
             className="spotify-logo"
@@ -23,6 +18,5 @@ const Nav = ({ changeNav }) => {
           </div>
         </div>
     );
-  }
 
 export default Nav;

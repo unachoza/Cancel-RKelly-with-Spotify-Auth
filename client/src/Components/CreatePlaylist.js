@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../App.css";
+import "App.css";
 import Spotify from "spotify-web-api-js";
 
 const spotifyWebApi = new Spotify();

@@ -1,10 +1,9 @@
 import React from "react";
-import UsageStats from "./UsageStats";
-import AboutMe from "./AboutMe";
-import "./App.css";
+import UsageStats from "Components/UsageStats";
+import AboutMe from "Components/AboutMe";
+import "App.css";
 
-const Conclusion = () => {
-  return (
+const Conclusion = () =>  (
     <div>
       <UsageStats />
       <header>What You've Done</header>
@@ -19,6 +18,5 @@ const Conclusion = () => {
       <footer>Share this!</footer>
     </div>
   );
-};
 
 export default Conclusion;

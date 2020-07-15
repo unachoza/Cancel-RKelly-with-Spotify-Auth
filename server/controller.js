@@ -12,7 +12,8 @@ cancelController.allUsers = (req, res) => {
             data: data
         })
     })
-    .catch(err => {
+        .catch(err => {
+        console.log(err)
         res.status(500).json({err})
     })
 }
