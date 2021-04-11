@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD:client/src/Components/App/App.js
 import 'Components/App/App.css';
 import Spotify from 'spotify-web-api-js';
 import UserPlaylists from 'Pages/UserPlaylists/UserPlaylists';
@@ -11,17 +10,6 @@ import HowItWorks from 'Pages/HowItWorks/HowItWorks.css';
 import AboutMe from 'Pages/AboutMe/AboutMe.css';
 import Nav from 'Components/Nav/Nav';
 import Home from 'Pages/Home/Home';
-=======
-import 'App.css';
-import Spotify from 'spotify-web-api-js';
-import PlaylistList from 'Components/PlaylistsList';
-import Login from 'Components/Login';
-import UsageStats from 'Components/UsageStats';
-import HowItWorks from 'Components/HowItWorks';
-import AboutMe from 'Components/AboutMe';
-import Nav from 'Components/Nav';
-import Home from 'Components/Home';
->>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3:client/src/Components/App.js
 import MakingHashMap from 'Components/MakingHashMap';
 import axios from 'axios';
 
@@ -33,19 +21,6 @@ class App extends Component {
     const params = this.getHashParams();
     const token = params.access_token;
     this.state = {
-<<<<<<< HEAD:client/src/Components/App/App.js
-      loggedIn: token ? true : false,
-      home: true,
-      userPlaylists: false,
-      howItWorks: false,
-      aboutMe: false,
-      playListObject: [],
-      offsetNum: 0,
-      display_name: '',
-      email: '',
-      country: '',
-      id: '',
-=======
       loggedIn: token ? true : false, //user
       home: true, //nav
       userPlaylists: false, //nav
@@ -57,7 +32,6 @@ class App extends Component {
       email: '', //user
       country: '', //user
       id: '', //user
->>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3:client/src/Components/App.js
     };
 
     if (token) {
@@ -167,7 +141,6 @@ class App extends Component {
 
   // after user logs in they are routed to UserPlaylist Page
   //once you are logged in, user never sees home
-<<<<<<< HEAD:client/src/Components/App/App.js
   componentDidUpdate() {
     console.log('inside', this.state.userPlaylists, this.state.loggedIn);
     if (this.state.userPlaylists) {
@@ -182,21 +155,6 @@ class App extends Component {
 
   render() {
     // console.log(this.state);
-=======
-  // componentDidUpdate() {
-  //   console.log('inside' , this.state.userPlaylists, this.state.loggedIn)
-  //   if (this.state.userPlaylists) {
-  //     return
-  //   } else if (this.state.loggedIn) {
-  //     this.setState({
-  //       userPlaylists: true,
-  //     home: false})
-  //   }
-  // }
-
-  render() {
-    console.log(this.state);
->>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3:client/src/Components/App.js
     const { loggedIn, offsetNum, total, playListObject, id, home, aboutMe, howItWorks, userPlaylists } = this.state;
     return (
       <div className="home">
@@ -217,26 +175,7 @@ class App extends Component {
 
         {/* {userPlaylists && <Introduction loggedIn={loggedIn} />} */}
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-<<<<<<< HEAD:client/src/Components/App/App.js
           {userPlaylists && loggedIn && <UserPlaylists offsetNum={offsetNum} getPlaylists={this.getPlaylists} />}
-=======
-          {userPlaylists && (
-            <div>
-              {/* WETHER TO SHOW LOGIN BUTTON OR YOUR PLAYLISTS */}
-              {loggedIn && (
-                <div>
-                  <button className={offsetNum > 0 ? 'hide' : 'showIt'} onClick={() => this.getPlaylists()}>
-                    Back 10 PLAYLISTS
-                  </button>
-                  <button className={offsetNum > 0 ? 'hide' : 'showIt'} onClick={() => this.getPlaylists()}>
-                    Next 10 PLAYLISTS
-                  </button>
-                </div>
-              )}
-              )
-            </div>
-          )}
->>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3:client/src/Components/App.js
         </div>
 
         <div>

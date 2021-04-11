@@ -1,14 +1,7 @@
-<<<<<<< HEAD:client/src/Components/ProblemRK/ProblemRK.js
 import React, { Component } from 'react';
 import 'Components/ProblemRK/ProblemRK.css';
 import Spotify from 'spotify-web-api-js';
 import axios from 'axios';
-=======
-import React, { Component } from "react";
-import "App.css";
-import Spotify from "spotify-web-api-js";
-import axios from "axios";
->>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3:client/src/Components/ProblemRK.js
 
 const spotifyWebApi = new Spotify();
 

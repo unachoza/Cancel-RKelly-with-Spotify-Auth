@@ -1,12 +1,6 @@
-<<<<<<< HEAD:client/src/Components/CreatePlaylist/CreatePlaylist.js
 import React, { Component } from 'react';
 import 'Components/CreatePlaylist/CreatePlaylist.css';
 import Spotify from 'spotify-web-api-js';
-=======
-import React, { Component } from "react";
-import "App.css";
-import Spotify from "spotify-web-api-js";
->>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3:client/src/Components/CreatePlaylist.js
 
 const spotifyWebApi = new Spotify();
 
