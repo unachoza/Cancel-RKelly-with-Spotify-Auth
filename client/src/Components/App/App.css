@@ -1,5 +1,3 @@
-
-
 .module {
   all: unset;
 }
@@ -7,16 +5,14 @@ body {
   background-color: rgb(29, 28, 28);
 }
 ul {
-  background-color: "rgb(29, 28, 28)";
+  background-color: 'rgb(29, 28, 28)';
 }
 div,
 button {
   margin: 0px 10px;
   font-weight: 200;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-
 
 /* ////  Navigation ///////// */
 .profile-container {
@@ -33,11 +29,10 @@ button {
   float: right;
 }
 
-
 /* ////////// Containers ////  */
 
-.hash-container{
-margin: 40px 80px 30px 80px;
+.hash-container {
+  margin: 40px 80px 30px 80px;
 }
 
 .paragraph {
@@ -45,7 +40,7 @@ margin: 40px 80px 30px 80px;
   margin: auto;
   background-color: rgb(29, 28, 28);
 }
-.title{
+.title {
   margin: 20px;
 }
 .selected {
@@ -83,16 +78,14 @@ a:hover {
   color: #1bb954;
 }
 h1 {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 42px;
   color: white;
   margin: 35px 0px 12px 0px;
   width: 100%;
 }
 p {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 20px;
   text-align: justify;
   text-justify: inter-word;
@@ -105,15 +98,14 @@ p {
 }
 
 button {
-  background-color: lightgray;
-  font-size: 20px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-size: 15px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   border-radius: 40px;
-  padding: 15px;
+  padding: 10px 15px;
   color: white;
   background-color: rgb(23, 138, 84);
   border: none;
+  margin: 10px;
 }
 button:hover {
   background-color: #1bb954;
@@ -123,29 +115,25 @@ button:hover {
   font-size: 20px;
 }
 .playlist-container-closed {
-  width: "350px";
-  height: "350px";
   display: inline-block;
-  margin: 10px;
-  padding-left: 50px;
-  padding-right: 50px;
+  margin: 20px;
   border-radius: 10px;
   color: rgb(126, 121, 121);
-  
 }
 .album-image {
-  height: "220px";
-  width: 200px;
+  height: '220px';
+  width: 180px;
+  border-radius: 2px;
+  margin: 10px;
 }
 .album-image:hover {
-  box-shadow: 0 12px 16px 0 rgba(128, 125, 125, 0.39),
-    0 17px 50px 0 rgba(128, 125, 125, 0.61);
+  box-shadow: 0 12px 16px 0 rgba(128, 125, 125, 0.39), 0 17px 50px 0 rgba(128, 125, 125, 0.61);
 }
 .my-slide-container {
-  background-color: "rgb(29, 28, 28)";
-  margin: "0px";
-  width: "100%";
-  height: "100%";
+  background-color: 'rgb(29, 28, 28)';
+  margin: '0px';
+  width: '100%';
+  height: '100%';
 }
 
 .playlist-container-open {
@@ -165,7 +153,7 @@ button:hover {
 }
 
 .songs-in-playlist-container-open {
-  width: "530px";
+  width: '530px';
   text-align: center;
   font-size: 20px;
   padding: 1px;
@@ -196,8 +184,7 @@ button:hover {
 .Intro-page {
   justify-content: center;
 
-  margin: auto
-
+  margin: auto;
 }
 .loggedIn {
   padding-top: 55px;
@@ -210,7 +197,6 @@ button:hover {
   font-size: 15px;
   padding: 8px;
 }
-
 
 .deleted {
   animation: strikethru 0.5s ease forwards;
@@ -277,88 +263,80 @@ a:active {
 }
 .control-dots {
   position: relative;
-    margin-top: 30px;
-    display: none;
+  margin-top: 30px;
+  display: none;
 }
-.control-arrow{
-  margin: 0px 12%
+.control-arrow {
+  margin: 0px 12%;
 }
 
 /*///// Display Problems  \\\*/
-@keyframes blinkingText{
-  0%{     color: white;    }
-  10%{    color: transparent; }
-  20%{    color: white;  }
-  30%{    color:transparent;  }
-  40%{    color: transparent; }
-  50%{    color: white;  }
-  60%{    color:transparent;  }
-  70%{    color: transparent; }
-  80%{    color: white;  }
-  90%{    color:transparent;  }
-  100%{   color: white;    }
+@keyframes blinkingText {
+  0% {
+    color: white;
+  }
+  10% {
+    color: transparent;
+  }
+  20% {
+    color: white;
+  }
+  30% {
+    color: transparent;
+  }
+  40% {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
+  60% {
+    color: transparent;
+  }
+  70% {
+    color: transparent;
+  }
+  80% {
+    color: white;
+  }
+  90% {
+    color: transparent;
+  }
+  100% {
+    color: white;
+  }
 }
-.blinking{
-  animation:blinkingText 3s ;
+.blinking {
+  animation: blinkingText 3s;
 }
 
-.hashResults{
+.hashResults {
   margin: auto;
   font-size: 30px;
   color: white;
-  
 }
 
-
 /* Portrait and Landscape */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2) { 
-
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
 }
 
 /* Portrait */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: portrait) { 
-
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
 }
 
 /* Landscape */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) { 
-
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
 }
 
 /*////////////////////////////// Iphone X /////////////////////*/
 
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 812px) 
-  and (-webkit-min-device-pixel-ratio: 3) { 
-
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
 }
 
 /* Portrait */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 812px) 
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: portrait) { 
-
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
 }
 
 /* Landscape */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 812px) 
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: landscape) { 
-
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: landscape) {
 }

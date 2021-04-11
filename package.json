@@ -19,8 +19,8 @@
     "start": "node server.js",
     "db": "psql -f db/schema.sql && psql -f db/seed.sql",
     "server": "nodemon server.js",
-    "client": "npm run dev --prefix client",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "client": "npm run start --prefix client",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\" \"NODE_PATH=./src\""
   },
   "proxy": "http://localhost:3001"
 }

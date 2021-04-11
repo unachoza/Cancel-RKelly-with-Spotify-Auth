@@ -1,0 +1,12 @@
+.show {
+  display: inline;
+  visibility: visible;
+  background-color: none;
+}
+.showIt {
+  visibility: visible;
+}
+
+.hide {
+  display: none;
+}

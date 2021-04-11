@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import "../App.css";
-import Spotify from "spotify-web-api-js";
+import React, { Component } from 'react';
+import 'Components/CreatNewPlaylist/CreateNewPlaylistComponent.css';
+import Spotify from 'spotify-web-api-js';
 
 const spotifyWebApi = new Spotify();
 
@@ -9,7 +9,7 @@ class CreatePlaylist extends Component {
     const { playlistInfo, iofRKsong, userId } = this.props;
     let uri = [];
     const response = await spotifyWebApi.getPlaylistTracks(playlistInfo.id);
-    response.items.map(async item => {
+    response.items.map(async (item) => {
       uri.push(item.track.uri);
     });
 
@@ -28,29 +28,24 @@ class CreatePlaylist extends Component {
     }
 
     const NewPlaylistRes = await spotifyWebApi.createPlaylist(userId, {
-      name: `${playlistInfo.name} - 4th try`
+      name: `${playlistInfo.name} - PROBLEM FREE`,
     });
 
     const newPlaylistID = NewPlaylistRes.id;
     spotifyWebApi.addTracksToPlaylist(newPlaylistID, uri);
 
-    //Problem Free playlist has been created; now must unfollow Problem playlist 
-    spotifyWebApi.unfollowPlaylist(playlistInfo.id)
-
+    //Problem Free playlist has been created; now must unfollow Problem playlist
+    spotifyWebApi.unfollowPlaylist(playlistInfo.id);
   }
 
   render() {
-   
     return (
       <div>
-        <p style={{ color: "red" }}>
+        <p style={{ color: 'red' }}>
           <br></br>
-          This is a public playlist that you follow. Click to make a new
-          playlist without problems
+          This is a public playlist that you follow. Click to make a new playlist without problems
         </p>
-        <button onClick={() => this.createProblemFreePlaylist()}>
-          Make New Playlist
-        </button>
+        <button onClick={() => this.createProblemFreePlaylist()}>Make New Playlist</button>
       </div>
     );
   }
