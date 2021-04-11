@@ -1,0 +1,17 @@
+.paragraph {
+  width: 35%;
+  margin: auto;
+  background-color: rgb(29, 28, 28);
+}
+.title {
+  margin: 20px;
+}
+.cancel-img {
+  height: 270px;
+  opacity: 0.6;
+  border-radius: 10px;
+  margin: auto;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  display: flex;
+}

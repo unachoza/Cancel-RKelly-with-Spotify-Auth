@@ -1,0 +1,14 @@
+/* ////  Navigation ///////// */
+.profile-container {
+  width: 790px;
+  margin: auto;
+}
+.profile {
+  width: 260px;
+  border-radius: 15px;
+  float: left;
+}
+.bio {
+  width: 460px;
+  float: right;
+}

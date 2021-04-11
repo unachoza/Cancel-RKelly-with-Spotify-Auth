@@ -98,14 +98,19 @@ p {
 }
 
 button {
+<<<<<<< HEAD:client/src/Components/App/App.css
+  font-size: 15px;
+=======
   background-color: lightgray;
   font-size: 20px;
+>>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3:client/src/CSS/App.css
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   border-radius: 40px;
-  padding: 15px;
+  padding: 10px 15px;
   color: white;
   background-color: rgb(23, 138, 84);
   border: none;
+  margin: 10px;
 }
 button:hover {
   background-color: #1bb954;
@@ -115,18 +120,25 @@ button:hover {
   font-size: 20px;
 }
 .playlist-container-closed {
+<<<<<<< HEAD:client/src/Components/App/App.css
+=======
   width: '350px';
   height: '350px';
+>>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3:client/src/CSS/App.css
   display: inline-block;
-  margin: 10px;
-  padding-left: 50px;
-  padding-right: 50px;
+  margin: 20px;
   border-radius: 10px;
   color: rgb(126, 121, 121);
 }
 .album-image {
   height: '220px';
+<<<<<<< HEAD:client/src/Components/App/App.css
+  width: 180px;
+  border-radius: 2px;
+  margin: 10px;
+=======
   width: 200px;
+>>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3:client/src/CSS/App.css
 }
 .album-image:hover {
   box-shadow: 0 12px 16px 0 rgba(128, 125, 125, 0.39), 0 17px 50px 0 rgba(128, 125, 125, 0.61);
