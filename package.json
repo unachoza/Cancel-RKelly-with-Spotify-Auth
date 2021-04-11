@@ -17,10 +17,12 @@
   },
   "scripts": {
     "start": "node server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run spotify\" \"npm run server\" \"npm run client\"",
     "db": "psql -f db/schema.sql && psql -f db/seed.sql",
     "server": "nodemon server.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\" \"NODE_PATH=./src\""
+
   },
   "proxy": "http://localhost:3001"
 }

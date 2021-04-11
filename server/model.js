@@ -4,7 +4,7 @@
     count found songs
 */
 
-const db = require('../db/config')
+const db = require('../server')
 const canceldatabase = {}
 
 

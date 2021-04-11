@@ -6,7 +6,7 @@ const options = {
 
 const pgp = require('pg-promise')(options)
 
-const setDatabase = () => {
+const db = () => {
     if(process.env.NODE_ENV === 'developement' || !process.env.NODE_ENV){
         return pgp({
             database: 'cancel',
@@ -16,6 +16,6 @@ const setDatabase = () => {
     } else return pgp(process.env.DATABASE_URL)
 }
 
-const db = setDatabase()
+
 
 module.exports = db
