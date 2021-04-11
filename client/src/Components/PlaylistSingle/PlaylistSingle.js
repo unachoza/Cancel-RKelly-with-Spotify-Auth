@@ -1,3 +1,4 @@
+<<<<<<< HEAD:client/src/Components/PlaylistSingle/PlaylistSingle.js
 import React, { Component } from 'react';
 import 'Components/PlaylistSingle/PlaylistSingle.css';
 import Spotify from 'spotify-web-api-js';
@@ -5,6 +6,15 @@ import Songs from 'Components/Songs/Songs';
 import ProblemRK from 'Components/ProblemRK/ProblemRK';
 import axios from 'axios';
 import CreatePlaylist from 'Components/CreatePlaylist/CreatePlaylist';
+=======
+import React, { Component } from "react";
+import "App.css";
+import Spotify from "spotify-web-api-js";
+import Songs from "Components/Songs";
+import ProblemRK from "Components/ProblemRK";
+import axios from "axios";
+import CreatePlaylist from "Components/CreatePlaylist";
+>>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3:client/src/Components/PlaylistSingle.js
 
 const spotifyWebApi = new Spotify();
 

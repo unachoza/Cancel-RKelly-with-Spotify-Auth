@@ -32,6 +32,9 @@
     "start": "cross-env NODE_PATH=./src npm run start",
     "dev": "react-scripts start  \"NODE_PATH=./src\"",
     "later": "serve -s build",
+<<<<<<< HEAD
+>>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3
+=======
 >>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
