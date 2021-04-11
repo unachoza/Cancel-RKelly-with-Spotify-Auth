@@ -1,10 +1,16 @@
+<<<<<<< HEAD:client/src/Pages/Conclusion/Conclusion.js
 import React from 'react';
 import UsageStats from '../Components/UsageStats';
 import AboutMe from './AboutMe';
 import './App.css';
+=======
+import React from "react";
+import UsageStats from "Components/UsageStats";
+import AboutMe from "Components/AboutMe";
+import "App.css";
+>>>>>>> ea6988ba74082d2e9516ebc19aaa80b6797c0dc3:client/src/Components/Conclusion.js
 
-const Conclusion = () => {
-  return (
+const Conclusion = () =>  (
     <div>
       <UsageStats />
       <header>What You've Done</header>
@@ -18,6 +24,5 @@ const Conclusion = () => {
       <footer>Share this!</footer>
     </div>
   );
-};
 
 export default Conclusion;
