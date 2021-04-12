@@ -14,7 +14,7 @@ button {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-/* ////  Navigation ///////// */
+/* ////  About Me Page ///////// */
 .profile-container {
   width: 790px;
   margin: auto;
@@ -106,6 +106,7 @@ button {
   background-color: rgb(23, 138, 84);
   border: none;
   margin: 10px;
+  z-index: 300;
 }
 button:hover {
   background-color: #1bb954;
@@ -152,28 +153,7 @@ button:hover {
     width: calc(100% - 2em);
   }
 }
-/* ///////Navigation Header\\\\\\ */
-.nav-list {
-  margin-top: 100px;
-  padding-top: 20px;
-  display: -webkit-flex;
-  display: flex;
-  width: 70%;
-  align-items: center;
-  margin: auto;
-  font-size: 20px;
-  -webkit-justify-content: space-around;
-  justify-content: space-around;
-  list-style-type: none;
-  color: rgb(126, 121, 121);
-}
-.nav-container {
-  display: inline;
-  margin: 55px, 20px;
-}
-.nav-container:hover {
-  color: white;
-}
+
 li:hover {
   color: white;
 }
@@ -191,10 +171,6 @@ a:active {
   margin-bottom: 40px;
   margin-top: 40px;
   display: flex;
-}
-.spotify-logo {
-  height: 60px;
-  top: 35px;
 }
 
 /* /// Carousel \\\\ */

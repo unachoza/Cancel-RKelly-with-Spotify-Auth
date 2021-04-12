@@ -1,0 +1,22 @@
+.spotify-logo {
+  height: 60px;
+  top: 35px;
+}
+.nav-list {
+  margin-top: 100px;
+  padding-top: 20px;
+  display: -webkit-flex;
+  display: flex;
+  width: 70%;
+  align-items: center;
+  margin: auto;
+  font-size: 20px;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  list-style-type: none;
+  color: rgb(126, 121, 121);
+}
+
+li:hover {
+  color: white;
+}
