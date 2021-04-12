@@ -93,7 +93,7 @@ class PlaylistSingle extends Component {
           {playlistInfo.name} <br></br>
           <button onClick={(e) => this.listTracksFromPlaylists(playlistInfo.id)}>{buttonText}</button>
           {RKSongTitle.length > 0 && (
-            <div style={{ color: 'darkred', fontSize: '20px', fontWeight: '300' }}>This is a problem:</div>
+            <div style={{ color: 'darkred', fontSize: '14px', fontWeight: '300' }}>This is a problem:</div>
           )}
           {/***** if Playlist is public, need to make a new playlist *****/}
           {RKSongTitle.length > 0 && CurrentUserid !== playlistInfo.owner.id && (

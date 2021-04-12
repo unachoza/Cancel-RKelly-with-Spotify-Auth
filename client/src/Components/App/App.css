@@ -111,63 +111,6 @@ button:hover {
   background-color: #1bb954;
 }
 
-.playlist-title {
-  font-size: 20px;
-}
-.playlist-container-closed {
-  display: inline-block;
-  margin: 20px;
-  border-radius: 10px;
-  color: rgb(126, 121, 121);
-}
-.album-image {
-  height: '220px';
-  width: 180px;
-  border-radius: 2px;
-  margin: 10px;
-}
-.album-image:hover {
-  box-shadow: 0 12px 16px 0 rgba(128, 125, 125, 0.39), 0 17px 50px 0 rgba(128, 125, 125, 0.61);
-}
-.my-slide-container {
-  background-color: 'rgb(29, 28, 28)';
-  margin: '0px';
-  width: '100%';
-  height: '100%';
-}
-
-.playlist-container-open {
-  font-size: 20px;
-  display: inline-block;
-  padding: 1px;
-  border-radius: 10px;
-
-  color: white;
-  z-index: 1;
-}
-.all-playlists {
-  z-index: -1;
-}
-.all-playlist-fade-back {
-  z-index: -1;
-}
-
-.songs-in-playlist-container-open {
-  width: '530px';
-  text-align: center;
-  font-size: 20px;
-  padding: 1px;
-  border-radius: 10px;
-  color: rgb(126, 121, 121);
-}
-.songs-in-playlist-container-closed {
-  display: none;
-}
-.song-title {
-  text-align: left;
-  font-size: 20px;
-  width: 300px;
-}
 .show {
   display: inline;
   visibility: visible;
