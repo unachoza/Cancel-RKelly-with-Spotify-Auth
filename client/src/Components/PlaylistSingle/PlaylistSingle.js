@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'Components/PlaylistSingle/PlaylistSingle.css';
 import Spotify from 'spotify-web-api-js';
-import Songs from 'Components/Songs/Songs';
+import ModalSongs from 'Components/ModalSongs/ModalSongs';
 import ProblemRK from 'Components/ProblemRK/ProblemRK';
 import axios from 'axios';
 import CreatePlaylist from 'Components/CreatePlaylist/CreatePlaylist';
@@ -114,7 +114,7 @@ class PlaylistSingle extends Component {
             />
           )}
           {iofRKsong > 0 && <hr></hr>}
-          {items && <Songs items={items} showSongs={showSongs} home={home} />}
+          {items && <ModalSongs items={items} showSongs={showSongs} home={home} />}
         </div>
       </div>
     );

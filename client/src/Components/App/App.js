@@ -102,9 +102,9 @@ class App extends Component {
   //  using number of total playlists to decided if need for looping to fetch more than 50
   getAllPlaylists = async (totalPlaylists) => {
     let loopsCount = Math.ceil(totalPlaylists / 20);
-    let ALLplaylistID = [];
-    let ALLplaylistNameArray = [];
-    let offsetNum = -50;
+    let ALLplaylistID = [],
+      ALLplaylistNameArray = [],
+      offsetNum = -50;
     for (let i = 0; i < loopsCount; i++) {
       offsetNum += 50;
       const res = await spotifyWebApi.getUserPlaylists(this.state.id, {
@@ -159,7 +159,6 @@ class App extends Component {
     return (
       <div className="home">
         <Nav changeNav={this.navigate} />
-
         {loggedIn && !home && <MakingHashMap />}
         {home && <Home loggedIn={loggedIn} />}
         {!loggedIn && !userPlaylists && (

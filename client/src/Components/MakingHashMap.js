@@ -1,54 +1,55 @@
 import React, { Component } from 'react';
 import Spotify from 'spotify-web-api-js';
+import LoadingSpinner from 'Components/LoadingSpinner/LoadingSpinner';
 const spotifyWebApi = new Spotify();
 
-const PROBLEMATIC_ARTIST = 'R. Kelly';
+//InitialState
+const ARTIST = 'R. Kelly';
 
 class MakingHash extends Component {
   state = {
     playlists: [],
     problem: [],
+    loading: false,
   };
 
   async componentDidMount() {
     const { id } = this.state;
-    const userRes = await spotifyWebApi.getMe();
+    const userDetails = await spotifyWebApi.getMe();
     this.setState({
-      id: userRes.id,
-      name: userRes.display_name,
-      email: userRes.email,
-
-      country: userRes.country,
+      id: userDetails.id,
+      name: userDetails.display_name,
+      email: userDetails.email,
+      country: userDetails.country,
     });
-    let offsetNum = -50;
-    let playlistResults = [];
+    let offsetNum = -50,
+      playlistResults = [],
+      playlistIds = [],
+      playlistNames = [];
 
     //geting playlists ids & names only 50
-    const loops = await spotifyWebApi.getUserPlaylists(id);
-    this.setState({ totalPlaylists: loops.total });
-    let loopsCount = Math.ceil(this.state.totalPlaylists / 50);
-    //needs to loop if user has more than 50 playlists
-    for (let i = 0; i < loopsCount; i++) {
+    const userPlaylistSummary = await spotifyWebApi.getUserPlaylists(id);
+
+    this.setState({ totalPlaylists: userPlaylistSummary.total, loading: true });
+    let spotifyRequestsNeededNum = Math.ceil(this.state.totalPlaylists / 50);
+    //needs to make multiple requests if user has more than 50 playlists
+    for (let i = 0; i < spotifyRequestsNeededNum; i++) {
       offsetNum += 50;
 
-      const temp = await spotifyWebApi.getUserPlaylists(this.state.id, {
+      const partialUserPlaylists = await spotifyWebApi.getUserPlaylists(this.state.id, {
         limit: 50,
         offset: offsetNum,
       });
-      playlistResults.push.apply(playlistResults, temp.items);
-      let playlistIds = [];
-      let playlistNames = [];
+      playlistResults.push.apply(playlistResults, partialUserPlaylists.items);
       playlistResults.map((index) => {
         playlistIds.push(index.id);
-
         playlistNames.push(index.name);
       });
 
-      //State now has all PlayListIDS and their Names
+      //State now has all PlayListIDS and Playlist Names
       this.setState((prevState) => ({
         playlists: {
           ...prevState.playlists,
-
           playlistIds: playlistIds,
           playlistNames: playlistNames,
         },
@@ -56,17 +57,18 @@ class MakingHash extends Component {
     }
     //getting the songs &aritist from each playlist
     this.state.playlists.playlistIds.map(async (id) => {
+      let artistsNames = [],
+        artistsObj = [];
+
       let tracks = await spotifyWebApi.getPlaylistTracks(id);
       tracks = tracks.items;
-      let artistsObj = [];
 
       // getting the artist object, because the name is nested deeply
       tracks.forEach((i) => artistsObj.push(i.track.artists));
-      let artistsNames = [];
       artistsObj.forEach((obj) => artistsNames.push(obj[0].name));
 
-      // checking if rkelly is in array of artists
-      if (artistsNames.includes(PROBLEMATIC_ARTIST)) {
+      // checking if artist is in array of artists
+      if (artistsNames.includes(ARTIST)) {
         const res = await spotifyWebApi.getPlaylist(id);
         console.log(res, 'if problematic');
         //saving playlist name to state, if problem present
@@ -74,6 +76,7 @@ class MakingHash extends Component {
           problem: prevState.problem.concat(res.name),
         }));
       }
+      this.setState({ loading: false });
     });
   }
 
@@ -81,10 +84,12 @@ class MakingHash extends Component {
   ///**********FINDS RKELLY AND PRINTS PLAYLISTNAME*/
 
   render() {
-    const { problem } = this.state;
+    // console.log('this is what state has become', this.state);
+    const { problem, loading } = this.state;
     return (
       <div className="hash-container">
-        {problem.length > 0 ? (
+        {loading && <LoadingSpinner />}
+        {problem.length > 0 && !loading ? (
           problem.map((playlist, i) => (
             <div key={i} className="hashResults">{`The Playlist, ${playlist} has a Problem`}</div>
           ))
@@ -99,3 +104,8 @@ class MakingHash extends Component {
 export default MakingHash;
 
 // edge case: what if playlist has more than 100 songs
+// const processArray = async (array) => {
+//   for (const item of array) {
+//     await delayedLog(item);
+//   }
+// }
