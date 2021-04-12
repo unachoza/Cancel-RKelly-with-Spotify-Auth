@@ -77,6 +77,7 @@ class PlaylistSingle extends Component {
     const { playlistInfo, CurrentUserid } = this.props;
     let buttonText = showSongs ? 'CHECK SONGS' : 'CLOSE SONGS';
     let songsVisible = showSongs ? 'playlist-container-closed' : 'playlist-container-open';
+    console.log('showing', songsVisible);
     return (
       <div className={songsVisible}>
         <img

@@ -64,7 +64,7 @@ h3 {
   background: whitesmoke;
 }
 
-.songs-in-playlist-container-closed {
+.closed-container {
   display: none;
 }
 .song-title {

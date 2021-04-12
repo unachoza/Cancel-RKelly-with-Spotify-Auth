@@ -20,6 +20,7 @@ class App extends Component {
     super(props);
     const params = this.getHashParams();
     const token = params.access_token;
+    console.log(token, 'what is token');
     this.state = {
       loggedIn: token ? true : false, //user
       home: true, //nav
@@ -152,7 +153,6 @@ class App extends Component {
       });
     }
   }
-
   render() {
     // console.log(this.state);
     const { loggedIn, offsetNum, total, playListObject, id, home, aboutMe, howItWorks, userPlaylists } = this.state;

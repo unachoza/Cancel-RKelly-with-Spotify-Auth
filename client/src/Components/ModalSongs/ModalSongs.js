@@ -4,14 +4,10 @@ import SongSingle from 'Components/SongSingle/SongSingle';
 
 const ModalSongs = ({ items, showSongs }) => {
   return (
-    <div className={showSongs ? 'songs-in-playlist-container-closed' : 'modal-container'}>
-      <div
-        className={showSongs ? 'songs-in-playlist-container-closed' : 'songs-in-playlist-container-open  show-modal'}
-      >
-        {items.map((item, i) => (
-          <SongSingle item={item} key={i} />
-        ))}
-      </div>
+    <div className={showSongs ? 'closed-container' : 'songs-container-open'}>
+      {items.map((item, i) => (
+        <SongSingle item={item} key={i} />
+      ))}
     </div>
   );
 };
